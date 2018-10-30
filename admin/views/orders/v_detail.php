@@ -2,22 +2,13 @@
 
 <?php include("include/report.php"); ?>
 <div class="breadcrumbs">
-    <div class="col-sm-4">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Details</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="page-header float-right">
-            <div class="page-title">
-                <ol class="breadcrumb text-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Table</a></li>
-                    <li class="active">Data table</li>
-                </ol>
-            </div>
+
+    <div class="page-header">
+        <div class="page-title">
+            <ol class="breadcrumb text-right">
+                <li><a href="orders_list.php" style="color:blue">Orders</a></li>
+                <li class="active">Detail order</li>
+            </ol>
         </div>
     </div>
 </div>
@@ -36,7 +27,7 @@
                     ?>
                     <div class="card-body">
                         <div>
-                         <div class="col-md-12">
+                           <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header badge-info">
                                     <strong class="card-title"><i class="fa fa-info-circle"></i> Customer infomation</strong>
@@ -119,7 +110,7 @@
                                         </div>
 
                                         <div class="card-body">
-                                           <table id="bootstrap-data-table" class="table table-striped table-bordered search_order">
+                                         <table id="bootstrap-data-table" class="table table-striped table-bordered search_order">
                                             <thead>
                                                 <tr>
                                                     <th>Image</th>
@@ -131,23 +122,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+
                                                 <?php 
                                                 $total = 0;
                                                 foreach($details as $dt):
-                                                $product = $m_product->read_product_by_id($dt->pro_id);
-                                                $subtotal = 0;
-                                                $total += $dt->price * $dt->quantity;
-                                                ?>
-                                                <tr>
+                                                    $product = $m_product->read_product_by_id($dt->pro_id);
+                                                    $subtotal = 0;
+                                                    $total += $dt->price * $dt->quantity;
+                                                    ?>
+                                                    <tr>
 
-                                                    <td width="20%"><img src="public/images/<?php echo $product->image?>" width="100px"></td>
-                                                    <td><?php echo  $product->name ?></td>
-                                                    <td><?php echo $dt->size?></td>
-                                                    <td>$ <?php echo  number_format($dt->price,2)?></td>
-                                                    <td><?php echo  $dt->quantity ?></td>
-                                                    <td>$ <?php echo  number_format($dt->price*$dt->quantity,2)?></td>
-                                                </tr>
+                                                        <td width="20%"><img src="public/images/<?php echo $product->image?>" width="100px"></td>
+                                                        <td><?php echo  $product->name ?></td>
+                                                        <td><?php echo $dt->size?></td>
+                                                        <td>$ <?php echo  number_format($dt->price,2)?></td>
+                                                        <td><?php echo  $dt->quantity ?></td>
+                                                        <td>$ <?php echo  number_format($dt->price*$dt->quantity,2)?></td>
+                                                    </tr>
                                                 <?php endforeach ?>
 
                                             </tbody>
@@ -207,7 +198,7 @@
                 url:'ajax.php',
                 data:{'id':id,'check_delivery':'OK'},
                 success:function(data) {
-                    
+
                 }
 
             })

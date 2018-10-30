@@ -83,7 +83,6 @@ $(document).ready(function() {
 
                 <td colspan="7" align="right"><a href="." class="btn btn-success"><i class="fa fa-reply"></i> Back</a></td>
             </tfoot>
-            <td colspan="7" align="right"><a href="load_cart_pdf.php" class="btn btn-success"><i class="fa fa-reply"></i> Back</a></td>
         </table>
     </div>
 

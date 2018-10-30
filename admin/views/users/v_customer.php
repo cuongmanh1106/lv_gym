@@ -1,20 +1,5 @@
 <?php include("include/report.php") ; ?>
-<div class="breadcrumbs">
-  <div class="col-sm-4">
-    <div class="page-header float-left">
-      <div class="page-title">
-        <h1>Users</h1>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-8">
-    <div class="page-header float-right">
-      <div class="page-title">
 
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="content mt-3">
   <div class="animated fadeIn">
@@ -23,7 +8,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header badge-info">
-            <strong class="card-title"><i class="fa fa-list"></i> Users</strong>
+            <strong class="card-title"><i class="fa fa-list"></i> Customers</strong>
             <?php if($m_per->check_permission('delete_user') == 1) { ?>
             <button class="btn btn-danger" id="del_user"  ><i class="fa fa-trash-o"></i> </a>
               <?php } else {?>

@@ -28,7 +28,7 @@ class C_cart{
 	}
 
 	public function success() {
-
+		ini_set("display_errors",0);
 
 		include("models/m_order.php");
 
@@ -74,7 +74,29 @@ class C_cart{
 		$order = $m_order->read_order_by_id($order_id);
 		$carts = $_SESSION["cart"];
 
+		require_once("smtpgmail/class.phpmailer.php");
+		$mail=new PHPMailer();
+		$mail->IsSMTP(); // Chứng thực SMTP
+		$mail->SMTPAuth=TRUE;
+		$mail->Host="smtp.gmail.com";
+		$mail->Port=465;
+		$mail->SMTPSecure="ssl";
+		/* Server google*/
+		$mail->Username="cuongmanh1106@gmail.com"; // Nhập mail 
+		$mail->Password="nguyenmanhcuong"; // Mật khẩu
+		/* Server google*/
+		$mail->CharSet="utf-8";
+		ob_start();
+		require_once 'mail.php';
+		$html = ob_get_clean();
+		$mail->SetFrom("cuongmanh1106@gmail.com","Harrik");
+		$mail->Subject="[Confirm your order]";
+		$mail->MsgHTML($html);
+		$mail->AddAddress("cuongmanh2311@gmail.com",$_SESSION["customer"]->first_name ." ".$_SESSION["customer"]->last_name); // Mail người nhận
+		$mail->Send();
+
 		//view
+		
 		$view = "views/cart/v_success.php";
 		$title = "Order Successfully";
 		include("include/layout.php");

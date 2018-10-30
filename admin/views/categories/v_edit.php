@@ -1,9 +1,14 @@
 
 <?php require("include/report.php");?>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="cate_list.php" style="color: blue">Categories</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit a category</li>
+</ol>
+</nav>
 <div class="card">
   <div class="card-header   badge-info">
   	<h5 class="card-title"> <i class="fa fa-edit"></i> Edit a Category</h5>
-  
   </div>
   
   <div class="card-body">
