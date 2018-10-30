@@ -34,6 +34,26 @@ class M_products extends database {
 		return $this->loadAllRows();
 	}
 
+	public function chart($year) {
+		$sql = "select SUM(price*quantity) as total, Month(created_at) as month from order_details where Year(created_at) = ".$year." group by Month(created_at)";
+		$this->setQuery($sql);
+		return $this->loadAllRows();
+	}
+
+	public function filter_revenue($date) {
+		$sql = "select SUM(price*quantity) as total from order_details where date(created_at) = '".$date."' group by date(created_at)";
+		$this->setQuery($sql);
+		// var_dump($sql);
+		return $this->loadRow();
+	}
+
+	public function read_top_product($top) {
+		$sql ="select products.id, products.name, products.image, products.price,SUM(order_details.quantity) as quantity ,SUM(order_details.price*order_details.quantity) as total from products, order_details where products.id = order_details.pro_id group by products.id order by total desc limit 0,".$top;
+		$this->setQuery($sql);
+		// var_dump($sql);
+		return $this->loadAllRows();
+	}
+
 	public function insert_product($name,$cate_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description) {
 		$sql = "insert into products(name,alias,cate_id,price,quantity,reduce,size,image,sub_image,intro,description) values(?,?,?,?,?,?,?,?,?,?,?)";
 		$this->setQuery($sql);

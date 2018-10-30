@@ -20,7 +20,8 @@ class C_products {
 		if(isset($_GET['cate_id'])) {
 			$cate_id = $_GET['cate_id'];
 			$cate = $m_cate->read_cate_by_id($cate_id);
-			if($cate->parent_id == 0) {
+			$child = $m_cate->read_cate_by_parent($cate->id);
+			if($cate->parent_id == 0 && count($child) > 0) {
 				$arrCate = array();
 				$children_cate = $m_cate->read_cate_by_parent($cate->id);
 				foreach($children_cate as $c) {
@@ -49,20 +50,20 @@ class C_products {
 		if(isset($_GET['cate_id'])) {
 			$cate_id = $_GET['cate_id'];
 			$cate = $m_cate->read_cate_by_id($cate_id);
-			if($cate->parent_id == 0) {
+			$child = $m_cate->read_cate_by_parent($cate->id);
+			if($cate->parent_id == 0 && count($child) > 0) {
 				$arrCate = array();
 				$children_cate = $m_cate->read_cate_by_parent($cate->id);
 				foreach($children_cate as $c) {
 					$arrCate[] = $c->id;
 				}
 				$products = $m_pro->read_product_by_arrcate($arrCate,$vt,$limit);
-			} else {
+			} else  {
 				$products = $m_pro->read_product_by_cate_id($cate_id,$vt,$limit);
 			}
 		} else {
 			$products = $m_pro->read_all_product($vt,$limit);
 		}
-
 
 
 

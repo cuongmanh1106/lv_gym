@@ -2,6 +2,7 @@
     <script src="public/assets/js/popper.min.js"></script>
     <script src="public/assets/js/plugins.js"></script>
     <script src="public/assets/js/main.js"></script>
+    <script src="public/assets/js/Chart.min.js"></script>
 
 
     <script src="public/assets/js/lib/data-table/datatables.min.js"></script>

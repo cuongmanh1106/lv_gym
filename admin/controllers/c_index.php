@@ -16,7 +16,7 @@ class C_Index
 				if($m_user->check_login($email, $password) != "wrong") {
 					$_SESSION["user"] = $m_user->check_login($email,$password);
 					$_SESSION["alert-success"] = "Login Successfully";
-					echo "<script>window.location = 'products_list.php'</script>";
+					echo "<script>window.location = 'chart.php'</script>";
 				} else {
 					$_SESSION["alert-danger"] = "Wrong Email or Password";
 					// echo "<script>window.location = '';</script>";

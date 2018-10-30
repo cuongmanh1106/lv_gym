@@ -169,6 +169,28 @@ if(isset($_POST["search_pro"])){
 }
 /*Products */
 
+/*Chart*/
+if(isset($_POST["chart"])) {
+	include("models/m_products.php");
+	$m_pro = new M_products();
+	$year = date("Y");
+	if(isset($_POST["year"])) {
+		$year = $_POST["year"];
+	}
+	$chart = $m_pro->chart($year);
+
+	echo json_encode($chart);
+}
+
+if(isset($_POST["filter_revenue"])) {
+	$date = $_POST["date"];
+	include("models/m_products.php");
+	$m_pro = new M_products();
+	$data = $m_pro->filter_revenue($date);
+	echo $data->total;
+}
+/*End Chart*/
+
 /*Users*/
 
 if(isset($_POST["check_email"])){

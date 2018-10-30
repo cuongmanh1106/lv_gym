@@ -76,6 +76,8 @@
 <?php endforeach?>
 <div class="clearfix"></div>
 
+
+<?php if($total_page > 1) {?>
 <div class=" col-md-3  col-md-offset-4" style="margin: auto; text-align: center; float: right;">
 	<ul class="pagination modal-1">
 		<?php
@@ -93,12 +95,14 @@
 		for($i = 1 ; $i<=$total_page ; $i++)
 		{
 			$active = '';
+            $style = '';
 			if($current_page == $i) 
 			{
 				$active = 'active';
 
+
 				?>
-				<li> <a class="<?php echo $active?>" ><?php echo $i?></a></li>
+				<li> <a class="<?php echo $active?>" style="color:red" ><?php echo $i?></a></li>
 				<?php
 			} else {
 				?>
@@ -118,10 +122,11 @@
 				?>
 			</ul>
 		</div>
+        <?php }?>
 
-		<!-- {{ isset($check_search)?'':$products->links() }} -->
+        <!-- {{ isset($check_search)?'':$products->links() }} -->
 
-	</div>
+    </div>
 </div>
 </div>
 <script type="text/javascript">
@@ -159,4 +164,6 @@
         })
 
     })
+
+
 </script>

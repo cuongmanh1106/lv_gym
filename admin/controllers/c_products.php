@@ -420,5 +420,17 @@ public function update() {
         $cates = $m_cate->read_all_categories();
         include("views/products/v_search.php");
     }
+
+    public function chart() {
+        //models
+        include("models/m_products.php");
+        $m_pro = new M_products();
+        $top_product = $m_pro->read_top_product(10);
+        // die();
+        //views 
+        $view = "views/products/v_chart.php";
+        $title = "Chart";
+        include("include/layout.php");
+    }
 }
 

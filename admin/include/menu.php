@@ -5,14 +5,14 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><img src="images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href="./"><img src="public/images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="./"><img src="public/images/logo2.png" alt="Logo"></a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="."> <i class="menu-icon fa fa-dashboard"></i>Chart </a>
+                        <a href="chart.php"> <i class="menu-icon fa fa-bar-chart-o"></i>Chart </a>
                     </li>
                     <!-- <h3 class="menu-title">UI elements</h3>
                     <li class="menu-item-has-children dropdown">
@@ -32,55 +32,45 @@
                         </ul>
                     </li> -->
                     <li class="menu-item-has-children active dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Products</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-alt"></i>Products</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="products_list.php">List</a></li>
-                            <li><i class="fa fa-table"></i><a href="products_add.php">Add</a></li>
+                            <li><i class="fa fa-list"></i><a href="products_list.php">List</a></li>
+                            <li><i class="fa fa-plus-square"></i><a href="products_add.php">Add</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children active dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Categories</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-alt"></i>Categories</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="cate_list.php">List</a></li>
-                            <li><i class="fa fa-table"></i><a href="cate_add.php">Add</a></li>
+                            <li><i class="fa fa-list"></i><a href="cate_list.php">List</a></li>
+                            <li><i class="fa fa-plus-square"></i><a href="cate_add.php">Add</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children active dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Users</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Users</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="user_list.php">List</a></li>
-                            <li><i class="fa fa-table"></i><a href="user_add.php">Add</a></li>
+                            <li><i class="fa fa-list"></i><a href="user_list.php">List</a></li>
+                            <li><i class="fa fa-plus-square"></i><a href="user_add.php">Add</a></li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="customer_list.php"> <i class="menu-icon fa fa-dashboard"></i>Customer </a>
+                        <a href="customer_list.php"> <i class="menu-icon fa fa-users"></i>Customer </a>
                     </li>
 
                     <li>
-                        <a href="feedback_list.php"> <i class="menu-icon fa fa-dashboard"></i>Feedback </a>
+                        <a href="feedback_list.php"> <i class="menu-icon fa fa-comment-o"></i>Feedback </a>
                     </li>
                     <li>
-                        <a href="orders_list.php"> <i class="menu-icon fa fa-dashboard"></i>Orders </a>
+                        <a href="orders_list.php"> <i class="menu-icon fa fa-book"></i>Orders </a>
                     </li>
                     <li>
-                        <a href="ship.php"> <i class="menu-icon fa fa-dashboard"></i>Shipper </a>
+                        <a href="ship.php"> <i class="menu-icon fa fa-truck"></i>Shipper </a>
                     </li>
                     <li>
-                        <a href="permission_list.php"> <i class="menu-icon fa fa-dashboard"></i>Permission </a>
+                        <a href="permission_list.php"> <i class="menu-icon fa fa-users"></i>Permission </a>
                     </li>
 
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
-                        </ul>
-                    </li>
-
-
-                    <h3 class="menu-title">Icons</h3><!-- /.menu-title -->
-
+                    
 
                     
                 </ul>
