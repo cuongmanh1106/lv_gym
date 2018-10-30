@@ -10,8 +10,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header ">
-            <strong class="card-title">List Of Products</strong>
+          <div class="card-header badge-info ">
+            <strong class="card-title"><i class="fa fa-list"></i> List Of Products </strong>
             <?php if($m_per->check_permission('insert_product') == 1) {?>
             <a href="products_add.php" class="btn btn-success" ><i class="fa fa-plus-circle"></i></a>
             <?php } else { ?>
@@ -90,7 +90,7 @@
                 <td>
                  <div class="dropdown">
                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                     Action
+                     <i class="fa fa-dot-circle-o"></i> Action
                    </button>
                    <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
                     <?php if($m_per->check_permission('edit_product') ==  1) { ?>

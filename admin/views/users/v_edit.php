@@ -28,7 +28,7 @@
 
           <div class="row form-group">
             <div class="col-md-2"><label for="text-input" class=" form-control-label">Phone:</label></div>
-            <div class="col-md-9"><input type="text" required="required" id="text-input" value="<?php echo  $_SESSION["user"]->phone_number ?>" name="phone_number" class="form-control"></div>
+            <div class="col-md-9"><input type="text" required="required"  onkeypress="return isNumberKey(event)" maxlength="11" minlength="9" id="text-input" value="<?php echo  $_SESSION["user"]->phone_number ?>" name="phone_number" class="form-control"></div>
             <div class="">(<span style="color:red">*</span>)</div>
           </div>
           <div class="row form-group">
@@ -47,8 +47,8 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" name="update_prof" id="update_profile" style="text-align: center;" class="btn btn-info">Update</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" name="update_prof" id="update_profile" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Update</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-reply"></i> Close</button>
           </div>
         </form>
       </div>

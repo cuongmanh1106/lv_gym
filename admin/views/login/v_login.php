@@ -58,9 +58,8 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button type="button" class="login100-form-btn" name="login">
-							Login
-						</button>
+						<input type="submit" class="login100-form-btn" name="login"  value="Login" />
+							
 					</div>
 				</form>
 			</div>
@@ -68,8 +67,7 @@
 	</div>
 	
 	<script type="text/javascript">
-		$('button[name=login]').on('click',function(){
-			alert
+		$('input[name=login]').on('click',function(){
 			var html = '<ul class="alert alert-info">';
 			flag = true;
 			if($('input[name=email]').val() == '') {
@@ -85,11 +83,13 @@
 			console.log(html);
 
 			if(flag) {
-				$('button[name="login"]').attr("type", "submit");
+				$('input[name="login"]').attr("type", "submit");
 			} else {
 				$('.error_login').html(html);
 			}
 		});
+
+		
 	</script>
 
 	

@@ -23,8 +23,8 @@
 
       <div class="col-md-12">
         <div class="card">
-            <div class="card-header">
-            <strong class="card-title">FeedBack</strong>
+            <div class="card-header badge-info">
+            <strong class="card-title"><i class="fa fa-list"></i> FeedBack</strong>
             <Button class="btn btn-danger" id="delete_group_contact"><i class="fa fa-trash-o"></i> Delete</Button>
           </div>
           

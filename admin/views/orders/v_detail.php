@@ -28,8 +28,8 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Detail order</strong>
+                    <div class="card-header badge-success">
+                        <strong class="card-title"><i class="fa fa-pencil"></i> Detail order</strong>
                     </div>
                     <?php
                     $customer = $m_user->read_user_by_id($order->customer_id);
@@ -38,8 +38,8 @@
                         <div>
                          <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <strong class="card-title">Customer infomation</strong>
+                                <div class="card-header badge-info">
+                                    <strong class="card-title"><i class="fa fa-info-circle"></i> Customer infomation</strong>
                                 </div>
 
                                 <div class="card-body">
@@ -114,8 +114,8 @@
 
 
                                     <div class="card">
-                                        <div class="card-header">
-                                            <strong class="card-title">Order infomation</strong>
+                                        <div class="card-header badge-info">
+                                            <strong class="card-title"> <i class="fa fa-info-circle"></i> Order infomation</strong>
                                         </div>
 
                                         <div class="card-body">

@@ -22,8 +22,8 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Ship</strong>
+                    <div class="card-header badge-info">
+                        <strong class="card-title"><i class="fa fa-truck"></i> Ship</strong>
                         
                     </div>
                     <?php if($_SESSION['user']->permission_id !=6) { ?>

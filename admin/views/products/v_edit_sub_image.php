@@ -24,8 +24,8 @@
             </div>
 
             <div class="modal-footer">
-              <button type="submit" style="text-align: center;" class="btn btn-info">Update</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Update</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-reply"></i> Close</button>
             </div>
           </form>
         </div>

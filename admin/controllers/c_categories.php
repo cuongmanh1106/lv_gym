@@ -67,11 +67,11 @@ class C_categories
 			}
 			// var_dump($name .' '.$parent.' '.$description);
 			if($m_cate->insert_cate($name,$parent,$description)) {
-				$_SESSION['alert-success'] = "Successfully";
+				$_SESSION['alert-success'] = "Add Category Successfully";
 				echo "<script>window.location = 'cate_list.php'</script>";
 
 			} else {
-				$_SESSION['alert-danger'] = "Fail";
+				$_SESSION['alert-danger'] = "Add Category Fail";
 				echo "<script>window.location = 'cate_list.php'</script>";
 			}	
 		}
@@ -111,11 +111,11 @@ class C_categories
 			
 
 			if($m_cate->update_cate($id,$name,$parent,$description)){
-				$_SESSION['alert-success'] = "Successfully";
+				$_SESSION['alert-success'] = "Edit Category Successfully";
 				// echo "<script>alert('Successfully'); window.location = 'cate_list.php'</script>";
 
 			} else {
-				$_SESSION['alert-danger'] = "Fail";
+				$_SESSION['alert-danger'] = "Edit Category Fail";
 			}
 
 			$cate = $m_cate->read_cate_by_id($id);

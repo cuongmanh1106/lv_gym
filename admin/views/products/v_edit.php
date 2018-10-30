@@ -16,8 +16,8 @@ if($product->sub_image != '') {
  <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
-                <h4>INSERT A PRODUCT</h4>
+            <div class="card-header badge-info">
+                <h4><i class="fa fa-edit"></i> Edit A PRODUCT</h4>
             </div>
             <div class="card-body">
                 <div class="error_tmp">
@@ -155,7 +155,7 @@ if($product->sub_image != '') {
 
     </div>
     <div style="text-align: center;">
-        <button class="btn btn-info" name="update_pro" type="button" id="insert"><i class="fa fa-thumbs-o-up"></i> Update</button>
+        <button class="btn btn-info" name="update_pro" type="submit" id="insert"><i class="fa fa-thumbs-o-up"></i> Update</button>
         <button class="btn btn-danger" onclick="window.location= 'products_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
     </div>
 </div>

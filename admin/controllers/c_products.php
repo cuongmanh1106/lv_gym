@@ -53,7 +53,7 @@ class C_products
 
         //views
         $view = "views/products/v_add.php";
-        $title = "Add a category";
+        $title = "Add a Product";
         include("include/layout.php");
     }
 
@@ -277,10 +277,10 @@ public function update() {
 
             //Tiến hành update
             if($m_product->update_product($name,$cate_id,$price,$quantity,$reduce,$size,$new_img,json_encode($new_sub_image),$intro,$description,$id)){
-                $_SESSION['alert-success'] = "Edit Successfully";
+                $_SESSION['alert-success'] = "Edit Product Successfully";
                 echo "<script>window.location = 'products_edit.php?id=$id'</script>";
             } else {
-                $_SESSION['alert-danger'] = "Edit Fail";
+                $_SESSION['alert-danger'] = "Edit Product Fail";
                 echo "<script>window.location.reload();</script>";
             }
         }
@@ -343,10 +343,10 @@ public function update() {
         }
         
         if($m_product->update_sub_image(json_encode($new_sub_image),$id)){
-            $_SESSION['alert-success'] = "Edit Successfully";
+            $_SESSION['alert-success'] = "Edit Sub Image Successfully";
             echo "<script>window.location = 'products_list.php'</script>";
         } else {
-            $_SESSION['alert-danger'] = "Edit Fail";
+            $_SESSION['alert-danger'] = "Edit Sub Image Fail";
             echo "<script>window.location.reload();</script>";
         }
 
@@ -376,10 +376,10 @@ public function update() {
         include("models/m_products.php");
         $m_pro = new M_products();
         if($m_pro->update_size($id,$total_quantity,$size)){
-            $_SESSION['alert-success'] = "Edit Successfully";
+            $_SESSION['alert-success'] = "Edit Size Successfully";
             echo "<script>window.location = 'products_list.php'</script>";
         } else {
-            $_SESSION['alert-danger'] = "Edit Fail";
+            $_SESSION['alert-danger'] = "Edit Size Fail";
             echo "<script>window.location.reload();</script>";
         }
     }

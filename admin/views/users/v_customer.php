@@ -22,8 +22,8 @@
 
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">
-            <strong class="card-title">Users</strong>
+          <div class="card-header badge-info">
+            <strong class="card-title"><i class="fa fa-list"></i> Users</strong>
             <?php if($m_per->check_permission('delete_user') == 1) { ?>
             <button class="btn btn-danger" id="del_user"  ><i class="fa fa-trash-o"></i> </a>
               <?php } else {?>

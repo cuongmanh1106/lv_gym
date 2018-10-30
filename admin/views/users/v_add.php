@@ -1,8 +1,8 @@
 
 
 <div class="card">
-  <div class="card-header">
-    Featured
+  <div class="card-header badge-info">
+    <h4><i class="fa fa-plus"></i> Add a user</h4>
   </div>
 
   <div class="error_user">
@@ -74,7 +74,7 @@
     </div>
 
       <div class="form-group " style="text-align: center;">
-              <button  type="button" class="btn btn-info" id="insert_user" name="insert_user"><i class="fa fa-thumbs-o-up"></i> Add</button>
+              <button  type="submit" class="btn btn-info" id="insert_user" name="insert_user"><i class="fa fa-thumbs-o-up"></i> Add</button>
               <button type="button" class="btn btn-danger " onclick="window.location='user_list.php'" name="reset"><i class="fa fa-reply"></i> Back</button>
             </div>
 

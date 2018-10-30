@@ -2,8 +2,8 @@
 
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
-                <h4>INSERT A PRODUCT</h4>
+            <div class="card-header badge-info">
+                <h4><i class="fa fa-plus"></i> INSERT A PRODUCT</h4>
             </div>
             <div class="card-body">
                 <div class="error_tmp">
@@ -122,7 +122,7 @@
             </div>
 
             <div style="text-align: center;">
-                <button class="btn btn-info" name="insert_pro" type="button" id="insert"> <i class="fa fa-thumbs-o-up"></i> Add</button>
+                <button type="submit" class="btn btn-info" name="insert_pro"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Add</button>
                 <button class="btn btn-danger" onclick="window.location= 'products_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
             </div>
         </div>
@@ -220,7 +220,7 @@
         $(this).parent().remove();
     })
 
-    $('#insert').click(function(){
+    $('button[name="insert_pro"]').click(function(){
         var html = '';
         var flag = true;
         html += ' <ul  id="error" class="alert alert-danger">';

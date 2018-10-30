@@ -2,7 +2,7 @@
 <?php require("include/report.php");?>
 <div class="card">
   <div class="card-header   badge-info">
-  	<h5 class="card-title">Edit a Category</h5>
+  	<h5 class="card-title"> <i class="fa fa-edit"></i> Edit a Category</h5>
   
   </div>
   

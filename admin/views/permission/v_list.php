@@ -23,11 +23,11 @@
 
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title">Permissions</strong>
+                        <div class="card-header badge-info">
+                            <strong class="card-title"><i class="fa fa-list"></i> Permissions</strong>
                            
                            <!--  <Button disabled class="btn btn-success" data-toggle="modal" data-target="#insert_per"><i class="fa fa-plus-circle"></i> Insert</Button> -->
-                            <Button class="btn btn-success" data-toggle="modal" data-target="#insert_per"><i class="fa fa-plus-circle"></i> Insert</Button>
+                            <Button class="btn btn-success" data-toggle="modal" data-target="#insert_per"><i class="fa fa-plus-circle"></i></Button>
                             
                         </div>
                        

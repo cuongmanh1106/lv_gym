@@ -22,8 +22,8 @@
 
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">
-            <strong class="card-title">Users</strong>
+          <div class="card-header badge-info">
+            <strong class="card-title"><i class="fa fa-list"></i> Users</strong>
             <?php if($m_per->check_permission('insert_user') == 1){?>
             <a class="btn btn-success" href="user_add.php" ><i class="fa fa-plus-circle"></i> </a>
             <?php } else {?>

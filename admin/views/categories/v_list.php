@@ -7,8 +7,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">
-            <strong class="card-title">List Of Category</strong>
+          <div class="card-header badge-info">
+            <strong class="card-title"><i class="fa fa-list"></i> List Of Category</strong>
             <?php if($m_per->check_permission('insert_category') == 1) {?>
             <span class="btn btn-success" data-toggle="modal" data-target="#add_cate"><i class="fa fa-plus"></i></span>
             <?php } else {?>
