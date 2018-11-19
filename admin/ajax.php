@@ -504,4 +504,77 @@ if(isset($_POST["search_ship"])) {
 }
 /*End orders*/
 
+/*Supplier*/ 
+if(isset($_POST["insert_supplier"])) {
+	$name = $_POST["name"];
+	$phone = $_POST["phone"];
+	$address = $_POST["address"];
+	include("models/m_supplier.php");
+	$m_sup = new M_suppliers();
+	
+	if($m_sup->insert_supplier($name,$address,$phone)) {
+		$_SESSION["alert-success"] = "Insert Supplier Successfully";
+		echo "success";
+	} else {
+		$_SESSION["alert-danger"] = "Insert Supplier Fail";
+		echo "fail";
+	}
+}
+
+if(isset($_POST["get_supplier_by_id"])) {
+	$id = $_POST["id"];
+	include("models/m_supplier.php");
+	$m_sup = new M_suppliers();
+	$sup = $m_sup->read_supply_by_id($id);
+	echo json_encode(['sup'=>$sup]);
+}
+if(isset($_POST["edit_supplier"])) {
+	$id = $_POST["id"];
+	$name = $_POST["name"];
+	$phone = $_POST["phone"];
+	$address = $_POST["address"];
+	include("models/m_supplier.php");
+	$m_sup = new M_suppliers();
+	if($m_sup->update_supplier($name,$address,$phone,$id)) {
+		$_SESSION["alert-success"] = "Edit Supplier Successfully";
+		echo "success";
+	} else {
+		$_SESSION["alert-danger"] = "Edit Supplier Fail";
+		echo "fail";
+	}
+}
+
+if(isset($_POST["delete_supplier"])) {
+	$id = $_POST["id"];
+	include("models/m_supplier.php");
+	$m_sup = new M_suppliers();
+	if($m_sup->delete_supplier($id)) {
+		$_SESSION["alert-success"] = "Delete Supplier Successfully";
+		echo "success";
+	} else {
+		$_SESSION["alert-danger"] = "Delete Supplier Fail";
+		echo "fail";
+	}
+}
+
+
+if(isset($_POST["delete_group_supplier"])) {
+	$list_id = $_POST['list_id'];//trả về kiểu chuổi
+	$str = str_replace('[','',$list_id);
+	$str = str_replace(']', '', $str);
+	$str = explode(',',$str);//chuyển thành mảng
+	include("models/m_supplier.php");
+	$m_sup = new M_suppliers();
+	if($m_sup->delete_group_supplier($str)) {
+		$_SESSION["alert-success"] = "Delete Suppliers Successfully";
+		echo "success";
+	} else {
+		$_SESSION["alert-danger"] = "Delete Suppliers Fail";
+		echo "fail";
+	}
+}
+
+
+/*end Supplier*/
+
 ?>

@@ -42,6 +42,13 @@
                         <a href="cate_list.php"> <i class="menu-icon fa fa-list-alt"></i>Categories </a>
                     </li>
                     <li class="menu-item-has-children active dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-alt"></i>Supplier</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-list"></i><a href="supplier_list.php">List</a></li>
+                            <li><i class="fa fa-plus-square"></i><a href="">Add</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children active dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Users</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-list"></i><a href="user_list.php">List</a></li>

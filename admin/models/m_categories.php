@@ -17,7 +17,7 @@ class M_Categories extends database {
 		return $this->loadRow(array($id));
 	}
 	public function read_cate_by_parent($id){
-		$sql = "select* from categories where parent_id = ?";
+		$sql = "select* from categories where parent_id = ? and status = 0";
 		$this->setQuery($sql);
 		return $this->loadAllRows(array($id));
 	}

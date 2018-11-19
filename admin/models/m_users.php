@@ -88,7 +88,7 @@ class M_users extends database {
 	}
 
 	public function search_user($name,$permission) {
-		$sql = "select * from users where status = 0 ";
+		$sql = "select * from users where status = 0 and permission_id != 4 ";
 		if($name != ''){
 			$sql .= " and (last_name like '%".$name."%' or first_name like '%".$name."%') ";
 		} 
