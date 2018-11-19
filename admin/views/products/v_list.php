@@ -57,6 +57,7 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Category</th>
+                <th>Supplier</th>
                 <th>Quantity</th>
                 <th>Introduce</th>
                 <th>Size</th>
@@ -65,6 +66,11 @@
             </thead>
             <tbody>
               <?php $i = 1; foreach($products as $p): 
+              $supplier = '';
+              $sup = $m_sup->read_supply_by_id($p->sup_id);
+              if(!empty($sup)) {
+                $supplier = $sup->name;
+              }
               $size = json_decode($p->size);
               $disable_edit_quantity = '';
               $size_name = '[';
@@ -84,6 +90,7 @@
                 <td><?php echo $p->name?></td>
                 <td align="right"><?php echo number_format($p->price,2)?></td>
                 <td><?php echo $p->cate_name?></td>
+                <td><?php echo $supplier?></td>
                 <td><?php echo $p->quantity?></td>
                 <td><?php echo substr($p->intro,0,30)  ?>.....</td>
                 <td><?php echo $size_name?></td>

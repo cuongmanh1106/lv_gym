@@ -56,120 +56,132 @@ if($product->sub_image != '') {
                                 <div class="col-md-1">(<span style="color:red">*</span>)</div>
                             </div>
 
-
                             <div class="row form-group">
-                                <div class="col-md-1"><label for="text-input" class=" form-control-label">Price:</label></div>
-                                <div class="col-md-10"><input type="text" value="<?php echo $product->price?>" required="required" onkeyup="formatNumBerKeyUp(this)" id="text-input" name="price" class="form-control"></div>
-                                <div class="col-md-1">(<span style="color:red">*</span>)</div>
+                                <div class="col col-md-1"><label for="select" class=" form-control-label">Suplier:</label></div>
+                                <div class="col-12 col-md-10">
+                                  <select name="sup_id" required="required" id="" class="form-control selected2">
+                                    <?php foreach($supliers as $sup): ?>
+                                        <option <?php echo ($product->sup_id == $sup->id)?'selected':'' ?>  value="<?php echo $sup->id?>"><?php echo $sup->name?></option>
+                                    <?php endforeach?>
+                                </select>
                             </div>
-
-                            <div class="row form-group">
-                                <div class="col-md-1"><label for="text-input" class=" form-control-label">Discount Price:</label></div>
-                                <div class="col-md-1"><label class="switch switch-text switch-success switch-pill"><input type="checkbox" class="switch-input" id="discount" checked="true"> <span data-on="On" data-off="Off" class="switch-label"></span> <span class="switch-handle"></span></label></div>
-                                <div class="col-md-9">
-                                    <input placeholder=" Discount price...." onkeyup="formatNumBerKeyUp(this)"  type="text" name="reduce"  id="discount-input" value="<?php echo $product->reduce?>" name="reduce" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col-md-1"><label for="text-input" class=" form-control-label">Introduce:</label></div>
-                                <div class="col-md-10"><input type="text" value="<?php echo $product->intro; ?>" required="required" id="text-input" name="intro" class="form-control"></div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-1"><label for="textarea-input" class=" form-control-label">Description</label></div>
-                                <div class="col-12 col-md-10"><textarea  name="description" id="editor2" required="required" rows="9" placeholder="Content..." class="form-control"><?php echo $product->description?></textarea>
-                                </div>
-                                <div class="col-md-1">(<span style="color:red">*</span>)</div>
-                            </div>
-
-
-
-
+                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
                         </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <div class="row form-group">
-                                <div class="col-md-1"><label for="text-input" class=" form-control-label">Image:</label></div>
-                                <div class="col-md-10"><img src="public/images/<?php echo $product->image?>" width="150px" ><input type="file" value="public/images/<?php echo $product->image?>" id="image" name="image" class="form-control"></div>
-                                <div class="col-md-1">(<span style="color:red">*</span>)</div>
+
+
+                        <div class="row form-group">
+                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Price:</label></div>
+                            <div class="col-md-10"><input type="text" value="<?php echo $product->price?>" required="required" onkeyup="formatNumBerKeyUp(this)" id="text-input" name="price" class="form-control"></div>
+                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Discount Price:</label></div>
+                            <div class="col-md-1"><label class="switch switch-text switch-success switch-pill"><input type="checkbox" class="switch-input" id="discount" checked="true"> <span data-on="On" data-off="Off" class="switch-label"></span> <span class="switch-handle"></span></label></div>
+                            <div class="col-md-9">
+                                <input placeholder=" Discount price...." onkeyup="formatNumBerKeyUp(this)"  type="text" name="reduce"  id="discount-input" value="<?php echo $product->reduce?>" name="reduce" class="form-control">
                             </div>
-                            <?php 
-                            if($sub_img != null) {
-                                foreach($sub_img as $s){
-                                    ?>
-                                    <div class="form-group">
-                                       <div class="col-md-1"><label for="text-input" class=" form-control-label">Sub-Image:</label></div>
-                                       <div class="col-md-11" style="margin-top: 15px; margin-bottom: 15px"><img src="public/images/<?php echo $s?>" class="" width="130px"><a style="width: 30px; height: 30px; padding:6px 0; border-radius: 15px; text-align: center;font-size: 12px; line-height: 1.42857; position: absolute; left: 131px; top: 0" class="btn btn-danger btn-circle icon_del del_sub_image"><i class="fa fa-times"></i></a></div>
-                                       <input type="hidden" value="<?php echo $s?>" name="old_sub_image[]">
+                        </div>
 
-                                   </div>
-                                   <?php
-                               }
+                        <div class="row form-group">
+                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Introduce:</label></div>
+                            <div class="col-md-10"><input type="text" value="<?php echo $product->intro; ?>" required="required" id="text-input" name="intro" class="form-control"></div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-1"><label for="textarea-input" class=" form-control-label">Description</label></div>
+                            <div class="col-12 col-md-10"><textarea  name="description" id="editor2" required="required" rows="9" placeholder="Content..." class="form-control"><?php echo $product->description?></textarea>
+                            </div>
+                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="row form-group">
+                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Image:</label></div>
+                            <div class="col-md-10"><img src="public/images/<?php echo $product->image?>" width="150px" ><input type="file" value="public/images/<?php echo $product->image?>" id="image" name="image" class="form-control"></div>
+                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
+                        </div>
+                        <?php 
+                        if($sub_img != null) {
+                            foreach($sub_img as $s){
+                                ?>
+                                <div class="form-group">
+                                   <div class="col-md-1"><label for="text-input" class=" form-control-label">Sub-Image:</label></div>
+                                   <div class="col-md-11" style="margin-top: 15px; margin-bottom: 15px"><img src="public/images/<?php echo $s?>" class="" width="130px"><a style="width: 30px; height: 30px; padding:6px 0; border-radius: 15px; text-align: center;font-size: 12px; line-height: 1.42857; position: absolute; left: 131px; top: 0" class="btn btn-danger btn-circle icon_del del_sub_image"><i class="fa fa-times"></i></a></div>
+                                   <input type="hidden" value="<?php echo $s?>" name="old_sub_image[]">
+
+                               </div>
+                               <?php
                            }
+                       }
 
-                           ?>
-                           <div class="clearfix"></div>
-                           <a href="javascript::void(0)" class="btn btn-secondary" id="add-sub-image"><i class="fa fa-plus"></i> Add sub-image</a>
-                           <hr>
-                           <div class="sub-image">
-
-
-                           </div>
+                       ?>
+                       <div class="clearfix"></div>
+                       <a href="javascript::void(0)" class="btn btn-secondary" id="add-sub-image"><i class="fa fa-plus"></i> Add sub-image</a>
+                       <hr>
+                       <div class="sub-image">
 
 
                        </div>
-                       <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                        <div class="col-md-6">Total quantity<input class="form-control" type="text" name="total_quantity" value="<?php echo $product->quantity ?>" onkeypress="return isNumberKey(event)" ></div>
 
-                        <div class="clearfix"></div>
-                        <hr>
-                        <div id="add-size">
-                            <?php 
-                            if(count($sizes) != 0) {
-                                foreach($sizes as $key=>$value){
-                                    ?>
 
-                                    <div class="row form-group">
-                                        <div class="col-md-1"><label for="text-input" class=" form-control-label">Size:</label></div>
-                                        <div class="col-md-4">
-                                            <select name="size[]" class="form-control" id="select">
-                                                <option <?php echo  ($key=="XS")?'selected':'' ?> value="XS">XS</option>
-                                                <option <?php echo ($key=="S")?'selected':''  ?> value="S">S</option>
-                                                <option <?php echo ($key=="M")?'selected':''  ?> value="M">M</option>
-                                                <option <?php echo ($key=="L")?'selected':''  ?> value="L">L</option>
-                                                <option <?php echo ($key=="XL")?'selected':''  ?> value="XL">XL</option>
-                                                <option <?php echo ($key=="2XL")?'selected':''  ?> value="2XL">2XL</option>
-                                                <option <?php echo ($key=="3XL")?'selected':''  ?> value="3XL">3XL</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-1"><label for="text-input" class=" form-control-label">Quantity:</label></div>
-                                        <div class="col-md-4"><input type="text" value="<?php echo  $value ?>" required="required" onkeypress="return isNumberKey(event)" id="text-input" name="quantity[]" class="form-control"></div>
-                                        <button type="button" class="close close-add-size" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                   </div>
+                   <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="col-md-6">Total quantity<input class="form-control" type="text" name="total_quantity" value="<?php echo $product->quantity ?>" onkeypress="return isNumberKey(event)" ></div>
+
+                    <div class="clearfix"></div>
+                    <hr>
+                    <div id="add-size">
+                        <?php 
+                        if(count($sizes) != 0) {
+                            foreach($sizes as $key=>$value){
+                                ?>
+
+                                <div class="row form-group">
+                                    <div class="col-md-1"><label for="text-input" class=" form-control-label">Size:</label></div>
+                                    <div class="col-md-4">
+                                        <select name="size[]" class="form-control" id="select">
+                                            <option <?php echo  ($key=="XS")?'selected':'' ?> value="XS">XS</option>
+                                            <option <?php echo ($key=="S")?'selected':''  ?> value="S">S</option>
+                                            <option <?php echo ($key=="M")?'selected':''  ?> value="M">M</option>
+                                            <option <?php echo ($key=="L")?'selected':''  ?> value="L">L</option>
+                                            <option <?php echo ($key=="XL")?'selected':''  ?> value="XL">XL</option>
+                                            <option <?php echo ($key=="2XL")?'selected':''  ?> value="2XL">2XL</option>
+                                            <option <?php echo ($key=="3XL")?'selected':''  ?> value="3XL">3XL</option>
+                                        </select>
                                     </div>
-                                    <?php }}?>
-
-
+                                    <div class="col-md-1"><label for="text-input" class=" form-control-label">Quantity:</label></div>
+                                    <div class="col-md-4"><input type="text" value="<?php echo  $value ?>" required="required" onkeypress="return isNumberKey(event)" id="text-input" name="quantity[]" class="form-control"></div>
+                                    <button type="button" class="close close-add-size" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <a href="javascript::void(0)" class="btn btn-secondary" id="add-sub-size"><i class="fa fa-plus"></i> Add sub size</a>
+                                <?php }}?>
+
 
                             </div>
-                        </div>
+                            <a href="javascript::void(0)" class="btn btn-secondary" id="add-sub-size"><i class="fa fa-plus"></i> Add sub size</a>
 
+                        </div>
                     </div>
 
                 </div>
-                <div style="text-align: center;">
-                    <button class="btn btn-info" name="update_pro" type="submit" id="insert"><i class="fa fa-thumbs-o-up"></i> Update</button>
-                    <button class="btn btn-danger" onclick="window.location= 'products_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
-                </div>
-            </div>
 
+            </div>
+            <div style="text-align: center;">
+                <button class="btn btn-info" name="update_pro" type="button" id="insert"><i class="fa fa-thumbs-o-up"></i> Update</button>
+                <button class="btn btn-danger" onclick="window.location= 'products_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
+            </div>
         </div>
-        <!-- /# column -->
 
     </div>
+    <!-- /# column -->
+
+</div>
 </form>
 <script>
  $(document).ready(function(){
@@ -250,7 +262,7 @@ if($product->sub_image != '') {
         $(this).parent().parent().remove();
     })
     //kiểm tra dữ liệu
-    $('#insert').click(function(){
+    $(document).on('click','#insert',function(){
         var html = '';
         var flag = true;
         html += ' <ul  id="error" class="alert alert-danger">';
@@ -293,7 +305,6 @@ if($product->sub_image != '') {
                     html += '<li>Size is unique</li>';
                     flag = false;
                     check = false; 
-
                 }
                 if(check == false)
                 {
@@ -307,8 +318,8 @@ if($product->sub_image != '') {
         }) ;
 
         html += '</ul>';
-        console.log(flag);  
         if(flag) {
+            console.log(flag);  
             $('button[name="update_pro"]').attr("type", "submit");
         } else {
             $('.error_tmp').html(html);

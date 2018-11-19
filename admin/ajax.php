@@ -156,7 +156,9 @@ if(isset($_POST["search_pro"])){
 
 	include("models/m_products.php");
 	include("models/m_categories.php");
+	include("models/m_supplier.php");
 	include("models/m_permission.php");
+	$m_sup = new M_suppliers();
 	$m_per = new M_permission();
 	$m_pro = new M_products();
 	$m_cate = new M_Categories();

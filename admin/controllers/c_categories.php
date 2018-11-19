@@ -99,19 +99,23 @@ class C_categories
 			$name = $_POST["name"];
 			$parent = $_POST["parent"];
 			$description = $_POST["description"];
+			$msg = "";
+			$children = $m_cate->read_cate_by_parent($id); // tìm con của cate đang đứng
 
-			if($parent != 0) {
-				$cate_parent = $m_cate->read_cate_by_id($parent);
-				if($cate_parent->parent_id != $parent && $cate_parent->parent_id != 0) {
+			if($cate->parent_id == 0 && count($children) > 0 ) { //nếu là cấp cao nhất và có con thì không cho thay đổi 
+				$parent = $cate->parent_id;
+				$msg = "this category had children, you can change it's parent";
+			} else if($parent != 0 ) { //nếu chọn cha không phải cấp cao nhất
+				$cate_parent = $m_cate->read_cate_by_id($parent);  //Lấy cha của loại đang đứng
+				if($cate_parent->parent_id != 0 ) { // cha vừa chọn không phải cấp cao nhất thì chọn parent = là thằng có cấp cao nhất (parent = 0) ví dụ parent = Short (parent = 1 :mens) thì t sẽ chuyển parent = 0 :none cấp cao nhất 
 					$parent = $cate_parent->parent_id;
-				} else if($cate_parent->parent_id == 0) {
-					$parent = $cate->parent_id;
+				} else if ($cate_parent->parent_id == 0 && count($children) == 0) { // không có cha và không có con thì cho đổi parent 
+					$parent = $cate_parent->id;
 				}
-			}
-			
+			} 
 
 			if($m_cate->update_cate($id,$name,$parent,$description)){
-				$_SESSION['alert-success'] = "Edit Category Successfully";
+				$_SESSION['alert-success'] = "Edit Category Successfully ".$msg ;
 				// echo "<script>alert('Successfully'); window.location = 'cate_list.php'</script>";
 
 			} else {

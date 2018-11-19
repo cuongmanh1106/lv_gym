@@ -54,16 +54,16 @@ class M_products extends database {
 		return $this->loadAllRows();
 	}
 
-	public function insert_product($name,$cate_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description) {
-		$sql = "insert into products(name,alias,cate_id,price,quantity,reduce,size,image,sub_image,intro,description) values(?,?,?,?,?,?,?,?,?,?,?)";
+	public function insert_product($name,$cate_id,$sup_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description) {
+		$sql = "insert into products(name,alias,cate_id,sup_id,price,quantity,reduce,size,image,sub_image,intro,description) values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		$this->setQuery($sql);
-		return $this->execute(array($name,changeTitle($name),$cate_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description));
+		return $this->execute(array($name,changeTitle($name),$cate_id,$sup_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description));
 	}
 
-	public function update_product($name,$cate_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description,$id){
-		$sql = "update products set name = ?,alias = ?,cate_id =?, price = ?, quantity = ?, reduce = ?, size = ?,image = ?,sub_image = ?,intro = ?,description = ? where id = ?";
+	public function update_product($name,$cate_id,$sup_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description,$id){
+		$sql = "update products set name = ?,alias = ?,cate_id =?,sup_id=?, price = ?, quantity = ?, reduce = ?, size = ?,image = ?,sub_image = ?,intro = ?,description = ? where id = ?";
 		$this->setQuery($sql);
-		return $this->execute(array($name,changeTitle($name),$cate_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description,$id));
+		return $this->execute(array($name,changeTitle($name),$cate_id,$sup_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description,$id));
 	}
 	public function update_sub_image($sub_image,$id) {
 		$sql = "update products set sub_image = ? where id = ?";

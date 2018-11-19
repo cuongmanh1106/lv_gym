@@ -13,12 +13,6 @@
             <button class="btn btn-danger" id="del_supplier"  ><i class="fa fa-trash-o"></i> </a>
 
             </div>
-            <div class="search" style="margin-top: 20px">
-             <div class="col-md-12 col-md-offset-3">
-               <input type="text" class="form-control" name="name_search" placeholder=" Last Name...">
-             </div>
-
-           </div>
            <hr style="boder:0.5px solid #fff">
            <div class="card-body" id="search_supplier">
             <table id="table_user" class="table table-striped table-bordered table_supplier">

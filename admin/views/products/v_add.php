@@ -2,7 +2,7 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="products_list.php" style="color: blue">Products</a></li>
     <li class="breadcrumb-item active" aria-current="page">Insert a product</li>
-  </ol>
+</ol>
 </nav>
 <form method="POST" enctype="multipart/form-data" action="products_store.php">
 
@@ -37,6 +37,18 @@
                                   <select name="cate_id" required="required" id="select" class="form-control">
                                     <option value="0">--None--</option>
                                     <?php cate_parent($cates); ?>
+                                </select>
+                            </div>
+                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
+                        </div>
+
+                        <div class="row form-group">
+                                <div class="col col-md-1"><label for="select" class=" form-control-label">Suplier:</label></div>
+                                <div class="col-12 col-md-10">
+                                  <select name="sup_id" required="required" id="" class="form-control selected2">
+                                    <?php foreach($supliers as $sup): ?>
+                                        <option value="<?php echo $sup->id?>"><?php echo $sup->name?></option>
+                                    <?php endforeach?>
                                 </select>
                             </div>
                             <div class="col-md-1">(<span style="color:red">*</span>)</div>
@@ -146,7 +158,7 @@
     } else {
         $('input[name=total_quantity').prop('disabled',true);
     }
-   })
+})
 </script>
 
 <script type="text/javascript" >

@@ -23,12 +23,15 @@ class C_products
         //models
         require("models/m_categories.php");
         require("models/m_products.php");
+        require("models/m_supplier.php");
         
+        $m_sup = new M_suppliers();
         $m_cate = new M_Categories();
         $m_pro = new M_products();
 
         $cates = $m_cate->read_all_categories();
         $products = $m_pro->read_all_products();
+        
 
 
         //views
@@ -46,10 +49,12 @@ class C_products
         }
         // require("../helper/help.php");
         require("models/m_categories.php");
+        require("models/m_supplier.php");
+        $m_sup = new M_suppliers();
         $m_cate = new M_Categories();
 
         $cates = $m_cate->read_all_categories();
-
+        $supliers = $m_sup->read_all_suppliers();
 
         //views
         $view = "views/products/v_add.php";
@@ -98,6 +103,7 @@ class C_products
                 $reduce = str_replace(',', '', $_POST['reduce']);
             }
             $cate_id = $_POST["cate_id"];
+            $sup_id = $_POST["sup_id"];
             $intro = $_POST["intro"];
             $description = $_POST["description"];
             $quanity = $total_quantity;
@@ -122,7 +128,7 @@ class C_products
 
             }
                 //insert_product($name,$cate_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description)
-            if($m_pro->insert_product($name,$cate_id,$price,$quanity,$reduce,$size,$image,json_encode($sub_image_array),$intro,$description)){
+            if($m_pro->insert_product($name,$cate_id,$sup_id,$price,$quanity,$reduce,$size,$image,json_encode($sub_image_array),$intro,$description)){
                 $_SESSION['alert-success'] = "Insert Product Successfully";
                 echo "<script>window.location = 'products_list.php'</script>";
             } else {
@@ -153,12 +159,15 @@ public function edit() {
         //model
     include("models/M_products.php");
     include("models/M_categories.php");
+    require("models/m_supplier.php");
+        
     // include("../helper/help.php");
-
+    $m_sup = new M_suppliers();
     $m_product = new M_products();
     $m_cate = new M_Categories();
     $cates = $m_cate->read_all_categories();
     $product = $m_product->read_product_by_id($id);
+    $supliers = $m_sup->read_all_suppliers();
 
 
         //views
@@ -229,6 +238,7 @@ public function update() {
             $name = $_POST['name'];
             $price = str_replace(',', '', $_POST["price"]);
             $cate_id = $_POST["cate_id"];
+            $sup_id = $_POST["sup_id"];
             $description = $_POST["description"];
             $intro = $_POST['intro'];
             $quantity = $total_quantity;
@@ -276,7 +286,7 @@ public function update() {
             }
 
             //Tiến hành update
-            if($m_product->update_product($name,$cate_id,$price,$quantity,$reduce,$size,$new_img,json_encode($new_sub_image),$intro,$description,$id)){
+            if($m_product->update_product($name,$cate_id,$sup_id,$price,$quantity,$reduce,$size,$new_img,json_encode($new_sub_image),$intro,$description,$id)){
                 $_SESSION['alert-success'] = "Edit Product Successfully";
                 echo "<script>window.location = 'products_edit.php?id=$id'</script>";
             } else {

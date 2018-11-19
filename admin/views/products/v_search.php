@@ -8,6 +8,7 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Category</th>
+                <th>Supplier</th>
                 <th>Quantity</th>
                 <th>Introduce</th>
                 <th>Size</th>
@@ -16,6 +17,16 @@
             </thead>
             <tbody>
               <?php $i = 1; foreach($products as $p): 
+              $supplier = '';
+              $cate_name = '';
+              $sup = $m_sup->read_supply_by_id($p->sup_id);
+              if(!empty($sup)) {
+                $supplier = $sup->name;
+              }
+              $cate = $m_cate->read_cate_by_id($p->cate_id);
+              if(!empty($cate)) {
+                $cate_name = $cate->name;
+              }
               $size = json_decode($p->size);
               $disable_edit_quantity = '';
               $size_name = '[';
@@ -34,7 +45,8 @@
                 <td><img src="public/images/<?php echo $p->image?>" width="150px"></td>
                 <td><?php echo $p->name?></td>
                 <td align="right"><?php echo number_format($p->price,2)?></td>
-                <td><?php echo $p->cate_name?></td>
+                <td><?php echo $cate_name?></td>
+                <td><?php echo $supplier?></td>
                 <td><?php echo $p->quantity?></td>
                 <td><?php echo substr($p->intro,0,30)  ?>.....</td>
                 <td><?php echo $size_name?></td>
