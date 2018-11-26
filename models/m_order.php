@@ -4,7 +4,7 @@ require_once("admin/models/database.php");
 class M_order extends database {
 
 	public function read_order_by_customer($customer_id) {
-		$sql = "select * from orders where customer_id = ".$customer_id ." order by id desc";
+		$sql = "select * from orders where customer_id = ".$customer_id ." order by created_at desc";
 		$this->setQuery($sql);
 		return $this->loadAllRows();
 	}

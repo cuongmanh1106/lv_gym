@@ -4,7 +4,7 @@
                   <td><img src="admin/public/images/<?php echo  $product->image ?>" width="70px"></td>
                   <td width="20%" ><?php echo  $product->name ?></td>
                   <td>$ <?php echo  number_format($product->price, 2)?></td>
-                  <td width="10%"><input type="number" class="form-control" value="<?php echo  $cart["qty"] ?>" name="qty_checkout"></td>
+                  <td width="10%"><input type="number"  onkeypress="return isNumberKey(event)" class="form-control" value="<?php echo  $cart["qty"] ?>" name="qty_checkout"></td>
                   <td>
                     <?php if($cart["size"] != 'none') {?>
                     <select class="form-control" name="size_update">

@@ -116,6 +116,12 @@ class M_products extends database {
         return $this->execute(array($quantity,$size,$id));
     }
 
+    public function update_view($id,$view) {
+        $sql = "update products set view = ".$view." where id = ".$id;
+        $this->setQuery($sql);
+        return $this->execute();
+    }
+
     public function insert_feedback($customer_id,$content) {
         $sql ="insert into feedback (customer_id,content,status) values(?,?,0)";
         $this->setQuery($sql);

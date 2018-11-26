@@ -4,7 +4,7 @@
 		<div class="banner-matter">
 			<h1>Get excercise  get gym<span>push your limits</h1>
 				<div class="out">
-					<a href="single.html" class="shop">SHOP</a>
+					<a href="products.php" class="shop">SHOP</a>
 					<div class="clearfix"> </div>
 				</div>
 			</div>	
@@ -70,11 +70,11 @@
 		<div class="content-grids">
 			<?php foreach($products as $p):?>
 				<div class="col-md-4 content-grid">
-					<a href="single.html" class="lot"><img class="img-responsive " src="admin/public/images/<?php echo $p->image?>" alt=""></a>
+					<a href="single.php?id=<?php echo $p->id?>" class="lot"><img class="img-responsive " src="admin/public/images/<?php echo $p->image?>" alt=""></a>
 					<div class="shoe">
 						<p><?php echo $p->name?></p>
 						<label>$<?php echo $p->price?></label>
-						<a href="single.html">find a store</a>
+						<a href="single.php?id=<?php echo $p->id?>">find a store</a>
 					</div>
 					<div class="clearfix"> </div>
 				</div>

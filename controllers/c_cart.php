@@ -53,7 +53,7 @@ class C_cart{
 				$sizes = json_decode($product->size);
 				$total_quantity = $product->quantity;
 				if(count($sizes) > 0) {
-					if($sizes->$cart["size"] >= $cart["qty"]) {
+					if($sizes->$cart["size"] >= $cart["qty"]) { //trừ sản phẩm mà khách hàng đã đặt
 						$sizes->$cart["size"] = $sizes->$cart["size"] - $cart["qty"]; 
 						$total_quantity -= $cart["qty"];
 					} else {
@@ -67,6 +67,8 @@ class C_cart{
 				$m_order->insert_order_detail($order_id,$cart["id"],$cart["price"],$cart["size"],$cart["qty"]);
 
 				$m_pro->update_product($cart["id"],$total_quantity,json_encode($sizes));
+
+				$m_pro->update_view($product->id,$product->view + 1);
 			}
 		}
 

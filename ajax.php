@@ -171,7 +171,7 @@ if(isset($_POST['add-to-cart'])) {
 	if(isset($_POST["size"])) {
 		$size  = $_POST["size"];
 		$sizes = json_decode($product->size);
-		if($size == "" && count($sizes) > 0) {
+		if($size == "" && count($sizes) > 0) { //chọn khi xem sản phẩm mà k order bên chi tiết
 			foreach($sizes as $key=>$v){
 				if($v != 0) {
 					$size = $key;
@@ -263,12 +263,12 @@ if(isset($_POST["update_cart"])) {
 	foreach($_SESSION["cart"] as $key=>$cart) {
 		$total += $cart["qty"]*$cart["price"];
 
-		if($key != $rowId && $pro_id == $cart["id"] && $size == $cart["size"]) {
+		if($key != $rowId && $pro_id == $cart["id"] && $size == $cart["size"]) { //if the product just update and it already have in your cart 																			(that mean giống nhau)
 			echo json_encode(['cart'=>"exists",'size'=>$cart_detail["size"] ]); //send back begin size
 			exit();
 		} 
-		if(count($sizes) > 0) {
-			if($rowId == $key && $qty > $sizes->$size) { //change size of product but it already have on cart
+		if(count($sizes) > 0) { //có size
+			if($rowId == $key && $qty > $sizes->$size) { //change size of product but it already have on cart (chọn số lượng nhiều hơn tồn)
 				echo json_encode(['cart'=>"overlimit",'qty'=>$cart_detail["qty"] , 'size'=>$cart_detail["size"] ]); //send back begin quantity
 				exit();															 //using size when change size and it doesn't exist in cart													
 			} else {
@@ -276,7 +276,7 @@ if(isset($_POST["update_cart"])) {
 			}
 
 		} else {
-			if($rowId == $key && $qty > $product->quantity) {
+			if($rowId == $key && $qty > $product->quantity) { // không có size thì so sánh vs tồn chính
 				echo json_encode(['cart'=>"overlimit",'qty'=>$cart_detail["qty"]]);
 				exit();
 			} else {
@@ -287,7 +287,7 @@ if(isset($_POST["update_cart"])) {
 		
 	}
 
-	if($check) {
+	if($check) { 
 		$total += ($qty - $_SESSION["cart"][$rowId]["qty"])*$_SESSION["cart"][$rowId]["price"];
 		$_SESSION["cart"][$rowId]["qty"] = $qty;
 		$_SESSION["cart"][$rowId]["size"] = $size;
@@ -303,7 +303,7 @@ if(isset($_POST["delete_cart"])){
 	unset($_SESSION["cart"][$rowId]);
 	$total = 0;
 	foreach($_SESSION["cart"] as $key=>$cart){
-		$total = $cart["qty"]*$cart["price"];
+		$total += $cart["qty"]*$cart["price"];
 	}
 
 	$count = count($_SESSION["cart"]);

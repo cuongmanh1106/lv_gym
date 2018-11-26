@@ -136,8 +136,7 @@ class C_account{
 		}
 
 		$orders = $m_order->read_order_by_customer($customer_id);
-
-		//views
+		//views	
 		$title = "Order history";
 		$view = "views/account/v_history_order.php";
 		include("include/layout.php");
