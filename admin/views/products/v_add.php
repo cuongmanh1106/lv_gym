@@ -1,3 +1,6 @@
+<?php
+include("include/report.php");
+?>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="products_list.php" style="color: blue">Products</a></li>

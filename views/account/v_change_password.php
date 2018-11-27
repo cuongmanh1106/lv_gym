@@ -34,7 +34,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" name="change_password" id="change_password" style="text-align: center;" class="btn btn-info">Update</button>
+        <button type="button" name="change_password" id="change_pass" style="text-align: center;" class="btn btn-info">Update</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
 </form>
@@ -45,7 +45,7 @@
 </div>
 </div>
 <script type="text/javascript">
-  $('#change_password').on('click',function(){
+  $('#change_pass').on('click',function(){
     html = '<ul class="alert alert-danger" >';
     flag = true;
     if($('input[name=password]').val() == '') {

@@ -1,6 +1,8 @@
 
 <?php include("v_view.php"); ?>
-
+<?php
+include("include/report.php");
+?>
 
 <div class="content mt-3">
   <div class="animated fadeIn">

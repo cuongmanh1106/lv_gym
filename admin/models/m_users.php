@@ -53,7 +53,7 @@ class M_users extends database {
 	}
 
 	public function check_login($email,$password){
-		$sql = "select * from users where email = ?  ";
+		$sql = "select * from users where email = ? and permission_id != 4  ";
 		$this->setQuery($sql);
 		$us = $this->loadRow(array($email)); 
 		if(!empty($us) && password_verify($password,$us->password)) {

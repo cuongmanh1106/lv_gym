@@ -1,5 +1,6 @@
-
-
+<?php
+include("include/report.php");
+?>
 
 <div class="container">
 	<?php

@@ -13,7 +13,7 @@ class C_Index
 			if(isset($_POST["login"])) {
 				$email = $_POST["email"];
 				$password = $_POST["password"];
-				if($m_user->check_login($email, $password) != "wrong") {
+				if($m_user->check_login($email, $password) != "wrong" ) {
 					$_SESSION["user"] = $m_user->check_login($email,$password);
 					$_SESSION["alert-success"] = "Login Successfully";
 					echo "<script>window.location = 'chart.php'</script>";
