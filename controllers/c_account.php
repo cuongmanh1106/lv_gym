@@ -22,7 +22,7 @@ class C_account{
 				echo "<script>window.location = '.'</script>";
 			} else {
 				$_SESSION["alert-danger"] = "Wrong Email or Password";
-				echo "<script>window.location = '';</script>";
+				// echo "<script>window.location = '';</script>";
 			}
 
 		}

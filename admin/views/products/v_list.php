@@ -117,7 +117,7 @@
                     <?php }?>
 
                     <?php if($m_per->check_permission('delete_product') == 1) {?>
-                    <a class="dropdown-item badge badge-danger" data-index="<?php echo $p->id?>" id="delete_pro" onclick="delete_pro(<?php echo $p->id?>)" href="javascript::void(0)"><i class="fa fa-trash-o"></i> Delete</a>
+                    <a class="dropdown-item badge badge-danger delete_pro" data-index="<?php echo $p->id?>"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> Delete</a>
                     <?php } else {?>
                     <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Delete</button>
                     <?php }?>
@@ -219,13 +219,9 @@
     } 
 
   })
-</script>
-<!--Delete group-->
-
-<!--Search-->
-<script type="text/javascript">
-  function delete_pro(id){
+  $(document).on('click','.delete_pro',function(){
     if(confirm('Are you are? Data wont backup again')) {
+      id = $(this).data('index');
       $.ajax({
         type:'POST',
         url : "ajax.php",
@@ -233,15 +229,42 @@
         data: {'id':id,'delete_pro':'OK'},
         success: function(data,status) {
           if(data.trim() == "permission") {
+            console.log("permission");
             alert("You dont have permission to do this action")
           } else if(data.trim() != "") {
+            console.log("success");
             $('#pro_search').html(data);
-            $('.table_pro').DataTable({});
+            $('.table_pro').DataTable();
           } 
         }
       })
     }
-  }
+  })
+</script>
+<!--Delete group-->
+
+<!--Search-->
+<script type="text/javascript">
+  // function delete_pro(id){
+  //   if(confirm('Are you are? Data wont backup again')) {
+  //     $.ajax({
+  //       type:'POST',
+  //       url : "ajax.php",
+  //       cache: false,
+  //       data: {'id':id,'delete_pro':'OK'},
+  //       success: function(data,status) {
+  //         if(data.trim() == "permission") {
+  //           console.log("permission");
+  //           alert("You dont have permission to do this action")
+  //         } else if(data.trim() != "") {
+  //           console.log("success");
+  //           $('#pro_search').html(data);
+  //           $('.table_pro').DataTable();
+  //         } 
+  //       }
+  //     })
+  //   }
+  // }
 
   $('input[name=name_search], input[name=price_from], input[name=price_to]').on('keyup',function(){
     var name = $('input[name=name_search').val();

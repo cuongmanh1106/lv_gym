@@ -105,8 +105,10 @@ if(isset($_POST['delete_pro'])){
 	$id = $_POST['id'];
 	include("models/m_products.php");
 	include("models/m_categories.php");
+	include("models/m_supplier.php");
 	$m_pro = new M_products();
 	if($m_pro->delete_product($id)) {
+		$m_sup = new M_suppliers();
 		$m_pro = new M_products();
 		$m_cate = new M_Categories();
 		$products = $m_pro->read_all_products();
@@ -129,6 +131,7 @@ if(isset($_POST['delete_group_product'])){
 
 	include("models/m_products.php");
 	include("models/m_categories.php");
+	include("models/m_supplier.php");
 	$m_pro = new M_products();
 
 	$list_id = $_POST['list_id'];//trả về kiểu chuổi
@@ -136,6 +139,7 @@ if(isset($_POST['delete_group_product'])){
 	$str = str_replace(']', '', $str);
 	$str = explode(',',$str);//chuyển thành mảng
 	if($m_pro->delete_group($str)){
+		$m_sup = new M_suppliers();
 		$m_pro = new M_products();
 		$m_cate = new M_Categories();
 		$products = $m_pro->read_all_products();

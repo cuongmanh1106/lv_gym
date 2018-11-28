@@ -17,15 +17,11 @@
             </thead>
             <tbody>
               <?php $i = 1; foreach($products as $p): 
+
               $supplier = '';
-              $cate_name = '';
               $sup = $m_sup->read_supply_by_id($p->sup_id);
               if(!empty($sup)) {
                 $supplier = $sup->name;
-              }
-              $cate = $m_cate->read_cate_by_id($p->cate_id);
-              if(!empty($cate)) {
-                $cate_name = $cate->name;
               }
               $size = json_decode($p->size);
               $disable_edit_quantity = '';
@@ -45,7 +41,7 @@
                 <td><img src="public/images/<?php echo $p->image?>" width="150px"></td>
                 <td><?php echo $p->name?></td>
                 <td align="right"><?php echo number_format($p->price,2)?></td>
-                <td><?php echo $cate_name?></td>
+                <td><?php echo $p->cate_name?></td>
                 <td><?php echo $supplier?></td>
                 <td><?php echo $p->quantity?></td>
                 <td><?php echo substr($p->intro,0,30)  ?>.....</td>
@@ -53,7 +49,7 @@
                 <td>
                  <div class="dropdown">
                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                     Action
+                     <i class="fa fa-dot-circle-o"></i> Action
                    </button>
                    <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
                     <?php if($m_per->check_permission('edit_product') ==  1) { ?>
@@ -73,7 +69,7 @@
                     <?php }?>
 
                     <?php if($m_per->check_permission('delete_product') == 1) {?>
-                    <a class="dropdown-item badge badge-danger" data-index="<?php echo $p->id?>" id="delete_pro" onclick="delete_pro(<?php echo $p->id?>)" href="javascript::void(0)"><i class="fa fa-trash-o"></i> Delete</a>
+                    <a class="dropdown-item badge badge-danger delete_pro" data-index="<?php echo $p->id?>"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> Delete</a>
                     <?php } else {?>
                     <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Delete</button>
                     <?php }?>

@@ -113,7 +113,7 @@ class C_products
             //Xu ly hinh anh
             $sub_image_array = array();
             $sub_image = $_FILES["sub_image"]["name"];
-            if(move_uploaded_file($_FILES["image"]["tmp_name"],"public/images/$image")) {
+            if(move_uploaded_file($_FILES["image"]["tmp_name"],"public/images/$image") ) {
                 foreach($sub_image as $key => $value) {
                    if($value == "") {
                     continue;
