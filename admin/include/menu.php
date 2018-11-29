@@ -39,6 +39,9 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="stock_receipt_list.php"> <i class="menu-icon fa fa-users"></i>Stock Receiving </a>
+                    </li>
+                    <li>
                         <a href="cate_list.php"> <i class="menu-icon fa fa-list-alt"></i>Categories </a>
                     </li>
                     <li class="menu-item-has-children active dropdown">

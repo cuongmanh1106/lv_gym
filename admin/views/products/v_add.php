@@ -12,7 +12,7 @@ include("include/report.php");
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header badge-info">
-                <h4><i class="fa fa-plus"></i> INSERT A PRODUCT</h4>
+                <h4><i class="fa fa-plus"></i> INSERT A PRODUCT TO STOCK</h4>
             </div>
             <div class="card-body">
                 <div class="error_tmp">
@@ -56,7 +56,6 @@ include("include/report.php");
                             </div>
                             <div class="col-md-1">(<span style="color:red">*</span>)</div>
                         </div>
-
 
                         <div class="row form-group">
                             <div class="col-md-1"><label for="text-input" class=" form-control-label">Price:</label></div>
@@ -143,8 +142,8 @@ include("include/report.php");
             </div>
 
             <div style="text-align: center;">
+                <button class="btn btn-danger" onclick="window.location= 'product_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Cancel</button>
                 <button type="submit" class="btn btn-info" name="insert_pro"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Add</button>
-                <button class="btn btn-danger" onclick="window.location= 'products_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
             </div>
         </div>
 

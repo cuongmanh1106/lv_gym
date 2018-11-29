@@ -7,12 +7,12 @@ include("include/report.php");
     <li class="breadcrumb-item active" aria-current="page">Insert a product</li>
 </ol>
 </nav>
-<form method="POST" enctype="multipart/form-data" action="products_store.php">
-
+<form method="POST" enctype="multipart/form-data" action="stock_receipt_store_product.php">
+    <input type="hidden" name="stock_id" value="<?php echo $stock_id?>">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header badge-info">
-                <h4><i class="fa fa-plus"></i> INSERT A PRODUCT TO STOCK</h4>
+                <h4><i class="fa fa-plus"></i> INSERT A PRODUCT</h4>
             </div>
             <div class="card-body">
                 <div class="error_tmp">
@@ -57,20 +57,23 @@ include("include/report.php");
                             <div class="col-md-1">(<span style="color:red">*</span>)</div>
                         </div>
 
+
+
                         <div class="row form-group">
-                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Price:</label></div>
-                            <div class="col-md-10"><input type="text" required="required" onkeyup="formatNumBerKeyUp(this)" id="text-input" name="price" class="form-control"></div>
+                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Price In:</label></div>
+                            <div class="col-md-10"><input type="text" required="required" placeholder=" Price In..." onkeyup="formatNumBerKeyUp(this)" id="text-input" name="price" class="form-control"></div>
                             <div class="col-md-1">(<span style="color:red">*</span>)</div>
                         </div>
 
                         <div class="row form-group">
-                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Discount Price:</label></div>
-                            <div class="col-md-1"><label class="switch switch-text switch-success switch-pill"><input type="checkbox" class="switch-input" id="discount" checked="true"> <span data-on="On" data-off="Off" class="switch-label"></span> <span class="switch-handle"></span></label></div>
-                            <div class="col-md-9">
-                                <input placeholder=" Discount price...." onkeyup="formatNumBerKeyUp(this)"  type="text" name="reduce"  id="discount-input" name="reduce" class="form-control">
+                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Price Out:</label></div>
+                           <!--  <div class="col-md-1"><label class="switch switch-text switch-success switch-pill"><input type="checkbox" class="switch-input" id="discount" checked="true"> <span data-on="On" data-off="Off" class="switch-label"></span> <span class="switch-handle"></span></label></div> -->
+                            <div class="col-md-10">
+                                <input placeholder=" Price Out...." onkeyup="formatNumBerKeyUp(this)"  type="text" name="reduce"  id="discount-input" name="reduce" class="form-control">
                             </div>
 
                         </div>
+
 
                         <div class="row form-group">
                             <div class="col-md-1"><label for="text-input" class=" form-control-label">Introduce:</label></div>
@@ -142,8 +145,8 @@ include("include/report.php");
             </div>
 
             <div style="text-align: center;">
-                <button class="btn btn-danger" onclick="window.location= 'product_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Cancel</button>
                 <button type="submit" class="btn btn-info" name="insert_pro"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Add</button>
+                <button class="btn btn-danger" onclick="window.location= 'products_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
             </div>
         </div>
 
