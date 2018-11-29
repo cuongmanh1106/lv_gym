@@ -98,10 +98,7 @@ class C_products
             //Tong hop du lieu
             $name = $_POST["name"];
             $price = str_replace(',', '', $_POST['price']);
-            $reduce = str_replace(',', '', $_POST['price']);
-            if($_POST['reduce'] != ""){
-                $reduce = str_replace(',', '', $_POST['reduce']);
-            }
+           
             $cate_id = $_POST["cate_id"];
             $sup_id = $_POST["sup_id"];
             $intro = $_POST["intro"];
@@ -128,7 +125,7 @@ class C_products
 
             }
                 //insert_product($name,$cate_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description)
-            if($m_pro->insert_product($name,$cate_id,$sup_id,$price,$quanity,$reduce,$size,$image,json_encode($sub_image_array),$intro,$description)){
+            if($m_pro->insert_product($name,$cate_id,$sup_id,$price,$quanity,$size,$image,json_encode($sub_image_array),$intro,$description)){
                 $_SESSION['alert-success'] = "Insert Product Successfully";
                 echo "<script>window.location = 'products_list.php'</script>";
             } else {
@@ -286,7 +283,7 @@ public function update() {
             }
 
             //Tiến hành update
-            if($m_product->update_product($name,$cate_id,$sup_id,$price,$quantity,$reduce,$size,$new_img,json_encode($new_sub_image),$intro,$description,$id)){
+            if($m_product->update_product($name,$cate_id,$sup_id,$price,$quantity,$size,$new_img,json_encode($new_sub_image),$intro,$description,$id)){
                 $_SESSION['alert-success'] = "Edit Product Successfully";
                 echo "<script>window.location = 'products_edit.php?id=$id'</script>";
             } else {

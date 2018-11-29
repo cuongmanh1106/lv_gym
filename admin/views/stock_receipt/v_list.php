@@ -11,49 +11,55 @@
             <strong class="card-title"><i class="fa fa-list"></i> List of stock receipt</strong>
             <a class="btn btn-success" href="#add_stock" data-toggle="modal" ><i class="fa fa-plus-circle"></i> </a>
             <button class="btn btn-danger" id="del_user"  ><i class="fa fa-trash-o"></i> </a>
-              </div>
-              <div class="search" style="margin-top: 20px">
-               <div class="col-md-12 col-md-offset-3">
-                 <input type="text" class="form-control" name="name_search" placeholder=" Last Name...">
-               </div>
-
+            </div>
+            <div class="search" style="margin-top: 20px">
+             <div class="col-md-12 col-md-offset-3">
+               <input type="text" class="form-control" name="name_search" placeholder=" Last Name...">
              </div>
-             <hr style="boder:0.5px solid #fff">
-             <div class="card-body" id="search_user">
 
-              <table id="table_stock" class="table table-striped table-bordered table_stock">
-                <thead>
+           </div>
+           <hr style="boder:0.5px solid #fff">
+           <div class="card-body" id="search_user">
 
-                  <tr>
-                   <th><input type="checkbox" name="check_all_user"></th>
-                   <th>STT</th>
-                   <th>Date</th>
-                   <th>Stock No.</th>
-                   <th>Staff</th>
-                   <th>Description</th>
-                   <th>Action</th>
-                 </tr>
-               </thead>
-               <tbody>
+            <table id="table_stock" class="table table-striped table-bordered table_stock">
+              <thead>
 
-                 <?php
-                 foreach($stocks as $key=>$stock):
-                  $user = $m_user->read_user_by_id($stock->user_id);
-                  $user_name = $user->first_name . ' ' . $user->last_name;
-                  
-                  ?>
-                  <tr id="">
-                   <td>
-                    <input type="checkbox" name="check_user[]" value="<?php echo $stock->id ?>">
-                  </td>
-                  <td><?php echo $key + 1 ?></td>
-                  <td><?php echo $stock->created_at ?></td>
-                  <td><?php echo $stock->id ?></td>
-                  <td><?php echo $user_name ?></td>
-                  <td><?php echo $stock->description ?></td>
-                  <td>
-                     <a class=" btn btn-primary"  title="Add products" href="stock_receipt_add_products.php?id=<?php echo $stock->id ?>"  data-index = "<?php echo $stock->id?>"><i class="fa fa-plus"></i> </a>
-                    <a class=" btn btn-danger delete_supplier" data-index = "<?php echo $stock->id ?>"  id="delete_supplier"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> </a>
+                <tr>
+                 <th><input type="checkbox" name="check_all_user"></th>
+                 <th>STT</th>
+                 <th>Date</th>
+                 <th>Stock No.</th>
+                 <th>Staff</th>
+                 <th>Description</th>
+                 <th>Action</th>
+               </tr>
+             </thead>
+             <tbody>
+
+               <?php
+               foreach($stocks as $key=>$stock):
+                $user = $m_user->read_user_by_id($stock->user_id);
+                $user_name = $user->first_name . ' ' . $user->last_name;
+
+                ?>
+                <tr id="">
+                 <td>
+                  <input type="checkbox" name="check_user[]" value="<?php echo $stock->id ?>">
+                </td>
+                <td><?php echo $key + 1 ?></td>
+                <td><?php echo $stock->created_at ?></td>
+                <td><?php echo $stock->id ?></td>
+                <td><?php echo $user_name ?></td>
+                <td><?php echo $stock->description ?></td>
+                <td>
+                  <div class="dropdown">
+                   <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                     <i class="fa fa-dot-circle-o"></i> Action
+                   </button>
+                   <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
+                    <a class="dropdown-item  badge badge-warning" href="stock_receipt_list_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-list-alt"></i> View list products</a>
+                    <a class="dropdown-item  badge badge-primary" href="stock_receipt_add_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-plus"></i> Add products</a>
+                    <a class="dropdown-item  badge badge-info" href="stock_receipt_update_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update products</a>
                   </div>
                 </div>
               </td>
@@ -106,7 +112,7 @@
       type: 'POST',
       data: {'name':name,'search_customer':'OK'},
       success: function(data,status) {
-        
+
        $('#search_user').html(data);
        $('.table_user').DataTable();
        

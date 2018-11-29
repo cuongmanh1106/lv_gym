@@ -1,329 +1,515 @@
-<?php
-include("include/report.php");
-?>
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="products_list.php" style="color: blue">Products</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Insert a product</li>
-</ol>
-</nav>
-<form method="POST" enctype="multipart/form-data" action="products_store.php">
-
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header badge-info">
-                <h4><i class="fa fa-plus"></i> INSERT A PRODUCT TO STOCK</h4>
-            </div>
-            <div class="card-body">
-                <div class="error_tmp">
-
-                </div>
-                <div class="default-tab">
-                    <nav>
-                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Infomation</a>
-                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Images</a>
-                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Sizes & Quantity</a>
-                        </div>
-                    </nav>
-                    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <div class="row form-group">
-                                <div class="col-md-1"><label for="text-input" class=" form-control-label">Name:</label></div>
-                                <div class="col-md-10"><input type="text" required="required" id="id_name" name="name" class="form-control"></div>
-                                <div class="col-md-1">(<span style="color:red">*</span>)</div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-1"><label for="select" class=" form-control-label">Category:</label></div>
-                                <div class="col-12 col-md-10">
-                                  <select name="cate_id" required="required" id="select" class="form-control">
-                                    <option value="0">--None--</option>
-                                    <?php cate_parent($cates); ?>
-                                </select>
-                            </div>
-                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
-                        </div>
-
-                        <div class="row form-group">
-                                <div class="col col-md-1"><label for="select" class=" form-control-label">Suplier:</label></div>
-                                <div class="col-12 col-md-10">
-                                  <select name="sup_id" required="required" id="" class="form-control selected2">
-                                    <?php foreach($supliers as $sup): ?>
-                                        <option value="<?php echo $sup->id?>"><?php echo $sup->name?></option>
-                                    <?php endforeach?>
-                                </select>
-                            </div>
-                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
-                        </div>
-
-                        <div class="row form-group">
-                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Price:</label></div>
-                            <div class="col-md-10"><input type="text" required="required" onkeyup="formatNumBerKeyUp(this)" id="text-input" name="price" class="form-control"></div>
-                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
-                        </div>
-
-                        <div class="row form-group">
-                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Discount Price:</label></div>
-                            <div class="col-md-1"><label class="switch switch-text switch-success switch-pill"><input type="checkbox" class="switch-input" id="discount" checked="true"> <span data-on="On" data-off="Off" class="switch-label"></span> <span class="switch-handle"></span></label></div>
-                            <div class="col-md-9">
-                                <input placeholder=" Discount price...." onkeyup="formatNumBerKeyUp(this)"  type="text" name="reduce"  id="discount-input" name="reduce" class="form-control">
-                            </div>
-
-                        </div>
-
-                        <div class="row form-group">
-                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Introduce:</label></div>
-                            <div class="col-md-10"><input type="text" required="required" id="text-input" name="intro" class="form-control"></div>
-                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
-                        </div>
-
-                        <div class="row form-group">
-                            <div class="col col-md-1"><label for="textarea-input" class=" form-control-label">Description</label></div>
-                            <div class="col-12 col-md-10"><textarea  name="description" id="editor2" required="required" rows="9" placeholder="Content..." class="form-control"></textarea>
-                            </div>
-                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
-                        </div>
-
-
-
-
-                    </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <div class="row form-group">
-                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Image:</label></div>
-                            <div class="col-md-11"><input type="file" required="required" id="image" name="image" class="form-control"></div>
-                        </div>
-
-                        <a href="javascript::void(0)" class="btn btn-secondary" id="add-sub-image"><i class="fa fa-plus"></i> Add sub-image</a>
-                        <hr>
-                        <br>
-                        <div class="sub-image">
-
-                        </div>
-                        
-
-                    </div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                        <div class="col-md-6">Total quantity<input class="form-control" type="text" name="total_quantity" value="0" onkeypress="return isNumberKey(event)" ></div>
-
-                        <div class="clearfix"></div>
-                        <hr>
-                        <a href="javascript::void(0)" class="btn btn-secondary" id="add-sub-size"><i class="fa fa-plus"></i> Add size</a>
-                        <br><br>
-                        <div id="add-size">
-                            <!-- <div class="row form-group">
-                                <div class="col-md-1"><label for="text-input" class=" form-control-label">Size:</label></div>
-                                <div class="col-md-4">
-                                    <select name="size[]" class="form-control" id="select">
-                                        <option value="XS">XS</option>
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                        <option value="XL">XL</option>
-                                        <option value="2XL">2XL</option>
-                                        <option value="3XL">3XL</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-1"><label for="text-input" class=" form-control-label">Quantity:</label></div>
-                                <div class="col-md-4"><input type="text" required="required" onkeyup="formatNumBerKeyUp(this)" id="text-input" name="quantity[]" class="form-control"></div>
-                                <button type="button" class="close close-add-size" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div> -->
-
-
-                        </div>
-                        
-
-                    </div>
-                </div>
-
-            </div>
-
-            <div style="text-align: center;">
-                <button class="btn btn-danger" onclick="window.location= 'product_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Cancel</button>
-                <button type="submit" class="btn btn-info" name="insert_pro"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Add</button>
-            </div>
-        </div>
-
-    </div>
-    <!-- /# column -->
-
-</form>
-<script>
-   $(document).ready(function(){
-    var tmp_quantity = $('input[name="quantity[]"]');
-    console.log(tmp_quantity.length);
-    if(tmp_quantity.length == 0 ) {
-        $('input[name=total_quantity').prop('disabled',false);
-    } else {
-        $('input[name=total_quantity').prop('disabled',true);
+<?php 
+session_start();
+ini_set('display_errors', 0);
+if(isset($_POST["delete_group"])){
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('delete_category') == 0) {
+        echo "permission";
+        exit;
     }
-})
-</script>
-
-<script type="text/javascript" >
-
-    $(document).on('keyup','input[name="quantity[]"]',function(){ //cập nhật total khi tăng quantity
-
-        console.log(1);
-        total_quantity = 0;
-        $('input[name="quantity[]"]').each(function(i,n){
-            total_quantity += parseInt($(n).val());
-        })
-        var tmp_quantity = $('input[name="quantity[]"]');
-        if(tmp_quantity.length == 0) {
-            $('input[name=total_quantity]').prop('disabled',false);
+    include("models/m_categories.php");
+    $m_cate = new M_Categories();
+    $list_id = $_POST['list_id'];//trả về kiểu chuổi
+    $str = str_replace('[','',$list_id);
+    $str = str_replace(']', '', $str);
+    $str = explode(',',$str);//chuyển thành mảng
+    $check = '';
+    foreach($str as $s) {
+        $parent = $m_cate->read_cate_by_parent($s);
+        if(count($parent) > 0 ) { 
+            $check =  "success";
+            break;
         }
-
-        $('input[name=total_quantity]').val(total_quantity);
-    })
-
-    $('#add-sub-image').on('click',function(){
-        var html = '';
-        html += '<div class="row form-group">';
-        html += '<div class="col-md-1"><label for="text-input" class=" form-control-label">Sub-Image:</label></div>';
-        html += '<div class="col-md-10"><input type="file" id="text-input" name="sub_image[]" class="form-control"></div>';
-        html += '<button type="button" class="close close-add-image" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
-        html += '</div>';
-        $('.sub-image').append(html);
-    });
-
-    $('#discount').on('click',function(){
-        if($('#discount').is(':checked')){
-            $('input[name=reduce]').show();
-
+    }
+    if($check == '') {
+        if($m_cate->delete_group($str)){
+            $cates = $m_cate->read_all_categories();
+            include("views/categories/v_search.php");
+        }
+    } else {
+        echo 'parent_error';
+    }
+}
+//Search cate 
+if(isset($_POST['search_cate'])){
+    $name = $_POST['name'];
+    $parent = $_POST['parent'];
+    include("models/m_categories.php");
+    include("models/m_permission.php");
+    $m_per = new M_permission();
+    $m_cate = new M_Categories();
+    $cates = $m_cate->search_cate($name,$parent);
+        //views
+    include("views/categories/v_search.php");
+}
+if(isset($_POST['delete_cate'])){
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('delete_category') == 0) {
+        echo "permission";
+        exit;
+    }
+    $id = $_POST['id'];
+    include("models/m_categories.php");
+    $m_cate = new M_Categories();
+    $parent = $m_cate->read_cate_by_parent($id);
+    if(count($parent) == 0) {
+        if($m_cate->delete_cate($id)) {
+            $cates = $m_cate->read_all_categories();
+            include("views/categories/v_search.php");
         } else {
-            $('input[name=reduce]').val('');
-            $('input[name=reduce]').hide();
+            echo "error_delete";
         }
-    });
-
-    $('#add-sub-size').on('click',function(){
-        $('input[name=total_quantity]').prop('disabled',true);
-        var html = '';
-        html += ' <div class="row form-group">';
-        html += '<div class="col-md-1"><label for="text-input" class=" form-control-label">Size:</label></div>';
-        html += ' <div class="col-md-4">';
-        html += ' <select name="size[]" class="form-control" id="select">';
-        html += '<option value="XS">XS</option>';
-        html += '<option value="S">S</option>';
-        html += '<option value="M">M</option>';
-        html += '<option value="L">L</option>';
-        html += '<option value="XL">XL</option>';
-        html += '<option value="2XL">2XL</option>';
-        html += '<option value="3XL">3XL</option>';
-        html += '</select>';
-        html += ' </div>';
-        html += '<div class="col-md-1"><label for="text-input" class=" form-control-label">Quantity:</label></div>';
-        html += '<div class="col-md-4"><input type="text" required="required" id="text-input" onkeypress="return isNumberKey(event)" name="quantity[]" class="form-control"></div>';
-        html += ' <button type="button" class="close close-add-size" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
-        html += ' </div>';
-        $('#add-size').append(html);
-    })
-
-    $(document).on('click', '.close-add-size', function () {
-        $(this).parent().remove();
-        total_quantity = 0;
-        $('input[name="quantity[]"]').each(function(i,n){
-            total_quantity += parseInt($(n).val());
-        })
-        var tmp_quantity = $('input[name="quantity[]"]');
-        if(tmp_quantity.length == 0) {
-            $('input[name=total_quantity]').prop('disabled',false);
-        }
-        
-        $('input[name=total_quantity]').val(total_quantity);
-    })
-    $(document).on('click', '.close-add-image', function () {
-        $(this).parent().remove();
-    })
-
-    $('button[name="insert_pro"]').click(function(){
-        var html = '';
-        var flag = true;
-        html += ' <ul  id="error" class="alert alert-danger">';
-        price = $('input[name=price]').val();
-        discount = $('input[name=reduce]').val();
-        // console.log($('input[name=name]').val());
-        if($('#id_name').val() == "") {
-            html += '<li>Name is required</li>';
-            flag = false;
-        }
-        if($('input[name=price]').val() == ""){
-            html += '<li>Price is required</li>';
-            flag = false;
-        }
-        if(parseFloat(price) < 0) { 
-            html += '<li>Price is the least one</li>';
-            flag = false;
-        }
-        if($('input[name=reduce]').val() == "" && $('#discount').is(':checked')){
-            html += '<li>Discount price is required</li>';
-            flag = false;
-        }
-        if(parseFloat(discount) < 0) {
-           html += '<li>Discount price is the least one</li>';
-           flag = false;
-       }
-       if(parseFloat($('input[name=reduce]').val()) > parseFloat($('input[name=price]').val()) && $('#discount').is(':checked')){
-        html += '<li>Discount price must be smaller than price </li>';
-        flag = false;
-    }
-    if($('input[name=intro]').val() == ""){
-        html += '<li>Intro is required</li>';
-        flag = false;
-    }
-    if($('input[name=total_quantity]').val() == "0"){
-        html += '<li>quantity is required</li>';
-        flag = false;
-    }
-    var file_data = $('#image').prop('files')[0];
-    if(file_data == null) {
-     html += '<li>Image is required</li>';
-     flag = false;
- }
- var quantity = 0;
-     $('input[name="quantity[]"]').each(function(i,n){ // nếu chưa nhập quantity
-         if($(n).val() == "") {
-            html += '<li>Please fill all quantity</li>';
-            flag = false;
-            return false;
-
-        }
-    })
-     var check ;
-     var len = $('select[name="size[]"').length;
-     $('select[name="size[]"').each(function(i,n){
-        $('select[name="size[]"').each(function(j,m){
-            if($(n).val() == $(m).val() && len > 1 && i != j) {//nếu size bị trùng
-                html += '<li>Size is unique</li>';
-                flag = false;
-                check = false; 
-            }
-            if(check == false)
-            {
-                return check;
-            }
-        });
-        if(check == false) {
-            return check;
-        }
-
-    }) ;
-
-     html += '</ul>';
-     console.log(flag);  
-     if(flag) {
-        $('button[name="insert_pro"]').attr("type", "submit");
     } else {
-        $('.error_tmp').html(html);
+        echo "error_parent";
     }
-})
+    
+}
+/*Categories */
+/*Products */
+//Edit sub image 
+if(isset($_POST["edit_sub_image"])) {
+    include("models/m_products.php");
+    $m_pro = new M_products();
+    $pro = $m_pro->read_product_by_id($_POST["id"]);
+    $sub_image = $pro->sub_image;
+    echo $sub_image;
+}
+//Edit size
+if(isset($_POST["edit_size"])) {
+    include("models/m_products.php");
+    $m_pro = new M_products();
+    $pro = $m_pro->read_product_by_id($_POST["id"]);
+    $size = $pro->size;
+    echo $size;
+}
+//delete_product
+if(isset($_POST['delete_pro'])){
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('delete_product') == 0) {
+        echo "permission";
+        exit;
+    }
+    $id = $_POST['id'];
+    include("models/m_products.php");
+    include("models/m_categories.php");
+    include("models/m_supplier.php");
+    $m_pro = new M_products();
+    if($m_pro->delete_product($id)) {
+        $m_sup = new M_suppliers();
+        $m_pro = new M_products();
+        $m_cate = new M_Categories();
+        $products = $m_pro->read_all_products();
+        $cates = $m_cate->read_all_categories();
+        include("views/products/v_search.php");
+    } else {
+        echo "";
+    }
+}
+//delete_group_product
+if(isset($_POST['delete_group_product'])){
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('delete_product') == 0) {
+        echo "permission";
+        exit;
+    }
+    include("models/m_products.php");
+    include("models/m_categories.php");
+    include("models/m_supplier.php");
+    $m_pro = new M_products();
+    $list_id = $_POST['list_id'];//trả về kiểu chuổi
+    $str = str_replace('[','',$list_id);
+    $str = str_replace(']', '', $str);
+    $str = explode(',',$str);//chuyển thành mảng
+    if($m_pro->delete_group($str)){
+        $m_sup = new M_suppliers();
+        $m_pro = new M_products();
+        $m_cate = new M_Categories();
+        $products = $m_pro->read_all_products();
+        $cates = $m_cate->read_all_categories();
+        include("views/products/v_search.php");
+    } else {
+        echo '';
+    } 
+}
+if(isset($_POST["search_pro"])){
+    //'name':name, 'price_from':price_from, 'price_to':price_to, 'cate':cate,'search_pro':'OK'
+    $name = $_POST['name'];
+    $price_from = $_POST['price_from'];
+    $price_to = $_POST['price_to'];
+    $cate = $_POST['cate'];
+    include("models/m_products.php");
+    include("models/m_categories.php");
+    include("models/m_supplier.php");
+    include("models/m_permission.php");
+    $m_sup = new M_suppliers();
+    $m_per = new M_permission();
+    $m_pro = new M_products();
+    $m_cate = new M_Categories();
+    
+    $products = $m_pro->search_product($name,$price_from,$price_to,$cate);
+    $cates = $m_cate->read_all_categories();
+    include("views/products/v_search.php");
+}
+/*Products */
+/*Chart*/
+if(isset($_POST["chart"])) {
+    include("models/m_products.php");
+    $m_pro = new M_products();
+    $year = date("Y");
+    if(isset($_POST["year"])) {
+        $year = $_POST["year"];
+    }
+    $chart = $m_pro->chart($year);
+    echo json_encode($chart);
+}
+if(isset($_POST["filter_revenue"])) {
+    $date = $_POST["date"];
+    include("models/m_products.php");
+    $m_pro = new M_products();
+    $data = $m_pro->filter_revenue($date);
+    echo $data->total;
+}
+/*End Chart*/
+/*Users*/
+if(isset($_POST["check_email"])){
+    $email = $_POST['email'];
+    include("models/m_users.php");
+    $m_user = new M_users();
+    $check = $m_user->check_email($email);
+    if($check == null ){
+        echo "ok";
+    }  else {
+        echo "exist";
+    }
+} 
+if(isset($_POST["check_password"])) {
+    $password = $_POST["password"];
+    $new_password = password_hash($_POST["new_password"],PASSWORD_DEFAULT);
+    $email = '';
+    if(isset($_SESSION["user"])) {
+        $email = $_SESSION["user"]->email;
+    }
+    include("models/m_users.php");
+    $m_user = new M_users();
+    if(password_verify($password,$_SESSION["user"]->password)){
+        if($m_user->update_password($new_password,$_SESSION["user"]->id)) {
+            $_SESSION["alert-success"] = "Successfully";
+            $_SESSION["user"]->password = $new_password;
+            echo "success";
+        }
+    } else {
+        echo "error_password";
+    }
+}
+if(isset($_POST["delete_user"])) {
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('delete_user') == 0) {
+        echo "permission";
+        exit;
+    }
+    include("models/m_users.php");
+    $m_user = new M_users();
+    $id = $_POST["id"];
+    if($m_user->delete_user($id)) {
+        $users = $m_user->read_all_user();
+        include("views/users/v_search.php");
+    } else {
+        echo "error";
+    }
+}
+if(isset($_POST["delete_group_user"])) {
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('delete_user') == 0) {
+        echo "permission";
+        exit;
+    }
+    $list_id = $_POST['list_id'];//trả về kiểu chuổi
+    $str = str_replace('[','',$list_id);
+    $str = str_replace(']', '', $str);
+    $str = explode(',',$str);//chuyển thành mảng
+    include("models/m_users.php");
+    $m_user = new M_users();
+    if($m_user->delete_group_user($str)) {
+        $users = $m_user->read_all_user();
+        include("views/users/v_search.php");
+    } else {
+        echo "error";
+    }
+}
+if(isset($_POST["search_user"])) {
+    $name = $_POST["name"];
+    $permission = $_POST["permission"]; 
+    var_dump($name);
+    include("models/m_users.php");
+    include("models/m_permission.php");
+    $m_per = new M_permission();
+    $m_user = new M_users();
+    $users = $m_user->search_user($name,$permission);
+    include("views/users/v_search.php");
+}
+if(isset($_POST["logout"])) {
+    unset($_SESSION['user']);
+    echo "success";
+}
+if(isset($_POST["delete_customer"])) {
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('delete_user') == 0) {
+        echo "permission";
+        exit;
+    }
+    include("models/m_users.php");
+    $m_user = new M_users();
+    $id = $_POST["id"];
+    if($m_user->delete_user($id)) {
+        $users = $m_user->read_customer();
+        include("views/users/v_search_customer.php");
+    } else {
+        echo "error";
+    }
+}
+if(isset($_POST["delete_group_customer"])) {
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('delete_user') == 0) {
+        echo "permission";
+        exit;
+    }
+    $list_id = $_POST['list_id'];//trả về kiểu chuổi
+    $str = str_replace('[','',$list_id);
+    $str = str_replace(']', '', $str);
+    $str = explode(',',$str);//chuyển thành mảng
+    include("models/m_users.php");
+    $m_user = new M_users();
+    if($m_user->delete_group_user($str)) {
+        $users = $m_user->read_customer();
+        include("views/users/v_search.php");
+    } else {
+        echo "error";
+    }
+}
+if(isset($_POST["search_customer"])) {
+    $name = $_POST["name"];
+    include("models/m_users.php");
+    include("models/m_permission.php");
+    $m_per = new M_permission();
+    $m_user = new M_users();
+    $users = $m_user->search_customer($name);
+    include("views/users/v_search_customer.php");
+}
+/*End Users*/
+/*FeedBack*/
+if(isset($_POST["delete_feedback"])) {
+    $id = $_POST["id"];
+    include("models/m_feedback.php");
+    include("models/m_users.php");
+    $m_user = new M_users();
+    $m_feedback = new M_feedback();
+    if($m_feedback->delete_feedback($id)) {
+        $contacts = $m_feedback->read_all_feedback();
+        include("views/feedback/v_search.php");
+    } else {
+        echo "error";
+    }
+}
+if(isset($_POST["delete_group_feedback"])){
+    $list_id = $_POST['list_id'];//trả về kiểu chuổi
+    $str = str_replace('[','',$list_id);
+    $str = str_replace(']', '', $str);
+    $str = explode(',',$str);//chuyển thành mảng
+    include("models/m_feedback.php");
+    include("models/m_users.php");
+    $m_user = new M_users();
+    $m_fb = new M_feedback();
+    if($m_fb->delete_group_feedback($str)) {
+        $contacts = $m_fb->read_all_feedback();
+        include("views/feedback/v_search.php");
+    } else {
+        echo "error";
+    }
+}
+if(isset($_POST["view_feedback"])) {
+    $id = $_POST["id"];
+    include("models/m_feedback.php");
+    $m_fb = new M_feedback();
+    $contact = $m_fb->read_feedback_by_id($id);
+    echo $contact->content;
+}
+if(isset($_POST["seen_contact"])) {
+    $id = $_POST["id"];
+    include("models/m_feedback.php");
+    $m_fb = new M_feedback();
+    if($m_fb->seen_feedback($id)) {
+        echo "success";
+    }
+}
+/*End FeedBack*/
+/*Orders*/
+if(isset($_POST["search_order"])) {
+    $cus  = $_POST["cus_search"];
+    $status_search = $_POST["status_search"];
+    $date_from = $_POST["date_from"];
+    $date_to = $_POST["date_to"];
+    $order = $_POST["order"];
+    include("models/m_orders.php");
+    include("models/m_users.php");
+    include("models/m_permission.php");
+    $m_per = new M_permission();
+    $m_order = new M_orders();
+    $m_user = new M_users();
+    $status = $m_order->read_status();
+    $customer = $m_user->read_customer();
+    $orders = $m_order->search_orders($order,$cus,$status_search,$date_from,$date_to);
+    include("views/orders/v_search.php");
+}
+if(isset($_POST["check_delivery"])) {
+    $id = $_POST["id"];
+    include("models/m_orders.php");
+    $m_order = new M_orders();
+    
+}
+if(isset($_POST["update_status_ship"])) {
+    $id = $_POST["id"];
+    $status = $_POST["status"];
+    $order_id = $_POST["order_id"];
+    include("models/m_users.php");
+    include("models/m_orders.php");
+    include("models/m_products.php");
+    $m_pro = new M_products();
+    $m_user = new M_users();
+    $m_order = new M_orders();
+    if($status == 1) {
+        if($m_order->update_ship($status,$order_id) && $m_order->update_status(4,$order_id)){
+            echo "success";
+        } else {
+            echo "fail";
+        }
+    } else if($status == 2) {
+        $order = $m_order->read_order_by_id($order_id);
+        $order_detail = $m_order->read_detail_by_id($order_id);
+        if($m_order->update_ship($status,$order_id) && $m_order->update_status(5,$order_id)){
+            foreach($order_detail as $d) {
+                $product = $m_pro->read_product_by_id($d->pro_id);
+                $sizes = json_decode($product->size);
+                $total = 0;
+                if(count($sizes)> 0 ) {
+                    foreach($sizes as $key=>$value) {
+                        if($key == $d->size) {
+                            $sizes->$key = $value + $d->quantity;
+                            $total += $value + $d->quantity;
+                        } else {
+                            $total += $value;
+                        }
+                    }
+                } else {
+                    $total = $product->quantity + $d->quantity;
+                }
+                $m_pro->update_product_order($total,json_encode($sizes),$product->id);  
+            }
+            echo "success";
+        } else {
+            echo "fail";
+        }
+    }
+}
+if(isset($_POST["search_ship"])) {
+    $order_id = $_POST["order_id"];
+    $user_id = $_POST["user_id"];
+    $status = $_POST["status"];
+    include("models/m_orders.php");
+    include("models/m_users.php");
+    include("models/m_permission.php");
+    $m_per = new M_permission();
+    $m_user = new M_users();
+    $m_order = new M_orders();
+    $ship = $m_order->search_ship($order_id,$user_id,$status);
+    include("views/orders/v_search_ship.php");
+}
+/*End orders*/
+/*Supplier*/ 
+if(isset($_POST["insert_supplier"])) {
+    $name = $_POST["name"];
+    $phone = $_POST["phone"];
+    $address = $_POST["address"];
+    include("models/m_supplier.php");
+    $m_sup = new M_suppliers();
+    
+    if($m_sup->insert_supplier($name,$address,$phone)) {
+        $_SESSION["alert-success"] = "Insert Supplier Successfully";
+        echo "success";
+    } else {
+        $_SESSION["alert-danger"] = "Insert Supplier Fail";
+        echo "fail";
+    }
+}
+if(isset($_POST["get_supplier_by_id"])) {
+    $id = $_POST["id"];
+    include("models/m_supplier.php");
+    $m_sup = new M_suppliers();
+    $sup = $m_sup->read_supply_by_id($id);
+    echo json_encode(['sup'=>$sup]);
+}
+if(isset($_POST["edit_supplier"])) {
+    $id = $_POST["id"];
+    $name = $_POST["name"];
+    $phone = $_POST["phone"];
+    $address = $_POST["address"];
+    include("models/m_supplier.php");
+    $m_sup = new M_suppliers();
+    if($m_sup->update_supplier($name,$address,$phone,$id)) {
+        $_SESSION["alert-success"] = "Edit Supplier Successfully";
+        echo "success";
+    } else {
+        $_SESSION["alert-danger"] = "Edit Supplier Fail";
+        echo "fail";
+    }
+}
+if(isset($_POST["delete_supplier"])) {
+    $id = $_POST["id"];
+    include("models/m_supplier.php");
+    $m_sup = new M_suppliers();
+    if($m_sup->delete_supplier($id)) {
+        $_SESSION["alert-success"] = "Delete Supplier Successfully";
+        echo "success";
+    } else {
+        $_SESSION["alert-danger"] = "Delete Supplier Fail";
+        echo "fail";
+    }
+}
+if(isset($_POST["delete_group_supplier"])) {
+    $list_id = $_POST['list_id'];//trả về kiểu chuổi
+    $str = str_replace('[','',$list_id);
+    $str = str_replace(']', '', $str);
+    $str = explode(',',$str);//chuyển thành mảng
+    include("models/m_supplier.php");
+    $m_sup = new M_suppliers();
+    if($m_sup->delete_group_supplier($str)) {
+        $_SESSION["alert-success"] = "Delete Suppliers Successfully";
+        echo "success";
+    } else {
+        $_SESSION["alert-danger"] = "Delete Suppliers Fail";
+        echo "fail";
+    }
+}
+/*end Supplier*/
+    
+/* Stock receipt */
+if(isset($_POST["search_update_product"])) {
+    $pro_id = $_POST["pro_id"];
+    include("models/m_products.php");
+    include("models/m_stock_receipt.php");
 
+    $m_pro = new M_products();
+    $m_stock = new m_stock_receipt();
+    $product = $m_pro->read_product_by_id($pro_id);
+    include("views/stock_receipt/v_search_update.php");
 
-
-</script>
-
-
+}
+/* end stock receipt */
+?>

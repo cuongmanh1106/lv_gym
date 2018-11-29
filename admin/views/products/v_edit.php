@@ -49,7 +49,6 @@ if($product->sub_image != '') {
                                     <div class="col col-md-1"><label for="select" class=" form-control-label">Category:</label></div>
                                     <div class="col-12 col-md-10">
                                       <select name="cate_id" required="required" id="select" class="form-control">
-                                        <option value="0">--None--</option>
                                         <?php cate_parent_edit($cates,0,"--",$product->cate_id); ?>
                                     </select>
                                 </div>
@@ -75,13 +74,7 @@ if($product->sub_image != '') {
                             <div class="col-md-1">(<span style="color:red">*</span>)</div>
                         </div>
 
-                        <div class="row form-group">
-                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Discount Price:</label></div>
-                            <div class="col-md-1"><label class="switch switch-text switch-success switch-pill"><input type="checkbox" class="switch-input" id="discount" checked="true"> <span data-on="On" data-off="Off" class="switch-label"></span> <span class="switch-handle"></span></label></div>
-                            <div class="col-md-9">
-                                <input placeholder=" Discount price...." onkeyup="formatNumBerKeyUp(this)"  type="text" name="reduce"  id="discount-input" value="<?php echo $product->reduce?>" name="reduce" class="form-control">
-                            </div>
-                        </div>
+                        
 
                         <div class="row form-group">
                             <div class="col-md-1"><label for="text-input" class=" form-control-label">Introduce:</label></div>

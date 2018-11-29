@@ -1,6 +1,5 @@
 <?php
-ini_set('display_errors', 0);
 include("controllers/c_stock_receipt.php");
 $c_stock = new C_stock_receipt();
-$c_stock->store_stock_product();
+$c_stock->edit_stock_product();
 ?>

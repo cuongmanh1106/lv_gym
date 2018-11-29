@@ -11,6 +11,12 @@ class M_products extends database {
 		return $this->loadAllRows();
 	}
 
+	public function read_all_pro() {
+		$sql = "select * from products where status = 0 order by id desc";
+		$this->setQuery($sql);
+		return $this->loadAllRows();
+	}
+
 	public function read_product_by_id($id) {
 		$sql = "select * from products where id =".$id;
 		$this->setQuery($sql);
@@ -54,16 +60,26 @@ class M_products extends database {
 		return $this->loadAllRows();
 	}
 
-	public function insert_product($name,$cate_id,$sup_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description) {
-		$sql = "insert into products(name,alias,cate_id,sup_id,price,quantity,reduce,size,image,sub_image,intro,description) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+	public function insert_product($name,$cate_id,$sup_id,$price,$quantity,$size,$image,$sub_image,$intro,$description) {
+		$sql = "insert into products(name,alias,cate_id,sup_id,price,quantity,size,image,sub_image,intro,description) values(?,?,?,?,?,?,?,?,?,?,?)";
 		$this->setQuery($sql);
-		return $this->execute(array($name,changeTitle($name),$cate_id,$sup_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description));
+		return $this->execute(array($name,changeTitle($name),$cate_id,$sup_id,$price,$quantity,$size,$image,$sub_image,$intro,$description));
 	}
 
-	public function update_product($name,$cate_id,$sup_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description,$id){
-		$sql = "update products set name = ?,alias = ?,cate_id =?,sup_id=?, price = ?, quantity = ?, reduce = ?, size = ?,image = ?,sub_image = ?,intro = ?,description = ? where id = ?";
+	public function insert_product_get_id($name,$cate_id,$sup_id,$price,$price_in,$quantity,$size,$image,$sub_image,$intro,$description,$status) {
+		$sql = "insert into products(name,alias,cate_id,sup_id,price,price_in,quantity,size,image,sub_image,intro,description,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$this->setQuery($sql);
-		return $this->execute(array($name,changeTitle($name),$cate_id,$sup_id,$price,$quantity,$reduce,$size,$image,$sub_image,$intro,$description,$id));
+
+		$this->execute(array($name,changeTitle($name),$cate_id,$sup_id,$price,$price_in,$quantity,$size,$image,$sub_image,$intro,$description,$status));
+		return $this->getLastId();
+	}
+
+
+
+	public function update_product($name,$cate_id,$sup_id,$price,$quantity,$size,$image,$sub_image,$intro,$description,$id){
+		$sql = "update products set name = ?,alias = ?,cate_id =?,sup_id=?, price = ?, quantity = ?, size = ?,image = ?,sub_image = ?,intro = ?,description = ? where id = ?";
+		$this->setQuery($sql);
+		return $this->execute(array($name,changeTitle($name),$cate_id,$sup_id,$price,$quantity,$size,$image,$sub_image,$intro,$description,$id));
 	}
 	public function update_sub_image($sub_image,$id) {
 		$sql = "update products set sub_image = ? where id = ?";
