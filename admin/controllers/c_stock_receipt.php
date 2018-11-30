@@ -214,7 +214,7 @@ class C_stock_receipt
             	//$quantity,$size,$price,$price_in,$id
             	if($m_pro->update_product_stock($quantity,json_encode($old_size),$price,$price_in,$pro_id)) {
             		//$quantiy,$price_in,$size,$status,$stock_id,$pro_id
-            		$m_stock->update_stock_detail($quantity,$price_in,json_encode($old_size),2,$stock_id,$pro_id);
+            		$m_stock->update_stock_detail($quantity,$price_in,json_encode($old_size),0,$stock_id,$pro_id);
             		$_SESSION['alert-success'] = "Update Stock Product Successfully";
                    	
             	} else {
@@ -281,6 +281,72 @@ class C_stock_receipt
         //views
         $title = "List products of stock";
         $view = "views/stock_receipt/v_list_product.php";
+        include("include/layout.php");
+    }
+
+    public function edit_stock_size_qty() {
+        //models
+        $pro_id = $_GET["pro_id"];
+        $stock_id = $_GET["stock_id"];
+        include("models/m_products.php");
+        include("models/m_stock_receipt.php");
+
+        $m_pro = new M_products();
+        $m_stock = new m_stock_receipt();
+        $product = $m_pro->read_product_by_id($pro_id);
+
+        if(isset($_POST["update_stock_qty_size"])) {
+            $detail = $m_stock->read_detail_by_stock_product($stock_id,$pro_id);
+            $detail_size = '';
+            $detail_quantity = 0;
+
+            $price = $product->price;
+            $price_in = $product->price_in;
+            $old_size = json_decode($product->size);
+
+            $new_size  = '';
+            $total_quantity = 0;
+
+            if(isset($_POST['size'])) {
+                $arr_size = $_POST['size'];
+                $arr_quantity = $_POST['quantity'];
+                $merge=array_combine($arr_size,$arr_quantity);
+                $total_quantity = array_sum($arr_quantity);
+                $new_size = $merge;
+            } 
+            if($new_size == ''){
+                $total_quantity = $_POST["total_quantity"];
+                $new_size = null;
+            }
+
+            
+            if($product->status == 2) { //sản phẩm mới dc thêm trong đơn hàng này
+                $price = $_POST["price"];
+                $price_in = $_POST["price_in"];
+                
+                //$quantity,$size,$price,$price_in,$id
+                if($m_pro->update_product_stock($total_quantity,json_encode($new_size),$price,$price_in,$pro_id)) {
+                    //$quantiy,$price_in,$size,$status,$stock_id,$pro_id
+                    $m_stock->update_stock_detail($total_quantity,$price_in,json_encode($new_size),0,$stock_id,$pro_id);
+                    $_SESSION['alert-success'] = "Update Stock Product Successfully";
+                    
+                } else {
+                    $_SESSION['alert-danger'] = "Update Stock Product Faily";
+                }
+
+            } else { //sản phẩm có sản trong danh sách
+
+                if($m_stock->update_stock_detail($total_quantity,$price_in,json_encode($new_size),1,$stock_id,$pro_id)){
+                $_SESSION['alert-success'] = "Update Stock Product Successfully";
+                } else {
+                    $_SESSION['alert-danger'] = "Update Stock Product Faily";
+                }
+            }
+        }
+
+        //views
+        $title = "Update Size & Qty Of Stock";
+        $view = "views/stock_receipt/v_update_size_qty.php";
         include("include/layout.php");
     }
 }

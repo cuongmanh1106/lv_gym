@@ -215,30 +215,12 @@ public function update() {
             $new_img = $old_img;
             
             //thu thập dữ liệu
-            $size = '';
-            $total_quantity = $_POST["total_quantity"];
             
-            if(isset($_POST['size'])) {
-                $arr_size = $_POST['size'];
-                $arr_quantity = $_POST['quantity'];
-                $merge=array_combine($arr_size,$arr_quantity);
-                $total_quantity = array_sum($arr_quantity);
-                $size = json_encode($merge);
-            }
-            if($size == '') {
-                $total_quantity = $_POST["total_quantity"];
-            }
-            $reduce = str_replace(',', '', $_POST["price"]);
-            if(isset($_POST["reduce"])){
-                $reduce = str_replace(',', '', $_POST["reduce"]);
-            }
             $name = $_POST['name'];
-            $price = str_replace(',', '', $_POST["price"]);
             $cate_id = $_POST["cate_id"];
             $sup_id = $_POST["sup_id"];
             $description = $_POST["description"];
             $intro = $_POST['intro'];
-            $quantity = $total_quantity;
             /*----thu thập dữ liệu-----*/
 
             //Xử lý hình và update
@@ -283,7 +265,7 @@ public function update() {
             }
 
             //Tiến hành update
-            if($m_product->update_product($name,$cate_id,$sup_id,$price,$quantity,$size,$new_img,json_encode($new_sub_image),$intro,$description,$id)){
+            if($m_product->update_product($name,$cate_id,$sup_id,$product->price,$product->quantity,$product->size,$new_img,json_encode($new_sub_image),$intro,$description,$id)){
                 $_SESSION['alert-success'] = "Edit Product Successfully";
                 echo "<script>window.location = 'products_edit.php?id=$id'</script>";
             } else {
@@ -351,11 +333,16 @@ public function update() {
         
         if($m_product->update_sub_image(json_encode($new_sub_image),$id)){
             $_SESSION['alert-success'] = "Edit Sub Image Successfully";
-            echo "<script>window.location = 'products_list.php'</script>";
         } else {
             $_SESSION['alert-danger'] = "Edit Sub Image Fail";
-            echo "<script>window.location.reload();</script>";
         }
+        $stock_id = $_POST["stock_id"];
+        if($stock_id != '') {
+            echo "<script>window.location = 'stock_receipt_list_products.php?id=".$stock_id."'</script>";
+        } else {
+            echo "<script>window.location = 'products_list.php'</script>";
+        }
+        
 
     }
 

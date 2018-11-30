@@ -34,7 +34,7 @@ if($product->sub_image != '') {
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Infomation</a>
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Images</a>
-                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Sizes</a>
+                                
                             </div>
                         </nav>
                         <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -66,15 +66,6 @@ if($product->sub_image != '') {
                             </div>
                             <div class="col-md-1">(<span style="color:red">*</span>)</div>
                         </div>
-
-
-                        <div class="row form-group">
-                            <div class="col-md-1"><label for="text-input" class=" form-control-label">Price:</label></div>
-                            <div class="col-md-10"><input type="text" value="<?php echo $product->price?>" required="required" onkeyup="formatNumBerKeyUp(this)" id="text-input" name="price" class="form-control"></div>
-                            <div class="col-md-1">(<span style="color:red">*</span>)</div>
-                        </div>
-
-                        
 
                         <div class="row form-group">
                             <div class="col-md-1"><label for="text-input" class=" form-control-label">Introduce:</label></div>
@@ -123,51 +114,15 @@ if($product->sub_image != '') {
 
 
                    </div>
-                   <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    <div class="col-md-6">Total quantity<input class="form-control" type="text" name="total_quantity" value="<?php echo $product->quantity ?>" onkeypress="return isNumberKey(event)" ></div>
-
-                    <div class="clearfix"></div>
-                    <hr>
-                    <div id="add-size">
-                        <?php 
-                        if(count($sizes) != 0) {
-                            foreach($sizes as $key=>$value){
-                                ?>
-
-                                <div class="row form-group">
-                                    <div class="col-md-1"><label for="text-input" class=" form-control-label">Size:</label></div>
-                                    <div class="col-md-4">
-                                        <select name="size[]" class="form-control" id="select">
-                                            <option <?php echo  ($key=="XS")?'selected':'' ?> value="XS">XS</option>
-                                            <option <?php echo ($key=="S")?'selected':''  ?> value="S">S</option>
-                                            <option <?php echo ($key=="M")?'selected':''  ?> value="M">M</option>
-                                            <option <?php echo ($key=="L")?'selected':''  ?> value="L">L</option>
-                                            <option <?php echo ($key=="XL")?'selected':''  ?> value="XL">XL</option>
-                                            <option <?php echo ($key=="2XL")?'selected':''  ?> value="2XL">2XL</option>
-                                            <option <?php echo ($key=="3XL")?'selected':''  ?> value="3XL">3XL</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1"><label for="text-input" class=" form-control-label">Quantity:</label></div>
-                                    <div class="col-md-4"><input type="text" value="<?php echo  $value ?>" required="required" onkeypress="return isNumberKey(event)" id="text-input" name="quantity[]" class="form-control"></div>
-                                    <button type="button" class="close close-add-size" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <?php }}?>
-
-
-                            </div>
-                            <a href="javascript::void(0)" class="btn btn-secondary" id="add-sub-size"><i class="fa fa-plus"></i> Add sub size</a>
-
-                        </div>
                     </div>
 
                 </div>
 
             </div>
             <div style="text-align: center;">
-                <button class="btn btn-info" name="update_pro" type="button" id="insert"><i class="fa fa-thumbs-o-up"></i> Update</button>
                 <button class="btn btn-danger" onclick="window.location= 'products_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
+                <button class="btn btn-info" name="update_pro" type="button" id="insert"><i class="fa fa-thumbs-o-up"></i> Update</button>
+                
             </div>
         </div>
 
@@ -264,51 +219,12 @@ if($product->sub_image != '') {
             html += '<li>Name is required</li>';
             flag = false;
         }
-        if($('input[name=price]').val() == ""){
-            html += '<li>Price is required</li>';
-            flag = false;
-        }
-        if($('input[name=reduce]').val() == "" && $('#discount').is(':checked')){
-            html += '<li>Discount price is required</li>';
-            flag = false;
-        }
-        if(parseFloat($('input[name=reduce]').val()) > parseFloat($('input[name=price]').val()) && $('#discount').is(':checked')){
-            html += '<li>Discount price must be smaller than price </li>';
-            flag = false;
-        }
         if($('input[name=intro]').val() == ""){
             html += '<li>Intro is required</li>';
             flag = false;
         }
 
-        var quantity = 0;
-        $('input[name="quantity[]"]').each(function(i,n){
-           if($(n).val() == "") {
-            html += '<li>Please fill all quantity</li>';
-            flag = false;
-            return false;
-
-        }
-    })
-        var check ;
-        var len = $('select[name="size[]"').length;
-        $('select[name="size[]"').each(function(i,n){
-            $('select[name="size[]"').each(function(j,m){
-                if($(n).val() == $(m).val() && len > 1 && i != j) {
-                    html += '<li>Size is unique</li>';
-                    flag = false;
-                    check = false; 
-                }
-                if(check == false)
-                {
-                    return check;
-                }
-            });
-            if(check == false) {
-                return check;
-            }
-
-        }) ;
+        
 
         html += '</ul>';
         if(flag) {

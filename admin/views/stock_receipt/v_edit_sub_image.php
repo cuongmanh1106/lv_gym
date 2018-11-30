@@ -11,6 +11,7 @@
         </div>
         <div class="modal-body">
           <form method="POST" enctype="multipart/form-data" action="products_update_sub.php">
+            <input type="hidden" name="stock_id" value="<?php echo $stock_id ?>">
             <input type="hidden" name="id_pro" value="">
             <div id="old_image"></div>
 

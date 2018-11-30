@@ -512,5 +512,88 @@ if(isset($_POST["search_update_product"])) {
     include("views/stock_receipt/v_search_update.php");
 
 }
+
+if(isset($_POST["delete_stock"])) {
+    $id = $_POST["id"];
+
+    require("models/m_stock_receipt.php");
+    require("models/m_products.php");
+    require("models/m_categories.php");
+    require("models/m_supplier.php");
+
+    $m_cate = new M_Categories();
+    $m_sup = new M_suppliers();
+    $m_stock = new M_stock_receipt();
+    $m_pro = new M_products();
+    $details = $m_stock->read_detail_by_id($id);
+    if($m_stock->update_status_detail(2,$id)) {
+        $products = $m_stock->read_product_by_stock($details->stock_id);
+        $cates = $m_cate->read_all_categories();
+        $stock_id = $details->stock_id;
+        $_SESSION["alert-success"] = "Delete Detail Stock Successfully";
+        include("views/stock_receipt/search_list_stock.php");
+    }  else {
+        $_SESSION["alert-danger"] = "Delete Detail Stock Faily";
+        echo "fail";
+    }
+}
+
+if(isset($_POST["delete_group_stock_product"])) {
+    // $m_per = new M_permission;
+    // if($m_per->check_permission('delete_product') == 0) {
+    //     echo "permission";
+    //     exit;
+    // }
+    require("models/m_stock_receipt.php");
+    require("models/m_products.php");
+    require("models/m_categories.php");
+    require("models/m_supplier.php");
+
+    $m_cate = new M_Categories();
+    $m_sup = new M_suppliers();
+    $m_stock = new M_stock_receipt();
+    $m_pro = new M_products();
+    $stock_id = $_POST["stock_id"];
+
+    $list_id = $_POST['list_id'];//trả về kiểu chuổi
+    $str = str_replace('[','',$list_id);
+    $str = str_replace(']', '', $str);
+    $str = explode(',',$str);//chuyển thành mảng
+    if($m_stock->delete_group_stock_product($str)){
+        $products = $m_stock->read_product_by_stock($stock_id);
+        $cates = $m_cate->read_all_categories();
+        $_SESSION["alert-success"] = "Delete Detail Stock Successfully";
+        include("views/stock_receipt/search_list_stock.php");
+    }  else {
+        $_SESSION["alert-danger"] = "Delete Detail Stock Faily";
+        echo "fail";
+    }
+}
+
+
+if(isset($_POST["search_list_stock"])) {
+    $name = $_POST["name"];
+    $price_from = $_POST["price_from"];
+    $price_to = $_POST["price_to"];
+    $cate = $_POST["cate"];
+    $stock_id = $_POST["stock_id"];
+
+    require("models/m_stock_receipt.php");
+    require("models/m_products.php");
+    require("models/m_categories.php");
+    require("models/m_supplier.php");
+
+    $m_cate = new M_Categories();
+    $m_sup = new M_suppliers();
+    $m_stock = new M_stock_receipt();
+    $m_pro = new M_products();
+    $stock_id = $_POST["stock_id"];
+
+    $products = $m_stock->search_product_stock($stock_id,$name,$price_from,$price_to,$cate);
+    $cates = $m_cate->read_all_categories();
+    include("views/stock_receipt/search_list_stock.php");
+
+
+}
 /* end stock receipt */
 ?>

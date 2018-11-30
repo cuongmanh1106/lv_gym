@@ -6,7 +6,7 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="stock_receipt_list.php" style="color: blue">Stock Receipt</a></li>
     <li class="breadcrumb-item active" aria-current="page">List products of stock</li>
-</ol>
+  </ol>
 </nav>
 <div class="content mt-3">
   <div class="animated fadeIn">
@@ -15,7 +15,9 @@
         <div class="card">
           <div class="card-header badge-info ">
             <strong class="card-title"><i class="fa fa-list"></i> List Products Of Stock </strong>
-            
+            <a href="stock_receipt_add_products.php?id=<?php echo $stock_id?>" class="btn btn-success" title="Insert New Products"   ><i class="fa fa-plus"></i></a>
+            <a href="stock_receipt_update_products.php?id=<?php echo $stock_id?>" class="btn btn-warning" title="Update Old Products"   ><i class="fa fa-edit"></i></a>
+            <a href="javascript:void(0)"  id="delete_group_stock_product" name="delete_group_stock_product" class="btn btn-danger" title="Update Old Products"   ><i class="fa fa-trash-o"></i></a>
           </div> 
           <!--search form-->
           <div class="search" style="margin-top: 20px">
@@ -41,11 +43,11 @@
 
         <!--search form-->
         <hr style="boder:0.5px solid #fff">
-        <div class="card-body" id="pro_search">
-          <table id="table_pro" class="table table-striped table-bordered table_pro">
+        <div class="card-body" id="list_stock_search">
+          <table id="table_list_stock" class="table table-striped table-bordered table_list_stock">
             <thead>
               <tr>
-                <th><input type="checkbox" name="check_all"></th>
+                <th><input type="checkbox" name="check_all_stock"></th>
                 <th>Image</th>
                 <th>Name</th>
                 <th>Price</th>
@@ -60,85 +62,86 @@
             <tbody>
               <?php $i = 1;
               for($j=0;$j<count($products);$j++) {
-              $p = $products[$j];
-              $detail = $m_stock->read_detail_by_stock_product($stock_id,$p->id);
-              $status = '';
-              if($detail->status == 1) {
-                $status = "Update";
-              } else {
-                $status = "New";
-              }
-
-              $supplier = '';
-              $cate_name = '';
-              $sup = $m_sup->read_supply_by_id($p->sup_id);
-              if(!empty($sup)) {
-                $supplier = $sup->name;
-              }
-              $cate = $m_cate->read_cate_by_id($p->cate_id);
-              if(!empty($cate)){
-                $cate_name = $cate->name;
-              }
-              $size = json_decode($p->size);
-              $quantity = $p->quantity;
-              if($p->status == 2) {
-                $size = json_decode($detail->size);
-                $quantity = $detail->quantity;
-              }
-              $disable_edit_quantity = '';
-              $size_name = '';
-              if(count($size) != 0) {
-                $size_name .=' (';
-                $disable_edit_quantity = 'disabled';
-                foreach ($size as $key => $value) {
-                  $size_name .= $key .' => ' . $value.' ' ;
+                $p = $products[$j];
+                $detail = $m_stock->read_detail_by_stock_product($stock_id,$p->id);
+                $status = '';
+                if($detail->status == 1) {
+                  $status = "Update";
+                } else {
+                  $status = "New";
                 }
-                $size_name .= ' )';
-              } else {
-                $size_name .= 'None';
-              }
+
+                $supplier = '';
+                $cate_name = '';
+                $sup = $m_sup->read_supply_by_id($p->sup_id);
+                if(!empty($sup)) {
+                  $supplier = $sup->name;
+                }
+                $cate = $m_cate->read_cate_by_id($p->cate_id);
+                if(!empty($cate)){
+                  $cate_name = $cate->name;
+                }
+                $size = json_decode($p->size);
+                $quantity = $p->quantity;
+                if($p->status == 2) {
+                  $size = json_decode($detail->size);
+                  $quantity = $detail->quantity;
+                }
+                $disable_edit_quantity = '';
+                $size_name = '';
+                if(count($size) != 0) {
+                  $size_name .=' (';
+                  $disable_edit_quantity = 'disabled';
+                  foreach ($size as $key => $value) {
+                    $size_name .= $key .' => ' . $value.' ' ;
+                  }
+                  $size_name .= ' )';
+                } else {
+                  $size_name .= 'None';
+                }
 
 
-              ?>
-              <tr class="row_pro_<?php echo $p->id?>">
-                <td><input type="checkbox" name="check_products[]" value="<?php echo $p->id?>"></td>
-                <td><img src="public/images/<?php echo $p->image?>" width="150px"></td>
-                <td><?php echo $p->name?></td>
-                <td align="right"><?php echo number_format($p->price,2)?></td>
-                <td><?php echo $cate_name?></td>
-                <td><?php echo $supplier?></td>
-                <td><?php echo $p->quantity?></td>
-                <td><?php echo $size_name?></td>
-                <td><?php echo $status?></td>
-                <td>
-                 <div class="dropdown">
-                   <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                     <i class="fa fa-dot-circle-o"></i> Action
-                   </button>
-                   <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
-                    <a class="dropdown-item  badge badge-primary" href="products_edit.php?id=<?php echo $p->id?>"><i class="fa fa-edit"> </i> Edit Infomation</a>
-                    <a class="dropdown-item badge badge-primary edit_sub_img" data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_sub_image"><i class="fa fa-retweet"></i> Edit Sub Image</a>
-                    <a class="dropdown-item badge badge-danger delete_pro" data-index="<?php echo $p->id?>"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> Delete</a>
-                    
+                ?>
+                <tr class="row_stock_<?php echo $detail->id?>">
+                  <td><input type="checkbox" name="check_stocks[]" value="<?php echo $detail->id?>"></td>
+                  <td><img src="public/images/<?php echo $p->image?>" width="150px"></td>
+                  <td><?php echo $p->name?></td>
+                  <td align="right"><?php echo number_format($p->price_in,2)?></td>
+                  <td><?php echo $cate_name?></td>
+                  <td><?php echo $supplier?></td>
+                  <td><?php echo $p->quantity?></td>
+                  <td><?php echo $size_name?></td>
+                  <td><?php echo $status?></td>
+                  <td>
+                   <div class="dropdown">
+                     <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                       <i class="fa fa-dot-circle-o"></i> Action
+                     </button>
+                     <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
+                      <a class="dropdown-item  badge badge-primary" href="products_edit.php?id=<?php echo $p->id?>"><i class="fa fa-edit"> </i> Edit Infomation</a>
+                      <a class="dropdown-item badge badge-primary edit_sub_img" data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_sub_image"><i class="fa fa-retweet"></i> Edit Sub Image</a>
+                      <a class="dropdown-item  badge badge-info" href="stock_receipt_update_size_qty.php?pro_id=<?php echo $p->id ?>&stock_id=<?php echo $stock_id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update Size & Qty</a>
+                      <a class="dropdown-item badge badge-danger delete_stock" data-index="<?php echo $detail->id?>"  href="javascript:void(0)"><i class="fa fa-trash-o"></i> Delete</a>
+
+                    </div>
                   </div>
-                </div>
-              </td>
-            </tr>
-            <?php $i++; } ?>
-          </tbody>
-        </table>
+                </td>
+              </tr>
+              <?php $i++; } ?>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+
+
   </div>
-
-
-</div>
 </div><!-- .animated -->
 </div><!-- .content -->
 
 <script>
   $(document).ready(function(){
-    $('.table_pro').DataTable({
+    $('.table_list_stock').DataTable({
             // "aaSorting":[[2,"asc"]]
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
           })
@@ -149,11 +152,11 @@
 <!--Delete group-->
 <script>
   var checked = [];
-  $(document).on('click','input[name=check_all_pro]',function(){
+  $(document).on('click','input[name=check_all_stock]',function(){
     checked = [];
     if($(this).is(':checked')) {
       $('input:checkbox').prop('checked',true);
-      $('input[name="check_pro[]"]').each(function(i,n){
+      $('input[name="check_stocks[]"]').each(function(i,n){
         if($(n).is(':checked')) {
           checked.push(parseInt($(n).val()));
         } else {
@@ -165,7 +168,7 @@
       });
     } else {
       $('input:checkbox').prop('checked',false);
-      $('input[name="check_pro[]"]').each(function(i,n){
+      $('input[name="check_stocks[]"]').each(function(i,n){
         if($(n).is(':checked')) {
           checked.push(parseInt($(n).val()));
         } else {
@@ -180,7 +183,7 @@
     console.log(checked);
 
   })
-  $(document).on('click','input[name="check_pro[]"]',function(){
+  $(document).on('click','input[name="check_stocks[]"]',function(){
     var thischeck = $(this) ;
     if(thischeck.is(':checked')) {
       checked.push(parseInt(thischeck.val()));
@@ -193,47 +196,23 @@
     }
     console.log(checked);
   })
-  $(document).on('click','button[name=delete_pro]',function(){
-    var requestData = JSON.stringify(checked);
-    console.log(requestData);
-    if(requestData == '[]') {
-      alert('please choose product to delete');
-    }
-    else if(confirm('data will not be restore\nAre you sure')){
-      var requestData = JSON.stringify(checked); //gửi requrest bằng mảng
-      $.ajax({
-        type:'POST',
-        url:'ajax.php',
-        data:{'list_id':requestData,'delete_group':'OK'},
-        success:function(data){
-          if(data.trim() == 'success'){
-            alert('Successfully')
-            window.location.reload(); 
-          }else if(data.trim() == 'parent_error') {
-            alert('this cate has sub-cate!!! please delete sub-cate first');
-          }
-        }
 
-      })
-    } 
-
-  })
-  $(document).on('click','.delete_pro',function(){
+  $(document).on('click','.delete_stock',function(){
     if(confirm('Are you are? Data wont backup again')) {
-      id = $(this).data('index');
+      var id = $(this).data('index');
+      
       $.ajax({
         type:'POST',
         url : "ajax.php",
         cache: false,
-        data: {'id':id,'delete_pro':'OK'},
+        data: {'id':id,'delete_stock':'OK'},
         success: function(data,status) {
           if(data.trim() == "permission") {
             console.log("permission");
             alert("You dont have permission to do this action")
           } else if(data.trim() != "") {
-            console.log("success");
-            $('#pro_search').html(data);
-            $('.table_pro').DataTable();
+            $('#list_stock_search').html(data);
+            $('.table_stock').DataTable();
           } 
         }
       })
@@ -244,63 +223,39 @@
 
 <!--Search-->
 <script type="text/javascript">
-  // function delete_pro(id){
-  //   if(confirm('Are you are? Data wont backup again')) {
-  //     $.ajax({
-  //       type:'POST',
-  //       url : "ajax.php",
-  //       cache: false,
-  //       data: {'id':id,'delete_pro':'OK'},
-  //       success: function(data,status) {
-  //         if(data.trim() == "permission") {
-  //           console.log("permission");
-  //           alert("You dont have permission to do this action")
-  //         } else if(data.trim() != "") {
-  //           console.log("success");
-  //           $('#pro_search').html(data);
-  //           $('.table_pro').DataTable();
-  //         } 
-  //       }
-  //     })
-  //   }
-  // }
 
   $('input[name=name_search], input[name=price_from], input[name=price_to]').on('keyup',function(){
     var name = $('input[name=name_search').val();
     var price_from = $('input[name=price_from]').val();
     var price_to = $('input[name=price_to]').val();
     var cate = $('select[name=cate_search]').val();
-
+    var stock_id = '<?php echo $stock_id ?>';
     $.ajax({
       type:'POST',
       url: 'ajax.php',
-      cache: false,
-      data: {'name':name, 'price_from':price_from, 'price_to':price_to, 'cate':cate,'search_pro':'OK'},
+      data: {'name':name, 'price_from':price_from, 'price_to':price_to, 'cate':cate,'stock_id':stock_id,'search_list_stock':'OK'},
       success: function(data,status) {
-        $('#pro_search').html(data);
-        $('.table_pro').DataTable();
+        $('#list_stock_search').html(data);
+        $('.table_stock').DataTable();
       }
     })
   })
   $(document).ready(function(){
-
-
     $('select[name=cate_search]').on('change',function(){
       var name = $('input[name=name_search').val();
-      var price_from = $('input[name=price_from]').val();
-      var price_to = $('input[name=price_to]').val();
-      var cate = $('select[name=cate_search]').val();
-
-      $.ajax({
-        type:'POST',
-        url: 'ajax.php',
-        cache: false,
-        data: {'name':name, 'price_from':price_from, 'price_to':price_to, 'cate':cate,'search_pro':'OK'},
-        success: function(data,status) {
-          $('#pro_search').html(data);
-          $('.table_pro').DataTable();
-        }
-      })
+    var price_from = $('input[name=price_from]').val();
+    var price_to = $('input[name=price_to]').val();
+    var cate = $('select[name=cate_search]').val();
+    var stock_id = '<?php echo $stock_id ?>';
+    $.ajax({
+      type:'POST',
+      url: 'ajax.php',
+      data: {'name':name, 'price_from':price_from, 'price_to':price_to, 'cate':cate,'stock_id':stock_id,'search_list_stock':'OK'},
+      success: function(data,status) {
+        $('#list_stock_search').html(data);
+        $('.table_stock').DataTable();
+      }
+    })
     })
   })
 
@@ -413,54 +368,10 @@ $('#edit_size').on('show.bs.modal', function(e) {
 </script>
 <script type="text/javascript">
   var checked = [];
-  $(document).on('click','input[name=check_all]',function(){
-    checked = [];
-    if($(this).is(':checked')) {
-      $('input:checkbox').prop('checked',true);
-      $('input[name="check_products[]"]').each(function(i,n){
-        if($(n).is(':checked')) {
-          checked.push(parseInt($(n).val()));
-        } else {
-          var i = checked.indexOf(parseInt($(n).val()));
-          if(i != -1) {
-            checked.splice(i,1);
-          }
-        }
-      })
-    } else {
-      $('input:checkbox').prop('checked',false);
-      $('input[name="check_products[]"]').each(function(i,n){
-        if($(n).is(':checked')) {
-          checked.push(parseInt($(n).val()));
-        } else {
-          var i = checked.indexOf(parseInt($(n).val()));
-          if(i != -1) {
-            checked.splice(i,1);
-          }
-          
-        }
-      })
-    }
-    console.log(checked);
-
-
-
-  })
-
-  $(document).on('click','input[name="check_products[]"]',function(){
-    var thischeck = $(this) ;
-    if(thischeck.is(':checked')) {
-      checked.push(parseInt(thischeck.val()));
-      console.log(checked);
-    } else {
-      var i = checked.indexOf(parseInt(thischeck.val()));
-      if(i != -1) {
-        checked.splice(i,1);
-      }
-    }
-  })
-  $(document).on('click','#delete_group_product',function(){
+  
+  $(document).on('click','#delete_group_stock_product',function(){
     var requestData = JSON.stringify(checked);
+    var stock_id = '<?php echo $stock_id ?>';
     console.log(requestData);
     if(requestData == '[]') {
       alert('please choose product to delete');
@@ -471,13 +382,13 @@ $('#edit_size').on('show.bs.modal', function(e) {
       $.ajax({
         type:'POST',
         url:'ajax.php',
-        data:{'list_id':requestData,'delete_group_product':'OK'},
+        data:{'list_id':requestData,'stock_id':stock_id,'delete_group_stock_product':'OK'},
         success:function(data){
          if (data.trim() == 'permission') {
           alert("You dont have permission to do this action")
         } else if(data.trim() != ''){
-         $('#pro_search').html(data);
-         $('.table_pro').DataTable();
+         $('#list_stock_search').html(data);
+         $('.table_stock').DataTable();
        }
      }
 
