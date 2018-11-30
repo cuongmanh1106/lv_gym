@@ -11,7 +11,7 @@ class M_Categories extends database {
 
 
 
-	public function  read_cate_by_id($id) {
+	public function read_cate_by_id($id) {
 		$sql = "select* from categories where id = ?";
 		$this->setQuery($sql);
 		return $this->loadRow(array($id));

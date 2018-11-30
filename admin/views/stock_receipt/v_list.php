@@ -40,6 +40,7 @@
                foreach($stocks as $key=>$stock):
                 $user = $m_user->read_user_by_id($stock->user_id);
                 $user_name = $user->first_name . ' ' . $user->last_name;
+                
 
                 ?>
                 <tr id="">
@@ -57,6 +58,7 @@
                      <i class="fa fa-dot-circle-o"></i> Action
                    </button>
                    <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
+                    <a class="dropdown-item  badge badge-info" href="stock_receipt_list_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update</a>
                     <a class="dropdown-item  badge badge-warning" href="stock_receipt_list_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-list-alt"></i> View list products</a>
                     <a class="dropdown-item  badge badge-primary" href="stock_receipt_add_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-plus"></i> Add products</a>
                     <a class="dropdown-item  badge badge-info" href="stock_receipt_update_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update products</a>

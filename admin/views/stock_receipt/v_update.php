@@ -7,7 +7,7 @@ include("include/report.php");
     <li class="breadcrumb-item active" aria-current="page">update a product to stock</li>
 </ol>
 </nav>
-<form method="POST" enctype="multipart/form-data" action="stock_receipt_store_product.php">
+<form method="POST" enctype="multipart/form-data" action="stock_receipt_update_product.php">
     <input type="hidden" name="stock_id" value="<?php echo $stock_id?>">
     <div class="col-lg-12">
         <div class="card">
@@ -28,16 +28,21 @@ include("include/report.php");
                 </div>
                 <br><hr>
 
+            
+
             <div id="content_update">
 
                     </div>
                 </div>
 
             </div>
+            <div class="error_tmp">
+
+                </div>
 
             <div style="text-align: center;">
-                <button class="btn btn-danger" onclick="window.location= 'products_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Complete</button>
-                <button type="submit" class="btn btn-info" name="insert_stock"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Continue</button>
+                <button class="btn btn-danger" onclick="window.location= 'stock_receipt_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
+                <button type="button" class="btn btn-info" name="update_stock"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Save</button>
             </div>
         </div>
 
@@ -48,10 +53,11 @@ include("include/report.php");
 <script>
    $(document).on('click','#search_update_product',function(){
         pro_id = $('select[name=product_update_id]').val();
+        stock_id = '<?php echo $stock_id?>';
         $.ajax({
             type:'POST',
             url:'ajax.php',
-            data:{'pro_id':pro_id,'search_update_product':'OK'},
+            data:{'pro_id':pro_id,'stock_id':stock_id,'search_update_product':'OK'},
             success:function(data) {
                 $('#content_update').html(data);
             }
@@ -145,17 +151,14 @@ include("include/report.php");
         $(this).parent().remove();
     })
 
-    $('button[name="insert_stock"]').click(function(){
+    $('button[name="update_stock"]').click(function(){
         var html = '';
         var flag = true;
         html += ' <ul  id="error" class="alert alert-danger">';
         price = $('input[name=price_in]').val();
         discount = $('input[name=price]').val();
         // console.log($('input[name=name]').val());
-        if($('#id_name').val() == "") {
-            html += '<li>Name is required</li>';
-            flag = false;
-        }
+       
         if($('input[name=price_in]').val() == ""){
             html += '<li>Price in is required</li>';
             flag = false;
@@ -172,19 +175,11 @@ include("include/report.php");
             html += '<li>Discount price out must be more than price in </li>';
             flag = false;
         }
-        if($('input[name=intro]').val() == ""){
-            html += '<li>Intro is required</li>';
-            flag = false;
-        }
         if($('input[name=total_quantity]').val() == "0"){
             html += '<li>quantity is required</li>';
             flag = false;
         }
-        var file_data = $('#image').prop('files')[0];
-        if(file_data == null) {
-         html += '<li>Image is required</li>';
-         flag = false;
-     }
+        
      var quantity = 0;
      $('input[name="quantity[]"]').each(function(i,n){ // nếu chưa nhập quantity
          if($(n).val() == "") {
@@ -217,10 +212,11 @@ include("include/report.php");
      html += '</ul>';
      console.log(flag);  
      if(flag) {
-        $('button[name="insert_pro"]').attr("type", "submit");
+        $('button[name="update_stock"]').attr("type", "submit");
     } else {
         $('.error_tmp').html(html);
     }
+    console.log(html);
 })
 
 

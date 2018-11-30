@@ -3,7 +3,7 @@ require_once("database.php");
 class M_stock_receipt extends database {
 
 	public function read_all_stock(){
-		$sql = "select * from stock_receipt where status = 0 order by created_at desc";
+		$sql = "select * from stock_receipt order by status asc, created_at desc";
 		$this->setQuery($sql);
 		return $this->loadAllRows();
 	} 
@@ -46,10 +46,28 @@ class M_stock_receipt extends database {
 	}
 
 	//detail
-	public function insert_stock_detail($stock_id,$pro_id,$quantity,$price_in,$size) {
-		$sql = "insert into detail_stock (stock_id,pro_id,quantity,price_in,size) values(?,?,?,?,?)";
+
+	public function read_detail_by_stock($stock) {
+		$sql = "select * from detail_stock where stock_id = ".$stock;
 		$this->setQuery($sql);
-		return $this->execute(array($stock_id,$pro_id,$quantity,$price_in,$size));
+		return $this->loadAllRows();
+	}
+	public function read_detail_by_stock_product($stock,$pro) {
+		$sql = "select * from detail_stock where stock_id = ? and pro_id = ?";
+		$this->setQuery($sql);
+		return $this->loadRow(array($stock,$pro));
+	}
+	public function insert_stock_detail($stock_id,$pro_id,$quantity,$price_in,$size,$status) {
+		$sql = "insert into detail_stock (stock_id,pro_id,quantity,price_in,size,status) values(?,?,?,?,?,?)";
+		$this->setQuery($sql);
+		return $this->execute(array($stock_id,$pro_id,$quantity,$price_in,$size,$status));
+	}
+
+	public function update_stock_detail($quantiy,$price_in,$size,$status,$stock_id,$pro_id) {
+		$sql ="update detail_stock set quantity = ?, price_in = ?, size = ?, status = ? where stock_id = ? and pro_id = ?";
+		$this->setQuery($sql);
+		return $this->execute(array($quantiy,$price_in,$size,$status,$stock_id,$pro_id));
+
 	}
  
 

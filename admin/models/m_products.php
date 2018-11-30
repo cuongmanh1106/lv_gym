@@ -12,7 +12,7 @@ class M_products extends database {
 	}
 
 	public function read_all_pro() {
-		$sql = "select * from products where status = 0 order by id desc";
+		$sql = "select * from products where status != 1 order by id desc";
 		$this->setQuery($sql);
 		return $this->loadAllRows();
 	}
@@ -163,5 +163,11 @@ class M_products extends database {
 		$sql = "update products set quantity = ?, size = ? where id = ?";
 		$this->setQuery($sql);
 		return $this->execute(array($quantity,$size,$id));
+	}
+
+	public function update_product_stock($quantity,$size,$price,$price_in,$id) {
+		$sql = "update products set quantity = ?, size = ?, price = ?, price_in = ? where id = ?";
+		$this->setQuery($sql);
+		return $this->execute(array($quantity,$size,$price,$price_in,$id));
 	}
 }

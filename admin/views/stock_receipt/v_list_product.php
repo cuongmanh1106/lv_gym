@@ -1,15 +1,20 @@
 
 
 <?php require("include/report.php");?>
-
-
+<?php require("v_edit_sub_image.php") ?>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="stock_receipt_list.php" style="color: blue">Stock Receipt</a></li>
+    <li class="breadcrumb-item active" aria-current="page">List products of stock</li>
+</ol>
+</nav>
 <div class="content mt-3">
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header badge-info ">
-            <strong class="card-title"><i class="fa fa-list"></i> List Of Products </strong>
+            <strong class="card-title"><i class="fa fa-list"></i> List Products Of Stock </strong>
             
           </div> 
           <!--search form-->
@@ -47,31 +52,51 @@
                 <th>Category</th>
                 <th>Supplier</th>
                 <th>Quantity</th>
-                <th>Introduce</th>
                 <th>Size</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <?php $i = 1;
-              var_dump($products);
-              foreach($products as $p):
-              var_dump($p); 
+              for($j=0;$j<count($products);$j++) {
+              $p = $products[$j];
+              $detail = $m_stock->read_detail_by_stock_product($stock_id,$p->id);
+              $status = '';
+              if($detail->status == 1) {
+                $status = "Update";
+              } else {
+                $status = "New";
+              }
+
               $supplier = '';
+              $cate_name = '';
               $sup = $m_sup->read_supply_by_id($p->sup_id);
               if(!empty($sup)) {
                 $supplier = $sup->name;
               }
+              $cate = $m_cate->read_cate_by_id($p->cate_id);
+              if(!empty($cate)){
+                $cate_name = $cate->name;
+              }
               $size = json_decode($p->size);
+              $quantity = $p->quantity;
+              if($p->status == 2) {
+                $size = json_decode($detail->size);
+                $quantity = $detail->quantity;
+              }
               $disable_edit_quantity = '';
-              $size_name = '[';
+              $size_name = '';
               if(count($size) != 0) {
+                $size_name .=' (';
                 $disable_edit_quantity = 'disabled';
                 foreach ($size as $key => $value) {
-                  $size_name .= $key .' - ';
+                  $size_name .= $key .' => ' . $value.' ' ;
                 }
+                $size_name .= ' )';
+              } else {
+                $size_name .= 'None';
               }
-              $size_name .= ']';
 
 
               ?>
@@ -80,43 +105,26 @@
                 <td><img src="public/images/<?php echo $p->image?>" width="150px"></td>
                 <td><?php echo $p->name?></td>
                 <td align="right"><?php echo number_format($p->price,2)?></td>
-                <td><?php echo $p->cate_name?></td>
+                <td><?php echo $cate_name?></td>
                 <td><?php echo $supplier?></td>
                 <td><?php echo $p->quantity?></td>
-                <td><?php echo substr($p->intro,0,30)  ?>.....</td>
                 <td><?php echo $size_name?></td>
+                <td><?php echo $status?></td>
                 <td>
                  <div class="dropdown">
                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
                      <i class="fa fa-dot-circle-o"></i> Action
                    </button>
                    <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
-                    <?php if($m_per->check_permission('edit_product') ==  1) { ?>
-                    <a class="dropdown-item  badge badge-primary" href="products_edit.php?id=<?php echo $p->id?>"><i class="fa fa-edit"></i> Edit</a>
-                    <a class="dropdown-item badge badge-success edit_sub_img" data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_sub_image"><i class="fa fa-retweet"></i> Edit Sub Image</a>
-                    <a class="dropdown-item badge badge-success " data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_size"><i class="fa fa-retweet"></i> Edit Size</a>
-                    <?php if($disable_edit_quantity == '') {?>
-                    <a class="dropdown-item badge badge-success"  data-index="<?php echo $p->quantity?>" data-proid="<?php echo $p->id?>" data-name="<?php echo $p->name?>" data-size="<?php echo $p->size?>"  data-toggle="modal" href="#edit_quantity"><i class="fa fa-retweet"></i> Edit Quantity</a>
-                    <?php } else {?>
-                    <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Edit Quantity</button>
-                    <?php }?>
-                    <?php } else {?> <!--end if permission-->
-                    <button class="dropdown-item  badge badge-primary" disabled><i class="fa fa-edit"></i> Edit</button>
-                    <button class="dropdown-item badge badge-success" disabled><i class="fa fa-retweet"></i> Edit Sub Image</button>
-                    <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Edit Size</button>
-                    <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Edit Quantity</button>
-                    <?php }?>
-
-                    <?php if($m_per->check_permission('delete_product') == 1) {?>
+                    <a class="dropdown-item  badge badge-primary" href="products_edit.php?id=<?php echo $p->id?>"><i class="fa fa-edit"> </i> Edit Infomation</a>
+                    <a class="dropdown-item badge badge-primary edit_sub_img" data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_sub_image"><i class="fa fa-retweet"></i> Edit Sub Image</a>
                     <a class="dropdown-item badge badge-danger delete_pro" data-index="<?php echo $p->id?>"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> Delete</a>
-                    <?php } else {?>
-                    <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Delete</button>
-                    <?php }?>
+                    
                   </div>
                 </div>
               </td>
             </tr>
-            <?php $i++; endforeach ?>
+            <?php $i++; } ?>
           </tbody>
         </table>
       </div>

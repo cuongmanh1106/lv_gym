@@ -38,7 +38,6 @@ include("include/report.php");
                                 <div class="col col-md-1"><label for="select" class=" form-control-label">Category:</label></div>
                                 <div class="col-12 col-md-10">
                                   <select name="cate_id" required="required" id="select" class="form-control">
-                                    <option value="0">--None--</option>
                                     <?php cate_parent($cates); ?>
                                 </select>
                             </div>
@@ -145,8 +144,8 @@ include("include/report.php");
             </div>
 
             <div style="text-align: center;">
-                <button type="submit" class="btn btn-info" name="insert_stock"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Continue</button>
-                <button class="btn btn-danger" onclick="window.location= 'products_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Complete</button>
+                <button type="submit" class="btn btn-info" name="insert_stock"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Back</button>
+                <button class="btn btn-danger" onclick="window.location= 'stock_receipt_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Complete</button>
                 
             </div>
         </div>

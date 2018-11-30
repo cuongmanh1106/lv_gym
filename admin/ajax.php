@@ -502,6 +502,7 @@ if(isset($_POST["delete_group_supplier"])) {
 /* Stock receipt */
 if(isset($_POST["search_update_product"])) {
     $pro_id = $_POST["pro_id"];
+    $stock_id = $_POST["stock_id"];
     include("models/m_products.php");
     include("models/m_stock_receipt.php");
 
