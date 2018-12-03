@@ -64,7 +64,7 @@
                 <tr>
                     <td><img src="admin/public/images/<?php echo $product->image ?>" width="70px"></td>
                     <td><?php echo  $product->name  ?></td>
-                    <td>$ <?php echo  number_format($product->price, 2) ?></td>
+                    <td>$ <?php echo  number_format($c["price"], 2) ?></td>
                     <td width="10%"><?php echo  $qty  ?></td>
                     <td><?php echo $c["size"] ?></td>
                     <td>$ <span class="sub-total"><?php echo number_format($c["price"]*$c["qty"],2) ?></span></td>

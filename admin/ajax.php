@@ -595,5 +595,168 @@ if(isset($_POST["search_list_stock"])) {
 
 
 }
+
+if(isset($_POST["update_stock_receipt"])) {
+    $id = $_POST["stock_id"];
+    $status = $_POST["status"];
+
+    require("models/m_stock_receipt.php");
+    require("models/m_products.php");
+    $m_stock = new M_stock_receipt();
+    $m_pro = new M_products();
+    $detail = $m_stock->read_detail_by_stock($id);
+    if($status == "2") {
+        $m_stock->cancel_stock($status,$id);
+        foreach($detail as $d) {
+            if($d->status == 0) {
+                $m_pro->delete_product($d->pro_id);
+            }
+        }
+    } else if ($status == "1") {
+        $m_stock->cancel_stock($status,$id);
+        foreach($detail as $d) {
+            if($d->status == 0) {
+                $m_pro->update_status(0,$d->pro_id);
+            } else if($d->status == 1) { 
+                $pro = $m_pro->read_product_by_id($d->pro_id);
+                $del_pro = $m_stock->read_detail_by_stock_product($id,$d->pro_id);
+                $size = json_decode($pro->size);
+                $quantity = $pro->quantity;
+                $old_size = json_decode($del_pro->size);
+                if(count($size) > 0 ) { //update qty & size vao sp chinh
+                    foreach($old_size as $key=>$value) {
+                        if(isset($size->$key)) {
+                            $size->$key += $value;
+                        } else {
+                            $size->$key = $value;
+                        }
+                        $quantity += $value;
+                    }
+                } else {
+                    $quantity += $del_pro->quantity;
+                }
+
+                $m_pro->update_product_order($quantity,json_encode($size),$d->pro_id);
+                $_SESSION["alert-success"] = "Update Status Stock Successfully";
+            }
+        }
+    }
+}
 /* end stock receipt */
+
+
+
+/* Promotion */
+if(isset($_POST["delete_promotion"])) {
+    $id = $_POST["id"];
+    include("models/m_promotion.php");
+    $m_promotion = new M_promotion();
+    if($m_promotion->update_status_promotion($id)) {
+        $promotions = $m_promotion->read_all_promotion();
+        include("views/promotion/v_search_promotion.php");
+    } else {
+        echo "error";
+    }
+}
+
+if(isset($_POST["delete_group_promotion"])) {
+
+    $list_id = $_POST['list_id'];//trả về kiểu chuổi
+    $str = str_replace('[','',$list_id);
+    $str = str_replace(']', '', $str);
+    $str = explode(',',$str);//chuyển thành mảng
+
+    include("models/m_promotion.php");
+    $m_promotion = new M_promotion();
+    if($m_promotion->delete_group_promotion($str)) {
+        $promotions = $m_promotion->read_all_promotion();
+        include("views/promotion/v_search_promotion.php");
+    } else {
+        echo "error";
+    }
+}
+
+if(isset($_POST["search_promotion"])) {
+
+    $name = $_POST["name"];
+    $date_from = $_POST["date_from"];
+    $date_to = $_POST["date_to"];
+
+
+    include("models/m_promotion.php");
+    $m_promotion = new M_promotion();
+    $promotions = $m_promotion->search_promotion($name,$date_from,$date_to);
+    include("views/promotion/v_search_promotion.php");
+}
+
+if(isset($_POST["search_pro_promotion"])) {
+    $name = $_POST['name'];
+    $price_from = $_POST['price_from'];
+    $price_to = $_POST['price_to'];
+    $cate = $_POST['cate'];
+    $id = $_POST['id'];
+    include("models/m_products.php");
+    include("models/m_categories.php");
+    include("models/m_supplier.php");
+    include("models/m_permission.php");
+    include("models/m_promotion.php");
+    $m_promotion = new M_promotion();
+    $m_sup = new M_suppliers();
+    $m_per = new M_permission();
+    $m_pro = new M_products();
+    $m_cate = new M_Categories();
+    
+    $products = $m_promotion->search_choose_product($id,$name,$price_from,$price_to,$cate);
+    $cates = $m_cate->read_all_categories();
+    include("views/promotion/v_search_products_promotion.php");
+}
+
+if(isset($_POST["search_chose_promotion"])) {
+    $name = $_POST['name'];
+    $price_from = $_POST['price_from'];
+    $price_to = $_POST['price_to'];
+    $cate = $_POST['cate'];
+    include("models/m_products.php");
+    include("models/m_categories.php");
+    
+    $m_pro = new M_products();
+    $m_cate = new M_Categories();
+    
+    $products = $m_pro->search_product($name,$price_from,$price_to,$cate);
+    $cates = $m_cate->read_all_categories();
+    include("views/promotion/v_search_products_promotion.php");
+}
+
+if(isset($_POST["get_detail_product_promotion"])) {
+    $id = $_POST["id"];
+    include("models/m_promotion.php");
+    $m_promotion = new M_promotion();
+    $product = $m_promotion->get_detail_product_promotion($id);
+    echo json_encode($product);
+}
+if(isset($_POST["update_detail_product_promotion"])) {
+    $id = $_POST["id"];
+    $price = $_POST["price"];
+    include("models/m_promotion.php");
+    $m_promotion = new M_promotion();
+    if($m_promotion->update_promotion_detail($price,0,$id)) {
+        $detail = $m_promotion->get_detail_product_promotion($id);
+        echo json_encode($detail);
+    } else {
+        echo json_encode(['error'=>'Error update']);
+    }
+
+}
+
+if(isset($_POST["delete_promotion_detail"])) {
+    $id = $_POST["id"];
+    include("models/m_promotion.php");
+    $m_promotion = new M_promotion();
+    if($m_promotion->delete_promotion_detail($id)) {
+        echo "success";
+    } else {
+        echo "fail";
+    }
+}
+/* end Promotion*/
 ?>

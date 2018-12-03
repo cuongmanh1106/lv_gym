@@ -158,6 +158,7 @@ if(isset($_POST['add-to-cart'])) {
 	$size = '';
 	$count = $_POST['count'];
 	$qty = 1;
+	$price = $_POST["price"];
 	include("models/m_products.php");
 	$m_pro = new M_products();
 	$product = $m_pro->read_product_by_id($pro_id);
@@ -231,7 +232,7 @@ if(isset($_POST['add-to-cart'])) {
 	if(!$check) {
 		$_SESSION["cart"][$time]["id"] = $pro_id;
 		$_SESSION["cart"][$time]["size"] = $size;
-		$_SESSION["cart"][$time]["price"] = $product->price;
+		$_SESSION["cart"][$time]["price"] = $price;
 		$_SESSION["cart"][$time]["qty"] = $qty; 
 		$total += $qty*$product->price;
 	} 

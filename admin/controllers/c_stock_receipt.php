@@ -120,15 +120,14 @@ class C_stock_receipt
                 if($pro_id != 0){
                 	$m_stock->insert_stock_detail($stock_id,$pro_id,$quanity,$price_in,$size,0);
                     $_SESSION['alert-success'] = "Insert Product Successfully";
-                   	echo "<script>window.location = 'stock_receipt_add_products.php?id=".$stock_id."'</script>";
                 } else {
                     $_SESSION['alert-danger'] = "Insert Product Fail";
-                    echo "<script>window.location = 'stock_receipt_add_products.php?id=".$stock_id."'</script>";	
                 }
             } else {
                 $_SESSION['alert-danger'] = "Error Upload File";
-                    echo "<script>window.location = 'stock_receipt_add_products.php?id=".$stock_id."'</script>";
+                    
             }
+            echo "<script>window.location = 'stock_receipt_add_products.php?id=".$stock_id."'</script>";
 
         }
 	}
@@ -254,7 +253,7 @@ class C_stock_receipt
 
             	
             } 
-            echo "<script>window.location = 'stock_receipt_update_products.php?id=".$stock_id."'</script>";
+            echo "<script>window.location = 'stock_receipt_list_products.php?id=".$stock_id."'</script>";
     	}
 
     }
@@ -273,6 +272,7 @@ class C_stock_receipt
         $m_cate = new M_Categories();
         $m_pro = new M_products();
         $m_stock = new M_stock_receipt();
+        $stock = $m_stock->read_stock_by_id($stock_id);
         $products = $m_stock->read_product_by_stock($stock_id);
         $cates = $m_cate->read_all_categories();
         
@@ -337,11 +337,12 @@ class C_stock_receipt
             } else { //sản phẩm có sản trong danh sách
 
                 if($m_stock->update_stock_detail($total_quantity,$price_in,json_encode($new_size),1,$stock_id,$pro_id)){
-                $_SESSION['alert-success'] = "Update Stock Product Successfully";
+                	$_SESSION['alert-success'] = "Update Stock Product Successfully";
                 } else {
                     $_SESSION['alert-danger'] = "Update Stock Product Faily";
                 }
             }
+            echo "<script>window.location = 'stock_receipt_list_products.php?id=".$stock_id."'</script>";
         }
 
         //views

@@ -145,7 +145,7 @@ include("include/report.php");
 
             <div style="text-align: center;">
                 <button type="submit" class="btn btn-info" name="insert_stock"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Continue</button>
-                <button class="btn btn-danger" onclick="window.location= 'stock_receipt_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Complete</button>
+                <button class="btn btn-danger" onclick="window.location= 'stock_receipt_list_products.php?id=<?php echo $stock_id?>'" type="button" value="Cancel"><i class="fa fa-reply"></i> Complete</button>
                 
             </div>
         </div>

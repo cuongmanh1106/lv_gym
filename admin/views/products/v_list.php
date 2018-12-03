@@ -12,11 +12,6 @@
         <div class="card">
           <div class="card-header badge-info ">
             <strong class="card-title"><i class="fa fa-list"></i> List Of Products </strong>
-            <?php if($m_per->check_permission('insert_product') == 1) {?>
-            <a href="products_add.php" class="btn btn-success" ><i class="fa fa-plus-circle"></i></a>
-            <?php } else { ?>
-            <button disabled class="btn btn-default"><i class="fa fa-plus-circle"></i></button>
-            <?php }?>
 
             <?php if($m_per->check_permission('delete_product') == 1) {?>
             <button class="btn btn-danger" id="delete_group_product" name="delete_group_product" ><i class="fa fa-trash-o"></i></button>
@@ -103,17 +98,12 @@
                     <?php if($m_per->check_permission('edit_product') ==  1) { ?>
                     <a class="dropdown-item  badge badge-primary" href="products_edit.php?id=<?php echo $p->id?>"><i class="fa fa-edit"></i> Edit</a>
                     <a class="dropdown-item badge badge-success edit_sub_img" data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_sub_image"><i class="fa fa-retweet"></i> Edit Sub Image</a>
-                    <a class="dropdown-item badge badge-success " data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_size"><i class="fa fa-retweet"></i> Edit Size</a>
-                    <?php if($disable_edit_quantity == '') {?>
-                    <a class="dropdown-item badge badge-success"  data-index="<?php echo $p->quantity?>" data-proid="<?php echo $p->id?>" data-name="<?php echo $p->name?>" data-size="<?php echo $p->size?>"  data-toggle="modal" href="#edit_quantity"><i class="fa fa-retweet"></i> Edit Quantity</a>
-                    <?php } else {?>
-                    <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Edit Quantity</button>
-                    <?php }?>
+                    
+                    
                     <?php } else {?> <!--end if permission-->
                     <button class="dropdown-item  badge badge-primary" disabled><i class="fa fa-edit"></i> Edit</button>
                     <button class="dropdown-item badge badge-success" disabled><i class="fa fa-retweet"></i> Edit Sub Image</button>
-                    <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Edit Size</button>
-                    <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Edit Quantity</button>
+                    
                     <?php }?>
 
                     <?php if($m_per->check_permission('delete_product') == 1) {?>

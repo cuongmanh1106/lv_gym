@@ -1,6 +1,6 @@
 <?php include("include/report.php") ; ?>
 <?php include("v_add.php") ?>
-
+<?php include("v_update_stock_receipt.php") ?>
 <div class="content mt-3">
   <div class="animated fadeIn">
     <div class="row">
@@ -31,6 +31,7 @@
                  <th>Stock No.</th>
                  <th>Staff</th>
                  <th>Description</th>
+                 <th>Status</th>
                  <th>Action</th>
                </tr>
              </thead>
@@ -40,7 +41,14 @@
                foreach($stocks as $key=>$stock):
                 $user = $m_user->read_user_by_id($stock->user_id);
                 $user_name = $user->first_name . ' ' . $user->last_name;
-                
+                $status = '';
+                if($stock->status == 0) {
+                  $status = "Entering";
+                } else if($stock->status == 1) {
+                  $status = "Confirmed";
+                } else if ($stock->status == 2) {
+                  $status = "Canceled";
+                }
 
                 ?>
                 <tr id="">
@@ -52,16 +60,24 @@
                 <td><?php echo $stock->id ?></td>
                 <td><?php echo $user_name ?></td>
                 <td><?php echo $stock->description ?></td>
+                <td><?php echo $status?></td>
                 <td>
                   <div class="dropdown">
                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
                      <i class="fa fa-dot-circle-o"></i> Action
                    </button>
                    <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
-                    <a class="dropdown-item  badge badge-info" href="stock_receipt_list_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update</a>
+                    
                     <a class="dropdown-item  badge badge-warning" href="stock_receipt_list_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-list-alt"></i> View list products</a>
+                    <?php if($stock->status == 0){ ?>
                     <a class="dropdown-item  badge badge-primary" href="stock_receipt_add_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-plus"></i> Add products</a>
                     <a class="dropdown-item  badge badge-info" href="stock_receipt_update_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update products</a>
+                    <a class="dropdown-item  badge badge-info" href="#update_stock_receipt" data-toggle = "modal" data-status="<?php echo $stock->status?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update Status</a>
+                    <?php } else { ?>
+                    <a class="dropdown-item  badge badge-primary disabled" href="stock_receipt_add_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-plus"></i> Add products</a>
+                    <a class="dropdown-item  badge badge-info disabled" href="stock_receipt_update_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update products</a>
+                    <a class="dropdown-item  badge badge-info disabled" href="#update_stock_receipt" data-toggle = "modal" data-status="<?php echo $stock->status?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update Status</a>
+                    <?php } ?>
                   </div>
                 </div>
               </td>
@@ -200,5 +216,15 @@
       })
     } 
     
+  })
+
+
+  $('#update_stock_receipt').on('show.bs.modal', function(e) {
+    stock_id  = $(e.relatedTarget).data('index');
+    status = $(e.relatedTarget).data('status');
+    console.log(stock_id +" "+status);
+    $(e.currentTarget).find('select[name=stock_status]').val(status);
+    $(e.currentTarget).find('input[name=stock_id]').val(stock_id);
+
   })
 </script>

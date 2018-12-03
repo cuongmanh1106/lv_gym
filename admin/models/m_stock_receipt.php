@@ -134,6 +134,12 @@ class M_stock_receipt extends database {
 		return $this->execute(array($user_id,$description,$id));
 	}
 
+	public function cancel_stock($status,$id) {
+		$sql = " update stock_receipt set status = ? where id = ?";
+		$this->setQuery($sql);
+		return $this->execute(array($status,$id));
+	}
+
 	//detail
 
 	public function read_detail_by_stock($stock) {

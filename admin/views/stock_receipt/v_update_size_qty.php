@@ -90,12 +90,12 @@ include("include/report.php");
                     <b>Price Out:</b><input class="form-control" onkeyup="formatNumBerKeyUp(this)" type="text" name="price" value="<?php echo $product->price?>" >
                 </div>
             <?php } ?>
-            <div class="col-md-12"><b>Total quantity:</b><input class="form-control" <?php echo ($size == "")?"":"readonly"?> type="text" name="total_quantity" value="<?php echo $detail->quantity ?>" onkeypress="return isNumberKey(event)" ></div>
+            <div class="col-md-12"><b>Total quantity:</b><input class="form-control" <?php echo ($size == "" || $product->status == 2)?"":"readonly"?> type="text" name="total_quantity" value="<?php echo $detail->quantity ?>" onkeypress="return isNumberKey(event)" ></div>
 
             <div class="clearfix"></div>
             <hr>
 
-            <a href="javascript::void(0)" class="btn btn-secondary <?php echo ($size == "")?"disabled":"" ?>" id="add-sub-size"><i class="fa fa-plus"></i> Add size</a>
+            <a href="javascript::void(0)" class="btn btn-secondary <?php echo ($size == "" && $product->status == 0)?"disabled":"" ?>" id="add-sub-size"><i class="fa fa-plus"></i> Add size</a>
             <br><br>
             <div id="add-size">
                 <?php 

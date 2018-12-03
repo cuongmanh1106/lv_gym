@@ -89,12 +89,14 @@
         $(document).on('click','.add-cart',function(){
             var id = $(this).attr('data-index');
             var count = $('#checkout').attr('data-index');
+            var price = $(this).parent().find('#price_'+id).html();
+            var price = price.slice(1);
             var size = '';
 
             $.ajax({
                 type:'POST',
                 url:'ajax.php',
-                data:{'pro_id':id,'count':count,'size':size,'add-to-cart':'OK'},
+                data:{'pro_id':id,'count':count,'size':size,'price':parseFloat(price),'add-to-cart':'OK'},
                 success:function(data){
                     data = data.trim();
                     // console.log(data);
@@ -126,11 +128,12 @@
             size = $(this).parent().find('select[name=size]').val();
             qty = $(this).parent().find('input[name=qty]').val();
             count = $('#checkout').attr('data-index');
-            console.log(id + " "+size+" "+qty+" "+count);
+            var price = $(this).parent().find('#price_'+id).html();
+            var price = price.slice(1);
             $.ajax({
                 type:'POST',
                 url:'ajax.php',
-                data:{'pro_id':id,'count':count,'size':size,'qty':qty,'add-to-cart':'OK'},
+                data:{'pro_id':id,'count':count,'size':size,'qty':qty,'price':price,'add-to-cart':'OK'},
                 success:function(data){
                     data = data.trim();
                     // console.log(data);

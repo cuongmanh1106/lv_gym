@@ -10,6 +10,8 @@ class C_products {
 
 		//models
 		include("models/m_categories.php");
+		include("admin/models/m_promotion.php");
+		$m_promotion = new M_promotion();
 		$m_cate = new M_Category();
 		$m_pro = new M_products();
 		$products = '';
@@ -81,8 +83,9 @@ class C_products {
 		include("models/m_comment.php");
 		include("models/m_account.php");
 		include("helper/carbon.php");
+		include("admin/models/m_promotion.php");
 		
-
+		$m_promotion = new M_promotion();
 		$m_account = new M_account();
 		$m_comment = new M_comment(); 
 		$m_pro = new M_products();

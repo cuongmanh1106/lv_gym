@@ -170,4 +170,10 @@ class M_products extends database {
 		$this->setQuery($sql);
 		return $this->execute(array($quantity,$size,$price,$price_in,$id));
 	}
+
+	public function update_status($status,$id) {
+		$sql = "update products set status = ? where id = ?";
+		$this->setQuery($sql);
+		return $this->execute(array($status,$id));
+	}
 }

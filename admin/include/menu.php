@@ -67,6 +67,9 @@
                         <a href="feedback_list.php"> <i class="menu-icon fa fa-comment-o"></i>Feedback </a>
                     </li>
                     <li>
+                        <a href="promotion_list.php"> <i class="menu-icon fa fa-comment-o"></i>Promotion </a>
+                    </li>
+                    <li>
                         <a href="orders_list.php"> <i class="menu-icon fa fa-book"></i>Orders </a>
                     </li>
                     <li>

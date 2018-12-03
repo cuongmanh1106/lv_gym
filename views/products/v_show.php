@@ -46,7 +46,13 @@
     	foreach($products as $p) :
     		if($dem == 0) {
     			echo '<div class="product-top">';
+
     		}
+            $promotion_price = 0;
+            $promotion = $m_promotion->get_promotion_price($p->id);
+            if($promotion != 0) {
+                $promotion_price = $promotion->price;
+            }   
     		?>
 
 
@@ -55,7 +61,16 @@
     				<a href="single.php?id=<?php echo $p->id?>"><img class="img-responsive " src="admin/public/images/<?php echo $p->image?>" alt=""></a>        
     				<div class="shoe-in">
     					<h6><a href="single.php?id=<?php echo $p->id?>"><?php echo $p->name ?> </a></h6>
-    					<label>$<?php echo $p->price ?></label>
+                        <?php if($promotion_price == 0) {?>
+    					<h3  id="price_<?php echo $p->id?>" style="padding-bottom: 15px; padding-top: 15px">$<?php echo $p->price ?></h3>
+                        <?php } else {?>
+                        <div class="row" style="padding-bottom: 15px; padding-top: 15px">
+                            <div class="col-md-6"><strike>$<?php echo $p->price ?></strike></div>
+                            <div class="col-md-6" style="text-align: right; color:#ff4d4d"><h3 id="price_<?php echo $p->id?>">$<?php echo $promotion_price?></h3></div>
+                        </div>
+
+
+                        <?php }?>
     					<a href="single.php?id=<?php echo $p->id?>" class="store"> FIND A STORE</a>
     					<button data-index = "<?php echo $p->id ?>" class="btn btn-primary add-cart"><i class="fa fa-shopping-cart"></i> Add to cart</button>
     				</div>

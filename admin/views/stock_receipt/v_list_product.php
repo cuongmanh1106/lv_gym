@@ -5,7 +5,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="stock_receipt_list.php" style="color: blue">Stock Receipt</a></li>
-    <li class="breadcrumb-item active" aria-current="page">List products of stock</li>
+    <li class="breadcrumb-item active" aria-current="page">List products of stock <?php echo "/ ".$stock->id?></li>
   </ol>
 </nav>
 <div class="content mt-3">
@@ -15,9 +15,15 @@
         <div class="card">
           <div class="card-header badge-info ">
             <strong class="card-title"><i class="fa fa-list"></i> List Products Of Stock </strong>
+            <?php if($stock->status == 0) {?>
             <a href="stock_receipt_add_products.php?id=<?php echo $stock_id?>" class="btn btn-success" title="Insert New Products"   ><i class="fa fa-plus"></i></a>
             <a href="stock_receipt_update_products.php?id=<?php echo $stock_id?>" class="btn btn-warning" title="Update Old Products"   ><i class="fa fa-edit"></i></a>
             <a href="javascript:void(0)"  id="delete_group_stock_product" name="delete_group_stock_product" class="btn btn-danger" title="Update Old Products"   ><i class="fa fa-trash-o"></i></a>
+            <?php } else {?>
+            <a href="stock_receipt_add_products.php?id=<?php echo $stock_id?>" class="btn btn-success disabled" title="Insert New Products"   ><i class="fa fa-plus"></i></a>
+            <a href="stock_receipt_update_products.php?id=<?php echo $stock_id?>" class="btn btn-warning disabled" title="Update Old Products"   ><i class="fa fa-edit"></i></a>
+            <a href="javascript:void(0)"  id="delete_group_stock_product" name="delete_group_stock_product" class="btn btn-danger disabled" title="Update Old Products"   ><i class="fa fa-trash-o"></i></a>
+            <?php } ?>
           </div> 
           <!--search form-->
           <div class="search" style="margin-top: 20px">
@@ -81,12 +87,9 @@
                 if(!empty($cate)){
                   $cate_name = $cate->name;
                 }
-                $size = json_decode($p->size);
-                $quantity = $p->quantity;
-                if($p->status == 2) {
-                  $size = json_decode($detail->size);
-                  $quantity = $detail->quantity;
-                }
+                $quantity = $detail->quantity;
+                $size = json_decode($detail->size);
+                $quantity = $detail->quantity;
                 $disable_edit_quantity = '';
                 $size_name = '';
                 if(count($size) != 0) {
@@ -109,14 +112,20 @@
                   <td align="right"><?php echo number_format($p->price_in,2)?></td>
                   <td><?php echo $cate_name?></td>
                   <td><?php echo $supplier?></td>
-                  <td><?php echo $p->quantity?></td>
+                  <td><?php echo $quantity?></td>
                   <td><?php echo $size_name?></td>
                   <td><?php echo $status?></td>
                   <td>
                    <div class="dropdown">
+                    <?php if($stock->status == 0) { ?>
                      <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
                        <i class="fa fa-dot-circle-o"></i> Action
                      </button>
+                     <?php } else {?>
+                     <button type="button" disabled class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                       <i class="fa fa-dot-circle-o"></i> Action
+                     </button>
+                     <?php } ?>
                      <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
                       <a class="dropdown-item  badge badge-primary" href="products_edit.php?id=<?php echo $p->id?>"><i class="fa fa-edit"> </i> Edit Infomation</a>
                       <a class="dropdown-item badge badge-primary edit_sub_img" data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_sub_image"><i class="fa fa-retweet"></i> Edit Sub Image</a>
