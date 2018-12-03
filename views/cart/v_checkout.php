@@ -32,10 +32,22 @@
                 <div class="col-md-4">
                     <h4><b>Delivery cost:</b> $<span id="delivery_cost">2.00</span></h4>
                 </div>
+
+
+                <div class="col-md-1">
+                    <h4><b>Payment: </b></h4>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control" name="payment">
+                        <option value="cash">Cash</option>
+                        <option value="paypal">Paypal </option>
+                    </select>
+                </div>
             </div>
            
-            <a class="btn btn-danger" href="products.php"  style="float: right;"><i class="fa fa-reply"></i> Continue to buy</a>
-            <button type="button" name="order" class="btn btn-success" style="float: right;margin-right: 15px"><i class="fa fa-shopping-cart"></i> Order</button>
+           
+            <button type="button" name="order" class="btn btn-success" style="float: right;margin-right: 15px"><i class="fa fa-shopping-cart"></i> Order </button> 
+             <a class="btn btn-danger" href="products.php"  style="float: right;"><i class="fa fa-reply"></i> Continue to buy</a>
         </form>
         <div class="clearfix"></div>
         <hr style="border:0.5px solid #000">

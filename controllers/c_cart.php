@@ -2,6 +2,7 @@
 session_start();
 include("models/m_products.php");
 
+
 class C_cart{
 
 	function __construct() {
@@ -28,9 +29,12 @@ class C_cart{
 	}
 
 	public function success() {
+
+
 		ini_set("display_errors",0);
 
 		include("models/m_order.php");
+		
 
 		$m_order = new M_order();
 		$m_pro = new M_products();
@@ -74,7 +78,7 @@ class C_cart{
 
 
 		$order = $m_order->read_order_by_id($order_id);
-		$carts = $_SESSION["cart"];
+		$carts = $m_order->read_detail_by_order($order_id);
 
 		require_once("smtpgmail/class.phpmailer.php");
 		$mail=new PHPMailer();
@@ -97,11 +101,18 @@ class C_cart{
 		$mail->AddAddress("cuongmanh2311@gmail.com",$_SESSION["customer"]->first_name ." ".$_SESSION["customer"]->last_name); // Mail người nhận
 		$mail->Send();
 
+		if($_POST["payment"] == "paypal") {
+			require('controllers/test_paypal.php');
+
+		} else {
+			$view = "views/cart/v_success.php";
+			$title = "Order Successfully";
+			include("include/layout.php");
+		}
+
 		//view
 		
-		$view = "views/cart/v_success.php";
-		$title = "Order Successfully";
-		include("include/layout.php");
+		
 
 
 	}
@@ -121,5 +132,18 @@ class C_cart{
 		//views
 		$title = "Export PDF";
 		include("views/cart/v_pdf.php");
+	}
+
+	public function paypal_success() {
+		$order_id = $_GET["order_id"];
+		include("models/m_order.php");
+		$m_order = new M_order();
+		$order = $m_order->read_order_by_id($order_id);
+		$m_pro = new M_products();
+		$carts = $m_order->read_detail_by_order($order_id);
+		$total_order = 500;
+		$view = "views/cart/v_success.php";
+		$title = "Order Successfully";
+		include("include/layout.php");
 	}
 }

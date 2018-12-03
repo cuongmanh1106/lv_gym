@@ -17,6 +17,10 @@ class ComposerStaticInit93d86cf3bb21bcee445bcf5694dceb23
             'Symfony\\Component\\Translation\\' => 30,
             'Spipu\\Html2Pdf\\' => 15,
         ),
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -32,10 +36,24 @@ class ComposerStaticInit93d86cf3bb21bcee445bcf5694dceb23
         array (
             0 => __DIR__ . '/..' . '/spipu/html2pdf/src',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
     );
 
     public static $fallbackDirsPsr4 = array (
         0 => __DIR__ . '/..' . '/nesbot/carbon/src',
+    );
+
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PayPal' => 
+            array (
+                0 => __DIR__ . '/..' . '/paypal/rest-api-sdk-php/lib',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -61,6 +79,7 @@ class ComposerStaticInit93d86cf3bb21bcee445bcf5694dceb23
             $loader->prefixLengthsPsr4 = ComposerStaticInit93d86cf3bb21bcee445bcf5694dceb23::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit93d86cf3bb21bcee445bcf5694dceb23::$prefixDirsPsr4;
             $loader->fallbackDirsPsr4 = ComposerStaticInit93d86cf3bb21bcee445bcf5694dceb23::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit93d86cf3bb21bcee445bcf5694dceb23::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit93d86cf3bb21bcee445bcf5694dceb23::$classMap;
 
         }, null, ClassLoader::class);

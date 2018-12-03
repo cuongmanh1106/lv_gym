@@ -75,6 +75,9 @@
     var d = new Date();
     var date_from = new Date($('input[name=date_from]').val());
     var date_to = new Date($('input[name=date_to]').val());
+
+    console.log(d);
+    console.log(date_from);
     
     
     html += ' <ul  class="alert alert-danger">';
