@@ -83,6 +83,7 @@ width: 100%; z-index: 100">
 					</li>	
 
 					<?php } endforeach?>
+					<li><a href="promotion.php">Promotion</a></li>
 					<li><a href="contact.php">Contact us</a></li>
 
 				</ul>

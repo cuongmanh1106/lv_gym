@@ -19,9 +19,9 @@
              
 
            </div>
-           <a href="javascript::void(0)" class="btn btn-secondary" id="add-sub-size"><i class="fa fa-plus"></i> Add sub size</a>
+           <!-- <a href="javascript::void(0)" class="btn btn-secondary" id="add-sub-size"><i class="fa fa-plus"></i> Add sub size</a> -->
            <div class="modal-footer">
-          <button type="button" name="update_size" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Update </button>
+         <!--  <button type="button" name="update_size" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Update </button> -->
           <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fa fa-reply"></i> Close</button>
         </div>
         </form>

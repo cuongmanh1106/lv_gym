@@ -74,7 +74,7 @@
 				$price = $p->price;
 				if(isset($_SESSION["vn"])) {
 					$front = "";
-					$back = " vnd";
+					$back = " VND";
 					$price = $p->price*$_SESSION["vn"];
 				}
 			?>
@@ -82,7 +82,7 @@
 					<a href="single.php?id=<?php echo $p->id?>" class="lot"><img class="img-responsive " src="admin/public/images/<?php echo $p->image?>" alt=""></a>
 					<div class="shoe">
 						<p><?php echo $p->name?></p>
-						<label><?php echo $front?><?php echo number_format($price,2)?><?php echo $back?></label>
+						<h4 style = "margin-top:20px; margin-bottom: 20px"><b><?php echo $front?><?php echo number_format($price,2)?><?php echo $back?></b></h4>
 						<a href="single.php?id=<?php echo $p->id?>">find a store</a>
 					</div>
 					<div class="clearfix"> </div>

@@ -195,12 +195,20 @@ if(isset($_POST['add-to-cart'])) {
 	$check = false;
 	$total = 0;
 
+	$front = "$";
+	$back = "";
+	$price_lang = $price;
+	if(isset($_SESSION["vn"])) {
+		$front = "";
+		$back = " VND";
+		$price_lang = $price_lang*$_SESSION["vn"];
+	}
 	
 
 	if(isset($_SESSION["cart"]) && count($_SESSION["cart"]) > 0) {
 		//add existed product
 		foreach($_SESSION["cart"] as $key=>$cart) {
-			$total = $total + $cart["qty"]*$cart["price"];
+			$total = $total + $cart["qty"]*$cart["price"]*(isset($_SESSION["vn"])?$_SESSION["vn"]:1);
 			if($cart["id"] == $pro_id && $cart["size"] == $size) {
 				$qty_add = $cart["qty"] + $qty;
 				if(count($sizes) > 0 ) { // If there are sizes in this product
@@ -219,10 +227,10 @@ if(isset($_POST['add-to-cart'])) {
 					}
 				}
 				$check = true;
-				$cart["price"] = (int)$cart["price"];
+				// $cart["price"] = (int)$cart["price"];
 				if($check) { //check == true => it means update cart successfully
 					$_SESSION["cart"][$key]["qty"] = $qty_add;
-					$total += $qty*$cart["price"];
+					$total += $qty*$price_lang;
 					$time = $key;
 				}
 			}
@@ -235,9 +243,9 @@ if(isset($_POST['add-to-cart'])) {
 		$_SESSION["cart"][$time]["size"] = $size;
 		$_SESSION["cart"][$time]["price"] = $price;
 		$_SESSION["cart"][$time]["qty"] = $qty; 
-		$total += $qty*$product->price;
+		$total += $qty*$price_lang;
 	} 
-
+	$total = $front.number_format($total,2).$back;
 	$count = count($_SESSION["cart"]);
 	$cart = $_SESSION["cart"][$time];
 
@@ -262,8 +270,19 @@ if(isset($_POST["update_cart"])) {
 	$cart_detail = $_SESSION["cart"][$rowId];
 	$total = 0;
 	$content = "";
+
+	//change language
+	$front = "$";
+	$back = " ";
+	$price = $_SESSION["cart"][$rowId]["price"];
+	if(isset($_SESSION["vn"])) {
+		$front = "";
+		$back = " VND";
+		$price = $price*$_SESSION["vn"];
+	}
+	//end change language
 	foreach($_SESSION["cart"] as $key=>$cart) {
-		$total += $cart["qty"]*$cart["price"];
+		$total += $cart["qty"]*$cart["price"]*(isset($_SESSION["vn"])?$_SESSION["vn"]:1);
 
 		if($key != $rowId && $pro_id == $cart["id"] && $size == $cart["size"]) { //if the product just update and it already have in your cart 																			(that mean giống nhau)
 			echo json_encode(['cart'=>"exists",'size'=>$cart_detail["size"] ]); //send back begin size
@@ -288,14 +307,16 @@ if(isset($_POST["update_cart"])) {
 		}
 		
 	}
-
+	
+	$subtotal = 0;
 	if($check) { 
-		$total += ($qty - $_SESSION["cart"][$rowId]["qty"])*$_SESSION["cart"][$rowId]["price"];
+		$subtotal = number_format(($qty)*$price,2);
+		$total += ($qty - $_SESSION["cart"][$rowId]["qty"])*$price;
 		$_SESSION["cart"][$rowId]["qty"] = $qty;
 		$_SESSION["cart"][$rowId]["size"] = $size;
-
 	}
-	$data = ['cart'=>$_SESSION["cart"][$rowId],'total'=>$total];
+
+	$data = ['subtotal'=>$front.$subtotal.$back,'total'=>$front.number_format($total,2).$back];
 	echo json_encode($data);
 }
 
@@ -304,12 +325,18 @@ if(isset($_POST["delete_cart"])){
 
 	unset($_SESSION["cart"][$rowId]);
 	$total = 0;
+	$front = "$";
+	$back = " ";
+	if(isset($_SESSION["vn"])) {
+		$front = "";
+		$back = " VND";
+	}
 	foreach($_SESSION["cart"] as $key=>$cart){
-		$total += $cart["qty"]*$cart["price"];
+		$total += $cart["qty"]*$cart["price"]*(isset($_SESSION["vn"])?$_SESSION["vn"]:1);
 	}
 
 	$count = count($_SESSION["cart"]);
-	$data = ["total"=>$total, "count"=>$count];
+	$data = ["total"=>$front.number_format($total,2).$back, "count"=>$count];
 	echo json_encode($data);
 
 }

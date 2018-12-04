@@ -28,10 +28,10 @@
         margin-right: 100px;
         padding-right: 70px;
     }   
-    </style>
+</style>
 </head>
 <body>
-   
+
     <?php 
     include("models/m_order.php");
     include("models/m_products.php");
@@ -42,6 +42,12 @@
     
     $c_tmp = $m_order->read_detail_by_order($id);
     $total_order = 0;
+    $front = "$";
+   $back = "";
+   if(isset($_SESSION["vn"])) {
+        $front = "";
+        $back = " VND"; 
+    } 
     ?>
 
     <div class="container">
@@ -51,7 +57,7 @@
                 <form method="POST" action="">
                     <div class="row" style="padding: 30px 0 0 0 ">
 
-                     <div class="col-md-4">
+                       <div class="col-md-4">
                         <h4><b>Date: </b><span><?php echo  date("d/m/Y") ?></span></h4>
                     </div>
                     <div class="col-md-4">
@@ -66,48 +72,53 @@
                         <h4><b>Delivery cost:</b> <span id="delivery_cost"><?php echo  $order->delivery_place  ?></span></h4>
                     </div>
                     <div class="col-md-4">
-                        <h4><b>Delivery cost:</b> $<span id="delivery_cost"><?php echo  $order->delivery_cost  ?></span></h4>
+                        <h4><b>Delivery cost:</b> <?php echo $front?><span id="delivery_cost"><?php echo  number_format($order->delivery_cost*(isset($_SESSION["vn"])?$_SESSION["vn"]:1),2)  ?></span><?php echo $back?></h4>
                     </div>
                     <div class="col-md-4">
-                        <h4><b>Sub total:</b> $<span class="total"><?php echo $_SESSION["total"] ?></span></h4>
+                        <h4><b>Sub total:</b> <?php echo $front?><span class="total"><?php echo number_format($_SESSION["total"]*(isset($_SESSION["vn"])?$_SESSION["vn"]:1),2) ?></span><?php echo $back?></h4>
                     </div>
 
                 </div>
 
 
-        </form>
+            </form>
 
-        <div class="clearfix"></div>
-        <hr style="border:0.5px solid #000">
-        <table border="0" width="100%"  style="width: 100px;" id="table_detail" class="detail">
-            <thead>
-                <tr>
-                    <th class="tb-col">image</th>
-                    <th class="tb-col">Name</th>
-                    <th class="tb-col">Price</th>
-                    <th class="tb-col">Quantity</th>
-                    <th class="tb-col">Size</th>
-                    <th class="tb-col">Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-             <?php 
-             foreach($c_tmp as $c){
-                $product = $m_pro->read_product_by_id($c->pro_id);
-                $sizes = json_decode($product->size);
-                ?>
-                <tr>
-                   <td><img src="admin/public/images/<?php echo $product->image?>" style="width: 70px;" /></td>
-                   <td><?php echo  $product->name  ?></td>
-                   <td>$ <?php echo  number_format($c->price, 2) ?></td>
-                   <td width="10%"><?php echo  $c->quantity  ?></td>
-                   <td><?php echo $c->size ?></td>
-                   <td>$ <span class="sub-total"><?php echo  number_format($c->price*$c->quantity,2) ?></span></td>
-               </tr>
-           <?php } ?>
-       </tbody>
-   </table>
-    </div>
+            <div class="clearfix"></div>
+            <hr style="border:0.5px solid #000">
+            <table border="0" width="100%"  style="width: 100px;" id="table_detail" class="detail">
+                <thead style="margin-bottom: 20px">
+                    <tr>
+                        <th class="tb-col">image</th>
+                        <th class="tb-col">Name</th>
+                        <th class="tb-col">Price</th>
+                        <th class="tb-col">Quantity</th>
+                        <th class="tb-col">Size</th>
+                        <th class="tb-col">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <?php 
+                   
+                foreach($c_tmp as $c){
+                    $product = $m_pro->read_product_by_id($c->pro_id);
+                    $sizes = json_decode($product->size);
+                    $price = $c->price;
+                    if(isset($_SESSION["vn"])) {
+                        $price = $c->price*$_SESSION["vn"];
+                    }
+                    ?>
+                    <tr>
+                     <td><img src="admin/public/images/<?php echo $product->image?>" style="width: 70px;" /></td>
+                     <td><?php echo  $product->name  ?></td>
+                     <td><?php echo $front?> <?php echo  number_format($price, 2) ?><?php echo $back?></td>
+                     <td width="10%" align="center"><?php echo  $c->quantity  ?></td>
+                     <td><?php echo $c->size ?></td>
+                     <td><?php echo $front?> <span class="sub-total"><?php echo number_format($price*$c->quantity,2) ?></span><?php echo $back?></td>
+                 </tr>
+             <?php } ?>
+         </tbody>
+     </table>
+ </div>
 
 </div>
 </div>

@@ -104,11 +104,11 @@
     }
     if(date_from.getTime() < d.getTime() || date_to.getTime() < d.getTime()) {
       flag = false;
-      html += '<li>Date must be more than current date</li>';
+      html += '<li>Date must be higher than current date</li>';
     }
     if(date_from.getTime() > date_to.getTime()) {
       flag = false;
-      html += '<li>Date From must be smaller than Date To</li>';
+      html += '<li>Date From must be slower than Date To</li>';
     }
     html += "</ul>";
 

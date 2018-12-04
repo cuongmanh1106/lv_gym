@@ -112,5 +112,19 @@ class C_products {
 		include("include/layout.php");
 	}
 
+	public function promotion() {
+		//models
+		
+		require("admin/models/m_promotion.php");
+		$m_promotion = new M_promotion();
+		$products = $m_promotion->get_promotion_detail_product();
+
+
+		//views 
+		$view = "views/products/v_promotion.php";
+		$title = "Promotion Program";
+		require("include/layout.php");
+	}
+
 }
 ?>
