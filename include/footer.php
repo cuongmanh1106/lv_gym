@@ -89,8 +89,7 @@
         $(document).on('click','.add-cart',function(){
             var id = $(this).attr('data-index');
             var count = $('#checkout').attr('data-index');
-            var price = $(this).parent().find('#price_'+id).html();
-            var price = price.slice(1);
+            var price = $(this).parent().find('#price_'+id).data('price');
             var size = '';
 
             $.ajax({
@@ -216,6 +215,18 @@
               }
             })
           })
+    })
+
+    $(document).on('change','select[name=change_language]',function(){
+        lang = $('select[name=change_language').val();
+        $.ajax({
+            type:'POST',
+            url:'ajax.php',
+            data:{'lang':lang,'change_language':'OK'},
+            success:function(data) {
+                window.location.reload();
+            }
+        })
     })
 
     $(".alert").delay(3000).slideUp();

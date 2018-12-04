@@ -81,7 +81,7 @@ class C_promotion
 				$_SESSION["alert-warning"] = "The time have duplicated with other promotion time";
 			}
 			// echo "<script>window.location = 'promotion_edit.php?id=$id'</script>";
-			$promotion = $m_promotion->read_promotion_by_id($id);
+			
 
 		}
 

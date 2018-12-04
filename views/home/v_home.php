@@ -68,12 +68,21 @@
 
 		<h3 style="text-align: center; margin-top:50px; font-size: 35px ">Top products</h3>
 		<div class="content-grids">
-			<?php foreach($products as $p):?>
+			<?php foreach($products as $p):
+				$front = "$";
+            	$back = "";
+				$price = $p->price;
+				if(isset($_SESSION["vn"])) {
+					$front = "";
+					$back = " vnd";
+					$price = $p->price*$_SESSION["vn"];
+				}
+			?>
 				<div class="col-md-4 content-grid">
 					<a href="single.php?id=<?php echo $p->id?>" class="lot"><img class="img-responsive " src="admin/public/images/<?php echo $p->image?>" alt=""></a>
 					<div class="shoe">
 						<p><?php echo $p->name?></p>
-						<label>$<?php echo $p->price?></label>
+						<label><?php echo $front?><?php echo number_format($price,2)?><?php echo $back?></label>
 						<a href="single.php?id=<?php echo $p->id?>">find a store</a>
 					</div>
 					<div class="clearfix"> </div>

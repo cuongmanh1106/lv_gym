@@ -5,7 +5,9 @@
     <li class="breadcrumb-item active" aria-current="page">Edit</li>
   </ol>
 </nav>
-<?php include("include/report.php"); ?>
+<?php include("include/report.php"); 
+  $promotion = $m_promotion->read_promotion_by_id($id);
+?>
 
 <div class="card">
   <div class="card-header badge-info">
@@ -81,6 +83,7 @@
     var d = new Date();
     var date_from = new Date($('input[name=date_from]').val());
     var date_to = new Date($('input[name=date_to]').val());
+    var cur_date_from = new Date('<?php echo $promotion->date_from ?>');
     
     
     html += ' <ul  class="alert alert-danger">';
@@ -105,11 +108,12 @@
     }  else {
       $('input[name=date_to]').css('border',"1px solid #ced4da");
     }
-    if(date_from < d || date_to < d) {
+    
+    if( (date_from.getTime() < d.getTime() || date_to.getTime() < d.getTime()) && (date_from.getTime() != cur_date_from.getTime())) {
       flag = false;
       html += '<li>Date must be more than current date</li>';
     }
-    if(date_from > date_to) {
+    if(date_from.getTime() > date_to.getTime()) {
       flag = false;
       html += '<li>Date From must be smaller than Date To</li>';
     }

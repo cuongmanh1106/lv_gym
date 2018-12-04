@@ -1,3 +1,6 @@
+<?php
+// ini_set('display_errors', 0); 
+?>
 <?php require("include/head.php"); ?>
 <?php require("include/menu.php"); ?>
 <div id="right-panel" class="right-panel">

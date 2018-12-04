@@ -102,11 +102,11 @@
     }  else {
       $('input[name=date_to]').css('border',"1px solid #ced4da");
     }
-    if(date_from < d || date_to < d) {
+    if(date_from.getTime() < d.getTime() || date_to.getTime() < d.getTime()) {
       flag = false;
       html += '<li>Date must be more than current date</li>';
     }
-    if(date_from > date_to) {
+    if(date_from.getTime() > date_to.getTime()) {
       flag = false;
       html += '<li>Date From must be smaller than Date To</li>';
     }

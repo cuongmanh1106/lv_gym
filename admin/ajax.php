@@ -170,8 +170,27 @@ if(isset($_POST["filter_revenue"])) {
     $date = $_POST["date"];
     include("models/m_products.php");
     $m_pro = new M_products();
-    $data = $m_pro->filter_revenue($date);
-    echo $data->total;
+    $products = $m_pro->filter_detail_revenue($date);
+    if(count($products) > 0) {
+        include("views/products/v_load_revenue_by_date.php");
+    }  else {
+        echo "";
+    }
+}
+
+if(isset($_POST["load_revenue_by_month_year"])) {
+    $month = $_POST["month"];
+    $year = $_POST["year"];
+  
+    include("models/m_products.php");
+    $m_pro = new M_products();
+    $products = $m_pro->filter_revenue_by_month_year($month,$year);
+    if(count($products) > 0) {
+        include("views/products/v_load_revenue_by_date.php");
+    }  else {
+        echo "";
+    }
+
 }
 /*End Chart*/
 /*Users*/

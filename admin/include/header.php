@@ -13,29 +13,42 @@
                             </form>
                         </div>
 
+                        <?php 
+                        include("models/m_other.php");
+                        $m_or = new M_other();
+                        $count_new_order = count($m_or->read_new_order());
+                        $count_new_feedback = count($m_or->read_new_feedback());
+                        $promotion = "Without promotion today";
+                        $date = date('Y-m-d');
+                        $promotion_count = $m_or->read_current_promotion($date);
+                        if(!empty($promotion)) {
+                            $promotion = "Today have a promotion";
+                        }
+
+                        ?>  
+
                         <div class="dropdown for-notification">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bell"></i>
-                            <span class="count bg-danger">5</span>
+                            <span class="count bg-danger">3</span>
                           </button>
                           <div class="dropdown-menu" aria-labelledby="notification">
-                            <p class="red">You have 3 Notification</p>
-                            <a class="dropdown-item media bg-flat-color-1" href="#">
+                            <a class="dropdown-item media bg-flat-color-4" href="orders_list.php">
                                 <i class="fa fa-check"></i>
-                                <p>Server #1 overloaded.</p>
+                                <p><b>You got <?php echo $count_new_order?> new order</p></b>
                             </a>
-                            <a class="dropdown-item media bg-flat-color-4" href="#">
+                            <a class="dropdown-item media bg-flat-color-4" href="feedback_list.php">
                                 <i class="fa fa-info"></i>
-                                <p>Server #2 overloaded.</p>
+                                <p><b>You got <?php echo $count_new_feedback?> new feedback</p></b>
                             </a>
-                            <a class="dropdown-item media bg-flat-color-5" href="#">
+                            <a class="dropdown-item media bg-flat-color-2" href="promotion_list.php">
                                 <i class="fa fa-warning"></i>
-                                <p>Server #3 overloaded.</p>
+                                <p><b><?php echo $promotion?></b></p>
                             </a>
                           </div>
                         </div>
 
-                        <div class="dropdown for-message">
+                        <!-- <div class="dropdown for-message">
                           <button class="btn btn-secondary dropdown-toggle" type="button"
                                 id="message"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,7 +90,7 @@
                                 </span>
                             </a>
                           </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <?php

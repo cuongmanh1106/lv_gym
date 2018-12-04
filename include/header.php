@@ -14,8 +14,10 @@ width: 100%; z-index: 100">
 <div class="logo">
 	<a href="."><img src="public/images/logo.png" alt="" ></a>
 </div>
+
 <div  class="header-top">
 	<div class="header-grid">
+
 		<ul class="header-in">
 			<li>
 				<?php if(!isset($_SESSION["customer"])) { ?>
@@ -26,7 +28,15 @@ width: 100%; z-index: 100">
 				<a href="profile.php" ><img class="img-circle" src="admin/public/images/us.png" width="50px"></a>
 				<?php } ?>
 			</li>
+			<li>
+				<select name="change_language">
+					<option <?php echo isset($_SESSION["en"])?"selected":""?> value="en">English</option>
+					<option <?php echo isset($_SESSION["vn"])?"selected":""?> value="vn">VietNam</option>
+				</select>
+			</li>
 		</ul>
+
+
 		<div class="search-box">
 			<div id="sb-search" class="sb-search">
 				<form method="POST" action="product_search.php">
@@ -36,6 +46,7 @@ width: 100%; z-index: 100">
 				</form>
 			</div>
 		</div>
+
 		<!-- search-scripts -->
 		<script src="public/js/classie.js"></script>
 		<script src="public/js/uisearch.js"></script>
@@ -76,7 +87,9 @@ width: 100%; z-index: 100">
 
 				</ul>
 				<script type="text/javascript" src="public/js/nav.js"></script>
-			</div><!-- end h_menu4 -->
+			</div>
+
+			<!-- end h_menu4 -->
 					<!-- <ul class="header-bottom-in">
 						<li ><select class="drop">
 							  <option value="Dollars" class="in-of">Get Active</option>
@@ -94,6 +107,8 @@ width: 100%; z-index: 100">
 				</div>
 				<div class="clearfix"> </div>
 			</div>
+
+
 			<?php include("views/cart/v_show_cart.php"); ?>
 			<!---->
 

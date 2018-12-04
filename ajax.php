@@ -16,8 +16,9 @@ if(isset($_POST['frontend_search_product'])) {
 	if(isset($_POST["cate_id"])) {
 		$cate_id = $_POST["cate_id"];
 	}
-
 	include("models/m_products.php");
+	include("admin/models/m_promotion.php");
+	$m_promotion = new M_promotion();
 	$m_pro = new M_products();
 	$products = $m_pro->search_product($price,$name,$soft,$cate_id);
 	include("views/products/v_search.php");
@@ -313,4 +314,23 @@ if(isset($_POST["delete_cart"])){
 
 }
 /*#############End Cart process##############*/
+
+
+/*######## Other #########*/
+
+
+if(isset($_POST["change_language"])) {
+	$lang = $_POST["lang"];
+	if($lang == "vn") {
+		$_SESSION["vn"] = 23400;
+		if(isset($_SESSION["en"])) {
+			unset($_SESSION["en"]);
+		}
+	} else {
+		$_SESSION["en"] = 1;
+		if(isset($_SESSION["vn"])) {
+			unset($_SESSION["vn"]);
+		}
+	}
+}
 ?>

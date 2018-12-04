@@ -15,6 +15,12 @@ class M_order extends database {
 		return $this->loadAllRows();
 	}
 
+	public function read_new_order(){
+		$sql = "select * from orders where status = 1";
+		$this->setQuery($sql);
+		return $this->loadAllRows();
+	}
+
 	public function read_status_by_id($id) {
 		$sql = "select * from status where id = ".$id;
 		$this->setQuery($sql);
