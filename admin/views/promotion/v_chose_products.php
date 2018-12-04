@@ -36,7 +36,8 @@
                 <th>Image</th>
                 <th>Name</th>
                 <th>Category</th>
-                <th>Price</th>
+                <th>Price In</th>
+                <th>Price Sale</th>
                 <th>Promotion Price</th>
                 <th>Percent</th>
                 <th>Action</th>
@@ -55,10 +56,12 @@
               <tr class="row_pro_<?php echo $p->id?>">
                 <input name="pro_id[]" type="hidden" value="<?php echo $p->id ?>">
                 <input type="hidden" name="price" value="<?php echo $p->price?>">
+                <input type="hidden" name="price_in" value="<?php echo $p->price_in?>">
                 <td><input type="checkbox" name="check_products[]" value="<?php echo $p->id?>"></td>
                 <td><img src="public/images/<?php echo $p->image?>" width="150px"></td>
                 <td><?php echo $p->name?></td>
                 <td><?php echo $cate_name?></td>
+                <td align="right"><?php echo number_format($p->price_in,2)?></td>
                 <td align="right"><?php echo number_format($p->price,2)?></td>
                 <td><input type="text"  onkeyup="formatNumBerKeyUp(this)" class="form-control" name="promotion_price[]" value=""></td>
                 <td><input type="number" min="1" max="99" name="percent"></td>
@@ -98,8 +101,14 @@
     per = $(this).val();
     if(per > 1 && per < 100 ) {
       var price = $(this).parent().parent().find('input[name=price]').val();
+      price_in = $(this).parent().parent().find('input[name=price_in]').val();
       var price_promotion = parseFloat(price*(1-per/100));
-      $(this).parent().parent().find('input[name="promotion_price[]"]').val(price_promotion);
+      if(parseFloat(price_promotion) > parseFloat(price_in)) {
+        $(this).parent().parent().find('input[name="promotion_price[]"]').val(price_promotion);
+      } else {
+        alert("Promotion price must be higher than price in and lower than price sale");
+        $(this).parent().parent().find('input[name="promotion_price[]"]').val('');
+      }
 
     } else {
       alert("Illigel Percent");
@@ -110,12 +119,13 @@
   $(document).on('change','input[name="promotion_price[]"]',function(){
     price_promotion = $(this).val();
     price = $(this).parent().parent().find('input[name=price]').val();
+    price_in = $(this).parent().parent().find('input[name=price_in]').val();
 
-    if(parseFloat(price_promotion) <  parseFloat(price) && price_promotion > 0) {
+    if(parseFloat(price_promotion) <  parseFloat(price) && parseFloat(price_promotion) > parseFloat(price_in) && price_promotion > 0) {
       var per = parseInt(100 - price_promotion/price*100);
       $(this).parent().parent().find('input[name=percent]').val(per);
     } else {
-      alert("Illigel Price Promotion");
+      alert("Promotion price must be higher than price in and lower than price sale");
       $(this).parent().parent().find('input[name="promotion_price[]"]').val('');
     }
   })

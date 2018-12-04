@@ -103,13 +103,27 @@ class C_products {
 	public function search_product() {
 		$name = $_POST["search"];
 		$m_pro = new M_products();
+		require("admin/models/m_promotion.php");
+		$m_promotion = new M_promotion();
 
 		$products = $m_pro->search_product('all',$name,'all','');
-
-
 		$view = "views/products/v_show.php";
 		$title = "List of products";
 		include("include/layout.php");
+	}
+
+	public function promotion() {
+		//models
+		
+		require("admin/models/m_promotion.php");
+		$m_promotion = new M_promotion();
+		$products = $m_promotion->get_promotion_detail_product();
+
+
+		//views 
+		$view = "views/products/v_promotion.php";
+		$title = "Promotion Program";
+		require("include/layout.php");
 	}
 
 }

@@ -1,7 +1,7 @@
 <?php @session_start();
-  ini_set('display_errors', 0);
+ini_set('display_errors', 0);
 
- ?>
+?>
 <div id="checkout_cart" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
 
@@ -39,77 +39,90 @@
 
                 <tbody id="cart_show">
                  <?php foreach($carts as $key=>$c) {?>
-                 <?php 
-                 $m_tmp_pro = new M_products();
-                 $pd = $m_tmp_pro->read_product_by_id($c["id"]); 
-                 $sizes = json_decode($pd->size);
-                 $total += $c["qty"]*$c["price"];
-                 ?>
-                 <tr id="<?php echo $key ?>"> 
-                  <td><img src="admin/public/images/<?php echo  $pd->image ?>" width="70px"></td>
-                  <td width="20%" ><?php echo  $pd->name ?></td>
-                  <td>$ <?php echo  number_format($pd->price, 2)?></td>
-                  <td width="10%"><input type="number" onkeypress="return isNumberKey(event)" class="form-control" value="<?php echo  $c["qty"] ?>" name="qty_checkout"></td>
-                  <td>
-                    <?php if($c["size"] != 'none') {?>
-                    <select class="form-control" name="size_update">
-                      <?php foreach($sizes as $k=>$s): ?>
-                      <?php if($s != 0) {?>
-                      <option <?php echo ($c["size"] == $k)?'selected':'' ?> value="<?php echo $k ?>"><?php echo $k ?></option>
-                      <?php } ?> <!--end if $s != 0-->
-                      <?php endforeach ?><!--end for-->
-                    </select>
-                    <?php } else {?><!--end if $cart["size"] != 'none'-->
-                    <select class="form-control hidden" name="size_update">
-                      <option value="none">option</option>
-                    </select> 
-                    <p><?php echo  $c["size"] ?></p>
-                    <?php } ?>
+                   <?php 
+                   $m_tmp_pro = new M_products();
+                   $pd = $m_tmp_pro->read_product_by_id($c["id"]); 
 
-                  </td>
-                  <td>$ <span class="sub-total"><?php echo  number_format($c["price"]*$c["qty"],2)?></span></td>
-                  <td>
-                    <a data-index = "<?php echo  $key ?>" class="btn btn-info update_cart" href="javascript:void(0)"><i class="fa fa-edit"></i> Update</a>
-                    <input type="hidden" value="<?php echo  $c["id"] ?>" name="pro_id">
-                    <a class="btn btn-danger delete_cart"  data-index = "<?php echo  $key ?>" href="javascript:void(0)"><i class="fa fa-trash-o"></i> Delete</a>
-                  </td>
-                </tr>
-                <?php } ?> <!--endforeach carts-->
-              </tbody>
-              <tfoot>
-                <td colspan="7" align="right"><h2><b>Total:$</b> <span class="total"><?php echo $total ?></span></h2></td>
-                <input type="hidden" name="check_checkout" value="<?php echo isset($_SESSION["customer"])?'1':'0' ?>">
-              </tfoot>
-            </table>
+                   $price = $c["price"];
+                   $front = "$";
+                   $back = "";
+                   if(isset($_SESSION["vn"])) {
+                    $front = "";
+                    $back = " VND"; 
+                    $price = $c["price"]*$_SESSION["vn"];
+                  }
+
+                  $sizes = json_decode($pd->size);
+                  $total += $c["qty"]*$price;
+
+
+
+                  ?>
+                  <tr id="<?php echo $key ?>"> 
+                    <td><img src="admin/public/images/<?php echo  $pd->image ?>" width="70px"></td>
+                    <td width="20%" ><?php echo  $pd->name ?></td>
+                    <td align="right"><?php echo $front?><?php echo  number_format($price, 1)?><?php echo $back?></td>
+                    <td width="10%"><input type="number" onkeypress="return isNumberKey(event)" class="form-control" value="<?php echo  $c["qty"] ?>" name="qty_checkout"></td>
+                    <td>
+                      <?php if($c["size"] != 'none') {?>
+                        <select class="form-control" name="size_update">
+                          <?php foreach($sizes as $k=>$s): ?>
+                            <?php if($s != 0) {?>
+                              <option <?php echo ($c["size"] == $k)?'selected':'' ?> value="<?php echo $k ?>"><?php echo $k ?></option>
+                              <?php } ?> <!--end if $s != 0-->
+                              <?php endforeach ?><!--end for-->
+                            </select>
+                            <?php } else {?><!--end if $cart["size"] != 'none'-->
+                            <select class="form-control hidden" name="size_update">
+                              <option value="none">option</option>
+                            </select> 
+                            <p><?php echo  $c["size"] ?></p>
+                          <?php } ?>
+
+                        </td>
+                        <td align="right"><span class="sub-total"><?php echo $front?><?php echo  number_format($price*$c["qty"],2)?><?php echo "</br>".$back?></span></td>
+                        <td>
+                          <a data-index = "<?php echo  $key ?>" class="btn btn-info update_cart" href="javascript:void(0)"><i class="fa fa-edit"></i> Update</a>
+                          <input type="hidden" value="<?php echo  $c["id"] ?>" name="pro_id">
+                          <a class="btn btn-danger delete_cart"  data-index = "<?php echo  $key ?>" href="javascript:void(0)"><i class="fa fa-trash-o"></i> Delete</a>
+                        </td>
+                      </tr>
+                      <?php } ?> <!--endforeach carts-->
+                    </tbody>
+                    <tfoot>
+                      <td colspan="7" align="right"><h2><b>Total:</b> <span class="total"><?php echo $front?><?php echo number_format($total,2) ?><?php echo $back?></span></h2></td>
+                      <input type="hidden" name="check_checkout" value="<?php echo isset($_SESSION["customer"])?'1':'0' ?>">
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+
           </div>
-        </div>
+
+          <div class="modal-footer">
+            <?php if($count > 0) {?>
+              <button type="button"  name="process" data-index="<?php echo  $count ?>" style="text-align: center;" class="btn btn-warning"><i class="fa fa-reply"></i> Process to buy</button>
+            <?php } else {?> 
+              <button disabled type="button"  name="process" data-index="<?php echo  $count ?>" style="text-align: center;" class="btn btn-warning"><i class="fa fa-reply"></i> Process to buy</button>
+            <?php } ?>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times-circle"></i> Close</button>
+          </div>
+
+        </form>
+
       </div>
 
     </div>
 
-    <div class="modal-footer">
-      <?php if($count > 0) {?>
-      <button type="button"  name="process" data-index="<?php echo  $count ?>" style="text-align: center;" class="btn btn-warning"><i class="fa fa-reply"></i> Process to buy</button>
-      <?php } else {?> 
-      <button disabled type="button"  name="process" data-index="<?php echo  $count ?>" style="text-align: center;" class="btn btn-warning"><i class="fa fa-reply"></i> Process to buy</button>
-      <?php } ?>
-      <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times-circle"></i> Close</button>
-    </div>
-
-  </form>
-
-</div>
-
-</div>
-
-</div>
+  </div>
 </div>
 
 
 
 <script type="text/javascript">
   $(document).ready(function(){
-    
+
   })
 
   $(document).on('click','button[name=process]',function(){

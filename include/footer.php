@@ -127,8 +127,7 @@
             size = $(this).parent().find('select[name=size]').val();
             qty = $(this).parent().find('input[name=qty]').val();
             count = $('#checkout').attr('data-index');
-            var price = $(this).parent().find('#price_'+id).html();
-            var price = price.slice(1);
+            var price = $(this).parent().find('#price_'+id).data('price');
             $.ajax({
                 type:'POST',
                 url:'ajax.php',
@@ -181,7 +180,7 @@
                     alert("This product existed in your cart! please check again");
                     $this1.parent().parent().find('select[name=size_update]').val(data.size);
                   } else {
-                    $this1.parent().parent().find('.sub-total').html(data.cart.price*data.cart.qty);
+                    $this1.parent().parent().find('.sub-total').html(data.subtotal);
                     $('.total').html(data.total);
                   }
                 }

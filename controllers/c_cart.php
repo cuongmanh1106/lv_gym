@@ -46,13 +46,17 @@ class C_cart{
 		} else {
 			$delivery_cost = 4;
 		}
+		$payment = 0;
+		if($_POST["payment"] == "paypal") {
+			$payment = 1;
+		}
 
 		$customer_id = $_SESSION["customer"]->id;
 		$total_order = 0;
-		$order_id = $m_order->insert_order($customer_id,$_POST["specific"],$area,$delivery_cost);
+		$order_id = $m_order->insert_order($customer_id,$_POST["specific"],$area,$delivery_cost,$payment);
 		if($order_id != null) {
 			foreach($_SESSION["cart"] as $key=>$cart) {
-				$total_order += $cart["price"]*$cart["qty"];
+				$total_order += $cart["price"]*$cart["qty"]*(isset($_SESSION["vn"])?$_SESSION["vn"]:1);
 				$product = $m_pro->read_product_by_id($cart["id"]);
 				$sizes = json_decode($product->size);
 				$total_quantity = $product->quantity;
@@ -141,7 +145,11 @@ class C_cart{
 		$order = $m_order->read_order_by_id($order_id);
 		$m_pro = new M_products();
 		$carts = $m_order->read_detail_by_order($order_id);
-		$total_order = 500;
+		$total_order = 0;
+
+		foreach($carts as $c) {
+			$total_order += $c->quantity*$c->price*(isset($_SESSION["vn"])?$_SESSION["vn"]:1);
+		}
 		$view = "views/cart/v_success.php";
 		$title = "Order Successfully";
 		include("include/layout.php");

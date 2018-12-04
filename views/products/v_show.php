@@ -28,11 +28,19 @@
             <div class="col-md-4">
             	Price: <select name="price" class="form-control">
             		<option value="all">All</option>
+                    <?php if(isset($_SESSION["vn"])) {?>
+                    <option value="small,10"> < <?php echo number_format(10*$_SESSION["vn"],2)?>vnd </option>
+                    <option value="10-30"> <?php echo number_format(10*$_SESSION["vn"],2)?>vnd - <?php echo number_format(30*$_SESSION["vn"])?>vnd</option>
+                    <option value="30-50"> <?php echo number_format(30*$_SESSION["vn"],2)?>vnd - <?php echo number_format(50*$_SESSION["vn"],2)?>vnd</option>
+                    <option value="50-100"> <?php echo number_format(50*$_SESSION["vn"],2)?>vnd - <?php echo number_format(100*$_SESSION["vn"],2)?>vnd</option>
+                    <option value="big,100"> ><?php echo number_format(100*$_SESSION["vn"],2)?>vnd</option>
+                    <?php } else {?>
             		<option value="small,10"> < $10 </option>
             		<option value="10-30"> $10 - $30</option>
             		<option value="30-50"> $30 - $50</option>
             		<option value="50-100"> $50 - $100</option>
             		<option value="big,100"> >$100</option>
+                    <?php }?>
             	</select>
             </div>
         </div>
@@ -58,7 +66,7 @@
             $back = "";
             if(isset($_SESSION["vn"])) {
                 $front = "";
-                $back = " vnd"; 
+                $back = " VND"; 
                 $price = $p->price*$_SESSION["vn"];
                 if($promotion != 0) {
                     $promotion_price = $promotion->price*$_SESSION["vn"];
@@ -73,11 +81,11 @@
     				<div class="shoe-in">
     					<h6><a href="single.php?id=<?php echo $p->id?>"><?php echo $p->name ?> </a></h6>
                         <?php if($promotion_price == 0) {?>
-    					<h3  id="price_<?php echo $p->id?>" data-price="<?php echo $p->price ?>" style="padding-bottom: 15px; padding-top: 15px"><?php echo $front?><?php echo number_format($price,2) ?><?php echo $back?></h3>
+    					<h4  id="price_<?php echo $p->id?>" data-price="<?php echo $p->price ?>" style="padding-bottom: 15px; padding-top: 15px"><b><?php echo $front?><?php echo number_format($price,1) ?><?php echo $back?></b></h4>
                         <?php } else {?>
                         <div class="row" style="padding-bottom: 15px; padding-top: 15px">
                             <div class="col-md-6"><strike><?php echo $front?><?php echo number_format($price,2) ?><?php echo $back?></strike></div>
-                            <div class="col-md-6" style="text-align: right; color:#ff4d4d"><h3 id="price_<?php echo $p->id?>" data-price="<?php echo $promotion->price?>"><?php echo $front?><?php echo number_format($promotion_price) ?><?php echo $back?></h3></div>
+                            <div class="col-md-6" style="text-align: right; color:#ff4d4d"><h4 id="price_<?php echo $p->id?>" data-price="<?php echo $promotion->price?>"><b><?php echo $front?><?php echo number_format($promotion_price,1) ?><?php echo $back?></b></h4></div>
                         </div>
 
 

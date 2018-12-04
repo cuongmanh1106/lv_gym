@@ -8,6 +8,10 @@ if(!isset($_GET["success"],$_GET["paymentId"],$_GET["PayerID"])) {
 	die();
 }
 if(!$_GET["success"]) {
+	require("models/m_order.php");
+	$m_order = new M_order();
+	$m_order->update_status(5,$_GET["order_id"]);
+	echo "<script>alert('Order Faily'); window.location='.'</script>";
 	die();
 }
 

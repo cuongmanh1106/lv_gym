@@ -95,6 +95,9 @@
                      <i class="fa fa-dot-circle-o"></i> Action
                    </button>
                    <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
+                    <?php if(count($size) > 0) {?>
+                    <a class="dropdown-item badge badge-warning" data-index="<?php echo $p->id?>"  href="#edit_size" data-toggle="modal" data-proid="<?php echo $p->id?>" data-name="<?php echo $p->name?>"><i class="fa fa-trash-o"></i> View Detail Size</a>
+                    <?php }?>
                     <?php if($m_per->check_permission('edit_product') ==  1) { ?>
                     <a class="dropdown-item  badge badge-primary" href="products_edit.php?id=<?php echo $p->id?>"><i class="fa fa-edit"></i> Edit</a>
                     <a class="dropdown-item badge badge-success edit_sub_img" data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_sub_image"><i class="fa fa-retweet"></i> Edit Sub Image</a>
@@ -111,6 +114,7 @@
                     <?php } else {?>
                     <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Delete</button>
                     <?php }?>
+
                   </div>
                 </div>
               </td>
@@ -381,19 +385,20 @@ $('#edit_size').on('show.bs.modal', function(e) {
     html += '  <div class="row form-group">'
     html += '  <div class="col-md-1"><label for="text-input" class=" form-control-label">Size:</label></div>'
     html += '  <div class="col-md-4">'
-    html += ' <select name="size[]" class="form-control" id="select">';
-    html += '<option '+xs+' value="XS">XS</option>';
-    html += '<option '+s+'  value="S">S</option>';
-    html += '<option '+m+'  value="M">M</option>';
-    html += '<option '+l+'  value="L">L</option>';
-    html += '<option '+xl+'  value="XL">XL</option>';
-    html += '<option '+xxl+'  value="2XL">2XL</option>';
-    html += '<option '+xxxl+'  value="3XL">3XL</option>';
-    html += '</select>';
+    html += '<input type="text" readonly value = "'+index+'" required="required" id="text-input" onkeypress="return isNumberKey(event)" name="quantity[]" class="form-control">'
+    // html += ' <select name="size[]" class="form-control" id="select">';
+    // html += '<option '+xs+' value="XS">XS</option>';
+    // html += '<option '+s+'  value="S">S</option>';
+    // html += '<option '+m+'  value="M">M</option>';
+    // html += '<option '+l+'  value="L">L</option>';
+    // html += '<option '+xl+'  value="XL">XL</option>';
+    // html += '<option '+xxl+'  value="2XL">2XL</option>';
+    // html += '<option '+xxxl+'  value="3XL">3XL</option>';
+    // html += '</select>';
     html += ' </div>';
     html += '<div><label for="text-input" class=" form-control-label">Quantity:</label></div>';
-    html += '<div class="col-md-4"><input type="text" value = "'+v+'" required="required" id="text-input" onkeypress="return isNumberKey(event)" name="quantity[]" class="form-control"></div>';
-    html += ' <button type="button" class="close close-add-size" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+    html += '<div class="col-md-4"><input type="text" readonly value = "'+v+'" required="required" id="text-input" onkeypress="return isNumberKey(event)" name="quantity[]" class="form-control"></div>';
+    // html += ' <button type="button" class="close close-add-size" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
     html += ' </div>';
   });
    $('#add-size').html(html);
@@ -433,7 +438,6 @@ $('#edit_size').on('show.bs.modal', function(e) {
       })
     }
     console.log(checked);
-
 
 
   })

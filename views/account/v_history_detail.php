@@ -22,23 +22,33 @@
             <tbody>
                 <?php
                 $total = 0;
+                $front = "$";
+                $back = "";
+                if(isset($_SESSION["vn"])) {
+                    $front = "";
+                    $back = " VND"; 
+                } 
                 foreach($details as $c): 
-                $total += $c->price*$c->quantity;
                 $product = $m_pro->read_product_by_id($c->pro_id);
+                $price = $c->price;
+                if(isset($_SESSION["vn"])) {
+                    $price = $c->price*$_SESSION["vn"];
+                }
+                $total += $price*$c->quantity;
                 ?>
                 <tr>
                     <td><img src="admin/public/images/<?php echo  $product->image ?>" width="70px"></td>
                     <td><?php echo  $product->name  ?></td>
-                    <td>$ <?php echo  number_format($c->price, 2) ?></td>
+                    <td><?php echo $front?> <?php echo  number_format($price, 2) ?><?php echo $back?></td>
                     <td width="10%"><?php echo  $c->quantity  ?></td>
                     <td><?php echo $c->size ?></td>
-                    <td>$ <span class="sub-total"><?php echo number_format($c->price*$c->quantity,2) ?></span></td>
+                    <td><?php echo $front?> <span class="sub-total"><?php echo number_format($price*$c->quantity,2) ?></span><?php echo $back?></td>
 
                 </tr>
                 <?php endforeach ?>
             </tbody>
             <tfoot>
-                <td colspan="7" align="right"><h2><b>Total: </b> $<span class="total"><?php echo $total ?></span></h2></td>
+                <td colspan="7" align="right"><h2><b>Total: </b> <?php echo $front?><span class="total"><?php echo number_format($total,2) ?></span><?php echo $back?></h2></td>
             </tfoot>
 
         </table>

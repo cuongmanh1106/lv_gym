@@ -35,10 +35,10 @@ class M_order extends database {
 		$this->setQuery($sql);
 		return $this->loadRow();
 	}
-	public function insert_order($customer_id,$delivery_place,$area,$delivery_cost) {
-		$sql = "insert into orders (customer_id,delivery_place,area,delivery_cost,status) value(?,?,?,?,1) ";
+	public function insert_order($customer_id,$delivery_place,$area,$delivery_cost,$payment) {
+		$sql = "insert into orders (customer_id,delivery_place,area,delivery_cost,payment,status) value(?,?,?,?,?,1) ";
 		$this->setQuery($sql);
-		$this->execute(array($customer_id,$delivery_place,$area,$delivery_cost));
+		$this->execute(array($customer_id,$delivery_place,$area,$delivery_cost,$payment));
 		return $this->getLastId();
 	}
 
@@ -46,6 +46,12 @@ class M_order extends database {
 		$sql = "insert into order_details (order_id,pro_id,price,size,quantity) value(?,?,?,?,?)";
 		$this->setQuery($sql);
 		return $this->execute(array($order_id,$pro_id,$price,$size,$quantity));
+	}
+
+	public function update_status($status,$id){
+		$sql = "update orders set status = ? where id = ?";
+		$this->setQuery($sql);
+		return $this->execute(array($status,$id));
 	}
 
 	 

@@ -41,7 +41,7 @@ class M_products extends database {
 	}
 
 	public function chart($year) {
-		$sql = "select SUM((o.price - p.price_in)*o.quantity) as total,SUM(o.quantity) as total_quantity, Month(o.created_at) as month from order_details o,products p, (select * from orders where status = 5) od where o.pro_id = p.id and od.id = o.order_id and  Year(o.created_at) = ".$year." group by Month(o.created_at)";
+		$sql = "select SUM((o.price - p.price_in)*o.quantity) as total,SUM(o.quantity) as total_quantity, Month(o.created_at) as month from order_details o,products p, (select * from orders where status = 4) od where o.pro_id = p.id and od.id = o.order_id and  Year(o.created_at) = ".$year." group by Month(o.created_at)";
 		$this->setQuery($sql);
 		return $this->loadAllRows();
 	}
@@ -54,7 +54,10 @@ class M_products extends database {
 	}
 
 	public function filter_detail_revenue($date) {
-		$sql = "select p.image as image, p.name as name, p.price as price_out, p.price_in as price_in,o.price as price_sale, o.quantity as quantity from order_details o, products p, (select * from orders where status = 5) od where o.pro_id = p.id and od.id = o.order_id and date(o.created_at) = '".$date."'";
+		$sql = "select p.image as image, p.name as name, p.price as price_out, p.price_in as price_in,o.price as price_sale, SUM(o.quantity) as quantity ,SUM((o.price - p.price_in)*o.quantity) as total 
+		FROM order_details o, products p, (select * from orders where status = 4) od 
+		WHERE o.pro_id = p.id and od.id = o.order_id and date(o.created_at) = '".$date."' 
+		GROUP BY p.id";
 		$this->setQuery($sql);
 		return $this->loadAllRows();
 	}
@@ -64,7 +67,9 @@ class M_products extends database {
 		if($month != 0) {
 			$sql_month = "and Month(o.created_at) = '".$month."' ";
 		}
-		$sql = "select p.image as image, p.name as name, p.price as price_out, p.price_in as price_in,o.price as price_sale, o.quantity as quantity from order_details o, (select * from products where status = 0) p, (select * from orders where status = 5) od where o.pro_id = p.id and od.id = o.order_id and Year(o.created_at) = '".$year."' ".$sql_month;
+		$sql = "select p.image as image, p.name as name, p.price as price_out, p.price_in as price_in,o.price as price_sale, SUM(o.quantity) as quantity ,SUM((o.price - p.price_in)*o.quantity) as total 
+		FROM order_details o, (select * from products where status = 0) p, (select * from orders where status = 4) od 
+		WHERE o.pro_id = p.id and od.id = o.order_id and Year(o.created_at) = '".$year."' ".$sql_month ." GROUP BY p.id";
 		$this->setQuery($sql);
 		// var_dump($sql);
 		return $this->loadAllRows();
@@ -73,7 +78,7 @@ class M_products extends database {
 	public function read_top_product() {
 		$sql ="select products.id, products.name, products.image, order_details.price as price_sale,products.price_in as price_in,SUM(order_details.quantity) as quantity ,SUM((order_details.price - products.price_in)*order_details.quantity) as total 
 			FROM products, order_details,orders 
-			WHERE products.id = order_details.pro_id and orders.id = order_details.order_id and orders.status = 5 and products.status = 0
+			WHERE products.id = order_details.pro_id and orders.id = order_details.order_id and orders.status = 4 and products.status = 0
 			GROUP BY products.id order by total desc";
 		$this->setQuery($sql);
 		// var_dump($sql);

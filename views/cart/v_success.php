@@ -13,7 +13,17 @@ $(document).ready(function() {
     // }); window.location = '.';
 });
 </script>
+<?php 
+$front = "$";
+$back = "";
+if(isset($_SESSION["vn"])) {
+  $front = "";
+  $back = " VND"; 
+  
+} 
 
+
+?>
 <div class="container">
     <div class="panel panel-info" style="margin-top: 150px">
         <div class="panel-heading"><h3 style="text-align: center;">Order successfully</h3></div>
@@ -37,10 +47,10 @@ $(document).ready(function() {
                     <?php echo  $order->delivery_place ?>
                 </div>
                 <div class="col-md-4">
-                    <h4><b>Delivery cost:</b> $<span id="delivery_cost"><?php echo  $order->delivery_cost  ?></span></h4>
+                    <h4><b>Delivery cost:</b> <?php echo $front?><span id="delivery_cost"><?php echo  number_format($order->delivery_cost*(isset($_SESSION["vn"])?$_SESSION["vn"]:1),2)  ?></span><?php echo $back?></h4>
                 </div>
                 <div class="col-md-4">
-                    <h4><b>Sub total:</b> $<span class="total"><?php echo $total_order ?></span></h4>
+                    <h4><b>Sub total:</b> <?php echo $front?><span class="total"><?php echo number_format($total_order,2) ?></span><?php echo $back?></h4>
                 </div>
                 
             </div>
@@ -68,14 +78,22 @@ $(document).ready(function() {
                 foreach($carts as $c):
                     $product = $m_pro->read_product_by_id($c["id"]);
                     $sizes = json_decode($product->size);
+
+                    $price = $c["price"];
+                    if(isset($_SESSION["vn"])) {
+                     
+                      $price = $c["price"]*$_SESSION["vn"];
+                      
+                    } 
+
                     ?>
                     <tr>
                         <td><img src="admin/public/images/<?php echo $product->image ?>" width="70px"></td>
                         <td><?php echo  $product->name  ?></td>
-                        <td>$ <?php echo  number_format($c["price"], 2) ?></td>
+                        <td><?php echo $front?> <?php echo  number_format($price, 2) ?><?php echo $end?></td>
                         <td width="10%"><?php echo  $c["qty"]  ?></td>
                         <td><?php echo $c["size"] ?></td>
-                        <td>$ <span class="sub-total"><?php echo  number_format($c["price"]*$c["qty"],2) ?></span></td>
+                        <td><?php echo $front?> <span class="sub-total"><?php echo  number_format($price*$c["qty"],2) ?></span><?php echo $back?></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
