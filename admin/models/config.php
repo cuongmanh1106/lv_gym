@@ -1,6 +1,6 @@
 <?php
 define("DB_HOST","localhost");
-define("DB_NAME","ly_gym_test");
+define("DB_NAME","lv_gym_test");
 define("DB_USER","root");
 define("DB_PWD","");
 $currency			= ' đ'; //currency symbol
