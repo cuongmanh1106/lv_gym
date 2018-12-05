@@ -477,11 +477,12 @@ if(isset($_POST["insert_supplier"])) {
     include("models/m_supplier.php");
     $m_sup = new M_suppliers();
     
+    
     if($m_sup->insert_supplier($name,$address,$phone)) {
         $_SESSION["alert-success"] = "Insert Supplier Successfully";
         echo "success";
     } else {
-        $_SESSION["alert-danger"] = "Insert Supplier Fail";
+        // $_SESSION["alert-danger"] = "Insert Supplier Fail";
         echo "fail";
     }
 }
@@ -503,7 +504,6 @@ if(isset($_POST["edit_supplier"])) {
         $_SESSION["alert-success"] = "Edit Supplier Successfully";
         echo "success";
     } else {
-        $_SESSION["alert-danger"] = "Edit Supplier Fail";
         echo "fail";
     }
 }

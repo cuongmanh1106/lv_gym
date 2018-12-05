@@ -1,4 +1,4 @@
-					<table class="table table-striped table_load_revenue">
+					<table class="table table-striped table_load_view_detail_revenue">
 						<thead>
 							<tr>
 								<th>#</th>

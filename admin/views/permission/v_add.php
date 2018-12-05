@@ -15,8 +15,9 @@
              <div class="col-md-1">(<span style="color:red">*</span>)</div>
          </div>
          <div class="modal-footer">
-          <button type="submit" style="text-align: center;" class="btn btn-info">Add</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          
+          <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fa da-reply"></i>Close</button>
+          <button type="submit" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Save</button>
         </div>
      </form>
  </div>

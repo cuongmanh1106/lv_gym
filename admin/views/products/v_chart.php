@@ -59,7 +59,7 @@ include("include/report.php");
 									<td><img src="public/images/<?php echo $tp->image ?>" width="60px"></td>
 									<td><?php echo $tp->name ?></td>
 									<td><?php echo $tp->quantity ?></td>
-									<td>$ <?php echo number_format( ($tp->price_sale-$tp->price_in)*$tp->quantity,2) ?></td>
+									<td>$ <?php echo number_format( $tp->total,2) ?></td>
 									<td> <a href="#view_detail" data-type="d" data-toggle="modal" data-proid="<?php echo $tp->id?>" class="btn btn-warning"> <i class="fa fa-eye"></i> View detail</a> </td>
 								</tr>
 							<?php endforeach ?>
@@ -142,7 +142,7 @@ include("include/report.php");
 									<td><img src="public/images/<?php echo $tp->image ?>" width="60px"></td>
 									<td><?php echo $tp->name ?></td>
 									<td><?php echo $tp->quantity ?></td>
-									<td>$ <?php echo number_format( ($tp->price_sale-$tp->price_in)*$tp->quantity,2) ?></td>
+									<td>$ <?php echo number_format( $tp->total,2) ?></td>
 									<td> <a href="#view_detail" data-type="my" data-toggle="modal" data-proid="<?php echo $tp->id?>" class="btn btn-warning"> <i class="fa fa-eye"></i> View detail</a> </td>
 								</tr>
 							<?php endforeach ?>
@@ -360,6 +360,8 @@ include("include/report.php");
 			data:{'pro_id':pro_id,'date':date,'month':month,'year':year,'type':type,'view_detail_date':'OK'},
 			success:function(data) {
 				$(e.currentTarget).find('#content_view_detail').html(data);
+				$('.table_load_view_detail_revenue').DataTable();
+				
 			}
 		})
 	})

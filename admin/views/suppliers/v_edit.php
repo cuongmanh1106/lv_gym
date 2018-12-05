@@ -32,10 +32,11 @@
 
       </div>
       <div class="modal-footer ">
-        <button type="button" name="update_sup" class="btn btn-info">
-          <i class="fa fa-thumbs-up icon"></i> Update</button>
+       
           <button type="button" class="btn btn-danger" data-dismiss="modal">
             <i class="fa fa-reply icon"></i> Back</button>
+             <button type="button" name="update_sup" class="btn btn-info">
+          <i class="fa fa-thumbs-up icon"></i> Save</button>
           </div>
         </form>
       </div>

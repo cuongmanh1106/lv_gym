@@ -30,10 +30,11 @@
 
       </div>
       <div class="modal-footer ">
-        <button type="button" name="add_sup" class="btn btn-info">
-          <i class="fa fa-thumbs-up icon"></i> Add</button>
+        
           <button type="button" class="btn btn-danger" data-dismiss="modal">
             <i class="fa fa-reply icon"></i> Back</button>
+            <button type="button" name="add_sup" class="btn btn-info">
+          <i class="fa fa-thumbs-up icon"></i> Save</button>
           </div>
         </form>
       </div>
@@ -57,6 +58,10 @@
       if ($('input[name=phone]').val() == '') {
         flag = false;
         html += '<li>Field phone is required</li>';
+      }
+      if ($('input[name=phone]').val().length > 11 || $('input[name=phone]').val().length < 10) {
+        flag = false;
+        html += '<li>Field phone have length between 10 and 11</li>';
       }
       if ($('input[name=address]').val() == '') {
         flag = false;

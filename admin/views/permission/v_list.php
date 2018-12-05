@@ -12,7 +12,11 @@
                         <strong class="card-title"><i class="fa fa-list"></i> Permissions</strong>
                         
                         <!--  <Button disabled class="btn btn-success" data-toggle="modal" data-target="#insert_per"><i class="fa fa-plus-circle"></i> Insert</Button> -->
+                        <?php if($m_per->check_permission('insert_permission') == 1) { ?>
                         <Button class="btn btn-success" data-toggle="modal" data-target="#insert_per"><i class="fa fa-plus-circle"></i></Button>
+                        <?php } else {?>
+                        <Button class="btn btn-success" disabled data-toggle="modal" data-target="#insert_per"><i class="fa fa-plus-circle"></i></Button>
+                        <?php }?>
                         
                     </div>
                     
@@ -38,7 +42,11 @@
                            <!--  @if(check_permission('edit_permission') != 1)
                             <button disabled=""  class="badge badge-default"><i class="fa fa-eye"></i> List permisson</button>
                             @else  -->
+                            <?php if($m_per->check_permission('edit_permission') == 1) { ?>
                             <a href="permission_group.php?id=<?php echo $p->id?>" class="badge badge-info"><i class="fa fa-eye"></i> List permisson</a>
+                            <?php } else {?>
+                            <button  class="badge badge-info " disabled><i class="fa fa-eye"></i> List permisson</button>
+                            <?php }?>
                             <!-- @endif -->
                             
                         	<!-- <div class="dropdown">

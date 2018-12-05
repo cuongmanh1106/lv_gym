@@ -47,8 +47,9 @@
           </div>
 
           <div class="modal-footer">
-            <button type="submit" name="update_prof" id="update_profile" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Update</button>
+            
             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-reply"></i> Close</button>
+            <button type="submit" name="update_prof" id="update_profile" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Save</button>
           </div>
         </form>
       </div>
@@ -76,9 +77,9 @@
       $('input[name=last_name]').css('border',"1px solid #ced4da");
     }
 
-    if($('input[name=phone_number]').val() == '') {
+    if($('input[name=phone_number]').val().length  > 11 || $('input[name=phone_number]').val().length < 10) {
       $('input[name=phone_number]').css("border","1px solid red");
-      html += '<li>First name is required</li>';
+      html += '<li>Phone number have length between 10 and 11</li>';
       flag = false;
     } else {
       $('input[name=phone_number]').css('border',"1px solid #ced4da");

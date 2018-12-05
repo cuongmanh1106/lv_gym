@@ -73,9 +73,9 @@
 		}  else {
 			$('input[name=email]').css('border','none');
 		}  
-		if($('input[name=password]').val() == ''){
+		if($('input[name=password]').val().length < 6){
 			flag = false;
-			html += '<li>Password is required</li>';
+			html += '<li>Password have length at least 6 character</li>';
 			$('input[name=password]').css('border','1px solid red');
 		}  else {
 			$('input[name=password]').css('border','none');
@@ -84,9 +84,9 @@
 			flag = false;
 			html += '<li>Confirm password is required</li>';
 		}  
-		if($('input[name=phone_number]').val() == ''){
+		if($('input[name=phone_number]').val().length > 11 ||  $('input[name=phone_number]').val().length < 10 ){
 			flag = false;
-			html += '<li>Phone is required</li>';
+			html += '<li>Phone have length between 10 and 11</li>';
 			$('input[name=phone_number]').css('border','1px solid red');
 		}  else {
 			$('input[name=phone_number]').css('border','none');

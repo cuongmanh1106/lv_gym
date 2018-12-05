@@ -27,6 +27,11 @@
                         $list_category = $insert_category = $edit_category = $delete_category = "";
                         $list_user = $insert_user = $edit_user = $delete_user = "";
                         $list_per = $insert_permission = $edit_permission = $delete_permission = "";
+                        $list_stock = $insert_stock = $edit_stock = $delete_stock = "";
+                        $list_detail_stock = $insert_detail_stock = $edit_detail_stock = $delete_detail_stock = "";
+                        $list_promotion = $insert_promotion = $edit_promotion= $delete_promotion = "";
+                        $list_promotion_detail = $insert_promotion_detail = $edit_promotion_detail= $delete_promotion_detail = "";
+                        $list_supplier = $insert_supplier = $edit_supplier= $delete_supplier = "";
                         $list_order = $edit_order = "";
                         $list_ship = $edit_ship = "";
                         
@@ -50,6 +55,31 @@
                             if($list_permission->insert_permission == 1) $insert_permission = 'checked';
                             if($list_permission->edit_permission == 1) $edit_permission = 'checked';
                             if($list_permission->delete_permission == 1) $delete_permission = 'checked';
+
+                            if($list_permission->list_stock == 1) $list_stock = 'checked';
+                            if($list_permission->insert_stock == 1) $insert_stock = 'checked';
+                            if($list_permission->edit_stock == 1) $edit_stock = 'checked';
+                            if($list_permission->delete_stock == 1) $delete_stock = 'checked';
+
+                            if($list_permission->list_detail_stock == 1) $list_detail_stock = 'checked';
+                            if($list_permission->insert_detail_stock == 1) $insert_detail_stock = 'checked';
+                            if($list_permission->edit_detail_stock == 1) $edit_detail_stock = 'checked';
+                            if($list_permission->delete_detail_stock == 1) $delete_detail_stock = 'checked';
+
+                            if($list_permission->list_promotion == 1) $list_promotion = 'checked';
+                            if($list_permission->insert_promotion == 1) $insert_promotion = 'checked';
+                            if($list_permission->edit_promotion == 1) $edit_promotion = 'checked';
+                            if($list_permission->delete_promotion == 1) $delete_promotion = 'checked';
+
+                            if($list_permission->list_promotion_detail == 1) $list_promotion_detail = 'checked';
+                            if($list_permission->insert_promotion_detail == 1) $insert_promotion_detail = 'checked';
+                            if($list_permission->edit_promotion_detail == 1) $edit_promotion_detail = 'checked';
+                            if($list_permission->delete_promotion_detail == 1) $delete_promotion_detail = 'checked';
+
+                            if($list_permission->list_supplier == 1) $list_supplier = 'checked';
+                            if($list_permission->insert_supplier == 1) $insert_supplier = 'checked';
+                            if($list_permission->edit_supplier == 1) $edit_supplier = 'checked';
+                            if($list_permission->delete_supplier == 1) $delete_supplier = 'checked';
 
                             if($list_permission->list_order == 1) $list_order = 'checked';
                             if($list_permission->edit_order == 1) $edit_order = 'checked';
@@ -113,6 +143,7 @@
                                 </div>
                             </td>                   
                         </tr>
+
                         <tr>
                             <td><h4>Users</h4></td>
                             <td align="center">
@@ -168,6 +199,147 @@
                                 </div>
                             </td>
                         </tr>
+
+                        <tr>
+                            <td><h4>Stock Receiving</h4></td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $list_stock ?> name="list_stock" type="checkbox"  id="list_stock" />
+                                    <label for="list_stock"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $insert_stock ?> name="insert_stock" type="checkbox"  id="insert_stock" />
+                                    <label for="insert_stock"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $edit_stock ?> name="edit_stock" type="checkbox"  id="edit_stock" />
+                                    <label for="edit_stock"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $delete_stock ?> name="delete_stock" type="checkbox"  id="delete_stock" />
+                                    <label for="delete_stock"></label>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h4>Stock Detail</h4></td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $list_detail_stock ?> name="list_detail_stock" type="checkbox"  id="list_detail_stock" />
+                                    <label for="list_detail_stock"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $insert_detail_stock ?> name="insert_detail_stock" type="checkbox"  id="insert_detail_stock" />
+                                    <label for="insert_detail_stock"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $edit_detail_stock ?> name="edit_detail_stock" type="checkbox"  id="edit_detail_stock" />
+                                    <label for="edit_detail_stock"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $delete_detail_stock ?> name="delete_detail_stock" type="checkbox"  id="delete_detail_stock" />
+                                    <label for="delete_detail_stock"></label>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h4>Promotion</h4></td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $list_promotion ?> name="list_promotion" type="checkbox"  id="list_promotion" />
+                                    <label for="list_promotion"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $insert_promotion ?> name="insert_promotion" type="checkbox"  id="insert_promotion" />
+                                    <label for="insert_promotion"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $edit_promotion ?> name="edit_promotion" type="checkbox"  id="edit_promotion" />
+                                    <label for="edit_promotion"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $delete_promotion ?> name="delete_promotion" type="checkbox"  id="delete_promotion" />
+                                    <label for="delete_promotion"></label>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h4>Promotion Detail</h4></td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $list_promotion_detail ?> name="list_promotion_detail" type="checkbox"  id="list_promotion_detail" />
+                                    <label for="list_promotion_detail"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $insert_promotion_detail ?> name="insert_promotion_detail" type="checkbox"  id="insert_promotion_detail" />
+                                    <label for="insert_promotion_detail"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $edit_promotion_detail ?> name="edit_promotion_detail" type="checkbox"  id="edit_promotion_detail" />
+                                    <label for="edit_promotion_detail"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $delete_promotion_detail ?> name="delete_promotion_detail" type="checkbox"  id="delete_promotion_detail" />
+                                    <label for="delete_promotion_detail"></label>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h4>Supplier</h4></td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $list_supplier ?> name="list_supplier" type="checkbox"  id="list_supplier" />
+                                    <label for="list_supplier"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $insert_supplier ?> name="insert_supplier" type="checkbox"  id="insert_supplier" />
+                                    <label for="insert_supplier"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $edit_supplier ?> name="edit_supplier" type="checkbox"  id="edit_supplier" />
+                                    <label for="edit_supplier"></label>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="checkbox icheck-primary">
+                                    <input <?php echo $delete_supplier ?> name="delete_supplier" type="checkbox"  id="delete_supplier" />
+                                    <label for="delete_supplier"></label>
+                                </div>
+                            </td>
+                        </tr>
+
                         <tr style="border: none">
                             <td><h4>Order</h4></td>
                             <td colspan="3">
@@ -184,6 +356,7 @@
                                 
                             </td>
                         </tr>
+
                          <tr style="border: none">
                             <td><h4>Ship</h4></td>
                             <td colspan="3">
@@ -200,6 +373,7 @@
                                 
                             </td>
                         </tr>
+
                     </tbody>
                 </table>
                 <a href="permission_list.php" class="btn btn-danger"><i class="fa fa-reply"></i> Back</a>

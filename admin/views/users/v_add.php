@@ -79,8 +79,9 @@
     </div>
 
       <div class="form-group " style="text-align: center;">
-              <button  type="submit" class="btn btn-info" id="insert_user" name="insert_user"><i class="fa fa-thumbs-o-up"></i> Add</button>
+              
               <button type="button" class="btn btn-danger " onclick="window.location='user_list.php'" name="reset"><i class="fa fa-reply"></i> Back</button>
+              <button  type="button" class="btn btn-info" id="insert_user" name="insert_user"><i class="fa fa-thumbs-o-up"></i> Save</button>
             </div>
 
   
@@ -117,10 +118,10 @@
     }  else {
       $('input[name=email]').css('border',"1px solid #ced4da");
     }
-    if($('input[name=password]').val() == ''){
+    if($('input[name=password]').val().length < 6 ){
       flag = false;
       $('input[name=password]').css('border',"1px solid red");
-      html += '<li>Password is required</li>';
+      html += '<li>Password have length at least 6 character</li>';
     }  else {
       $('input[name=password]').css('border',"1px solid #ced4da");
     }
@@ -131,10 +132,10 @@
     }  else {
       $('input[name=confirm_password]').css('border',"1px solid #ced4da");
     }
-    if($('input[name=phone_number]').val() == ''){
+    if($('input[name=phone_number]').val().length > 11 ||  $('input[name=phone_number]').val().length < 10 ){
       flag = false;
       $('input[name=phone_number]').css('border',"1px solid red");
-      html += '<li>Phone is required</li>';
+      html += '<li>Phone have length between 10 to 11 </li>';
     }  else {
       $('input[name=phone_number]').css('border',"1px solid #ced4da");
     }
@@ -168,8 +169,9 @@
   })
 
   $('input[name=password]').on('change',function(){
-    if($('input[name=password]').val() == ''){
+    if($('input[name=password]').val().length < 6 ){
       $('input[name=password]').css('border',"1px solid red");
+      html += '<li>Password have length at least 6 character</li>';
     }  else {
       $('input[name=password]').css('border',"1px solid #ced4da");
     }
@@ -184,8 +186,9 @@
   })
 
   $('input[name=phone_number]').on('change',function(){
-    if($('input[name=phone_number]').val() == ''){
+    if($('input[name=phone_number]').val().length > 11 ||  $('input[name=phone_number]').val().length < 10 ){
       $('input[name=phone_number]').css('border',"1px solid red");
+      html += '<li>Phone have length between 10 to 11 </li>';
     }  else {
       $('input[name=phone_number]').css('border',"1px solid #ced4da");
     }

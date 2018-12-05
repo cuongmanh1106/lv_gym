@@ -27,8 +27,6 @@ class M_order extends database {
 		return $this->loadRow();
 	}
 
-	
-
 
 	public function read_order_by_id($id) {
 		$sql = "select * from orders where id = ".$id;
@@ -45,6 +43,7 @@ class M_order extends database {
 	public function insert_order_detail($order_id,$pro_id,$price,$size,$quantity) {
 		$sql = "insert into order_details (order_id,pro_id,price,size,quantity) value(?,?,?,?,?)";
 		$this->setQuery($sql);
+		var_dump($sql);
 		return $this->execute(array($order_id,$pro_id,$price,$size,$quantity));
 	}
 
@@ -54,5 +53,4 @@ class M_order extends database {
 		return $this->execute(array($status,$id));
 	}
 
-	 
 }

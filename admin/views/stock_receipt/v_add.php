@@ -21,10 +21,11 @@
 
       </div>
       <div class="modal-footer ">
-        <button type="submit" name="add_stock" class="btn btn-info">
-          <i class="fa fa-thumbs-up icon"></i> Add</button>
+       
           <button type="button" class="btn btn-danger" data-dismiss="modal">
             <i class="fa fa-reply icon"></i> Back</button>
+             <button type="submit" name="add_stock" class="btn btn-info">
+          <i class="fa fa-thumbs-up icon"></i> Save</button>
           </div>
         </form>
       </div>

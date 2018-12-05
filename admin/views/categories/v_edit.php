@@ -33,8 +33,9 @@
               </div>
             </div>
             <div class="form-group " style="text-align: center;">
-              <button  type="submit" name="edit_cate" class="btn btn-info" name=""><i class="fa fa-thumbs-o-up"></i> Update</button>
+              
               <button type="button" class="btn btn-danger" onclick="window.location='cate_list.php'" name="reset"><i class="fa fa-reply"></i> Back</button>
+              <button  type="submit" name="edit_cate" class="btn btn-info" name=""><i class="fa fa-thumbs-o-up"></i> Save</button>
             </div>
              
         </form>

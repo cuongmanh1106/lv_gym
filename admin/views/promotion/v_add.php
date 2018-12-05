@@ -50,10 +50,6 @@
         </div>
 
 
-
-
-
-
         <div class="form-group " style="text-align: center;">
           <button type="button" class="btn btn-danger " onclick="window.location='promotion_list.php'" name="reset"><i class="fa fa-reply"></i> Back</button>
           <button  type="button" class="btn btn-info" id="insert_promotion" name="insert_promotion"><i class="fa fa-thumbs-o-up"></i> Save</button>
@@ -102,13 +98,13 @@
     }  else {
       $('input[name=date_to]').css('border',"1px solid #ced4da");
     }
-    if(date_from.getTime() < d.getTime() || date_to.getTime() < d.getTime()) {
+    if(date_from.getTime() < d.getTime()) {
       flag = false;
       html += '<li>Date must be higher than current date</li>';
     }
     if(date_from.getTime() > date_to.getTime()) {
       flag = false;
-      html += '<li>Date From must be slower than Date To</li>';
+      html += '<li>Date From must be lower than Date To</li>';
     }
     html += "</ul>";
 

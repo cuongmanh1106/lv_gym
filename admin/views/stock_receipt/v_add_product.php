@@ -144,7 +144,7 @@ include("include/report.php");
             </div>
 
             <div style="text-align: center;">
-                <button type="submit" class="btn btn-info" name="insert_stock"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Continue</button>
+                <button type="button" class="btn btn-info" name="insert_stock"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Continue</button>
                 <button class="btn btn-danger" onclick="window.location= 'stock_receipt_list_products.php?id=<?php echo $stock_id?>'" type="button" value="Cancel"><i class="fa fa-reply"></i> Complete</button>
                 
             </div>
@@ -169,8 +169,6 @@ include("include/report.php");
 <script type="text/javascript" >
 
     $(document).on('keyup','input[name="quantity[]"]',function(){ //cập nhật total khi tăng quantity
-
-        console.log(1);
         total_quantity = 0;
         $('input[name="quantity[]"]').each(function(i,n){
             total_quantity += parseInt($(n).val());
@@ -315,7 +313,7 @@ include("include/report.php");
      html += '</ul>';
      console.log(flag);  
      if(flag) {
-        $('button[name="insert_pro"]').attr("type", "submit");
+        $('button[name="insert_stock"]').attr("type", "submit");
     } else {
         $('.error_tmp').html(html);
     }
