@@ -171,6 +171,7 @@ if(isset($_POST["filter_revenue"])) {
     include("models/m_products.php");
     $m_pro = new M_products();
     $products = $m_pro->filter_detail_revenue($date);
+    $type = "d";
     if(count($products) > 0) {
         include("views/products/v_load_revenue_by_date.php");
     }  else {
@@ -185,12 +186,29 @@ if(isset($_POST["load_revenue_by_month_year"])) {
     include("models/m_products.php");
     $m_pro = new M_products();
     $products = $m_pro->filter_revenue_by_month_year($month,$year);
+    $type = "my";
     if(count($products) > 0) {
         include("views/products/v_load_revenue_by_date.php");
     }  else {
         echo "";
     }
 
+}
+
+if(isset($_POST["view_detail_date"])) {
+    $pro_id = $_POST["pro_id"];
+    $date = $_POST["date"];
+    $month = $_POST["month"];
+    $year = $_POST["year"];
+    $type = $_POST["type"];
+    include("models/m_products.php");
+    $m_pro = new M_products();
+    if($type == "d") {
+        $products = $m_pro->view_list_product_detail_revenue($pro_id,$date);
+    } else if($type == "my") {
+        $products = $m_pro->view_list_product_detail_revenue_month_year($pro_id,$month,$year);
+    }
+    include("views/products/v_view_list_products_detail_revenue.php");
 }
 /*End Chart*/
 /*Users*/

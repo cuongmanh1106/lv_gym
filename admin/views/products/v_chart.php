@@ -37,11 +37,12 @@ include("include/report.php");
 					<table class="table table-striped table_load_revenue">
 						<thead>
 							<tr>
-								<th>STT</th>
+								<th>#</th>
 								<th>Image</th>
 								<th>Name</th>
 								<th>Quantity</th>
 								<th>Revenue</th>
+								<th></th>
 							</tr>
 
 						</thead>
@@ -59,7 +60,7 @@ include("include/report.php");
 									<td><?php echo $tp->name ?></td>
 									<td><?php echo $tp->quantity ?></td>
 									<td>$ <?php echo number_format( ($tp->price_sale-$tp->price_in)*$tp->quantity,2) ?></td>
-
+									<td> <a href="#view_detail" data-type="d" data-toggle="modal" data-proid="<?php echo $tp->id?>" class="btn btn-warning"> <i class="fa fa-eye"></i> View detail</a> </td>
 								</tr>
 							<?php endforeach ?>
 						</tbody>
@@ -67,7 +68,7 @@ include("include/report.php");
 						<tfoot>
 							<tr>
 								<th colspan="3">Total</th>
-								<th><?php echo $total_quantity,2?></th>
+								<th><?php echo $total_quantity?></th>
 								<th>$<?php echo number_format($total_revenue,2) ?></th>
 							</tr>
 						</tfoot>
@@ -119,11 +120,12 @@ include("include/report.php");
 					<table class="table table-striped table_load_revenue">
 						<thead>
 							<tr>
-								<th>STT</th>
+								<th>#</th>
 								<th>Image</th>
 								<th>Name</th>
 								<th>Quantity</th>
 								<th>Revenue</th>
+								<th></th>
 							</tr>
 
 						</thead>
@@ -141,7 +143,7 @@ include("include/report.php");
 									<td><?php echo $tp->name ?></td>
 									<td><?php echo $tp->quantity ?></td>
 									<td>$ <?php echo number_format( ($tp->price_sale-$tp->price_in)*$tp->quantity,2) ?></td>
-
+									<td> <a href="#view_detail" data-type="my" data-toggle="modal" data-proid="<?php echo $tp->id?>" class="btn btn-warning"> <i class="fa fa-eye"></i> View detail</a> </td>
 								</tr>
 							<?php endforeach ?>
 						</tbody>
@@ -149,8 +151,9 @@ include("include/report.php");
 						<tfoot>
 							<tr>
 								<th colspan="3">Total</th>
-								<th><?php echo $total_quantity,2?></th>
+								<th><?php echo $total_quantity?></th>
 								<th>$<?php echo number_format($total_revenue,2) ?></th>
+								<th></th>
 							</tr>
 						</tfoot>
 					</table>
@@ -172,7 +175,7 @@ include("include/report.php");
 				<table class="table table-striped table_top_product">
 					<thead>
 						<tr>
-							<th>STT</th>
+							<th>#</th>
 							<th>Image</th>
 							<th>Name</th>
 							<th>Times order</th>
@@ -197,6 +200,41 @@ include("include/report.php");
 		</div>
 	</div>
 </div>
+
+<div id="view_detail" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header  badge-info">
+				<h4 class="modal-title custom_align" id="Heading" style="text-align: left">
+					<i class="fa fa-plus MarginRight-10"></i>
+				View Detail Revenue</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+
+				<div id="content_view_detail">
+
+				</div>
+
+			</div>
+			<div class="modal-footer ">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">
+					<i class="fa fa-reply icon"></i> Close</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</div>
+<script type="text/javascript">
+	$('button[name=reset]').on('click',function(){
+		$('input[name=name]').val('');
+		$('#editor1').val('');
+
+	})
+</script>
 
 
 <script>
@@ -283,9 +321,9 @@ include("include/report.php");
 			success:function(data){
 				if(data.trim() == '') {
 					$('#load_revenue_by_day').html('<div class="col-md-8"><b>Revenue:</b>$ 0.00</div>');
-
 				} else {
 					$('#load_revenue_by_day').html(data);
+					$('.table_load_revenue').DataTable();
 				}
 			}
 		})
@@ -304,7 +342,24 @@ include("include/report.php");
 
 				} else {
 					$('#load_revenue_by_month_year').html(data);
+					$('.table_load_revenue').DataTable();
 				}
+			}
+		})
+	})
+
+	$(document).on('show.bs.modal','#view_detail',function(e){
+		pro_id = $(e.relatedTarget).data('proid');
+		date = $('input[name=date]').val();
+		type = $(e.relatedTarget).data('type');
+		month = $('select[name=month_search]').val();
+		year = $('select[name=year_search]').val();
+		$.ajax({
+			type:'POST',
+			url:'ajax.php',
+			data:{'pro_id':pro_id,'date':date,'month':month,'year':year,'type':type,'view_detail_date':'OK'},
+			success:function(data) {
+				$(e.currentTarget).find('#content_view_detail').html(data);
 			}
 		})
 	})

@@ -54,7 +54,7 @@ class M_products extends database {
 	}
 
 	public function filter_detail_revenue($date) {
-		$sql = "select p.image as image, p.name as name, p.price as price_out, p.price_in as price_in,o.price as price_sale, SUM(o.quantity) as quantity ,SUM((o.price - p.price_in)*o.quantity) as total 
+		$sql = "select p.id as id, p.image as image, p.name as name, p.price as price_out, p.price_in as price_in,o.price as price_sale, SUM(o.quantity) as quantity ,SUM((o.price - p.price_in)*o.quantity) as total 
 		FROM order_details o, products p, (select * from orders where status = 4) od 
 		WHERE o.pro_id = p.id and od.id = o.order_id and date(o.created_at) = '".$date."' 
 		GROUP BY p.id";
@@ -62,16 +62,37 @@ class M_products extends database {
 		return $this->loadAllRows();
 	}
 
+	public function view_list_product_detail_revenue($pro_id,$date) {
+		$sql = "select p.image as image, p.name as name, p.price as price_out, p.price_in as price_in,o.price as price_sale, o.quantity as quantity, o.created_at as created_at
+		FROM order_details o, (select * from products where id = ".$pro_id.") p, (select * from orders where status = 4) od 
+		WHERE o.pro_id = p.id and od.id = o.order_id and date(o.created_at) = '".$date."'";
+		$this->setQuery($sql);
+		return $this->loadAllRows();
+	}
+
+
 	public function filter_revenue_by_month_year($month,$year) {
 		$sql_month = ""; 
 		if($month != 0) {
 			$sql_month = "and Month(o.created_at) = '".$month."' ";
 		}
-		$sql = "select p.image as image, p.name as name, p.price as price_out, p.price_in as price_in,o.price as price_sale, SUM(o.quantity) as quantity ,SUM((o.price - p.price_in)*o.quantity) as total 
+		$sql = "select p.id as id, p.image as image, p.name as name, p.price as price_out, p.price_in as price_in,o.price as price_sale, SUM(o.quantity) as quantity ,SUM((o.price - p.price_in)*o.quantity) as total 
 		FROM order_details o, (select * from products where status = 0) p, (select * from orders where status = 4) od 
 		WHERE o.pro_id = p.id and od.id = o.order_id and Year(o.created_at) = '".$year."' ".$sql_month ." GROUP BY p.id";
 		$this->setQuery($sql);
 		// var_dump($sql);
+		return $this->loadAllRows();
+	}
+
+	public function view_list_product_detail_revenue_month_year($pro_id,$month,$year) {
+		$sql_month = ""; 
+		if($month != 0) {
+			$sql_month = "and Month(o.created_at) = '".$month."' ";
+		}
+		$sql = "select p.id as id, p.image as image, p.name as name, p.price as price_out, p.price_in as price_in,o.price as price_sale, o.quantity as quantity, o.created_at as created_at
+		FROM order_details o, (select * from products where id =".$pro_id.") p, (select * from orders where status = 4) od 
+		WHERE o.pro_id = p.id and od.id = o.order_id and Year(o.created_at) = '".$year."' ".$sql_month;
+		$this->setQuery($sql);
 		return $this->loadAllRows();
 	}
 

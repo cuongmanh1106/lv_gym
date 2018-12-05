@@ -1,12 +1,14 @@
-<table class="table table-striped table_load_revenue">
+					<table class="table table-striped table_load_revenue">
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>Date</th>
 								<th>Image</th>
 								<th>Name</th>
+								<th>Price In</th>
+								<th>Price Sale</th>
 								<th>Quantity</th>
 								<th>Revenue</th>
-								<th></th>
 							</tr>
 
 						</thead>
@@ -20,21 +22,26 @@
 								?>
 								<tr>
 									<td><?php echo $key + 1 ?></td>
+									<td><?php echo $tp->created_at?></td>
 									<td><img src="public/images/<?php echo $tp->image ?>" width="60px"></td>
 									<td><?php echo $tp->name ?></td>
+									<td>$ <?php echo number_format($tp->price_in,2)?></td>
+									<td>$ <?php echo number_format($tp->price_sale,2)?></td>
 									<td><?php echo $tp->quantity ?></td>
 									<td>$ <?php echo number_format( ($tp->price_sale-$tp->price_in)*$tp->quantity,2) ?></td>
-									<td> <a href="#view_detail" data-type="<?php echo $type?>" data-toggle="modal" data-proid="<?php echo $tp->id?>" class="btn btn-warning"> <i class="fa fa-eye"></i> View detail</a> </td>
+
 								</tr>
 							<?php endforeach ?>
 						</tbody>
 						
 						<tfoot>
 							<tr>
-								<th colspan="3">Total</th>
+								<th colspan="6">Total</th>
 								<th><?php echo $total_quantity?></th>
 								<th>$<?php echo number_format($total_revenue,2) ?></th>
-								<th></th>
 							</tr>
 						</tfoot>
 					</table>
+
+
+					

@@ -36,9 +36,9 @@
                                 <div class="card-body">
                                     <form method="post"  action="">
                                         <div class="row">
-                                            <div class="col-md-4"><b>Date: </b>  <?php echo $order->created_at?> </div>
                                             <div class="col-md-4"><b>Customer: </b>  <?php echo $customer->first_name?> <?php echo $customer->last_name ?> </div>
                                             <div class="col-md-4"><b>Phone: </b> <?php echo  $customer->phone_number ?></div>
+                                            <div class="col-md-4"><b>Payment: </b> <?php echo  ($order->payment == 1)?"PayPal":"Cash" ?></div>
                                         </div>
                                         <br>
                                         <div class="row">
