@@ -5,8 +5,22 @@ include("models/m_permission.php");
 class C_stock_receipt
 {
 
+    function __construct() {
+
+        if(!isset($_SESSION["user"])) {
+            echo "<script>window.location='.'</script>";
+        } 
+    }
+
+
 	public function get_all_stock_receipt() {
 
+        $m_per = new M_permission;
+        if($m_per->check_permission("list_stock") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
 		//models
 		include("models/m_stock_receipt.php");
 		include("models/m_users.php");
@@ -24,6 +38,14 @@ class C_stock_receipt
 	}
 
 	public function insert_stock() {
+
+        $m_per = new M_permission;
+        if($m_per->check_permission("insert_stock") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
 		$description = $_POST["description_stock"];
 		$user_id = $_SESSION["user"]->id;
 		include("models/m_stock_receipt.php");
@@ -39,6 +61,14 @@ class C_stock_receipt
 
 	public function create_stock_product() {
 		//models
+        
+        $m_per = new M_permission;
+        if($m_per->check_permission("insert_detail_stock") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
 		$stock_id = $_GET["id"];
 		require("models/m_categories.php");
         require("models/m_supplier.php");
@@ -55,6 +85,15 @@ class C_stock_receipt
 	}
 
 	public function store_stock_product() {
+
+        $m_per = new M_permission;
+        if($m_per->check_permission("insert_detail_stock") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
+
 		$stock_id = $_POST["stock_id"];
 		include("models/m_products.php");
 		include("models/m_stock_receipt.php");
@@ -135,6 +174,13 @@ class C_stock_receipt
 
     public function edit_stock_product() {
 
+        $m_per = new M_permission;
+        if($m_per->check_permission("edit_detail_stock") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
         //models
         $stock_id = $_GET["id"];
         require("models/m_categories.php");
@@ -154,6 +200,12 @@ class C_stock_receipt
     }
 
     public function update_stock_product(){
+        $m_per = new M_permission;
+        if($m_per->check_permission("insert_detail_stock") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
 
     	//models
     	require("models/m_stock_receipt.php");
@@ -260,6 +312,13 @@ class C_stock_receipt
 
 
     public function list_stock_product() {
+        $m_per = new M_permission;
+        if($m_per->check_permission("list_detail_stock") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
         $stock_id = $_GET["id"];
 
         //models
@@ -285,6 +344,15 @@ class C_stock_receipt
     }
 
     public function edit_stock_size_qty() {
+
+        $m_per = new M_permission;
+        if($m_per->check_permission("edit_detail_stock") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
+
         //models
         $pro_id = $_GET["pro_id"];
         $stock_id = $_GET["stock_id"];

@@ -1,6 +1,6 @@
 <?php include("include/report.php") ; ?>
 
-<div id="edit_detail_promotion" class="modal fade" role="dialog">
+<div id="edit_detail_promotion"  class="modal fade"  role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -18,14 +18,17 @@
             </div>
             <input type="hidden" name="detail_id">
             <div>
-              <b>Price Out:</b> <span id="price_out"></span>  
+              <b>Price In:</b> $<span id="price_in"></span>  
+            </div>
+            <div>
+              <b>Price Out:</b> $<span id="price_out"></span>  
             </div>
             <br>
             <b>Promotion Price</b>
             <input type="text" required="" name="promotion_price" onkeyup="formatNumBerKeyUp(this)" class="form-control">
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" style="text-align: center;" data-dismiss="modal" name="update_detail_product_promotion" class="btn btn-info"><i class="fa fa-save"></i> Save</button>
+              <button type="button" style="text-align: center;"  name="update_detail_product_promotion" class="btn btn-info"><i class="fa fa-save"></i> Save</button>
 
             </div>
           </form>
@@ -62,7 +65,11 @@
           <div class="card">
             <div class="card-header badge-info">
               <strong class="card-title"><i class="fa fa-list"></i> List Products Promotion</strong>
+              <?php if($m_per->check_permission("insert_promotion_detail") == 1){?>
               <a class="btn btn-success" title="Add Product into promotion" href="promotion_choose_products.php?id=<?php echo $id?>" ><i class="fa fa-plus-circle"></i> </a>
+              <?php } else {?>
+              <button disabled class="btn btn-success"  ><i class="fa fa-plus-circle"></i> </button>
+              <?php }?>
 
             </div>
             <div class="search" style="margin-top: 20px">
@@ -102,8 +109,20 @@
                      <i class="fa fa-dot-circle-o"></i> Action
                    </button>
                    <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
-                    <a class="dropdown-item  badge badge-info" href="#edit_detail_promotion" data-toggle="modal"   data-index = "<?php echo $u->id?>" ><i class="fa fa-edit"></i> Update</a>
+
+                    <!--permission update promotion detail-->
+                    <?php if($m_per->check_permission("edit_promotion_detail") == 1){?>
+                    <a class="dropdown-item  badge badge-info" href="#edit_detail_promotion" data-toggle="modal"  data-backdrop="static"  data-index = "<?php echo $u->id?>" ><i class="fa fa-edit"></i> Update</a>
+                    <?php } else {?>
+                    <button disabled class="dropdown-item  badge badge-info"><i class="fa fa-edit"></i> Update</button>
+                    <?php }?>
+
+                    <!--permission delete promotion detail-->
+                    <?php if($m_per->check_permission("edit_promotion_detail") == 1){?>
                     <a class="dropdown-item  badge badge-danger delete_promotion_detail" href="javascript:void(0)"   data-index = "<?php echo $u->id?>" ><i class="fa fa-trash-o"></i> Delete</a>
+                    <?php } else {?>
+                    <button disabled class="dropdown-item  badge badge-danger"><i class="fa fa-trash-o"></i> Delete</button>
+                    <?php }?>
                     
                   </div>
                 </div>
@@ -273,6 +292,7 @@
       data:{'id':id,'get_detail_product_promotion':'OK'},
       dataType:'json',
       success:function(data) {
+        $(e.currentTarget).find('#price_in').html(data.price_in);
         $(e.currentTarget).find('#price_out').html(data.price_out);
         $(e.currentTarget).find('input[name=promotion_price]').val(data.price);
         $(e.currentTarget).find('#product_name').html(data.name);
@@ -285,10 +305,10 @@
     id = $('input[name=detail_id]').val();
     price = $('input[name=promotion_price]').val();
     price_out = $('#price_out').text();
-    console.log(price_out); 
+    price_in = $('#price_in').text();
     var self = $(this);
-    if(parseFloat(price) > parseFloat(price_out)) {
-      $('#error').html('<div class ="alert alert-danger">Promotion price must be smaller than price out</div>');
+    if(parseFloat(price) >= parseFloat(price_out) || parseFloat(price) <= parseFloat(price_in)) {
+      $('#error').html('<div class ="alert alert-danger">Promotion price must be smaller than price out & higher than price in</div>');
     }  else {
       $.ajax({
         type:'POST',
@@ -300,14 +320,17 @@
             alert("Error Update");
           } else {
             // $("#edit_detail_promotion").attr("data-dismiss","modal");
-            
-
             // $('#edit_detail_promotion').modal('hide');
             // $('#edit_detail_promotion').modal().hide();
             // $('#edit_detail_promotion').removeClass('show');
 
             $('#row_detail_promotion_'+id).find(".price_update").html(data.price);
+            window.location.reload();
             // $('#edit_detail_promotion').modal('toggle');
+            // $('#edit_detail_promotion').modal({backdrop: 'static', keyboard: false})  
+            // $('#edit_detail_promotion').modal('hide');
+            // $('body').removeClass('modal-open');
+            // $('.modal-backdrop').remove();
           }
         }
       })

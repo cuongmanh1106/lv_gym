@@ -9,8 +9,11 @@
         <div class="card">
           <div class="card-header badge-info">
             <strong class="card-title"><i class="fa fa-list"></i> List of stock receipt</strong>
+            <?php if($m_per->check_permission("insert_stock") == 1){ ?>
             <a class="btn btn-success" href="#add_stock" data-toggle="modal" ><i class="fa fa-plus-circle"></i> </a>
-            <button class="btn btn-danger" id="del_user"  ><i class="fa fa-trash-o"></i> </a>
+            <?php } else {?>
+            <button class="btn btn-success" disabled="" ><i class="fa fa-plus-circle"></i> </button>
+            <?php }?>
             </div>
             <div class="search" style="margin-top: 20px">
              <div class="col-md-12 col-md-offset-3">
@@ -67,16 +70,18 @@
                      <i class="fa fa-dot-circle-o"></i> Action
                    </button>
                    <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
-                    
+                    <?php if($m_per->check_permission("list_detail_stock") == 1){ ?>
                     <a class="dropdown-item  badge badge-warning" href="stock_receipt_list_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-list-alt"></i> View list products</a>
-                    <?php if($stock->status == 0){ ?>
-                    <a class="dropdown-item  badge badge-primary" href="stock_receipt_add_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-plus"></i> Add products</a>
-                    <a class="dropdown-item  badge badge-info" href="stock_receipt_update_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update products</a>
+                    <?php } else { ?>
+                    <button class="dropdown-item  badge badge-warning" disabled  ><i class="fa fa-list-alt"></i> View list products</button>
+                    <?php } ?>
+
+                    <?php if($stock->status == 0 && $m_per->check_permission("edit_stock") == 1){ ?>
+                    <!-- <a class="dropdown-item  badge badge-primary" href="stock_receipt_add_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-plus"></i> Add products</a>
+                    <a class="dropdown-item  badge badge-info" href="stock_receipt_update_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update products</a> -->
                     <a class="dropdown-item  badge badge-info" href="#update_stock_receipt" data-toggle = "modal" data-status="<?php echo $stock->status?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update Status</a>
                     <?php } else { ?>
-                    <a class="dropdown-item  badge badge-primary disabled" href="stock_receipt_add_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-plus"></i> Add products</a>
-                    <a class="dropdown-item  badge badge-info disabled" href="stock_receipt_update_products.php?id=<?php echo $stock->id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update products</a>
-                    <a class="dropdown-item  badge badge-info disabled" href="#update_stock_receipt" data-toggle = "modal" data-status="<?php echo $stock->status?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update Status</a>
+                    <button class="dropdown-item  badge badge-info disabled" disabled=""  ><i class="fa fa-edit"></i> Update Status</button>
                     <?php } ?>
                   </div>
                 </div>

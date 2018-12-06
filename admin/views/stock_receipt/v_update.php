@@ -4,7 +4,8 @@ include("include/report.php");
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="stock_receipt_list.php" style="color: blue">Stock Receipt</a></li>
-    <li class="breadcrumb-item active" aria-current="page">update a product to stock</li>
+    <li class="breadcrumb-item"><a href="stock_receipt_list_products.php?id=<?php echo $stock_id?>" style="color: blue">List products of stock</a></li>
+    <li class="breadcrumb-item active" aria-current="page">update a product to stock detail</li>
 </ol>
 </nav>
 <form method="POST" enctype="multipart/form-data" action="stock_receipt_update_product.php">
@@ -41,8 +42,8 @@ include("include/report.php");
         </div>
 
         <div style="text-align: center;">
-            <button class="btn btn-danger" onclick="window.location= 'stock_receipt_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
-            <button type="button" class="btn btn-info" name="update_stock"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Save</button>
+            <button class="btn btn-danger" onclick="window.location= 'stock_receipt_list_products.php?id=<?php echo $stock_id?>'" type="button"  value="Cancel"><i class="fa fa-reply"></i> Back</button>
+            <button type="button" disabled class="btn btn-info" name="update_stock"  id="insert"> <i class="fa fa-thumbs-o-up"></i> Save</button>
         </div>
     </div>
 
@@ -60,6 +61,8 @@ include("include/report.php");
         data:{'pro_id':pro_id,'stock_id':stock_id,'search_update_product':'OK'},
         success:function(data) {
             $('#content_update').html(data);
+            $('button[name=update_stock]').prop('disabled',false);
+
         }
     })
 })

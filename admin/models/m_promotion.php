@@ -3,7 +3,7 @@ require_once("database.php");
 class M_promotion extends database {
 
 	public function read_all_promotion() {
-		$sql = "select * from promotion where status = 0";
+		$sql = "select * from promotion where status = 0 order by created_at desc";
 		$this->setQuery($sql);
 		return $this->loadAllRows();
 	}
@@ -159,7 +159,7 @@ class M_promotion extends database {
 	}
 
 	public function get_detail_product_promotion($id) {
-		$sql = "select p.name as name, p.price as price_out, p.image as image, p.status as pro_status,d.* 
+		$sql = "select p.name as name, p.price_in as price_in , p.price as price_out, p.image as image, p.status as pro_status,d.* 
 				FROM products p,(select * from promotion_detail where id = ".$id.") d 
 				WHERE p.id = d.pro_id  and d.status = 0";
 		$this->setQuery($sql);

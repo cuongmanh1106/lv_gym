@@ -5,7 +5,21 @@ include("models/m_permission.php");
 class C_promotion
 {
 
+	function __construct() {
+
+        if(!isset($_SESSION["user"])) {
+            echo "<script>window.location='.'</script>";
+        } 
+    }
+
 	public function get_all_promotion() {
+
+		$m_per = new M_permission;
+        if($m_per->check_permission("list_promotion") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
 
 		//models
 		include("models/m_promotion.php");
@@ -19,6 +33,14 @@ class C_promotion
 	}
 
 	public function add_promotion(){
+
+		$m_per = new M_permission;
+        if($m_per->check_permission("insert_promotion") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
 		//models
 		$name = $date_from = $date_to = $description = '';
 		if(isset($_POST["insert_promotion"])) {
@@ -53,6 +75,13 @@ class C_promotion
 	}
 
 	public function edit_promotion() {
+
+		$m_per = new M_permission;
+        if($m_per->check_permission("edit_promotion") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
 		//models
 		$id = $_GET["id"];
 		include("models/m_promotion.php");
@@ -92,6 +121,15 @@ class C_promotion
 	}
 
 	public function get_list_products_promotion() {
+
+		$m_per = new M_permission;
+        if($m_per->check_permission("list_promotion_detail") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
+
 		$id = $_GET["id"];
 		//models
 		include("models/m_promotion.php");
@@ -106,6 +144,15 @@ class C_promotion
 	}
 
 	public function choose_products_promotion() {
+
+		$m_per = new M_permission;
+        if($m_per->check_permission("insert_promotion_detail") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
+
 		$id = $_GET["id"];
 		//models
 		require("models/m_categories.php");
@@ -133,6 +180,13 @@ class C_promotion
 
 	public function chose_products_promotion() {
 
+		$m_per = new M_permission;
+        if($m_per->check_permission("insert_promotion_detail") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
 		//models
 		$id = $_GET["id"];
 		$list_id = $_POST["list_id"];
@@ -156,6 +210,15 @@ class C_promotion
 
 
 	public function save_chose_products() {
+
+		$m_per = new M_permission;
+        if($m_per->check_permission("insert_promotion_detail") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
+
 		$id = $_GET["id"];
 		$pro_id = $_POST["pro_id"];
 		$price_promotion = $_POST["promotion_price"];

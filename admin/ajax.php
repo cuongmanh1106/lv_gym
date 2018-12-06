@@ -471,6 +471,14 @@ if(isset($_POST["search_ship"])) {
 /*End orders*/
 /*Supplier*/ 
 if(isset($_POST["insert_supplier"])) {
+
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('insert_supplier') == 0) {
+        echo "permission";
+        exit;
+    }
+
     $name = $_POST["name"];
     $phone = $_POST["phone"];
     $address = $_POST["address"];
@@ -494,6 +502,15 @@ if(isset($_POST["get_supplier_by_id"])) {
     echo json_encode(['sup'=>$sup]);
 }
 if(isset($_POST["edit_supplier"])) {
+
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('edit_supplier') == 0) {
+        echo "permission";
+        exit;
+    }
+
+
     $id = $_POST["id"];
     $name = $_POST["name"];
     $phone = $_POST["phone"];
@@ -508,6 +525,15 @@ if(isset($_POST["edit_supplier"])) {
     }
 }
 if(isset($_POST["delete_supplier"])) {
+
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('delete_supplier') == 0) {
+        echo "permission";
+        exit;
+    }
+
+
     $id = $_POST["id"];
     include("models/m_supplier.php");
     $m_sup = new M_suppliers();
@@ -520,6 +546,15 @@ if(isset($_POST["delete_supplier"])) {
     }
 }
 if(isset($_POST["delete_group_supplier"])) {
+
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission('delete_supplier') == 0) {
+        echo "permission";
+        exit;
+    }
+
+
     $list_id = $_POST['list_id'];//trả về kiểu chuổi
     $str = str_replace('[','',$list_id);
     $str = str_replace(']', '', $str);
@@ -550,7 +585,15 @@ if(isset($_POST["search_update_product"])) {
 
 }
 
-if(isset($_POST["delete_stock"])) {
+if(isset($_POST["delete_stock"])) { //delete detail_stock
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission("delete_detail_stock") == 0) {
+        $_SESSION['alert-warning'] = "You don't have permission to do this action";
+        echo "permission";
+        exit;
+    }
+
     $id = $_POST["id"];
 
     require("models/m_stock_receipt.php");
@@ -575,12 +618,14 @@ if(isset($_POST["delete_stock"])) {
     }
 }
 
-if(isset($_POST["delete_group_stock_product"])) {
-    // $m_per = new M_permission;
-    // if($m_per->check_permission('delete_product') == 0) {
-    //     echo "permission";
-    //     exit;
-    // }
+if(isset($_POST["delete_group_stock_product"])) { //delete detail stock
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission("delete_detail_stock") == 0) {
+        $_SESSION['alert-warning'] = "You don't have permission to do this action";
+        echo "permission";
+        exit;
+    }
     require("models/m_stock_receipt.php");
     require("models/m_products.php");
     require("models/m_categories.php");
@@ -633,7 +678,15 @@ if(isset($_POST["search_list_stock"])) {
 
 }
 
-if(isset($_POST["update_stock_receipt"])) {
+if(isset($_POST["update_stock_receipt"])) { //update status stock
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission("update_stock") == 0) {
+        $_SESSION['alert-warning'] = "You don't have permission to do this action";
+        echo "permission";
+        exit;
+    }
+
     $id = $_POST["stock_id"];
     $status = $_POST["status"];
 
@@ -685,6 +738,14 @@ if(isset($_POST["update_stock_receipt"])) {
 
 /* Promotion */
 if(isset($_POST["delete_promotion"])) {
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission("delete_promotion") == 0) {
+        $_SESSION['alert-warning'] = "You don't have permission to do this action";
+        echo "permission";
+        exit;
+    }
+
     $id = $_POST["id"];
     include("models/m_promotion.php");
     $m_promotion = new M_promotion();
@@ -697,6 +758,15 @@ if(isset($_POST["delete_promotion"])) {
 }
 
 if(isset($_POST["delete_group_promotion"])) {
+
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission("delete_promotion") == 0) {
+        $_SESSION['alert-warning'] = "You don't have permission to do this action";
+        echo "permission";
+        exit;
+    }
+
 
     $list_id = $_POST['list_id'];//trả về kiểu chuổi
     $str = str_replace('[','',$list_id);
@@ -772,12 +842,22 @@ if(isset($_POST["get_detail_product_promotion"])) {
     echo json_encode($product);
 }
 if(isset($_POST["update_detail_product_promotion"])) {
+
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission("edit_promotion_detail") == 0) {
+        $_SESSION['alert-warning'] = "You don't have permission to do this action";
+        echo "permission";
+        exit;
+    }
+
     $id = $_POST["id"];
     $price = $_POST["price"];
     include("models/m_promotion.php");
     $m_promotion = new M_promotion();
     if($m_promotion->update_promotion_detail($price,0,$id)) {
         $detail = $m_promotion->get_detail_product_promotion($id);
+        $_SESSION['alert-success'] = "Update promotion price successfully";
         echo json_encode($detail);
     } else {
         echo json_encode(['error'=>'Error update']);
@@ -786,6 +866,16 @@ if(isset($_POST["update_detail_product_promotion"])) {
 }
 
 if(isset($_POST["delete_promotion_detail"])) {
+
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    if($m_per->check_permission("delete_promotion_detail") == 0) {
+        $_SESSION['alert-warning'] = "You don't have permission to do this action";
+        echo "permission";
+        exit;
+    }
+
+
     $id = $_POST["id"];
     include("models/m_promotion.php");
     $m_promotion = new M_promotion();

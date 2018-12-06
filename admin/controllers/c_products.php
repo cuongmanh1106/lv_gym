@@ -145,7 +145,7 @@ class C_products
 
 public function edit() {
     $m_per = new M_permission;
-    if($m_per->check_permission("edit_product") == 0) {
+    if($m_per->check_permission("edit_product") == 0 && $m_per->check_permission("edit_detail_stock") == 0) {
         $_SESSION['alert-warning'] = "You don't have permission to do this action";
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
@@ -177,7 +177,7 @@ public function edit() {
 public function update() {
 
     $m_per = new M_permission;
-    if($m_per->check_permission("edit_product") == 0) {
+    if($m_per->check_permission("edit_product") == 0 && $m_per->check_permission("edit_detail_stock") == 0) {
         $_SESSION['alert-warning'] = "You don't have permission to do this action";
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
@@ -277,7 +277,7 @@ public function update() {
     public function update_sub() {
 
         $m_per = new M_permission;
-        if($m_per->check_permission("edit_product") == 0) {
+        if($m_per->check_permission("edit_product") == 0 && $m_per->check_permission("edit_detail_stock") == 0) {
             $_SESSION['alert-warning'] = "You don't have permission to do this action";
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             exit;

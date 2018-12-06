@@ -85,7 +85,10 @@
     var date_to = new Date($('input[name=date_to]').val());
     var cur_date_from = new Date('<?php echo $promotion->date_from ?>');
     
-    
+    d.setHours(0,0,0,0);
+    date_from.setHours(0,0,0,0);
+    date_to.setHours(0,0,0,0);
+
     html += ' <ul  class="alert alert-danger">';
     if($('input[name=name]').val() == ''){
       flag = false;

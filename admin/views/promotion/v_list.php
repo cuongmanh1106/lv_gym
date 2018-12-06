@@ -9,8 +9,19 @@
         <div class="card">
           <div class="card-header badge-info">
             <strong class="card-title"><i class="fa fa-list"></i> Promotions</strong>
+            <!--Permission insert promotion-->
+            <?php if($m_per->check_permission("insert_promotion") == 1){?>
             <a class="btn btn-success" href="promotion_add.php" ><i class="fa fa-plus-circle"></i> </a>
+            <?php } else {?>
+            <button class="btn btn-success" disabled ><i class="fa fa-plus-circle"></i> </button>
+            <?php } ?>
+
+            <!--Permission delete promotion-->
+            <?php if($m_per->check_permission("delete_promotion") == 1){?>
             <a class="btn btn-danger" href="javascript:void(0)" id="delete_group_promotion" ><i class="fa fa-trash-o"></i> </a>
+            <?php } else {?>
+              <button  class="btn btn-danger" disabled ><i class="fa fa-trash-o"></i> </button>
+            <?php } ?>
             
             </div>
             <div class="search" style="margin-top: 20px">
@@ -70,9 +81,27 @@
                      <i class="fa fa-dot-circle-o"></i> Action
                    </button>
                    <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
+
+                    <!--permission update promotion-->
+                    <?php if($m_per->check_permission("edit_promotion") == 1){?>
                     <a class="dropdown-item  badge badge-info" href="promotion_edit.php?id=<?php echo $u->id?>"   data-index = "<?php echo $u->id?>" ><i class="fa fa-edit"></i> Update</a>
+                    <?php } else {?>
+                    <button disabled class="dropdown-item  badge badge-info"  ><i class="fa fa-edit"></i> Update</a>
+                    <?php }?>
+
+                    <!--permission delete promotion-->
+                    <?php if($m_per->check_permission("delete_promotion") == 1){?>
                     <a class="dropdown-item  badge badge-danger delete_promotion" href="javascript:void(0)"   data-index = "<?php echo $u->id?>" ><i class="fa fa-trash-o"></i> Delete</a>
+                    <?php } else {?>
+                    <button disabled class="dropdown-item  badge badge-danger delete_promotion"  ><i class="fa fa-trash-o"></i> Delete</button>
+                    <?php }?>
+
+                    <!--permission list promotion detail-->
+                    <?php if($m_per->check_permission("list_promotion_detail") == 1){?>
                     <a class="dropdown-item  badge badge-warning" href="promotion_list_products.php?id=<?php echo $u->id?>"   data-index = "<?php echo $u->id?>" ><i class="fa fa-trash-o"></i> List Products Promotion</a>
+                    <?php } else {?>
+                    <button disabled class="dropdown-item  badge badge-warning" ><i class="fa fa-trash-o"></i> List Products Promotion</button>
+                    <?php }?>
                    </div>
                  </div>
                 </div>

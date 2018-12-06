@@ -15,10 +15,30 @@
         <div class="card">
           <div class="card-header badge-info ">
             <strong class="card-title"><i class="fa fa-list"></i> List Products Of Stock </strong>
+            <!-- Status stock is entering( status = 0) -->
             <?php if($stock->status == 0) {?>
-            <a href="stock_receipt_add_products.php?id=<?php echo $stock_id?>" class="btn btn-success" title="Insert New Products"   ><i class="fa fa-plus"></i></a>
-            <a href="stock_receipt_update_products.php?id=<?php echo $stock_id?>" class="btn btn-warning" title="Update Old Products"   ><i class="fa fa-edit"></i></a>
-            <a href="javascript:void(0)"  id="delete_group_stock_product" name="delete_group_stock_product" class="btn btn-danger" title="Update Old Products"   ><i class="fa fa-trash-o"></i></a>
+              <!--Permission insert-->
+              <?php if( $m_per->check_permission("insert_detail_stock") == 1) { ?>
+              <a href="stock_receipt_add_products.php?id=<?php echo $stock_id?>" class="btn btn-success" title="Insert New Products"   ><i class="fa fa-plus"></i></a>
+              <?php } else { ?>
+              <a href="stock_receipt_add_products.php?id=<?php echo $stock_id?>" class="btn btn-success disabled" title="Insert New Products"   ><i class="fa fa-plus"></i></a>
+              <?php }?>
+              
+              <!--Permission update-->
+              <?php if( $m_per->check_permission("edit_detail_stock") == 1) { ?>
+              <a href="stock_receipt_update_products.php?id=<?php echo $stock_id?>" class="btn btn-warning" title="Update Old Products"   ><i class="fa fa-edit"></i></a>
+              <?php } else { ?>
+              <a href="stock_receipt_update_products.php?id=<?php echo $stock_id?>" class="btn btn-warning disabled" title="Update Old Products"   ><i class="fa fa-edit"></i></a>
+              <?php }?>
+
+              <!--Permission delete-->
+              <?php if( $m_per->check_permission("delete_detail_stock") == 1) { ?>
+              <a href="javascript:void(0)"  id="delete_group_stock_product" name="delete_group_stock_product" class="btn btn-danger" title="Update Old Products"   ><i class="fa fa-trash-o"></i></a>
+              <?php } else { ?>
+              <a href="javascript:void(0)"  id="delete_group_stock_product" name="delete_group_stock_product" class="btn btn-danger disabled" title="Update Old Products"   ><i class="fa fa-trash-o"></i></a>
+              <?php }?>
+
+            <!-- Status stock is confirmed( status = 1|2) -->
             <?php } else {?>
             <a href="stock_receipt_add_products.php?id=<?php echo $stock_id?>" class="btn btn-success disabled" title="Insert New Products"   ><i class="fa fa-plus"></i></a>
             <a href="stock_receipt_update_products.php?id=<?php echo $stock_id?>" class="btn btn-warning disabled" title="Update Old Products"   ><i class="fa fa-edit"></i></a>
@@ -127,10 +147,23 @@
                      </button>
                      <?php } ?>
                      <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
+                      <!--Permission update--->
+                      <?php if($m_per->check_permission("edit_detail_stock") == 1){?>
                       <a class="dropdown-item  badge badge-primary" href="products_edit.php?id=<?php echo $p->id?>"><i class="fa fa-edit"> </i> Edit Infomation</a>
                       <a class="dropdown-item badge badge-primary edit_sub_img" data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_sub_image"><i class="fa fa-retweet"></i> Edit Sub Image</a>
                       <a class="dropdown-item  badge badge-info" href="stock_receipt_update_size_qty.php?pro_id=<?php echo $p->id ?>&stock_id=<?php echo $stock_id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update Size & Qty</a>
+                      <?php } else {?>
+                      <button class="dropdown-item  badge badge-primary" disabled=""><i class="fa fa-edit"> </i> Edit Infomation</a>
+                      <button class="dropdown-item badge badge-primary edit_sub_img" disabled><i class="fa fa-retweet"></i> Edit Sub Image</button>
+                      <button class="dropdown-item  badge badge-info" disabled ><i class="fa fa-edit"></i> Update Size & Qty</button>
+                      <?php }?>
+
+                      <!--Permission delete--->
+                      <?php if($m_per->check_permission("delete_detail_stock") == 1){?>
                       <a class="dropdown-item badge badge-danger delete_stock" data-index="<?php echo $detail->id?>"  href="javascript:void(0)"><i class="fa fa-trash-o"></i> Delete</a>
+                      <?php } else {?>
+                      <button class="dropdown-item badge badge-danger delete_stock" disabled><i class="fa fa-trash-o"></i> Delete</button>
+                      <?php }?>
 
                     </div>
                   </div>

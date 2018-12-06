@@ -9,9 +9,19 @@
         <div class="card">
           <div class="card-header badge-info">
             <strong class="card-title"><i class="fa fa-list"></i> Suppliers</strong>
-            <a class="btn btn-success"  data-toggle="modal" href="#add_supplier" ><i class="fa fa-plus-circle"></i> </a>
-            <button class="btn btn-danger" id="del_supplier"  ><i class="fa fa-trash-o"></i> </a>
+            <!--permission insert supplier-->
+            <?php if($m_per->check_permission("insert_supplier") == 1){?>
+            <a class="btn btn-success" data-toggle="modal" href="#add_supplier" ><i class="fa fa-plus-circle"></i> </a>
+            <?php } else {?>
+            <button disabled class="btn btn-success"  ><i class="fa fa-plus-circle"></i> </button>
+            <?php }?>
 
+            <!--permission delete supplier-->
+            <?php if($m_per->check_permission("delete_supplier") == 1){?>
+            <button class="btn btn-danger" id="del_supplier"  ><i class="fa fa-trash-o"></i> </a>
+            <?php } else {?>
+            <button disabled="" class="btn btn-danger" id="del_supplier"  ><i class="fa fa-trash-o"></i> </a>
+            <?php }?>
             </div>
            <hr style="boder:0.5px solid #fff">
            <div class="card-body" id="search_supplier">
@@ -40,8 +50,20 @@
                 <td><?php echo $u->address ?></td>
                 <td><?php echo $u->phone ?></td>
                 <td>
+
+                  <!--permission insert supplier-->
+                  <?php if($m_per->check_permission("edit_supplier") == 1){?>
                   <a class=" btn btn-primary" href="#edit_supplier" data-toggle="modal" data-index = "<?php echo $u->id?>"><i class="fa fa-edit"></i> </a>
+                  <?php } else {?>
+                  <button disabled class=" btn btn-primary"><i class="fa fa-edit"></i> </button>
+                  <?php }?>
+
+                  <!--permission delete supplier-->
+                  <?php if($m_per->check_permission("delete_supplier") == 1){?>
                   <a class=" btn btn-danger delete_supplier" data-index = "<?php echo $u->id ?>"  id="delete_supplier"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> </a>
+                  <?php } else {?>
+                  <button disabled class=" btn btn-danger delete_supplier"><i class="fa fa-trash-o"></i> </button>
+                  <?php }?>
                 </td>
               </tr>
             <?php endforeach?>
@@ -70,7 +92,9 @@
         success:function(data) {
           if(data.trim() == 'success') {
             window.location.reload();
-          } else {
+          } else if(data.trim() == "permission") {
+            alert('You dont have permission to do this action !!! ');
+          }else {
             alert('Fail delete supplier')
           }
         }
@@ -199,6 +223,8 @@
         success:function(data){
           if(data.trim() == "success") {
             window.location.reload();
+          } else if(data.trim() == "permission") {
+            alert('You dont have permission to do this action !!! ');
           } else {
             alert('Fail delete suppliers');
           }
