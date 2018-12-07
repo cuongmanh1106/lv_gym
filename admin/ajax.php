@@ -681,7 +681,7 @@ if(isset($_POST["search_list_stock"])) {
 if(isset($_POST["update_stock_receipt"])) { //update status stock
     include("models/m_permission.php");
     $m_per = new M_permission;
-    if($m_per->check_permission("update_stock") == 0) {
+    if($m_per->check_permission("edit_stock") == 0) {
         $_SESSION['alert-warning'] = "You don't have permission to do this action";
         echo "permission";
         exit;

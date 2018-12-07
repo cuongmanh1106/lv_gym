@@ -88,6 +88,7 @@
     d.setHours(0,0,0,0);
     date_from.setHours(0,0,0,0);
     date_to.setHours(0,0,0,0);
+    cur_date_from.setHours(0,0,0,0);
 
     html += ' <ul  class="alert alert-danger">';
     if($('input[name=name]').val() == ''){
@@ -112,7 +113,7 @@
       $('input[name=date_to]').css('border',"1px solid #ced4da");
     }
     
-    if( (date_from.getTime() < d.getTime() || date_to.getTime() < d.getTime()) && (date_from.getTime() != cur_date_from.getTime())) {
+    if( date_from.getTime() < d.getTime() && date_from.getTime() != cur_date_from.getTime() ) {
       flag = false;
       html += '<li>Date must be more than current date</li>';
     }
