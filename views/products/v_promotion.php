@@ -3,7 +3,7 @@
     <!-- @include('admin.include.report'); -->
  
     <div class="container" id="fil_pro">
-
+    <h3 style="text-align: center;"><b>Promotion Products</b></h3>
         <?php $dem =0;
         $count = 0;
         foreach($products as $p) :

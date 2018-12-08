@@ -37,8 +37,8 @@
 			<div id="example1">
 				<div id="owl-demo" class="owl-carousel text-center">
 					<?php 
-			include("models/m_categories.php");
-			$m_cate = new M_Category();
+					include("models/m_categories.php");
+					$m_cate = new M_Category();
 					$cates = $m_cate->read_top_view_cate();
 					foreach($cates as $c):
 						$parent_name = '';
@@ -69,82 +69,125 @@
 		<h3 style="text-align: center; margin-top:50px; font-size: 35px ">Top products</h3>
 		<div class="content-grids">
 			<?php foreach($products as $p):
-				$front = "$";
-            	$back = "";
-				$price = $p->price;
-				if(isset($_SESSION["vn"])) {
-					$front = "";
-					$back = " VND";
-					$price = $p->price*$_SESSION["vn"];
-				}
+			$front = "$";
+			$back = "";
+			$price = $p->price;
+			if(isset($_SESSION["vn"])) {
+				$front = "";
+				$back = " VND";
+				$price = $p->price*$_SESSION["vn"];
+			}
 			?>
-				<div class="col-md-4 content-grid">
-					<a href="single.php?id=<?php echo $p->id?>" class="lot"><img class="img-responsive " src="admin/public/images/<?php echo $p->image?>" alt=""></a>
-					<div class="shoe">
-						<p><?php echo $p->name?></p>
-						<h4 style = "margin-top:20px; margin-bottom: 20px"><b><?php echo $front?><?php echo number_format($price,2)?><?php echo $back?></b></h4>
-						<a href="single.php?id=<?php echo $p->id?>">find a store</a>
-					</div>
-					<div class="clearfix"> </div>
+			<div class="col-md-4 content-grid">
+				<a href="single.php?id=<?php echo $p->id?>" class="lot"><img class="img-responsive " src="admin/public/images/<?php echo $p->image?>" alt=""></a>
+				<div class="shoe">
+					<p><?php echo $p->name?></p>
+					<h4 style = "margin-top:20px; margin-bottom: 20px"><b><?php echo $front?><?php echo number_format($price,2)?><?php echo $back?></b></h4>
+					<a href="single.php?id=<?php echo $p->id?>">find a store</a>
 				</div>
-			<?php endforeach?>
-			
-			
+				<div class="clearfix"> </div>
+			</div>
+		<?php endforeach?>
 
+
+
+		<div class="clearfix"> </div>
+	</div>
+	<?php if(count($promotion_prduct) > 0) {?>
+	<h3 style="text-align: center; margin-top:50px; font-size: 35px ">Promotion</h3>
+	<div class="content-grids">
+		<?php foreach($promotion_prduct as $p):
+		$promotion_price = 0;
+		$promotion = $m_promotion->get_promotion_price($p->id);
+		if($promotion != 0) {
+			$promotion_price = $promotion->price;
+		}   
+		$price = $p->price_out;
+		$front = "$";
+		$back = "";
+		if(isset($_SESSION["vn"])) {
+			$front = "";
+			$back = " VND"; 
+			$price = $p->price_out*$_SESSION["vn"];
+			if($promotion != 0) {
+				$promotion_price = $promotion->price*$_SESSION["vn"];
+			}
+		} 
+		?>
+		<div class="col-md-4 content-grid">
+			<a href="single.php?id=<?php echo $p->id?>" class="lot"><img class="img-responsive " src="admin/public/images/<?php echo $p->image?>" alt=""></a>
+			<div class="shoe">
+				<p><?php echo $p->name?></p>
+				<?php if($promotion_price == 0) {?>
+				<h4 style = "margin-top:20px; margin-bottom: 20px"><b><?php echo $front?><?php echo number_format($price,2)?><?php echo $back?></b></h4>
+				<?php } else {?>
+				<div class="row" style="padding-bottom: 15px; padding-top: 15px">
+					<div class="col-md-6"><strike><?php echo $front?><?php echo number_format($price,2) ?><?php echo $back?></strike></div>
+					<div class="col-md-6" style="text-align: right; color:#ff4d4d"><h4 id="price_<?php echo $p->id?>" data-price="<?php echo $promotion->price?>"><b><?php echo $front?><?php echo number_format($promotion_price,1) ?><?php echo $back?></b></h4></div>
+				</div>
+				<?php }?>
+				<a href="single.php?id=<?php echo $p->id?>">find a store</a>
+			</div>
 			<div class="clearfix"> </div>
 		</div>
-		<!---->
-		<div class="content-top">
-			<div class="col-md-4 top-content">
-				<a href="single.html"><img class="img-responsive " src="public/images/pi.jpg" alt=""></a>
-			</div>
-			<div class="col-md-4 top-content">
-				<a href="single.html"><img class="img-responsive " src="public/images/pi1.jpg" alt=""></a>
-			</div>
-			<div class="col-md-4 top-content">
-				<a href="single.html"><img class="img-responsive " src="public/images/pi2.jpg" alt=""></a>
-			</div>
+	<?php endforeach?>
 
-			<div class="clearfix"> </div>
+
+<?php }?>
+	<div class="clearfix"> </div>
+</div>
+<!---->
+<div class="content-top">
+	<div class="col-md-4 top-content">
+		<a href="single.html"><img class="img-responsive " src="public/images/pi.jpg" alt=""></a>
+	</div>
+	<div class="col-md-4 top-content">
+		<a href="single.html"><img class="img-responsive " src="public/images/pi1.jpg" alt=""></a>
+	</div>
+	<div class="col-md-4 top-content">
+		<a href="single.html"><img class="img-responsive " src="public/images/pi2.jpg" alt=""></a>
+	</div>
+
+	<div class="clearfix"> </div>
+</div>
+<div class="content-bottom">
+	<div class="col-md-12 bottom-content">
+		<script src="public/js/responsiveslides.min.js"></script>
+		<script>
+			$(function () {
+				$("#slider").responsiveSlides({
+					auto: true,
+					speed: 500,
+					namespace: "callbacks",
+					pager: false,
+					nav:true,
+				});
+			});
+		</script>
+		<div class="slider">
+			<div class="callbacks_container">
+				<ul class="rslides" id="slider">
+					<li>
+						<img src="public/images/vi.jpg" alt="">
+
+					</li>
+					<li>
+						<img src="public/images/v2.jpg" alt="">
+
+					</li>
+					<li>
+						<img src="public/images/vi.jpg" alt="">
+
+					</li>
+				</ul>
+			</div>
+			<div class="london">
+				<h5>London Marathon 2013</h5>
+				<p>24/2013 - 6Mins</p>
+			</div>
 		</div>
-		<div class="content-bottom">
-			<div class="col-md-12 bottom-content">
-				<script src="public/js/responsiveslides.min.js"></script>
-				<script>
-					$(function () {
-						$("#slider").responsiveSlides({
-							auto: true,
-							speed: 500,
-							namespace: "callbacks",
-							pager: false,
-							nav:true,
-						});
-					});
-				</script>
-				<div class="slider">
-					<div class="callbacks_container">
-						<ul class="rslides" id="slider">
-							<li>
-								<img src="public/images/vi.jpg" alt="">
 
-							</li>
-							<li>
-								<img src="public/images/v2.jpg" alt="">
-								
-							</li>
-							<li>
-								<img src="public/images/vi.jpg" alt="">
-
-							</li>
-						</ul>
-					</div>
-					<div class="london">
-						<h5>London Marathon 2013</h5>
-						<p>24/2013 - 6Mins</p>
-					</div>
-				</div>
-
-			</div>
+	</div>
 			<!-- <div class="col-md-4 bottom-grid">
 				<h4>Latest Sport News</h4>
 				<div class="news">

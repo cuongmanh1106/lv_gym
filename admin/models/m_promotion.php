@@ -212,11 +212,15 @@ class M_promotion extends database {
 	}
 
 
-	public function get_promotion_detail_product() {
+	public function get_promotion_detail_product($rand = null) {
 		$date = date('Y-m-d');
+		$extra_sql = "";
+		if($rand != null) {
+			$extra_sql = " order by RAND() limit 4";
+		} 
 		$sql = "select  pro.id as id, pro.name as name, pro.price as price_out, pro.image as image, d.price as price_sale  
 		from (select * from promotion where date_from <= '$date' and date_to >= '$date' and status = 0) p, promotion_detail d, (select * from products where status = 0) pro 
-		where p.id = d.promotion_id and d.pro_id = pro.id and d.status = 0";
+		where p.id = d.promotion_id and d.pro_id = pro.id and d.status = 0" .$extra_sql;
 		$this->setQuery($sql);
 		$result = $this->loadAllRows();
 		return $result;

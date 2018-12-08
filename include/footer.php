@@ -85,6 +85,9 @@
 
 
 <script>
+    $(document).on('click','.h_menu4 ul li a',function(){
+        $(this).color('color','#d2232a');
+    })
     $(document).ready(function(){
         $(document).on('click','.add-cart',function(){
             var id = $(this).attr('data-index');

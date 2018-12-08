@@ -421,7 +421,7 @@ public function update() {
         $m_pro = new M_products();
         $top_product = $m_pro->read_top_product();
         $products_day = $m_pro->filter_detail_revenue(date('Y-m-d'));
-        $products_year_month = $m_pro->filter_revenue_by_month_year(date('m'),date('Y'));
+        $products_year_month = $m_pro->filter_revenue_by_month_year(0,date('Y'));
         // die();
         //views 
         $view = "views/products/v_chart.php";

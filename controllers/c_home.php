@@ -7,9 +7,11 @@ class C_home {
 	public function show_home() {
 
 		//models
+		include("admin/models/m_promotion.php");
+		$m_promotion = new M_promotion();
 		$m_pro = new M_products();
 		$products = $m_pro->read_top_product();
-
+		$promotion_prduct = $m_promotion->get_promotion_detail_product(3);
 
 
 

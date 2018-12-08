@@ -45,6 +45,7 @@
             </div>
         </div>
         <hr style="border:0.5px solid black">
+        <h3 style="text-align: center"><b><?php echo $cate->name?></b></h3>
     </div>
 
     <div class="container" id="fil_pro">
