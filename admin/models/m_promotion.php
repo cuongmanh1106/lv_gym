@@ -216,7 +216,7 @@ class M_promotion extends database {
 		$date = date('Y-m-d');
 		$extra_sql = "";
 		if($rand != null) {
-			$extra_sql = " order by RAND() limit 4";
+			$extra_sql = " order by RAND() limit ".$rand;
 		} 
 		$sql = "select  pro.id as id, pro.name as name, pro.price as price_out, pro.image as image, d.price as price_sale  
 		from (select * from promotion where date_from <= '$date' and date_to >= '$date' and status = 0) p, promotion_detail d, (select * from products where status = 0) pro 

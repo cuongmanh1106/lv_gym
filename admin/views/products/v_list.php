@@ -4,6 +4,7 @@
 <?php include("v_edit_sub_image.php");?>
 <?php include("v_edit_size.php");?>
 <?php include("v_edit_quantity.php");?>
+<?php include("v_destroy_product_size.php")?>
 
 <div class="content mt-3">
   <div class="animated fadeIn">
@@ -110,7 +111,14 @@
                     <?php }?>
 
                     <?php if($m_per->check_permission('delete_product') == 1) {?>
+                    <?php if(count($size) > 0) { ?>
+                    <a class="dropdown-item badge badge-danger" href="#destroy_product_size" data-toggle="modal" data-index="<?php echo $p->id?>" data-proid="<?php echo $p->id?>" data-name="<?php echo $p->name?>"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> Destroy Product</a>
+                    <?php } else {?>
+                      <a class="dropdown-item badge badge-danger" href="#edit_quantity" data-toggle="modal" data-index="<?php echo $p->quantity?>" data-proid="<?php echo $p->id?>" data-name="<?php echo $p->name?>"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> Destroy Product</a>
+                    <?php }?>
                     <a class="dropdown-item badge badge-danger delete_pro" data-index="<?php echo $p->id?>"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> Delete</a>
+
+
                     <?php } else {?>
                     <button class="dropdown-item badge badge-success " disabled ><i class="fa fa-retweet"></i> Delete</button>
                     <?php }?>
@@ -306,11 +314,8 @@
     quantity = $(e.relatedTarget).data('index');
     proid = $(e.relatedTarget).data('proid');
     name = $(e.relatedTarget).data('name');
-    size = $(e.relatedTarget).data('size');
-    console.log(size);
-
     $(e.currentTarget).find('input[name="quantity"]').val(quantity);
-    $(e.currentTarget).find('input[name="pro_id"]').val(proid);
+    $(e.currentTarget).find('input[name="id_pro"]').val(proid);
     $(e.currentTarget).find('#name_quantity_edit').html(name);
 
   })
@@ -402,6 +407,60 @@ $('#edit_size').on('show.bs.modal', function(e) {
     html += ' </div>';
   });
    $('#add-size').html(html);
+
+ }
+});
+});
+
+$('#destroy_product_size').on('show.bs.modal', function(e) {
+ var id = $(e.relatedTarget).data('proid');
+ var name = $(e.relatedTarget).data('name');
+ $(e.currentTarget).find('input[name="id_pro"]').val(id);
+ $(e.currentTarget).find('#name_edit').html(name);
+
+ $.ajax({
+  type:'POST',
+  url : 'ajax.php',
+  cache:false,
+  data:{'id':id,'edit_size':'OK'},
+  dataType:'JSON',
+  success:function(data,status){
+   var html = '';
+   $.each(data,function(index,v){
+    var xs='';
+    var s='';
+    var m='';
+    var l='';
+    var xl='';
+    var xxl='';
+    var xxxl='';
+    if(index == "XS") xs = 'selected';
+    if(index == "S") s = 'selected';
+    if(index == "M") m = 'selected';
+    if(index == "L") l = 'selected';
+    if(index == "XL") xl = 'selected';
+    if(index == "2XL") xxl = 'selected';
+    if(index == "3XL") xxxl = 'selected';
+    html += '  <div class="row form-group">'
+    html += '  <div class="col-md-1"><label for="text-input" class=" form-control-label">Size:</label></div>'
+    html += '  <div class="col-md-4">'
+    html += '<input type="text" readonly value = "'+index+'" required="required" id="text-input" onkeypress="return isNumberKey(event)" name="quantity[]" class="form-control">'
+    // html += ' <select name="size[]" class="form-control" id="select">';
+    // html += '<option '+xs+' value="XS">XS</option>';
+    // html += '<option '+s+'  value="S">S</option>';
+    // html += '<option '+m+'  value="M">M</option>';
+    // html += '<option '+l+'  value="L">L</option>';
+    // html += '<option '+xl+'  value="XL">XL</option>';
+    // html += '<option '+xxl+'  value="2XL">2XL</option>';
+    // html += '<option '+xxxl+'  value="3XL">3XL</option>';
+    // html += '</select>';
+    html += ' </div>';
+    html += '<div><label for="text-input" class=" form-control-label">Quantity:</label></div>';
+    html += '<div class="col-md-4"><input type="text" readonly value = "'+v+'" required="required" id="text-input" onkeypress="return isNumberKey(event)" name="quantity[]" class="form-control"></div>';
+    // html += ' <button type="button" class="close close-add-size" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+    html += ' </div>';
+  });
+   $('#destroy-product-size').html(html);
 
  }
 });

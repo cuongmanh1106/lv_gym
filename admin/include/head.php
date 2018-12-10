@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="public/assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="public/assets/css/lib/mystyle.css">
     <link rel="stylesheet" href="public/assets/css/icheck-bootstrap.css">
+    <link rel="stylesheet" href="public/assets/css/select2.min.css">
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
     <link rel="stylesheet" href="public/assets/scss/style.css">
     <script type="text/javascript" src="public/assets/js/ckeditor/ckeditor.js" charset="utf-8" ></script>

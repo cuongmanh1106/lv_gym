@@ -428,5 +428,70 @@ public function update() {
         $title = "Chart";
         include("include/layout.php");
     }
+
+    public function product_destroy() {
+        $m_per = new M_permission;
+        if($m_per->check_permission("delete_product") == 0) {
+            $_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+        include("models/m_products.php");
+        $m_pro = new M_products();
+        $id = $_POST['id_pro'];
+        $product = $m_pro->read_product_by_id($id);
+
+        $total_quantity = 0;
+        $size = '';
+        $user_id = $_SESSION["user"]->id;
+        if(isset($_POST["destroy_size"])) {
+            $size = json_decode($product->size);
+            $arr_size = $_POST['size_destroy'];
+            $arr_quantity = $_POST['quantity_destroy'];
+            $merge=array_combine($arr_size,$arr_quantity); // merge 2 trường lại 
+            $total_quantity = array_sum($arr_quantity);
+
+            $check = true;
+
+            foreach($merge as $key=>$value) {
+                if(isset($size->$key)) {
+                    if($size->$key >= $value) {
+                        $size->$key -= $value;
+                    } else {
+                        $check = false;
+                        break;
+                    }
+                } else {
+                    $check  = false;
+                    break;
+                }
+            }
+            if($check) {
+                if($m_pro->insert_destroy_product($user_id,$id,json_encode($merge),$total_quantity)) {
+                    $quantity = $product->quantity - $total_quantity;
+                    $m_pro->update_product_order($quantity,json_encode($size),$id);
+                    $_SESSION['alert-success'] = "Destroy product successfully";
+                }
+            } else {
+                $_SESSION['alert-warning'] = "Size must exitst in size list and size quantity must smaller than similiar size";
+            }
+            // $size = json_encode($merge);
+             
+        } else if (isset($_POST["destroy_quantity"])) {
+            $size = null;
+            $quantity = $product->quantity;
+            $destroy_quantity = $_POST["quantity_destroy"];
+            if($quantity >= $destroy_quantity) {
+                $quantity = $quantity - $destroy_quantity;
+                if($m_pro->insert_destroy_product($user_id,$id,json_encode($size),$destroy_quantity)) {
+                    $m_pro->update_product_order($quantity,$product->size,$id);
+                    $_SESSION['alert-success'] = "Destroy product successfully";
+                }
+            } else {
+                $_SESSION['alert-warning'] = "Destroy quantity must be lower than product quantity";
+            }
+        }
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
 }
 

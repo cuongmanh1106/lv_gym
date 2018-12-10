@@ -222,4 +222,10 @@ class M_products extends database {
 		$this->setQuery($sql);
 		return $this->execute(array($status,$id));
 	}
+
+	public function insert_destroy_product($user_id,$pro_id,$size,$quantity) {
+		$sql = "insert into destroy_product (user_id,pro_id,size,quantity) values(?,?,?,?)";
+		$this->setQuery($sql);
+		return $this->execute(array($user_id,$pro_id,$size,$quantity));
+	}
 }
