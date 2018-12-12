@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 10, 2018 at 12:55 AM
+-- Generation Time: Dec 12, 2018 at 12:49 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -95,6 +95,32 @@ INSERT INTO `comments` (`id`, `pro_id`, `user_id`, `comment`, `parent`, `like`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `destroy_product`
+--
+
+DROP TABLE IF EXISTS `destroy_product`;
+CREATE TABLE IF NOT EXISTS `destroy_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `pro_id` int(11) NOT NULL,
+  `size` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `quantity` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `destroy_product`
+--
+
+INSERT INTO `destroy_product` (`id`, `user_id`, `pro_id`, `size`, `quantity`, `created_at`) VALUES
+(1, 1, 58, '{\"XS\":\"2\"}', 2, '2018-12-10 05:40:59'),
+(2, 1, 4, 'null', 2, '2018-12-10 05:41:17'),
+(3, 1, 4, 'null', 45, '2018-12-10 07:09:01');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `detail_stock`
 --
 
@@ -112,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `detail_stock` (
   PRIMARY KEY (`id`),
   KEY `stock_id` (`stock_id`),
   KEY `pro_id` (`pro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `detail_stock`
@@ -182,7 +208,9 @@ INSERT INTO `detail_stock` (`id`, `stock_id`, `pro_id`, `quantity`, `price_in`, 
 (61, 12, 55, 35, '20.00', '{\"XS\":\"35\"}', 0, '2018-12-09 15:01:35', '2018-12-09 15:01:35'),
 (62, 12, 56, 30, '25.00', '{\"XS\":\"10\",\"S\":\"10\",\"L\":\"10\"}', 0, '2018-12-09 15:03:06', '2018-12-09 15:03:06'),
 (63, 12, 57, 30, '40.00', '{\"XS\":\"10\",\"M\":\"20\"}', 0, '2018-12-09 15:04:36', '2018-12-09 15:04:36'),
-(64, 12, 58, 10, '20.00', '{\"XS\":\"10\"}', 0, '2018-12-09 15:06:08', '2018-12-09 15:06:08');
+(64, 12, 58, 10, '20.00', '{\"XS\":\"10\"}', 0, '2018-12-09 15:06:08', '2018-12-09 15:06:08'),
+(65, 13, 4, 30, '10.00', 'null', 1, '2018-12-10 05:43:08', '2018-12-10 05:43:08'),
+(66, 13, 58, 40, '20.00', '{\"XS\":\"10\",\"M\":\"10\",\"L\":\"20\"}', 1, '2018-12-10 05:43:54', '2018-12-10 05:43:54');
 
 -- --------------------------------------------------------
 
@@ -457,7 +485,7 @@ INSERT INTO `products` (`id`, `name`, `alias`, `cate_id`, `sup_id`, `price_in`, 
 (1, 'BASIC TRAINING SHORTS', 'basic-training-shorts', 5, 9, '10.00', '17.00', 26, '{\"XS\":15,\"L\":\"11\"}', 't5-41544366178.jpg', '[]', 'All the basics and all you need.', '• Relaxed fit \r\n• Overlapping side seam split \r\n• Zip pocket with fusing \r\n• Branded flat drawcord \r\n• 95% Polyester, 5% Elastane \r\n• Model is 6\'0\" and wears size M\r\n\r\nThe Basic Training Shorts work with you in the gym and support you out of it. A loose fit gives complete freedom to squat, sprint and jump for a fully focused workout.', 5, 0, '2018-12-05 04:13:38', '2018-12-05 04:13:38'),
 (2, 'FLAWLESS KNIT TIGHTS', 'flawless-knit-tights', 5, 10, '17.00', '20.00', 10, '{\"XS\":0,\"S\":10}', 't1-11544366068.jpg', '[\"t2-11544366068.jpg\"]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S.', 6, 0, '2018-12-05 04:16:20', '2018-12-05 04:16:20'),
 (3, 'FLAWLESS KNIT LONG SLEEVE CROP TOP', 'flawless-knit-long-sleeve-crop-top', 7, 9, '12.00', '16.00', 30, '{\"XS\":30}', 't1-11544366154.jpg', '[]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'nice & Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S. ', 0, 0, '2018-12-05 04:18:51', '2018-12-05 04:18:51'),
-(4, 'FLEUR TEXTURE LONG SLEEVE CROP', 'fleur-texture-long-sleeve-crop', 5, 10, '10.00', '22.00', 17, 'null', 't7-31544366134.jpg', '[]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S.\r\n', 14, 0, '2018-12-05 04:24:12', '2018-12-05 04:24:12'),
+(4, 'FLEUR TEXTURE LONG SLEEVE CROP', 'fleur-texture-long-sleeve-crop', 5, 10, '10.00', '22.00', 0, 'null', 't7-31544366134.jpg', '[]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S.\r\n', 14, 0, '2018-12-05 04:24:12', '2018-12-05 04:24:12'),
 (5, 'Product 55', 'product-55', 8, 9, '16.00', '30.00', 24, '{\"XS\":4,\"S\":\"20\"}', 'h10-1153258053315439835311543984206.jpg', '[\"b1-315325770231544103371.jpg\",\"b1-115326595871544103396.jpg\"]', 'nicec', 'nices', 4, 1, '2018-12-05 04:30:06', '2018-12-05 04:30:06'),
 (6, 'Black Shirt', 'black-shirt', 5, 9, '10.00', '12.00', 76, '{\"XS\":19,\"S\":\"15\",\"XL\":\"12\",\"2XL\":\"30\"}', 't3-31544366111.jpg', '[]', 'nice', 'nice', 2, 0, '2018-12-06 13:47:07', '2018-12-06 13:47:07'),
 (7, 'Pink Short Shirt', 'pink-short-shirt', 8, 10, '15.00', '16.00', 30, '{\"XS\":\"10\",\"S\":\"20\"}', 't2-51544366089.jpg', '[]', 'soft & comfortable', 'soft & comfortable', 0, 0, '2018-12-08 12:57:12', '2018-12-08 12:57:12'),
@@ -511,7 +539,7 @@ INSERT INTO `products` (`id`, `name`, `alias`, `cate_id`, `sup_id`, `price_in`, 
 (55, 'FLEUR TEXTURE VEST WASHED KHAKI MARL', 'fleur-texture-vest-washed-khaki-marl', 15, 10, '20.00', '30.00', 35, '{\"XS\":\"35\"}', 't4-41544367695.jpg', '[\"t4-31544367695.jpg\",\"t4-21544367695.jpg\",\"t4-11544367695.jpg\"]', 'Get tough with training.', '• Thick, jacquard fabric\r\n• Double layered back feature\r\n• Keyhole cut out to back\r\n• Front seam\r\n• 46% Polyester, 43% Nylon, 11% Elastane\r\n• Model is 5\'7\" and wears a size S.\r\n\r\nBuilt with jacquard for when training gets hard. The Fleur Texture Vest is constructed from thick yet supple fabrics to move with your through your workout; but with a contemporary cut out design to the back, it’s a gym style ', 0, 0, '2018-12-09 15:01:35', '2018-12-09 15:01:35'),
 (56, 'ASYMMETRIC VEST SMOKEY GREY/BLACK', 'asymmetric-vest-smokey-greyblack', 15, 10, '25.00', '30.00', 30, '{\"XS\":\"10\",\"S\":\"10\",\"L\":\"10\"}', 't3-31544367786.jpg', '[\"t3-41544367786.jpg\",\"t3-21544367786.jpg\",\"t3-11544367786.jpg\"]', 'Abstract art meets performance technology.', '• Relaxed fit\r\n• Asymmetric colour panels\r\n• Cross over panels\r\n• Wrap front details\r\n• 85% Nylon, 15% Elastane\r\n• Model is 5\'7\" and wears a size S.\r\n\r\nDesigned to stand out, assembled to workout, the Asymmetric Vest provides a loose fit to allow you to exercise free of restriction but full of coverage. In unique, bold colourways, get ahead of the rest in style', 0, 0, '2018-12-09 15:03:06', '2018-12-09 15:03:06'),
 (57, 'SOLACE JUMPSUIT CHARCOAL MARL', 'solace-jumpsuit-charcoal-marl', 15, 10, '40.00', '50.00', 30, '{\"XS\":\"10\",\"M\":\"20\"}', 't2-41544367876.jpg', '[\"t2-21544367876.jpg\",\"t2-11544367876.jpg\",\"t2-31544367876.jpg\"]', 'Solace, softer.', '• High neck design with non-functional drawcords \r\n• Functional drawcords to waist \r\n• Keyhole cut out to back with button fastening \r\n• Bulk seams and elastication \r\n• Main: 46% Viscose, 42% Polyester, 12% Elastane. Rib: 95% Viscose, 5% Elastane. \r\n• Model is 5\'7\" and size XS.\r\n\r\nAll-in-one, all for rest day. Experience comfort like no other in the Solace Jumpsuit boasting a luxuriously soft fabric blend and flattering close fit: shaped for you', 0, 0, '2018-12-09 15:04:36', '2018-12-09 15:04:36'),
-(58, 'FLORAL GRAPHIC TANK WHITE', 'floral-graphic-tank-white', 15, 10, '20.00', '25.00', 10, '{\"XS\":\"10\"}', 't1-41544367968.jpg', '[\"t1-31544367968.jpg\",\"t1-21544367968.jpg\",\"t1-11544367968.jpg\"]', 'Subtly Gymshark.', 'Subtly Gymshark. The Graphic Floral Tank disguises our famous Gymshark logo within an elegant floral print.\r\n\r\n• Midriff crop and curved side split\r\n\r\n• Crew neck and drop armhole\r\n\r\n• Lightweight, unrestrictive fit\r\n\r\n65% Polyester, 35% Viscose.\r\n\r\nModel is 5\'5\" and wears size XS', 0, 0, '2018-12-09 15:06:08', '2018-12-09 15:06:08');
+(58, 'FLORAL GRAPHIC TANK WHITE', 'floral-graphic-tank-white', 15, 10, '20.00', '25.00', 48, '{\"XS\":18,\"M\":\"10\",\"L\":\"20\"}', 't1-41544367968.jpg', '[\"t1-31544367968.jpg\",\"t1-21544367968.jpg\",\"t1-11544367968.jpg\"]', 'Subtly Gymshark.', 'Subtly Gymshark. The Graphic Floral Tank disguises our famous Gymshark logo within an elegant floral print.\r\n\r\n• Midriff crop and curved side split\r\n\r\n• Crew neck and drop armhole\r\n\r\n• Lightweight, unrestrictive fit\r\n\r\n65% Polyester, 35% Viscose.\r\n\r\nModel is 5\'5\" and wears size XS', 0, 0, '2018-12-09 15:06:08', '2018-12-09 15:06:08');
 
 -- --------------------------------------------------------
 
@@ -539,7 +567,7 @@ CREATE TABLE IF NOT EXISTS `promotion` (
 INSERT INTO `promotion` (`id`, `name`, `description`, `image`, `date_from`, `date_to`, `status`, `created_at`) VALUES
 (1, 'First promotion', '<p>description</p>\r\n', 'apple15390030891543987262.jpg', '2018-12-05', '2018-12-08', 1, '2018-12-05 05:21:02'),
 (2, 'Black friday', '<p>hi</p>\r\n', 'apple15302017531544104524.jpg', '2018-12-06', '2018-12-09', 0, '2018-12-06 13:55:24'),
-(3, 'Promotion for new year', '', '', '2018-12-21', '2018-12-29', 0, '2018-12-08 13:05:11');
+(3, 'Promotion for new year', '', '', '2018-12-10', '2018-12-29', 0, '2018-12-08 13:05:11');
 
 -- --------------------------------------------------------
 
@@ -558,7 +586,7 @@ CREATE TABLE IF NOT EXISTS `promotion_detail` (
   PRIMARY KEY (`id`),
   KEY `promotion_id` (`promotion_id`),
   KEY `pro_id` (`pro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `promotion_detail`
@@ -570,7 +598,10 @@ INSERT INTO `promotion_detail` (`id`, `promotion_id`, `pro_id`, `price`, `status
 (4, 2, 1, '16.00', 0, '2018-12-06 13:56:30'),
 (6, 2, 6, '10.68', 0, '2018-12-06 13:56:30'),
 (7, 2, 3, '15.00', 0, '2018-12-08 03:03:36'),
-(8, 2, 2, '18.00', 0, '2018-12-08 13:09:43');
+(8, 2, 2, '18.00', 0, '2018-12-08 13:09:43'),
+(9, 3, 1, '15.00', 0, '2018-12-10 07:07:24'),
+(10, 3, 6, '11.00', 0, '2018-12-10 07:07:25'),
+(11, 3, 7, '15.50', 0, '2018-12-10 07:07:25');
 
 -- --------------------------------------------------------
 
@@ -642,7 +673,7 @@ CREATE TABLE IF NOT EXISTS `stock_receipt` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `stock_receipt`
@@ -660,7 +691,8 @@ INSERT INTO `stock_receipt` (`id`, `user_id`, `description`, `status`, `created_
 (9, 1, '<p>base layers</p>\r\n', 1, '2018-12-09 13:38:34', '2018-12-09 13:38:34'),
 (10, 1, '<p>mens t shirt</p>\r\n\r\n<p>&nbsp;</p>\r\n', 1, '2018-12-09 13:50:11', '2018-12-09 13:50:11'),
 (11, 1, '<p>hoodie &amp; jacket womens</p>\r\n', 1, '2018-12-09 14:38:22', '2018-12-09 14:38:22'),
-(12, 1, '<p>women&nbsp;shorts</p>\r\n', 1, '2018-12-09 14:48:12', '2018-12-09 14:48:12');
+(12, 1, '<p>women&nbsp;shorts</p>\r\n', 1, '2018-12-09 14:48:12', '2018-12-09 14:48:12'),
+(13, 1, '<p>update_product</p>\r\n', 1, '2018-12-10 05:41:53', '2018-12-10 05:41:53');
 
 -- --------------------------------------------------------
 
