@@ -52,8 +52,8 @@
       html += '<li>Password is required</li>';
       flag = false;
     }
-    if($('input[name=new_password]').val() == '') {
-      html += '<li>New password  is required</li>';
+    if($('input[name=new_password]').val().length < 6) {
+      html += '<li>New password have length at least is 6 characters</li>';
       flag = false;
     }
     if($('input[name=conf_new_password]').val() == '') {

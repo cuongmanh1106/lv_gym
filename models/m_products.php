@@ -4,7 +4,7 @@ require_once("admin/models/database.php");
 class M_products extends database { 
 
 	public function read_top_product() {
-		$sql = "select * from products order by view desc limit 0,3";
+		$sql = "select * from products where quantity != 0 order by view desc limit 0,3";
 		$this->setQuery($sql);
 		return $this->loadAllRows();
 	}

@@ -97,17 +97,17 @@
     var html = '';
     var flag = true;
     html += ' <ul  class="alert alert-danger">';
-    if($('input[name=first_name]').val() == ''){
+    if($('input[name=first_name]').val().length < 2){
       flag = false;
       $('input[name=first_name]').css('border',"1px solid red");
-      html += '<li>First name is required</li>';
+      html += '<li>First name have length at least 2 characters</li>';
     }  else {
       $('input[name=first_name]').css('border',"1px solid #ced4da");
     }
-    if($('input[name=last_name]').val() == ''){
+    if($('input[name=last_name]').val().length < 2){
       flag = false;
       $('input[name=last_name]').css('border',"1px solid red");
-      html += '<li>Last name is required</li>';
+      html += '<li>Last name have length at least 2 characters</li>';
     }  else {
       $('input[name=last_name]').css('border',"1px solid #ced4da");
     }
@@ -153,7 +153,7 @@
   })
 
   $('input[name=first_name]').on('change',function(){
-    if($('input[name=first_name]').val() == ''){
+    if($('input[name=first_name]').val().length < 2){
       $('input[name=first_name]').css('border',"1px solid red");
     }  else {
       $('input[name=first_name]').css('border',"1px solid #ced4da");
@@ -161,7 +161,7 @@
   })
 
   $('input[name=last_name]').on('change',function(){
-    if($('input[name=last_name]').val() == ''){
+    if($('input[name=last_name]').val().length < 2){
       $('input[name=last_name]').css('border',"1px solid red");
     }  else {
       $('input[name=last_name]').css('border',"1px solid #ced4da");

@@ -16,7 +16,7 @@
 							$total_revenue = 0;
 							foreach($products as $key=>$tp): 
 								$total_quantity += $tp->quantity;
-								$total_revenue += ($tp->price_sale-$tp->price_in)*$tp->quantity;
+								$total_revenue += $tp->total;
 								?>
 								<tr>
 									<td><?php echo $key + 1 ?></td>

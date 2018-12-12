@@ -24,7 +24,9 @@ include("include/report.php");
 		</div>
 		<div class="card">
 			<div class="card-header badge-info"  style="text-align: center;">
-				<h4><i class="fa fa-search"></i> Filter Revenue By Day</h4>
+				<form method="POST" action="products_chart_pdf.php">
+				<span style = "font-weight: 500; font-size:1.1rem"><i class="fa fa-search"></i> Filter Revenue By Day <span><button type="submit" style="float:right" class="btn btn-success">Export PDF</button></span></span>
+				
 			</div>
 			<div class="card-body">
 				<h5 class="card-title">Search Revenue:</h5>
@@ -32,6 +34,7 @@ include("include/report.php");
 					<div class="col-md-4"><input class="form-control" type="date" value="<?php echo date('Y-m-d'); ?>" name="date"></div>
 				</div>
 				<br>
+				</form>
 				<div id="load_revenue_by_day">
 					<?php if(count($products_day) > 0) {?>
 					<table class="table table-striped table_load_revenue">
@@ -52,7 +55,7 @@ include("include/report.php");
 							$total_revenue = 0;
 							foreach($products_day as $key=>$tp): 
 								$total_quantity += $tp->quantity;
-								$total_revenue += ($tp->price_sale-$tp->price_in)*$tp->quantity;
+								$total_revenue += $tp->total;
 								?>
 								<tr>
 									<td><?php echo $key + 1 ?></td>
@@ -84,7 +87,8 @@ include("include/report.php");
 
 		<div class="card">
 			<div class="card-header badge-info"  style="text-align: center;">
-				<h4><i class="fa fa-search"></i> Filter Revenue By Month/Year</h4>
+				<form method="POST" action="products_chart_pdf.php">
+				<span style = "font-weight: 500; font-size:1.1rem"><i class="fa fa-search"></i> Filter Revenue By Day <span><button type="submit" style="float:right" class="btn btn-success">Export PDF</button></span></span>
 			</div>
 			<div class="card-body">
 				<h5 class="card-title">Search Revenue:</h5>
@@ -116,6 +120,7 @@ include("include/report.php");
 					</div>
 				</div>
 				<br>
+				</form>
 				<div id="load_revenue_by_month_year">
 					<table class="table table-striped table_load_revenue">
 						<thead>
@@ -135,7 +140,7 @@ include("include/report.php");
 							$total_revenue = 0;
 							foreach($products_year_month as $key=>$tp): 
 								$total_quantity += $tp->quantity;
-								$total_revenue += ($tp->price_sale-$tp->price_in)*$tp->quantity;
+								$total_revenue += $tp->total;
 								?>
 								<tr>
 									<td><?php echo $key + 1 ?></td>
@@ -157,11 +162,7 @@ include("include/report.php");
 							</tr>
 						</tfoot>
 					</table>
-
-
-					
 				</div>
-				
 			</div>
 		</div>
 
@@ -169,7 +170,9 @@ include("include/report.php");
 
 		<div class="card">
 			<div class="card-header badge-info"  style="text-align: center;">
-				<h4><i class="fa fa-list-ol"></i> Top products</h4>
+				<form method="POST" action="products_chart_pdf.php">
+				<span style = "font-weight: 500; font-size:1.1rem"><i class="fa fa-search"></i> Top Revenue <span><button  type="submit" style="float:right" class="btn btn-success">Export PDF</button></span></span>
+				</form>
 			</div>
 			<div class="card-body">
 				<table class="table table-striped table_top_product">

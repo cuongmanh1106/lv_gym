@@ -19,7 +19,7 @@ class C_products {
 		if(isset($_GET['pages'])) {
 			$current_page = $_GET['pages'];
 		}
-		if(isset($_GET['cate_id'])) {
+		if(isset($_GET['cate_id']) && $_GET['cate_id'] != '') {
 			$cate_id = $_GET['cate_id'];
 			$cate = $m_cate->read_cate_by_id($cate_id);
 			$child = $m_cate->read_cate_by_parent($cate->id);
@@ -49,7 +49,7 @@ class C_products {
 		$vt = ($current_page - 1) * $limit;
 
 
-		if(isset($_GET['cate_id'])) {
+		if(isset($_GET['cate_id']) && $_GET['cate_id'] != '') {
 			$cate_id = $_GET['cate_id'];
 			$cate = $m_cate->read_cate_by_id($cate_id);
 			$child = $m_cate->read_cate_by_parent($cate->id);

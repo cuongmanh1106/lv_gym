@@ -57,10 +57,10 @@ class C_account{
 			}
 
 			if($m_account->insert_user($first_name,$last_name,$email,$password,$image,4,$phone_number,$address)) {
-				$_SESSION["alert-success"] = "Successfully";
+				$_SESSION["alert-success"] = "Register Successfully";
 				echo "<script> window.location='login.php'</script>";
 			} else {
-				$_SESSION["alert-danger"] = "Fail";
+				$_SESSION["alert-danger"] = "Register Fail";
 				echo " window.location='.'</script>";
 			}
 		}

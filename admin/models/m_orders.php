@@ -64,14 +64,21 @@ class M_orders extends database {
 	}
 
 	public function update_order($delivery_place,$delivery_cost,$status,$id) {
-		$sql = "update orders set delivery_place = ?, delivery_cost = ?, status =? where id = ?";
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$now = new DateTime();
+		$now =  $now->format('Y-m-d H:i:s');    // MySQL datetime format
+		var_dump($now);
+		$sql = "update orders set delivery_place = ?, delivery_cost = ?, status =?, updated_at = ? where id = ?";
 		$this->setQuery($sql);
-		return $this->execute(array($delivery_place,$delivery_cost,$status,$id));
+		return $this->execute(array($delivery_place,$delivery_cost,$status,$now,$id));
 	}
 	public function update_status($status,$id) {
-		$sql = "update orders set status =? where id = ?";
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$now = new DateTime();
+		$now =  $now->format('Y-m-d H:i:s');    // MySQL datetime format
+		$sql = "update orders set status =?, updated_at = ? where id = ?";
 		$this->setQuery($sql);
-		return $this->execute(array($status,$id));
+		return $this->execute(array($status,$now,$id));
 	}
 
 	//ship
@@ -109,9 +116,12 @@ class M_orders extends database {
 		return $this->loadAllRows();
 	}
 	public function update_ship($status,$id){
-		$sql = "update ship set status = ? where order_id = ?";
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$now = new DateTime();
+		$now =  $now->format('Y-m-d H:i:s');    // MySQL datetime format
+		$sql = "update ship set status = ?, updated_at = ? where order_id = ?";
 		$this->setQuery($sql);
-		return $this->execute(array($status,$id));
+		return $this->execute(array($status,$now,$id));
 	}
 
 	public function update_shipper($user_id,$id) {

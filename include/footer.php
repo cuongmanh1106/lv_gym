@@ -139,7 +139,7 @@
                     data = data.trim();
                     // console.log(data);
                     if(data == "overlimit") {
-                        alert("This product's quantity don't enough");
+                        alert("Sorry, This product don't have any left");
                     } else {
                         total_data = data.split('---');
                         total = data.split('-');
@@ -176,7 +176,7 @@
                 success:function(data) {
                     console.log(data);
                   if(data.cart == 'overlimit') {
-                    alert("This product's quantity don't enough!!");
+                    alert("Sorry, This product don't have any left!!");
                     $this1.parent().parent().find('input[name=qty_checkout]').val(data.qty);
                     $this1.parent().parent().find('select[name=size_update]').val(data.size);
                   }else if(data.cart == 'exists') {

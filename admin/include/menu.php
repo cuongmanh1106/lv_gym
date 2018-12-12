@@ -31,12 +31,8 @@
                             <li><i class="fa fa-file-word-o"></i><a href="ui-typgraphy.html">Typography</a></li>
                         </ul>
                     </li> -->
-                    <li class="menu-item-has-children active dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-alt"></i>Products</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-list"></i><a href="products_list.php">List</a></li>
-                            <li><i class="fa fa-plus-square"></i><a href="products_add.php">Add</a></li>
-                        </ul>
+                    <li>
+                        <a href="products_list.php" > <i class="menu-icon fa fa-list-alt"></i>Products</a>
                     </li>
                     <li>
                         <a href="stock_receipt_list.php"> <i class="menu-icon fa fa-users"></i>Stock Receiving </a>
@@ -44,12 +40,9 @@
                     <li>
                         <a href="cate_list.php"> <i class="menu-icon fa fa-list-alt"></i>Categories </a>
                     </li>
-                    <li class="menu-item-has-children active dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-alt"></i>Supplier</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-list"></i><a href="supplier_list.php">List</a></li>
-                            <li><i class="fa fa-plus-square"></i><a href="">Add</a></li>
-                        </ul>
+                    <li >
+                        <a href="supplier_list.php" > <i class="menu-icon fa fa-list-alt"></i>Supplier</a>
+                        
                     </li>
                     <li class="menu-item-has-children active dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Users</a>

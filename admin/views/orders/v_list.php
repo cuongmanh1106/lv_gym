@@ -10,7 +10,7 @@
         <div class="card">
           <div class="card-header badge-info">
             <strong class="card-title"><i class="fa fa-list"></i> Orders</strong>
-            
+            <?php include("include/report.php") ?>
           </div>
           <div class="clearfix"></div>
           <div class="search" style="margin-top: 20px">

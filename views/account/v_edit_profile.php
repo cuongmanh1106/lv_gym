@@ -60,20 +60,20 @@
   $('#update_profile').on('click',function(){
     html = '<ul class="alert alert-danger">';
     flag = true;
-    if($('input[name=first_name]').val() == '') {
-      html += '<li>First name is required</li>';
+    if($('input[name=first_name]').val().length < 2 ) {
+      html += '<li>First name have length at least 2 charecters</li>';
       flag = false;
     }
-    if($('input[name=last_name]').val() == '') {
-      html += '<li>Last name  is required</li>';
+    if($('input[name=last_name]').val().length < 2) {
+      html += '<li>Last name have length at least 2 charecters</li>';
       flag = false;
     }
     if($('input[name=email]').val() == '') {
       html += '<li>Email is required</li>';
       flag = false;
     }
-    if($('input[name=phone_number]').val() == '') {
-      html += '<li>First name is required</li>';
+    if($('input[name=phone_number]').val().length > 11 || $('input[name=phone_number]').val().length < 10) {
+      html += '<li>Phone have length between 10 and 11</li>';
       flag = false;
     }
     html += '</ul>';

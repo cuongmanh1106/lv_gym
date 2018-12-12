@@ -52,16 +52,16 @@
 		var html = '';
 		var flag = true;
 		html += ' <ul  class="alert alert-danger">';
-		if($('input[name=first_name]').val() == ''){
+		if($('input[name=first_name]').val().length < 2){
 			flag = false;
-			html += '<li>First name is required</li>';
+			html += '<li>First name have length at least is 2 characters</li>';
 			$('input[name=first_name]').css('border','1px solid red');
 		}  else {
 			$('input[name=first_name]').css('border','none');
 		}
-		if($('input[name=last_name]').val() == ''){
+		if($('input[name=last_name]').val().length < 2){
 			flag = false;
-			html += '<li>Last name is required</li>';
+			html += '<li>Last name have length at least is 2 characters</li>';
 			$('input[name=last_name]').css('border','1px solid red');
 		}  else {
 			$('input[name=last_name]').css('border','none');
@@ -105,7 +105,7 @@
 	})
 
 	$('input[name=first_name]').on('keyup',function(){
-		if($('input[name=first_name]').val() == "") {
+		if($('input[name=first_name]').val().length < 2 ) {
 			$('input[name=first_name]').css('border','1px solid red');
 		}  else {
 			$('input[name=first_name]').css('border','none');
@@ -113,7 +113,7 @@
 	}) 
 
 	$('input[name=last_name]').on('keyup',function(){
-		if($('input[name=last_name]').val() == "") {
+		if($('input[name=last_name]').val().length < 2 ) {
 			$('input[name=last_name]').css('border','1px solid red');
 		}  else {
 			$('input[name=last_name]').css('border','none');
@@ -121,7 +121,7 @@
 	}) 
 
 	$('input[name=email]').on('change',function(){
-		if($('input[name=email]').val() == "") {
+		if($('input[name=email]').val() < 2 ) {
 			$('input[name=email]').css('border','1px solid red');
 
 		}  else {
@@ -158,7 +158,7 @@
 	}) 
 
 	$('input[name=phone_number]').on('keyup',function(){
-		if($('input[name=phone_number]').val() == "") {
+		if($('input[name=phone_number]').val().length > 11 || $('input[name=phone_number]').val().length < 10) {
 			$('input[name=phone_number]').css('border','1px solid red');
 		}  else {
 			$('input[name=phone_number]').css('border','none');
