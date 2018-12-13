@@ -4,6 +4,7 @@ include("include/report.php");
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="stock_receipt_list.php" style="color: blue">Stock Receipt</a></li>
+    <li class="breadcrumb-item"><a href="stock_receipt_list_products.php?id=<?php echo $stock_id?>" style="color: blue">List Stock detail</a></li>
     <li class="breadcrumb-item active" aria-current="page">Insert a product to stock</li>
 </ol>
 </nav>

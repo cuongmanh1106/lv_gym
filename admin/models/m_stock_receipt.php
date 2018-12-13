@@ -14,6 +14,23 @@ class M_stock_receipt extends database {
 		return $this->loadRow();
 	}
 
+	public function search_stock_receipt($stock_no,$user,$status) {
+		$sql = "select * from stock_receipt where status >= 0";
+		if($stock_no != '') {
+			$sql .= " and id like '%".$stock_no."%'";
+		}
+		if($user != 0) {
+			$sql .= " and user_id =".$user;
+		}
+		if($status != 'all') {
+			$sql .= " and status = ".$status;
+		}
+
+		$sql .=" order by status asc, created_at desc";
+		$this->setQuery($sql);
+		return $this->loadAllRows();
+	}
+
 	public function read_product_by_stock($stock_id) {
 		$sql = "select * from detail_stock where status != 2 and stock_id = ".$stock_id;
 		$this->setQuery($sql);
@@ -177,12 +194,33 @@ class M_stock_receipt extends database {
 		return $this->execute(array($status,$id));
 	}
 
+	public function delete_product($id) {
+		$sql = "update products set status = 1 where id = ?";
+		$this->setQuery($sql);
+		return $this->execute(array($id));
+	}
+
 	public function delete_group_stock_product($arrId = array()) {
 		$str = implode(",",$arrId);
 		$sql = "update detail_stock set status = 2 where id IN ($str)";
 		$this->setQuery($sql);
-		return $this->execute();
+		$check = $this->execute();
+		if($check) {
+			foreach($arrId as $value) {
+				$detail = $this->read_detail_by_id($value);
+				$product = $this->read_product_by_id($detail->pro_id);
+				if($product->status == 2) {
+					$this->delete_product($product->id);
+				}
+			}
+			return true;	
+		}
+		return false;
+
 	}
- 
+
+
+
+
 
 }

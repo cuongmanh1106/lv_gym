@@ -182,7 +182,7 @@ if(isset($_POST["filter_revenue"])) {
 if(isset($_POST["load_revenue_by_month_year"])) {
     $month = $_POST["month"];
     $year = $_POST["year"];
-  
+
     include("models/m_products.php");
     $m_pro = new M_products();
     $products = $m_pro->filter_revenue_by_month_year($month,$year);
@@ -570,8 +570,24 @@ if(isset($_POST["delete_group_supplier"])) {
     }
 }
 /*end Supplier*/
-    
+
 /* Stock receipt */
+
+if(isset($_POST["search_stock"])) {
+    include("models/m_permission.php");
+    $m_per = new M_permission;
+    $stock_no = $_POST["stock_no"];
+    $user = $_POST["user"];
+    $status = $_POST["status"];
+
+    include("models/m_stock_receipt.php");
+    include("models/m_users.php");
+    $m_user = new M_users();
+    $m_stock = new M_stock_receipt();
+    $stocks = $m_stock->search_stock_receipt($stock_no,$user,$status);
+    include("views/stock_receipt/v_search_stock_receipt.php");
+}
+
 if(isset($_POST["search_update_product"])) {
     $pro_id = $_POST["pro_id"];
     $stock_id = $_POST["stock_id"];
@@ -607,6 +623,10 @@ if(isset($_POST["delete_stock"])) { //delete detail_stock
     $m_pro = new M_products();
     $details = $m_stock->read_detail_by_id($id);
     if($m_stock->update_status_detail(2,$id)) {
+        $product = $m_pro->read_product_by_id($details->pro_id);
+        if($product->status == 2) {
+            $m_pro->delete_product($product->id);
+        }
         $products = $m_stock->read_product_by_stock($details->stock_id);
         $cates = $m_cate->read_all_categories();
         $stock_id = $details->stock_id;
@@ -686,10 +706,8 @@ if(isset($_POST["update_stock_receipt"])) { //update status stock
         echo "permission";
         exit;
     }
-
     $id = $_POST["stock_id"];
     $status = $_POST["status"];
-
     require("models/m_stock_receipt.php");
     require("models/m_products.php");
     $m_stock = new M_stock_receipt();
@@ -725,11 +743,13 @@ if(isset($_POST["update_stock_receipt"])) { //update status stock
                 } else {
                     $quantity += $del_pro->quantity;
                 }
-
                 $m_pro->update_product_order($quantity,json_encode($size),$d->pro_id);
-                $_SESSION["alert-success"] = "Update Status Stock Successfully";
+               
             }
         }
+        $_SESSION["alert-success"] = "Update Status Stock Successfully";
+        echo "success";
+       
     }
 }
 /* end stock receipt */
@@ -750,6 +770,7 @@ if(isset($_POST["delete_promotion"])) {
     include("models/m_promotion.php");
     $m_promotion = new M_promotion();
     if($m_promotion->update_status_promotion($id)) {
+
         $promotions = $m_promotion->read_all_promotion();
         include("views/promotion/v_search_promotion.php");
     } else {

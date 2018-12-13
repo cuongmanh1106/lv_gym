@@ -17,7 +17,7 @@
     <script src="public/assets/js/lib/data-table/buttons.colVis.min.js"></script>
     <script src="public/assets/js/lib/data-table/datatables-init.js"></script>
     <script src="public/assets/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> -->
     
 
 

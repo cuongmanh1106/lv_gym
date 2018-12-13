@@ -27,8 +27,7 @@ class C_stock_receipt
 		$m_stock = new M_stock_receipt();
 		$m_user = new M_users();
 		$stocks = $m_stock->read_all_stock();
-
-
+        $users = $m_user->read_all_user();
 
 
 		//views
@@ -59,7 +58,7 @@ class C_stock_receipt
 		echo "<script>window.location = 'stock_receipt_list.php'</script>";
 	}
 
-	public function create_stock_product() {
+	public function create_stock_product() { //stock_receipt_add_products.php
 		//models
         
         $m_per = new M_permission;
@@ -106,7 +105,6 @@ class C_stock_receipt
                 $_SESSION['alert-danger'] = "Error File";
                 echo "<script>window.location = 'stock_receipt_add_products.php?id=".$stock_id."'</script>";
             }
-
 
             //Xu Ly size
             $size  = '';
@@ -172,7 +170,7 @@ class C_stock_receipt
 	}
 
 
-    public function edit_stock_product() {
+    public function edit_stock_product() { //stock_receipt_update_products.php
 
         $m_per = new M_permission;
         if($m_per->check_permission("edit_detail_stock") == 0) {
@@ -229,12 +227,12 @@ class C_stock_receipt
     		$extra_size  = '';
             $total_quantity = 0;
 
-            if(isset($_POST['size'])) {
+            if(isset($_POST['size'])) { //size mới thêm
                 $arr_size = $_POST['size'];
                 $arr_quantity = $_POST['quantity'];
                 $merge=array_combine($arr_size,$arr_quantity);
                 $total_quantity = array_sum($arr_quantity);
-                $extra_size = $merge;
+                $extra_size = $merge; 
             } 
             if($extra_size == ''){
                 $total_quantity = $_POST["total_quantity"];
@@ -242,41 +240,43 @@ class C_stock_receipt
 
             
             if($product->status == 2) { //sản phẩm mới dc thêm trong đơn hàng này
-            	
             	$detail_size = json_decode($detail->size);
             	$quantity = $product->quantity;
             	$price = $_POST["price"];
             	$price_in = $_POST["price_in"];
             	if($extra_size == '') { 
             		$quantity += $total_quantity;
+                    $old_size = '';
             	} else {
 
             		foreach($extra_size as $key=>$value) {
 	                	if(isset($old_size->$key)) {
-	                		$old_size->$key += $value;
+	                		$old_size->$key += $value;//update size cũ
 	                	} else {
-	                		$old_size->$key = $value;
+	                		$old_size->$key = $value; // thêm size mới
 	                	}
 
 	                	$quantity += $value;
 		            }
+                    $extra_size = json_encode($extra_size);
+                    $old_size = json_encode($old_size);
             	}
             	
             	//$quantity,$size,$price,$price_in,$id
-            	if($m_pro->update_product_stock($quantity,json_encode($old_size),$price,$price_in,$pro_id)) {
+            	if($m_pro->update_product_stock($quantity,$old_size,$price,$price_in,$pro_id)) {
             		//$quantiy,$price_in,$size,$status,$stock_id,$pro_id
-            		$m_stock->update_stock_detail($quantity,$price_in,json_encode($old_size),0,$stock_id,$pro_id);
+            		$m_stock->update_stock_detail($quantity,$price_in,$old_size,0,$stock_id,$pro_id);
             		$_SESSION['alert-success'] = "Update Stock Product Successfully";
                    	
             	} else {
             		$_SESSION['alert-danger'] = "Update Stock Product Faily";
             	}
 
-            } else { //sản phẩm có sản trong danh sách
+            } else { //sản phẩm có sẵn trong danh sách
             	if(empty($detail)) { //chưa dc update lần nào
             		//$stock_id,$pro_id,$quantity,$price_in,$size,$status
-            		if($extra_size == '') $extra_size = null;
-            		if($m_stock->insert_stock_detail($stock_id,$pro_id,$total_quantity,$price_in,json_encode($extra_size),1)) {
+            		// if($extra_size == '') $extra_size = null;
+            		if($m_stock->insert_stock_detail($stock_id,$pro_id,$total_quantity,$price_in,$extra_size,1)) {
             			$_SESSION['alert-success'] = "Update Stock Product Successfully";
             		} else {
             			$_SESSION['alert-danger'] = "Update Stock Product Faily";
@@ -380,11 +380,10 @@ class C_stock_receipt
                 $arr_quantity = $_POST['quantity'];
                 $merge=array_combine($arr_size,$arr_quantity);
                 $total_quantity = array_sum($arr_quantity);
-                $new_size = $merge;
+                $new_size = json_encode($merge);
             } 
             if($new_size == ''){
                 $total_quantity = $_POST["total_quantity"];
-                $new_size = null;
             }
 
             
@@ -393,9 +392,9 @@ class C_stock_receipt
                 $price_in = $_POST["price_in"];
                 
                 //$quantity,$size,$price,$price_in,$id
-                if($m_pro->update_product_stock($total_quantity,json_encode($new_size),$price,$price_in,$pro_id)) {
+                if($m_pro->update_product_stock($total_quantity,$new_size,$price,$price_in,$pro_id)) {
                     //$quantiy,$price_in,$size,$status,$stock_id,$pro_id
-                    $m_stock->update_stock_detail($total_quantity,$price_in,json_encode($new_size),0,$stock_id,$pro_id);
+                    $m_stock->update_stock_detail($total_quantity,$price_in,$new_size,0,$stock_id,$pro_id);
                     $_SESSION['alert-success'] = "Update Stock Product Successfully";
                     
                 } else {
@@ -404,7 +403,7 @@ class C_stock_receipt
 
             } else { //sản phẩm có sản trong danh sách
 
-                if($m_stock->update_stock_detail($total_quantity,$price_in,json_encode($new_size),1,$stock_id,$pro_id)){
+                if($m_stock->update_stock_detail($total_quantity,$price_in,$new_size,1,$stock_id,$pro_id)){
                 	$_SESSION['alert-success'] = "Update Stock Product Successfully";
                 } else {
                     $_SESSION['alert-danger'] = "Update Stock Product Faily";

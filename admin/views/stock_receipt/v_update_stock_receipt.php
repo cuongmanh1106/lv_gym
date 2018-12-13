@@ -59,7 +59,9 @@
           url:'ajax.php',
           data:{'status':status,'stock_id':stock_id,'update_stock_receipt':'OK'},
           success:function(data) {
-            window.location.reload();
+            if(data.trim() == "success") {
+              window.location.reload();
+            }
           }
         })
       }
