@@ -67,7 +67,6 @@ class M_orders extends database {
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
 		$now = new DateTime();
 		$now =  $now->format('Y-m-d H:i:s');    // MySQL datetime format
-		var_dump($now);
 		$sql = "update orders set delivery_place = ?, delivery_cost = ?, status =?, updated_at = ? where id = ?";
 		$this->setQuery($sql);
 		return $this->execute(array($delivery_place,$delivery_cost,$status,$now,$id));
