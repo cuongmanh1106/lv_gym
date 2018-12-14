@@ -27,7 +27,7 @@
             
           <div class="row form-group">
               <div class="col-md-2"><label for="text-input" class=" form-control-label">Phone:</label></div>
-              <div class="col-md-9"><input type="text" required="required" id="text-input" value="<?php echo $_SESSION["customer"]->phone_number ?>" name="phone_number" class="form-control"></div>
+              <div class="col-md-9"><input type="text" maxlength="11" minlength="10"  onkeypress="return isNumberKey(event)" required="required" id="text-input" value="<?php echo $_SESSION["customer"]->phone_number ?>" name="phone_number" class="form-control"></div>
               <div class="">(<span style="color:red">*</span>)</div>
           </div>
           <div class="row form-group">

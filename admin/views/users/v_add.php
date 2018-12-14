@@ -2,7 +2,7 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="user_list.php" style="color: blue">Users</a></li>
     <li class="breadcrumb-item active" aria-current="page">Add a user</li>
-</ol>
+  </ol>
 </nav>
 
 <div class="card">
@@ -11,84 +11,85 @@
   </div>
 
   <div class="error_user">
-    
+
   </div>
 
   
   <div class="card-body">
     <form id="form" method="POST" enctype="multipart/form-data" action="">
-  <div class="container">
-    
-    <div class="row form-group">
-        <div class="col-md-1"><label for="text-input" class=" form-control-label">First Name:</label></div>
-        <div class="col-md-4"><input type="text" required="required" id="text-input" value="<?php echo $first_name?>" name="first_name" class="form-control"></div>
-         <div class="col-md-1">(<span style="color:red">*</span>)</div>
-         <div class="col-md-1"><label for="text-input" class=" form-control-label">Last Name:</label></div>
-        <div class="col-md-4"><input type="text" required="required" id="text-input" value="<?php echo $last_name?>" name="last_name" class="form-control"></div>
-        <div class="col-md-1">(<span style="color:red">*</span>)</div>
-    </div>
-     
-   <div class="row form-group">
-    <div class="col col-md-1"><label for="select" class=" form-control-label">Permission:</label></div>
-    <div class="col-12 col-md-10">
-      <select name="permission_id" required="required" id="select" class="form-control">
-         <?php foreach($permission as $v): ?>
+      <div class="container">
 
-        <option  value="<?php echo $v->id ?>"><?php echo $v->name ?></option> 
-        <?php endforeach?>
-      </select>
-  </div>
-   <div class="col-md-1">(<span style="color:red">*</span>)</div>
-   
-   
-  </div>
+        <div class="row form-group">
+          <div class="col-md-1"><label for="text-input" class=" form-control-label">First Name:</label></div>
+          <div class="col-md-4"><input type="text" required="required" id="text-input" value="<?php echo $first_name?>" name="first_name" class="form-control"></div>
+          <div class="col-md-1">(<span style="color:red">*</span>)</div>
+          <div class="col-md-1"><label for="text-input" class=" form-control-label">Last Name:</label></div>
+          <div class="col-md-4"><input type="text" required="required" id="text-input" value="<?php echo $last_name?>" name="last_name" class="form-control"></div>
+          <div class="col-md-1">(<span style="color:red">*</span>)</div>
+        </div>
 
- 
-   <div class="row form-group">
-        <div class="col-md-1"><label for="text-input" class=" form-control-label">Email</label></div>
-        <div class="col-md-10"><input type="email" required="required" id="text-input" value="<?php echo $email?>" name="email" class="form-control"></div>
-         <div class="col-md-1" id="check_email">(<span style="color:red">*</span>)</div>
-   </div>
+        <div class="row form-group">
+          <div class="col col-md-1"><label for="select" class=" form-control-label">Permission:</label></div>
+          <div class="col-12 col-md-10">
+            <select name="permission_id" required="required" id="select" class="form-control">
+             <?php foreach($permission as $v): ?>
+              <?php if($v->id != 1) {?>
+                <option  value="<?php echo $v->id ?>"><?php echo $v->name ?></option> 
+              <?php }?>
+              <?php endforeach?>
+            </select>
+          </div>
+          <div class="col-md-1">(<span style="color:red">*</span>)</div>
 
-    <div class="row form-group">
-        <div class="col-md-1"><label for="text-input" class=" form-control-label">Password:</label></div>
-        <div class="col-md-10"><input type="password" required="required" id="text-input" value="" name="password" class="form-control"></div>
-         <div class="col-md-1">(<span style="color:red">*</span>)</div>
-    </div>
 
-    <div class="row form-group">
-        <div class="col-md-1"><label for="text-input" class=" form-control-label">Confirm Password:</label></div>
-        <div class="col-md-10"><input type="password" required="required" id="text-input" value="" name="confirm_password" class="form-control"></div>
-         <div class="col-md-1">(<span style="color:red">*</span>)</div>
-    </div>
+        </div>
 
-    <div class="row form-group">
-        <div class="col-md-1"><label for="text-input" class=" form-control-label">Phone Number:</label></div>
-        <div class="col-md-10"><input type="text" required="required" id="text-input" value="<?php echo $phone_number?>" name="phone_number" class="form-control"></div>
-         <div class="col-md-1">(<span style="color:red">*</span>)</div>
-    </div>
 
-    <div class="row form-group">
-        <div class="col-md-1"><label for="text-input" class=" form-control-label">Address:</label></div>
-        <div class="col-md-10"><input type="text" id="text-input" name="address" value="<?php echo $address?>" class="form-control"></div>
-    </div>
+        <div class="row form-group">
+          <div class="col-md-1"><label for="text-input" class=" form-control-label">Email</label></div>
+          <div class="col-md-10"><input type="email" required="required" id="text-input" value="<?php echo $email?>" name="email" class="form-control"></div>
+          <div class="col-md-1" id="check_email">(<span style="color:red">*</span>)</div>
+        </div>
 
-    <div class="row form-group">
-        <div class="col-md-1"><label for="text-input" class=" form-control-label">Avatar:</label></div>
-        <div class="col-md-10"><input type="file" id="text-input" name="image" class="form-control"></div>
-    </div>
+        <div class="row form-group">
+          <div class="col-md-1"><label for="text-input" class=" form-control-label">Password:</label></div>
+          <div class="col-md-10"><input type="password" required="required" id="text-input" value="" name="password" class="form-control"></div>
+          <div class="col-md-1">(<span style="color:red">*</span>)</div>
+        </div>
 
-      <div class="form-group " style="text-align: center;">
-              
-              <button type="button" class="btn btn-danger " onclick="window.location='user_list.php'" name="reset"><i class="fa fa-reply"></i> Back</button>
-              <button  type="button" class="btn btn-info" id="insert_user" name="insert_user"><i class="fa fa-thumbs-o-up"></i> Save</button>
-            </div>
+        <div class="row form-group">
+          <div class="col-md-1"><label for="text-input" class=" form-control-label">Confirm Password:</label></div>
+          <div class="col-md-10"><input type="password" required="required" id="text-input" value="" name="confirm_password" class="form-control"></div>
+          <div class="col-md-1">(<span style="color:red">*</span>)</div>
+        </div>
 
-  
-  </div>
+        <div class="row form-group">
+          <div class="col-md-1"><label for="text-input"  class=" form-control-label">Phone Number:</label></div>
+          <div class="col-md-10"><input type="text"  maxlength="11" minlength="10"  onkeypress="return isNumberKey(event)" required="required" id="text-input" value="<?php echo $phone_number?>" name="phone_number" class="form-control"></div>
+          <div class="col-md-1">(<span style="color:red">*</span>)</div>
+        </div>
 
-             
-        </form>
+        <div class="row form-group">
+          <div class="col-md-1"><label for="text-input" class=" form-control-label">Address:</label></div>
+          <div class="col-md-10"><input type="text" id="text-input" name="address" value="<?php echo $address?>" class="form-control"></div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-1"><label for="text-input" class=" form-control-label">Avatar:</label></div>
+          <div class="col-md-10"><input type="file" id="text-input" name="image" class="form-control"></div>
+        </div>
+
+        <div class="form-group " style="text-align: center;">
+
+          <button type="button" class="btn btn-danger " onclick="window.location='user_list.php'" name="reset"><i class="fa fa-reply"></i> Back</button>
+          <button  type="button" class="btn btn-info" id="insert_user" name="insert_user"><i class="fa fa-thumbs-o-up"></i> Save</button>
+        </div>
+
+
+      </div>
+
+
+    </form>
   </div>
 </div>
 
@@ -147,10 +148,10 @@
 
     if(flag) {
      $('button[name="insert_user"]').attr("type", "submit");
-    } else {
-       $('.error_user').html(html);
-    }
-  })
+   } else {
+     $('.error_user').html(html);
+   }
+ })
 
   $('input[name=first_name]').on('change',function(){
     if($('input[name=first_name]').val().length < 2){

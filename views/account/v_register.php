@@ -30,7 +30,7 @@
 				</div>	
 				<div> 	
 					<span>Phone number (<b style="color: red">*</b>)</span>
-					<input type="text" value="<?php echo $phone_number?>" required name="phone_number"> 
+					<input type="text"  maxlength="11" minlength="10"  onkeypress="return isNumberKey(event)" value="<?php echo $phone_number?>" required name="phone_number"> 
 				</div>
 				<div> 	
 					<span>Address</span>

@@ -878,7 +878,7 @@ if(isset($_POST["update_detail_product_promotion"])) {
     $m_per = new M_permission;
     if($m_per->check_permission("edit_promotion_detail") == 0) {
         $_SESSION['alert-warning'] = "You don't have permission to do this action";
-        echo "permission";
+        echo json_encode(['error'=>'permission']);
         exit;
     }
 
@@ -891,7 +891,7 @@ if(isset($_POST["update_detail_product_promotion"])) {
         $_SESSION['alert-success'] = "Update promotion price successfully";
         echo json_encode($detail);
     } else {
-        echo json_encode(['error'=>'Error update']);
+        echo json_encode(['error'=>'Error']);
     }
 
 }

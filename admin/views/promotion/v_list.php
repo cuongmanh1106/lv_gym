@@ -86,7 +86,7 @@
                     <?php if($m_per->check_permission("edit_promotion") == 1){?>
                     <a class="dropdown-item  badge badge-info" href="promotion_edit.php?id=<?php echo $u->id?>"   data-index = "<?php echo $u->id?>" ><i class="fa fa-edit"></i> Update</a>
                     <?php } else {?>
-                    <button disabled class="dropdown-item  badge badge-info"  ><i class="fa fa-edit"></i> Update</a>
+                    <button disabled class="dropdown-item  badge badge-info"  ><i class="fa fa-edit"></i> Update</button>
                     <?php }?>
 
                     <!--permission delete promotion-->

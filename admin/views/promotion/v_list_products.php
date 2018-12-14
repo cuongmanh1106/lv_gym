@@ -118,7 +118,7 @@
                     <?php }?>
 
                     <!--permission delete promotion detail-->
-                    <?php if($m_per->check_permission("edit_promotion_detail") == 1){?>
+                    <?php if($m_per->check_permission("delete_promotion_detail") == 1){?>
                     <a class="dropdown-item  badge badge-danger delete_promotion_detail" href="javascript:void(0)"   data-index = "<?php echo $u->id?>" ><i class="fa fa-trash-o"></i> Delete</a>
                     <?php } else {?>
                     <button disabled class="dropdown-item  badge badge-danger"><i class="fa fa-trash-o"></i> Delete</button>
@@ -316,8 +316,10 @@
         data:{'id':id,'price':price,'update_detail_product_promotion':'OK'},
         dataType:'json',
         success:function(data){
-          if(data.error != null) {
+          if(data.error != null && data.error.trim() == "Error") {
             alert("Error Update");
+          } else if (data.error != null && data.error.trim() == "permission") {
+            alert('you dont have permission to do this action');
           } else {
             // $("#edit_detail_promotion").attr("data-dismiss","modal");
             // $('#edit_detail_promotion').modal('hide');
@@ -348,7 +350,10 @@
         data:{'id':id,'delete_promotion_detail':'OK'},
         success:function(data) {
           if(data.trim() == "success") {
+            alert("Delete successfully")
             $('#row_detail_promotion_'+id).remove();
+          } else if(data.trim() == 'permission') {
+            alert('You dont have permission to do this action');
           }
         }
       })
