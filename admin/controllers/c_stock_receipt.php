@@ -275,7 +275,7 @@ class C_stock_receipt
             } else { //sản phẩm có sẵn trong danh sách
             	if(empty($detail)) { //chưa dc update lần nào
             		//$stock_id,$pro_id,$quantity,$price_in,$size,$status
-            		// if($extra_size == '') $extra_size = null;
+            		if($extra_size != '') $extra_size = json_encode($extra_size);
             		if($m_stock->insert_stock_detail($stock_id,$pro_id,$total_quantity,$price_in,$extra_size,1)) {
             			$_SESSION['alert-success'] = "Update Stock Product Successfully";
             		} else {
@@ -302,8 +302,6 @@ class C_stock_receipt
 	            		$_SESSION['alert-danger'] = "Update Stock Product Faily";
 	            	}
             	}
-
-            	
             } 
             echo "<script>window.location = 'stock_receipt_list_products.php?id=".$stock_id."'</script>";
     	}

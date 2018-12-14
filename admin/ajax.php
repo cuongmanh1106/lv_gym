@@ -154,6 +154,16 @@ if(isset($_POST["search_pro"])){
     $cates = $m_cate->read_all_categories();
     include("views/products/v_search.php");
 }
+
+if(isset($_POST["list_destroy_products"])) {
+    include("models/m_products.php");
+    include("models/m_users.php");
+    $m_user = new M_users();
+    $m_pro = new M_products();
+    $products = $m_pro->read_destroy_products();
+    include("views/products/v_list_destroy_products_table.php");
+}
+
 /*Products */
 /*Chart*/
 if(isset($_POST["chart"])) {
@@ -744,12 +754,12 @@ if(isset($_POST["update_stock_receipt"])) { //update status stock
                     $quantity += $del_pro->quantity;
                 }
                 $m_pro->update_product_order($quantity,json_encode($size),$d->pro_id);
-               
+
             }
         }
         $_SESSION["alert-success"] = "Update Status Stock Successfully";
         echo "success";
-       
+
     }
 }
 /* end stock receipt */

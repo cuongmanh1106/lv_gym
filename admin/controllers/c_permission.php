@@ -41,7 +41,7 @@ class C_permission
 		include("models/m_permission.php");
 		$m_per = new M_permission();
 
-		if($m_per->check_permission('edit_permission') == 0) {
+		if($m_per->check_permission('edit_permission') == 0 || $id == 1) {
 			$_SESSION['alert-warning'] = "You don't have permission to do this action";
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             exit;

@@ -7,7 +7,7 @@
 								<th>Name</th>
 								<th>Price In</th>
 								<th>Price Sale</th>
-								<th>Quantity</th>
+								<th style="width: 5%">Quantity</th>
 								<th>Revenue</th>
 							</tr>
 
@@ -25,8 +25,8 @@
 									<td><?php echo $tp->created_at?></td>
 									<td><img src="public/images/<?php echo $tp->image ?>" width="60px"></td>
 									<td><?php echo $tp->name ?></td>
-									<td>$ <?php echo number_format($tp->price_in,2)?></td>
-									<td>$ <?php echo number_format($tp->price_sale,2)?></td>
+									<td align="right">$<?php echo number_format($tp->price_in,2)?></td>
+									<td align="right">$<?php echo number_format($tp->price_sale,2)?></td>
 									<td><?php echo $tp->quantity ?></td>
 									<td>$ <?php echo number_format( ($tp->price_sale-$tp->price_in)*$tp->quantity,2) ?></td>
 

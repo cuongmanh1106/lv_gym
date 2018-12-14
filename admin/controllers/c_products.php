@@ -267,7 +267,12 @@ public function update() {
             //Tiến hành update
             if($m_product->update_product($name,$cate_id,$sup_id,$product->price,$product->quantity,$product->size,$new_img,json_encode($new_sub_image),$intro,$description,$id)){
                 $_SESSION['alert-success'] = "Edit Product Successfully";
-                echo "<script>window.location = 'products_edit.php?id=$id'</script>";
+                if(isset($_GET["stock_id"])) {
+                    $stock_id = $_GET["stock_id"];
+                    echo "<script>window.location = 'products_edit.php?id=$id&stock_id=$stock_id'</script>";
+                } else {
+                    echo "<script>window.location = 'products_edit.php?id=$id'</script>";
+                }
             } else {
                 $_SESSION['alert-danger'] = "Edit Product Fail";
                 echo "<script>window.location.reload();</script>";

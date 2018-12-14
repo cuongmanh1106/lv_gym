@@ -4,7 +4,8 @@
 <?php include("v_edit_sub_image.php");?>
 <?php include("v_edit_size.php");?>
 <?php include("v_edit_quantity.php");?>
-<?php include("v_destroy_product_size.php")?>
+<?php include("v_destroy_product_size.php") ?>
+<?php include("v_list_destroy_products.php") ?>
 
 <div class="content mt-3">
   <div class="animated fadeIn">
@@ -19,6 +20,7 @@
             <?php } else {?>
             <button disabled class="btn btn-default" ><i class="fa fa-trash-o"></i></button>
             <?php }?>
+            <button data-toggle="modal" data-target="#list_destroy_product" class="btn btn-success"><i class="fa fa-eye"> List Destroy Products</i></button>
           </div> 
           <!--search form-->
           <div class="search" style="margin-top: 20px">
@@ -320,6 +322,18 @@
 
   })
 
+    //Load list destroy product
+    $('#list_destroy_product').on('show.bs.modal',function(e){
+
+      $.ajax({
+        type:'POST',
+        url:'ajax.php',
+        data:{'list_destroy_products':'OK'},
+        success:function(data){
+          $(e.currentTarget).find('#table_destroy_products').html(data);
+        }
+      })
+    })
    //gửi thông tin qua modal edit sub images
    $('#edit_sub_image').on('show.bs.modal', function(e) {
      var userid = $(e.relatedTarget).data('proid');

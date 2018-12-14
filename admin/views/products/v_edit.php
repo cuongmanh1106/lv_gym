@@ -10,14 +10,26 @@ if($product->sub_image != '') {
 }
 
 ?>
+<?php if(isset($_GET["stock_id"])) {
+    $stock_id = $_GET["stock_id"]
+?>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="stock_receipt_list.php" style="color: blue">Stock Receipt</a></li>
+    <li class="breadcrumb-item"><a href="stock_receipt_list_products.php?id=<?php echo $stock_id?>" style="color: blue">List products of stock</a></li>
+    <li class="breadcrumb-item active" aria-current="page">update a product to stock detail</li>
+</ol>
+</nav>
+<?php } else {?>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="products_list.php" style="color: blue">Products</a></li>
     <li class="breadcrumb-item active" aria-current="page">Edit a product</li>
 </ol>
 </nav>
+<?php }?>
 
-<form style="margin-left: 15px; margin-right: 15px"  method="POST" enctype="multipart/form-data" action="products_update.php">
+<form style="margin-left: 15px; margin-right: 15px"  method="POST" enctype="multipart/form-data" action="products_update.php<?php echo (isset($_GET["stock_id"])?"?stock_id=".$_GET["stock_id"]:"")?>">
     <input type="hidden" name="id" value="<?php echo $id?>">
     <div class="row">
         <div class="col-lg-12">
@@ -120,7 +132,11 @@ if($product->sub_image != '') {
 
             </div>
             <div style="text-align: center;">
+                <?php if(isset($_GET["stock_id"])) {?>
+                <button class="btn btn-danger" onclick="window.location= 'stock_receipt_list_products.php?id=<?php echo $_GET["stock_id"] ?>'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
+                <?php } else {?>
                 <button class="btn btn-danger" onclick="window.location= 'products_list.php'" type="button" value="Cancel"><i class="fa fa-reply"></i> Back</button>
+                <?php }?>
                 <button class="btn btn-info" name="update_pro" type="button" id="insert"><i class="fa fa-thumbs-o-up"></i> Update</button>
                 
             </div>

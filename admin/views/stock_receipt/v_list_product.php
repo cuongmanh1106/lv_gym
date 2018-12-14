@@ -147,9 +147,9 @@
                      </button>
                      <?php } ?>
                      <div class="dropdown-menu" style="position: absolute;transform: translate3d(0px, 38px, 0px);top: 35px;left: 0px;will-change: transform;">
-                      <!--Permission update--->
+                      <!--Permission update-->
                       <?php if($m_per->check_permission("edit_detail_stock") == 1){?>
-                      <a class="dropdown-item  badge badge-primary" href="products_edit.php?id=<?php echo $p->id?>"><i class="fa fa-edit"> </i> Edit Infomation</a>
+                      <a class="dropdown-item  badge badge-primary" href="products_edit.php?id=<?php echo $p->id?>&stock_id=<?php echo $stock_id?>"><i class="fa fa-edit"> </i> Edit Infomation</a>
                       <a class="dropdown-item badge badge-primary edit_sub_img" data-name="<?php echo $p->name?>" data-proid="<?php echo $p->id?>"   data-toggle="modal" href="#edit_sub_image"><i class="fa fa-retweet"></i> Edit Sub Image</a>
                       <a class="dropdown-item  badge badge-info" href="stock_receipt_update_size_qty.php?pro_id=<?php echo $p->id ?>&stock_id=<?php echo $stock_id ?>"   data-index = "<?php echo $stock->id?>" ><i class="fa fa-edit"></i> Update Size & Qty</a>
                       <?php } else {?>
@@ -158,7 +158,7 @@
                       <button class="dropdown-item  badge badge-info" disabled ><i class="fa fa-edit"></i> Update Size & Qty</button>
                       <?php }?>
 
-                      <!--Permission delete--->
+                      <!--Permission delete -->
                       <?php if($m_per->check_permission("delete_detail_stock") == 1){?>
                       <a class="dropdown-item badge badge-danger delete_stock" data-index="<?php echo $detail->id?>"  href="javascript:void(0)"><i class="fa fa-trash-o"></i> Delete</a>
                       <?php } else {?>

@@ -120,9 +120,8 @@ public function show_order_detail(){
                 }
             }
             $_SESSION["alert-success"] = "Successfully";
-            echo "<script>window.location = 'orders_list.php'</script>";
-
         }
+        echo "<script>window.location = 'orders_list.php'</script>";
     }
 
         //views 

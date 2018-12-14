@@ -182,7 +182,7 @@ class M_stock_receipt extends database {
 	}
 
 	public function update_stock_detail($quantiy,$price_in,$size,$status,$stock_id,$pro_id) {
-		$sql ="update detail_stock set quantity = ?, price_in = ?, size = ?, status = ? where stock_id = ? and pro_id = ?";
+		$sql ="update detail_stock set quantity = ?, price_in = ?, size = ?, status = ? where stock_id = ? and pro_id = ? and status != 2";
 		$this->setQuery($sql);
 		return $this->execute(array($quantiy,$price_in,$size,$status,$stock_id,$pro_id));
 

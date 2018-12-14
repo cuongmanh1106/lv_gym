@@ -22,7 +22,7 @@
             if(isset($_SESSION["vn"])) {
                 $front = "";
                 $back = " VND"; 
-                $price = $p->price*$_SESSION["vn"];
+                $price = $p->price_out*$_SESSION["vn"];
                 if($promotion != 0) {
                     $promotion_price = $promotion->price*$_SESSION["vn"];
                 }
