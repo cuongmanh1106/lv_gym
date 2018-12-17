@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header badge-success">
-                        <strong class="card-title"><i class="fa fa-pencil"></i> Detail order</strong>
+                        <strong class="card-title"><i class="fa fa-pencil"></i> Detail order (<?php echo $order->updated_at?>)</strong>
                     </div>
                     <?php
                     $customer = $m_user->read_user_by_id($order->customer_id);
@@ -59,7 +59,7 @@
                                             <?php }?>
                                             <div class="col-md-4">
                                                 <b>Status: </b>
-                                                <?php if($order->status < 4 && $_SESSION["user"]->permission_id!=6) { ?> <!--không cho sửa delivery-->
+                                                <?php if($order->status <= 4 && $_SESSION["user"]->permission_id!=6 && $now <= $update ) { ?> <!--không cho sửa delivery-->
                                                 <select class="form-control" name="status">
                                                     <?php
                                                     foreach($status as $stt):
@@ -87,10 +87,10 @@
                                             <br>
                                             <div class="row" style="text-align: right">
                                                 <a href="orders_list.php" class="btn btn-danger"><i class="fa fa-reply"></i> Back</a>
-                                                <?php if($order->status == 3) {?> <!-- nếu cập nhật lại người giao hàng -->
+                                                <?php if($order->status == 3 && $_SESSION["user"]->permission_id != 6) {?> <!-- nếu cập nhật lại người giao hàng -->
                                                 <Button type="button" class="btn btn-info" name="delivery_first" data-toggle="modal" data-target="#delivery"><i class="fa fa-thumbs-up"></i> Confirm</Button>
                                                 <button type="submit" name="confirm" class="btn btn-info " style="display: none"><i class="fa fa-thumbs-up"></i> Confirm</button>
-                                                <?php } elseif($order->status < 4) { ?> <!-- cập nhật status -->
+                                                <?php } elseif($order->status <= 4 && $_SESSION["user"]->permission_id != 6 && $now <= $update ) { ?> <!-- cập nhật status -->
                                                 <Button type="submit" name="confirm" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Confirm</button>
                                                     <?php } else {?>  <!-- khi status là completed hoặc cancel thì không cho cập nhật lại nữa -->
                                                     <button disabled type="button" name="confirm" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Confirm</button>

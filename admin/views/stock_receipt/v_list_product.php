@@ -33,9 +33,9 @@
 
               <!--Permission delete-->
               <?php if( $m_per->check_permission("delete_detail_stock") == 1) { ?>
-              <a href="javascript:void(0)"  id="delete_group_stock_product" name="delete_group_stock_product" class="btn btn-danger" title="Update Old Products"   ><i class="fa fa-trash-o"></i></a>
+              <a href="javascript:void(0)"  id="delete_group_stock_product" name="delete_group_stock_product" class="btn btn-danger" title="Delete Products"   ><i class="fa fa-trash-o"></i></a>
               <?php } else { ?>
-              <a href="javascript:void(0)"  id="delete_group_stock_product" name="delete_group_stock_product" class="btn btn-danger disabled" title="Update Old Products"   ><i class="fa fa-trash-o"></i></a>
+              <a href="javascript:void(0)"  id="delete_group_stock_product" name="delete_group_stock_product" class="btn btn-danger disabled"   ><i class="fa fa-trash-o"></i></a>
               <?php }?>
 
             <!-- Status stock is confirmed( status = 1|2) -->

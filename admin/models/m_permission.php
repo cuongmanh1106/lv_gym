@@ -4,7 +4,7 @@ require_once("database.php");
 class M_permission extends database {
 
 	public function read_all_permission() {
-		$sql = "select * from permission ";
+		$sql = "select * from permission where id != 4 ";
 		$this->setQuery($sql);
 		return $this->loadAllRows();
 	}

@@ -19,6 +19,12 @@ class M_account extends database {
 		return 'wrong';
 	}
 
+	public function check_email ($email) {
+		$sql = "select * from users where email = ? and permission_id = 4";
+		$this->setQuery($sql);
+		return $this->loadRow(array($email));
+	}
+
 	public function read_user_by_id($id) {
 		$sql = "select * from users where id = ".$id;
 		$this->setQuery($sql);
@@ -39,14 +45,13 @@ class M_account extends database {
 	}
 
 	public function reset_password($email,$password) {
-		$sql = "select * from users where permission_id = 4 and ans status = 0 and email = '".$email."'";
+		$sql = "select * from users where permission_id = 4 and status = 0 and email = '".$email."'";
 		$this->setQuery($sql);
 		$result = $this->loadRow();
-		var_dump($sql);
 		if(empty($result)) {
 			return false;
 		}
-		$sql = "update users set password = ".$password." where email = '".$email."'";
+		$sql = "update users set password = '".$password."' where email = '".$email."'";
 		$this->setQuery($sql);
 		return $this->execute();
 	}

@@ -38,6 +38,20 @@ if(isset($_POST["check_email"])){
 	}
 }
 
+if(isset($_POST["check_email_reset"])) {
+	$email = $_POST['email'];
+
+	include("models/m_account.php");
+	$m_account = new M_account();
+
+	$check = $m_account->check_email($email);
+	if(empty($check) ){
+		echo "ok";
+	}  else {
+		echo "exist";
+	}
+}
+
 /*#############Comment process##############*/
 
 if(isset($_POST["add_comment"])) {

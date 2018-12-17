@@ -49,6 +49,7 @@ public function show_order_detail(){
     $id = $_GET["id"];
 
 
+
         //models 
     include("models/m_orders.php");
     include("models/m_users.php");
@@ -59,6 +60,12 @@ public function show_order_detail(){
     $details = $m_order->read_detail_by_id($id);
     $order = $m_order->read_order_by_id($id);
     $status = $m_order->read_status();
+    $now = date('Y-m-d');
+    $update = $order->updated_at;
+    $now = strtotime(date("Y-m-d", strtotime($now)) . " -3 days");
+    $now = strftime("%Y-%m-%d", $now);
+
+
 
     if(isset($_POST["confirm"]) || isset($_POST["confirm_delivery"])) {
             // nếu status cũ là 1 và status vừa chọn khác 5 và 3 thì update lại thông tin đơn hàng

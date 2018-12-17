@@ -98,8 +98,7 @@
                 <td><?php echo $p->quantity?></td>
                 <td><?php echo substr($p->intro,0,30)  ?>.....</td>
                 <td><?php echo $size_name?></td>
-                <td>
-              </td>
+                
             </tr>
             <?php $i++; endforeach ?>
           </tbody>

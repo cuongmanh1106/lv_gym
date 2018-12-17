@@ -3,7 +3,7 @@
 <div class="container" style="margin-top: 100px">
 
 	<div class="account">
-		<h2>Account</h2>
+		<h2>Reset Password</h2>
 		<?php include("include/report.php"); ?>
 		<div class="account-pass">
 			<div class="col-md-7 account-top">

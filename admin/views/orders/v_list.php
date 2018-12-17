@@ -80,7 +80,7 @@
                 <tr>
                   <td><?php echo $key + 1 ?></td>
                   <td><?php echo $c->id ?></td>
-                  <td><?php echo $c->created_at ?></td>
+                  <td><?php echo $c->updated_at ?></td>
                   <td><?php echo $customer->first_name ?> <?php echo $customer->last_name ?></td>
                   <td><?php echo $c->delivery_cost ?></td>
                   <td>$ <?php echo number_format($subtotal, 2)?></td>

@@ -35,7 +35,7 @@
                         <a href="products_list.php" > <i class="menu-icon fa fa-list-alt"></i>Products</a>
                     </li>
                     <li>
-                        <a href="stock_receipt_list.php"> <i class="menu-icon fa fa-users"></i>Stock Receiving </a>
+                        <a href="stock_receipt_list.php"> <i class="menu-icon fa fa-list"></i>Stock Receiving </a>
                     </li>
                     <li>
                         <a href="cate_list.php"> <i class="menu-icon fa fa-list-alt"></i>Categories </a>
@@ -44,7 +44,7 @@
                         <a href="supplier_list.php" > <i class="menu-icon fa fa-list-alt"></i>Supplier</a>
                         
                     </li>
-                    <li class="menu-item-has-children active dropdown">
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Users</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-list"></i><a href="user_list.php">List</a></li>
@@ -60,7 +60,7 @@
                         <a href="feedback_list.php"> <i class="menu-icon fa fa-comment-o"></i>Feedback </a>
                     </li>
                     <li>
-                        <a href="promotion_list.php"> <i class="menu-icon fa fa-comment-o"></i>Promotion </a>
+                        <a href="promotion_list.php"> <i class="menu-icon fa fa-list"></i>Promotion </a>
                     </li>
                     <li>
                         <a href="orders_list.php"> <i class="menu-icon fa fa-book"></i>Orders </a>

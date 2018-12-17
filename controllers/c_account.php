@@ -19,7 +19,7 @@ class C_account{
 			if($m_account->check_login($email, $password) != "wrong") {
 				$_SESSION["customer"] = $m_account->check_login($email,$password);
 				$_SESSION["alert-success"] = "Login Successfully";
-				echo "<script>window.location = '.'</script>";
+				echo "<script> alert('Successfully'); window.location = '.'</script>";
 			} else {
 				$_SESSION["alert-danger"] = "Wrong Email or Password";
 				// echo "<script>window.location = '';</script>";
@@ -175,16 +175,19 @@ class C_account{
 		if(isset($_POST["reset_password"])) {
 			$password =  password_hash($_POST["password"],PASSWORD_DEFAULT);
 			$email = $_POST["email"];
-
 			include("models/m_account.php");
 			$m_account = new M_account();
+			$account = $m_account->check_email($email);
+			if(empty($account)) {
+				echo "<script>alert('Email does not exitst !!!'); window.location='login.php'</script>";
+			}
 			if($m_account->reset_password($email,$password)) {
 				$_SESSION["alert-success"] = "Reset password successfully";
+				echo "<script>alert('successfully'); window.location='login.php'</script>";
 			} else {
 				$_SESSION["alert-danger"] = "Reset password Faily";
 			}
 		}
-
 		//views
 		$title = "Reset password";
 		$view = "views/account/v_reset_password.php";
