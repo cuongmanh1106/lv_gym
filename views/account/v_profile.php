@@ -23,6 +23,7 @@
 				<a class="btn btn-info" data-toggle="modal" href="#edit_profile" style="text-align: center;"><i class="fa fa-edit"></i> Edit</a>   
 				<a class="btn btn-success"  href="." style="text-align: center;"><i class="fa fa-reply"></i> Back</a>  
 				<a class="btn btn-warning" href="profile_order.php" style="text-align: center;"><i class="fa fa-eye"></i> See history order</a>  
+				 
 			</div>
 		</div>
 
@@ -65,8 +66,10 @@
 				url:'ajax.php',
 				data:{'profile_logout':'OK'},
 				success:function(data) {
+
 					 window.location = '.';
 				}
 			})
 		})
+		
 	</script>

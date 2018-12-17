@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 14, 2018 at 12:53 AM
+-- Generation Time: Dec 17, 2018 at 01:08 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `destroy_product` (
   `quantity` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `destroy_product`
@@ -118,7 +118,11 @@ INSERT INTO `destroy_product` (`id`, `user_id`, `pro_id`, `size`, `quantity`, `c
 (2, 1, 4, 'null', 2, '2018-12-10 05:41:17'),
 (3, 1, 4, 'null', 45, '2018-12-10 07:09:01'),
 (4, 1, 64, 'null', 10, '2018-12-13 14:54:24'),
-(5, 1, 64, 'null', 2, '2018-12-13 15:27:36');
+(5, 1, 64, 'null', 2, '2018-12-13 15:27:36'),
+(6, 1, 64, 'null', 5, '2018-12-15 02:19:59'),
+(7, 1, 2, '{\"S\":\"2\"}', 2, '2018-12-16 08:40:42'),
+(8, 1, 1, '{\"L\":\"7\"}', 7, '2018-12-16 09:00:02'),
+(9, 1, 3, '{\"XS\":\"5\"}', 5, '2018-12-16 09:00:45');
 
 -- --------------------------------------------------------
 
@@ -140,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `detail_stock` (
   PRIMARY KEY (`id`),
   KEY `stock_id` (`stock_id`),
   KEY `pro_id` (`pro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `detail_stock`
@@ -148,14 +152,14 @@ CREATE TABLE IF NOT EXISTS `detail_stock` (
 
 INSERT INTO `detail_stock` (`id`, `stock_id`, `pro_id`, `quantity`, `price_in`, `size`, `status`, `created_at`, `updated_at`) VALUES
 (1, 2, 1, 33, '10.00', '{\"XS\":\"22\",\"L\":\"11\"}', 0, '2018-12-05 04:13:38', '2018-12-05 04:13:38'),
-(2, 2, 2, 31, '17.00', '{\"XS\":\"10\",\"S\":\"11\"}', 0, '2018-12-05 04:16:20', '2018-12-05 04:16:20'),
+(2, 2, 2, 17, '17.00', '{\"XS\":\"10\",\"S\":\"7\"}', 0, '2018-12-05 04:16:20', '2018-12-05 04:16:20'),
 (3, 2, 3, 20, '12.00', '{\"XS\":\"10\"}', 0, '2018-12-05 04:18:51', '2018-12-05 04:18:51'),
-(4, 2, 4, 20, '10.00', 'null', 0, '2018-12-05 04:24:12', '2018-12-05 04:24:12'),
+(4, 2, 4, 11, '10.00', 'null', 0, '2018-12-05 04:24:12', '2018-12-05 04:24:12'),
 (5, 2, 5, 31, '16.00', '{\"XS\":\"11\",\"S\":\"20\"}', 0, '2018-12-05 04:30:06', '2018-12-05 04:30:06'),
 (6, 3, 4, 20, '10.00', 'null', 2, '2018-12-05 04:32:15', '2018-12-05 04:32:15'),
-(7, 3, 3, 10, '12.00', '{\"XS\":\"10\"}', 2, '2018-12-05 04:32:24', '2018-12-05 04:32:24'),
+(7, 3, 3, 10, '12.00', '{\"XS\":\"10\"}', 0, '2018-12-05 04:32:24', '2018-12-05 04:32:24'),
 (8, 3, 4, 20, '10.00', 'null', 1, '2018-12-05 04:36:10', '2018-12-05 04:36:10'),
-(9, 3, 3, 20, '12.00', '{\"XS\":\"20\"}', 1, '2018-12-05 04:39:37', '2018-12-05 04:39:37'),
+(9, 3, 3, 20, '12.00', '{\"XS\":\"20\"}', 2, '2018-12-05 04:39:37', '2018-12-05 04:39:37'),
 (10, 4, 6, 42, '10.00', '{\"XS\":\"15\",\"S\":\"15\",\"XL\":\"12\"}', 0, '2018-12-06 13:47:07', '2018-12-06 13:47:07'),
 (11, 4, 4, 50, '10.00', 'null', 2, '2018-12-06 13:47:28', '2018-12-06 13:47:28'),
 (12, 5, 7, 30, '15.00', '{\"XS\":\"10\",\"S\":\"20\"}', 0, '2018-12-08 12:57:12', '2018-12-08 12:57:12'),
@@ -230,7 +234,9 @@ INSERT INTO `detail_stock` (`id`, `stock_id`, `pro_id`, `quantity`, `price_in`, 
 (90, 17, 66, 22, '10.00', '{\"XS\":\"22\"}', 0, '2018-12-13 14:50:33', '2018-12-13 14:50:33'),
 (91, 17, 64, 20, '150.00', '', 1, '2018-12-13 14:52:14', '2018-12-13 14:52:14'),
 (92, 17, 58, 2, '20.00', '{\"XS\":\"2\"}', 1, '2018-12-13 14:53:12', '2018-12-13 14:53:12'),
-(93, 6, 67, 20, '10.00', '', 0, '2018-12-13 16:09:54', '2018-12-13 16:09:54');
+(93, 6, 67, 20, '10.00', '', 0, '2018-12-13 16:09:54', '2018-12-13 16:09:54'),
+(94, 18, 1, 35, '10.00', '{\"XS\":\"5\",\"XL\":\"30\"}', 1, '2018-12-16 09:03:22', '2018-12-16 09:03:22'),
+(95, 18, 2, 72, '17.00', '{\"XS\":\"50\",\"XL\":22}', 1, '2018-12-16 09:03:46', '2018-12-16 09:03:46');
 
 -- --------------------------------------------------------
 
@@ -372,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
   KEY `status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `orders`
@@ -395,7 +401,30 @@ INSERT INTO `orders` (`id`, `customer_id`, `area`, `delivery_place`, `delivery_c
 (24, 4, 'hcm', 'Q1', '2.00', 1, 4, '2018-12-12 14:46:46', '2018-02-12 14:57:43'),
 (25, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-12 15:03:40', '2018-12-14 00:25:07'),
 (26, 4, 'hcm', 'Q1', '2.00', 1, 4, '2017-12-13 15:31:50', '2017-01-13 15:33:34'),
-(27, 4, 'hcm', 'Q1', '2.00', 0, 4, '2018-12-14 00:18:23', '2018-12-14 00:24:18');
+(27, 4, 'hcm', 'Q1', '2.00', 0, 4, '2018-12-14 00:18:23', '2018-12-14 00:24:18'),
+(28, 4, 'hcm', 'Q1', '2.00', 1, 5, '2018-12-14 13:25:40', '2018-12-14 14:02:46'),
+(29, 4, 'hcm', 'Q1', '2.00', 0, 4, '2018-12-14 13:55:33', '2018-12-14 13:59:36'),
+(30, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-14 13:56:14', '2018-12-14 14:00:01'),
+(31, 4, 'hcm', 'Q1', '2.00', 0, 4, '2018-12-14 14:00:40', '2018-12-14 14:01:59'),
+(32, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-14 14:01:05', '2018-12-14 14:02:24'),
+(33, 4, 'hcm', 'Q1', '2.00', 0, 4, '2018-12-14 14:05:07', '2018-12-14 14:05:55'),
+(34, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-14 14:06:06', '2018-12-14 14:09:22'),
+(35, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-14 14:09:56', '2018-12-14 14:13:57'),
+(36, 4, 'hcm', 'Q1', '2.00', 0, 4, '2018-12-14 14:10:14', '2018-12-14 14:14:47'),
+(37, 4, 'hcm', 'Q1', '2.00', 0, 1, '2018-12-14 14:16:03', '2018-12-14 14:16:03'),
+(38, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-14 14:51:14', '2018-12-15 02:22:49'),
+(39, 4, 'hcm', 'Q1', '2.00', 1, 5, '2018-12-14 14:53:35', '2018-12-14 14:57:23'),
+(40, 4, 'hcm', 'Q1', '2.00', 1, 4, '2018-12-15 02:07:47', '2018-12-15 02:16:06'),
+(41, 4, 'hcm', 'Q1', '2.00', 0, 4, '2018-12-15 02:18:01', '2018-12-15 02:18:24'),
+(42, 4, 'hcm', 'Q1', '2.00', 1, 5, '2018-12-16 07:21:19', '2018-12-16 07:22:30'),
+(43, 4, 'hcm', 'Q1', '2.00', 0, 4, '2018-12-16 07:28:26', '2018-12-16 07:34:09'),
+(44, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-16 08:58:45', '2018-12-16 09:01:33'),
+(45, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-16 09:21:30', '2018-12-16 09:23:08'),
+(46, 4, 'hcm', 'Q1', '2.00', 1, 1, '2018-12-16 10:01:29', '2018-12-16 10:01:29'),
+(47, 4, 'hcm', 'Q1', '2.00', 1, 1, '2018-12-16 10:04:46', '2018-12-16 10:04:46'),
+(48, 4, 'hcm', 'Q1', '2.00', 1, 1, '2018-12-16 10:08:30', '2018-12-16 10:08:30'),
+(49, 4, 'hcm', 'Q1', '2.00', 1, 1, '2018-12-16 10:28:00', '2018-12-16 10:28:00'),
+(50, 4, 'hcm', 'Q1', '2.00', 1, 1, '2018-12-16 10:32:01', '2018-12-16 10:32:01');
 
 -- --------------------------------------------------------
 
@@ -415,7 +444,7 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`,`pro_id`),
   KEY `pro_id` (`pro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `order_details`
@@ -453,7 +482,42 @@ INSERT INTO `order_details` (`id`, `order_id`, `pro_id`, `price`, `size`, `quant
 (29, 26, 1, '15.00', 'XS', 1, '2018-12-13 15:31:50'),
 (30, 26, 64, '200.00', 'none', 2, '2018-12-13 15:31:50'),
 (31, 27, 49, '35.00', 'XS', 1, '2018-12-14 00:18:23'),
-(32, 27, 61, '200.00', 'none', 2, '2018-12-14 00:18:23');
+(32, 27, 61, '200.00', 'none', 2, '2018-12-14 00:18:23'),
+(33, 28, 1, '15.00', 'XS', 10, '2018-12-14 13:25:40'),
+(34, 28, 2, '20.00', 'S', 8, '2018-12-14 13:25:41'),
+(35, 28, 1, '15.00', 'L', 10, '2018-12-14 13:25:41'),
+(36, 29, 61, '200.00', 'none', 4, '2018-12-14 13:55:34'),
+(37, 29, 2, '20.00', 'S', 1, '2018-12-14 13:55:34'),
+(38, 30, 61, '200.00', 'none', 1, '2018-12-14 13:56:14'),
+(39, 31, 49, '35.00', 'XS', 1, '2018-12-14 14:00:40'),
+(40, 32, 63, '225.00', 'none', 1, '2018-12-14 14:01:05'),
+(41, 33, 1, '15.00', 'XS', 1, '2018-12-14 14:05:07'),
+(42, 34, 3, '16.00', 'XS', 1, '2018-12-14 14:06:06'),
+(43, 35, 53, '34.00', 'S', 1, '2018-12-14 14:09:56'),
+(44, 36, 3, '16.00', 'XS', 1, '2018-12-14 14:10:15'),
+(45, 37, 1, '15.00', 'XS', 1, '2018-12-14 14:16:03'),
+(46, 38, 1, '15.00', 'XS', 4, '2018-12-14 14:51:14'),
+(47, 38, 34, '30.00', 'M', 3, '2018-12-14 14:51:14'),
+(48, 39, 53, '34.00', 'S', 4, '2018-12-14 14:53:35'),
+(49, 39, 49, '35.00', 'M', 3, '2018-12-14 14:53:35'),
+(50, 40, 58, '25.00', 'XS', 10, '2018-12-15 02:07:47'),
+(51, 40, 58, '25.00', 'M', 1, '2018-12-15 02:07:47'),
+(52, 41, 58, '21.25', 'XS', 5, '2018-12-15 02:18:01'),
+(53, 42, 61, '220.00', 'none', 1, '2018-12-16 07:21:19'),
+(54, 42, 2, '20.00', 'S', 4, '2018-12-16 07:21:19'),
+(55, 43, 17, '25.00', 'M', 5, '2018-12-16 07:28:27'),
+(56, 43, 16, '25.00', 'M', 1, '2018-12-16 07:28:27'),
+(57, 43, 17, '25.00', 'XS', 10, '2018-12-16 07:28:27'),
+(58, 44, 1, '17.00', 'XS', 5, '2018-12-16 08:58:45'),
+(59, 44, 2, '20.00', 'S', 3, '2018-12-16 08:58:45'),
+(60, 44, 3, '16.00', 'XS', 4, '2018-12-16 08:58:45'),
+(61, 45, 1, '17.00', 'XS', 3, '2018-12-16 09:21:30'),
+(62, 46, 61, '220.00', 'none', 1, '2018-12-16 10:01:29'),
+(63, 46, 62, '200.00', 'none', 1, '2018-12-16 10:01:29'),
+(64, 47, 2, '20.00', 'XS', 1, '2018-12-16 10:04:46'),
+(65, 48, 1, '17.00', 'XS', 1, '2018-12-16 10:08:30'),
+(66, 49, 35, '30.00', 'XS', 1, '2018-12-16 10:28:01'),
+(67, 50, 2, '20.00', 'XS', 5, '2018-12-16 10:32:01');
 
 -- --------------------------------------------------------
 
@@ -518,11 +582,11 @@ CREATE TABLE IF NOT EXISTS `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `alias`, `cate_id`, `sup_id`, `price_in`, `price`, `quantity`, `size`, `image`, `sub_image`, `intro`, `description`, `view`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'BASIC TRAINING SHORTS', 'basic-training-shorts', 5, 9, '10.00', '17.00', 23, '{\"XS\":12,\"L\":\"11\"}', 't5-41544366178.jpg', '[]', 'All the basics and all you need.', '• Relaxed fit \r\n• Overlapping side seam split \r\n• Zip pocket with fusing \r\n• Branded flat drawcord \r\n• 95% Polyester, 5% Elastane \r\n• Model is 6\'0\" and wears size M\r\n\r\nThe Basic Training Shorts work with you in the gym and support you out of it. A loose fit gives complete freedom to squat, sprint and jump for a fully focused workout.', 7, 0, '2018-12-05 04:13:38', '2018-12-05 04:13:38'),
-(2, 'FLAWLESS KNIT TIGHTS', 'flawless-knit-tights', 5, 10, '17.00', '20.00', 11, '{\"XS\":0,\"S\":11}', 't1-11544366068.jpg', '[\"t2-11544366068.jpg\"]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S.', 6, 0, '2018-12-05 04:16:20', '2018-12-05 04:16:20'),
-(3, 'FLAWLESS KNIT LONG SLEEVE CROP TOP', 'flawless-knit-long-sleeve-crop-top', 7, 9, '12.00', '16.00', 30, '{\"XS\":30}', 't1-11544366154.jpg', '[]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'nice & Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S. ', 0, 0, '2018-12-05 04:18:51', '2018-12-05 04:18:51'),
+(1, 'BASIC TRAINING SHORTS', 'basic-training-shorts', 5, 9, '10.00', '17.00', 49, '{\"XS\":14,\"L\":5,\"XL\":\"30\"}', 't5-41544366178.jpg', '[]', 'All the basics and all you need.', '• Relaxed fit \r\n• Overlapping side seam split \r\n• Zip pocket with fusing \r\n• Branded flat drawcord \r\n• 95% Polyester, 5% Elastane \r\n• Model is 6\'0\" and wears size M\r\n\r\nThe Basic Training Shorts work with you in the gym and support you out of it. A loose fit gives complete freedom to squat, sprint and jump for a fully focused workout.', 15, 0, '2018-12-05 04:13:38', '2018-12-05 04:13:38'),
+(2, 'FLAWLESS KNIT TIGHTS', 'flawless-knit-tights', 5, 10, '17.00', '20.00', 74, '{\"XS\":44,\"S\":8,\"XL\":22}', 't1-11544366068.jpg', '[\"t2-11544366068.jpg\"]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S.', 12, 0, '2018-12-05 04:16:20', '2018-12-05 04:16:20'),
+(3, 'FLAWLESS KNIT LONG SLEEVE CROP TOP', 'flawless-knit-long-sleeve-crop-top', 7, 9, '12.00', '16.00', 24, '{\"XS\":24}', 't1-11544366154.jpg', '[]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'nice & Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S. ', 3, 0, '2018-12-05 04:18:51', '2018-12-05 04:18:51'),
 (4, 'FLEUR TEXTURE LONG SLEEVE CROP', 'fleur-texture-long-sleeve-crop', 5, 10, '10.00', '22.00', 0, 'null', 't7-31544366134.jpg', '[]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S.\r\n', 14, 0, '2018-12-05 04:24:12', '2018-12-05 04:24:12'),
-(5, 'Product 55', 'product-55', 8, 9, '16.00', '30.00', 24, '{\"XS\":4,\"S\":\"20\"}', 'h10-1153258053315439835311543984206.jpg', '[\"b1-315325770231544103371.jpg\",\"b1-115326595871544103396.jpg\"]', 'nicec', 'nices', 4, 1, '2018-12-05 04:30:06', '2018-12-05 04:30:06'),
+(5, 'Product 55', 'product-55', 8, 9, '16.00', '30.00', 24, '{\"XS\":4,\"S\":\"20\"}', 'b4-515326608441544839228.jpg', '[\"b4-115326608441544839186.jpg\"]', 'nicec', 'nices', 4, 1, '2018-12-05 04:30:06', '2018-12-05 04:30:06'),
 (6, 'Black Shirt', 'black-shirt', 5, 9, '10.00', '12.00', 71, '{\"XS\":14,\"S\":\"15\",\"XL\":\"12\",\"2XL\":\"30\"}', 't3-31544366111.jpg', '[]', 'nice', 'nice', 4, 0, '2018-12-06 13:47:07', '2018-12-06 13:47:07'),
 (7, 'Pink Short Shirt', 'pink-short-shirt', 8, 10, '15.00', '16.00', 25, '{\"XS\":5,\"S\":\"20\"}', 't2-51544366089.jpg', '[]', 'soft & comfortable', 'soft & comfortable', 2, 0, '2018-12-08 12:57:12', '2018-12-08 12:57:12'),
 (8, 'BASIC TRAINING SHORTS', 'basic-training-shorts', 11, 2, '15.00', '30.00', 70, '{\"XS\":\"15\",\"S\":\"15\",\"M\":\"15\",\"L\":\"13\",\"2XL\":\"12\"}', 's1-41544360397.jpg', '[\"s1-11544360397.jpg\",\"s1-21544360397.jpg\",\"s1-31544360397.jpg\",\"s1-51544360397.jpg\"]', 'All the basics and all you need. ', ' Relaxed fit \r\n• Overlapping side seam split \r\n• Zip pocket with fusing \r\n• Branded flat drawcord \r\n• 95% Polyester, 5% Elastane \r\n• Model is 6\'0\" and wears size M\r\n\r\nThe Basic Training Shorts work with you in the gym and support you out of it. A loose fit gives complete freedom to squat, sprint and jump for a fully focused workout', 0, 0, '2018-12-09 12:59:57', '2018-12-09 12:59:57'),
@@ -533,8 +597,8 @@ INSERT INTO `products` (`id`, `name`, `alias`, `cate_id`, `sup_id`, `price_in`, 
 (13, 'TAKE OVER SHORTS BLACK MARL', 'take-over-shorts-black-marl', 11, 9, '30.00', '40.00', 30, '{\"XS\":\"15\",\"M\":\"15\"}', 's6-41544361006.jpg', '[\"s6-11544361006.jpg\",\"s6-21544361006.jpg\",\"s6-31544361006.jpg\",\"s6-51544361006.jpg\"]', 'Built for the urban champion, fit for the fashion forward.', 'The Take Over Shorts are a contemporary take on an enduring design. Its silhouette adapts to your lifestyle with reverse-style zip pockets to store your go-to essentials and articulated seams to ensure a relaxed and comfortable fit.\r\n\r\nEngineered from a mid-weight cotton blend, the Take Over Shorts offer a slightly heavier foundation to build outfits around. An elasticated, drawcord waistband allows for a customisable fit whist panel detailing to the inner leg guarantees a sleek aesthetic. Complete with fused, matt taping to seams.\r\n\r\nMain: 74% Cotton, 26% Polyester.\r\nPocket Bag: 69% Polyester, 31% Cotton.\r\n\r\nModel is 6\'0\" and wears size M.', 0, 0, '2018-12-09 13:10:06', '2018-12-09 13:10:06'),
 (14, 'ARK SHORTS AEGEAN BLUE', 'ark-shorts-aegean-blue', 11, 1, '15.00', '26.00', 110, '{\"XS\":\"30\",\"S\":\"30\",\"L\":\"20\",\"2XL\":\"30\"}', 's7-51544361122.jpg', '[\"s7-11544361122.jpg\",\"s7-21544361122.jpg\",\"s7-31544361122.jpg\",\"s7-51544361122.jpg\"]', 'No-nonsense.', '• Loosely tapered fit\r\n• Drawstring waist and concealed side pockets\r\n• Jersey blend fabric\r\n• Minimalist design\r\n• 60% Polyester, 35% Cotton, 5% Elastane\r\n• Model is 6\'0\" and wears size M\r\n\r\nThe workhorse of your workout wardrobe. The Ark Gym Shorts are understated yet striking. They promise to support you through running and squatting and comfort you through rest days.', 0, 0, '2018-12-09 13:12:02', '2018-12-09 13:12:02'),
 (15, 'FREE FLOW SHORTS SLATE LAVENDER', 'free-flow-shorts-slate-lavender', 11, 9, '30.00', '34.00', 50, '{\"XS\":\"10\",\"L\":\"20\",\"2XL\":\"20\"}', 's8-41544361255.jpg', '[\"s8-11544361255.jpg\",\"s8-21544361255.jpg\",\"s8-31544361255.jpg\",\"s8-51544361255.jpg\"]', 'Constructed from a lightweight perforated fabric, the Free Flow Shorts are engineered for enhanced ventilation and breathability, providing you with a distraction-free workout.', 'Constructed from a lightweight perforated fabric, the Free Flow Shorts are engineered for enhanced ventilation and breathability, providing you with a distraction-free workout.\r\n\r\nDesigned as part of our lifestyle range, the Free Flow Shorts integrate soft stretch fabric to allow for a full range of movement. Complete with concealed zip pockets to store your essentials safely and cut-out reflective logo.\r\n\r\n48% Polyester, 21% Viscose,13% Pima Cotton, 11% Poly propylene, 7% Nylon.\r\n\r\nModel is 6\'2\" and wears size L.', 0, 0, '2018-12-09 13:14:15', '2018-12-09 13:14:15'),
-(16, 'SPORT SHORTS PORT', 'sport-shorts-port', 11, 10, '20.00', '25.00', 60, '{\"M\":\"30\",\"L\":\"20\",\"2XL\":\"10\"}', 's10-41544361350.jpg', '[\"s10-11544361350.jpg\",\"s10-21544361350.jpg\",\"s10-31544361350.jpg\"]', 'Your new go to shorts for any type of activity.', 'Your new go to shorts for any type of activity. The Men\'s Sports Shorts are a gym bag essential.\r\n\r\n- Adjustable waistband\r\n- Mesh ventilation\r\n- Gymshark logo\r\n\r\n100% Polyester\r\n\r\nModel is 6\'2\" and wears size L', 0, 0, '2018-12-09 13:15:50', '2018-12-09 13:15:50'),
-(17, 'ELEMENT+ BASELAYER SHORTS SAPPHIRE BLUE MARL', 'element+-baselayer-shorts-sapphire-blue-marl', 11, 10, '20.00', '25.00', 60, '{\"XS\":\"20\",\"M\":\"30\",\"XL\":\"10\"}', 's9-41544361450.jpg', '[\"s9-11544361450.jpg\",\"s9-21544361450.jpg\",\"s9-31544361450.jpg\"]', 'Primed for performance.', '• Muscle shaping cover stitch seam\r\n• Raised rubber print waistband\r\n• Mesh panels and DRY technology\r\n• Printed Gymshark logo\r\n• Main: 90% Polyester, 10% Elastane. Mesh: 90% Polyester, 10% Elastane.\r\n• Model is 6\'0\" and wears a size M. \r\n\r\nSupportive, functional and physique-enhancing, the Element+ Baselayer Shorts have been crafted for pristine performance. Maintain freshness and focus with sweat-wicking fabrics and maintain strength and endurance with supportive compression. Element+, assisting your training every rep of the way.', 0, 0, '2018-12-09 13:17:30', '2018-12-09 13:17:30'),
+(16, 'SPORT SHORTS PORT', 'sport-shorts-port', 11, 10, '20.00', '25.00', 59, '{\"M\":29,\"L\":\"20\",\"2XL\":\"10\"}', 's10-41544361350.jpg', '[\"s10-11544361350.jpg\",\"s10-21544361350.jpg\",\"s10-31544361350.jpg\"]', 'Your new go to shorts for any type of activity.', 'Your new go to shorts for any type of activity. The Men\'s Sports Shorts are a gym bag essential.\r\n\r\n- Adjustable waistband\r\n- Mesh ventilation\r\n- Gymshark logo\r\n\r\n100% Polyester\r\n\r\nModel is 6\'2\" and wears size L', 1, 0, '2018-12-09 13:15:50', '2018-12-09 13:15:50'),
+(17, 'ELEMENT+ BASELAYER SHORTS SAPPHIRE BLUE MARL', 'element+-baselayer-shorts-sapphire-blue-marl', 11, 10, '20.00', '25.00', 45, '{\"XS\":10,\"M\":25,\"XL\":\"10\"}', 's9-41544361450.jpg', '[\"s9-11544361450.jpg\",\"s9-21544361450.jpg\",\"s9-31544361450.jpg\"]', 'Primed for performance.', '• Muscle shaping cover stitch seam\r\n• Raised rubber print waistband\r\n• Mesh panels and DRY technology\r\n• Printed Gymshark logo\r\n• Main: 90% Polyester, 10% Elastane. Mesh: 90% Polyester, 10% Elastane.\r\n• Model is 6\'0\" and wears a size M. \r\n\r\nSupportive, functional and physique-enhancing, the Element+ Baselayer Shorts have been crafted for pristine performance. Maintain freshness and focus with sweat-wicking fabrics and maintain strength and endurance with supportive compression. Element+, assisting your training every rep of the way.', 2, 0, '2018-12-09 13:17:30', '2018-12-09 13:17:30'),
 (18, 'FRESH PULLOVER BLACK', 'fresh-pullover-black', 12, 2, '45.00', '50.00', 60, '{\"XS\":\"10\",\"M\":\"30\",\"2XL\":\"20\"}', 'h10-41544361691.jpg', '[\"h10-11544361691.jpg\",\"h10-21544361691.jpg\",\"h10-31544361691.jpg\",\"h10-51544361691.jpg\"]', 'A pioneer in casual wear.', '- Straight, relaxed fit\r\n- Funnel neck hood\r\n- Dropped shoulder design\r\n- Discreet embroidered Gymshark logo\r\n- 99% Cotton, 1% Viscose\r\n- Model is 6\'1\" and wears a size M.\r\n\r\nCurrent and contemporary, the Fresh Pullover is a design to talk about. An introverted aest', 0, 0, '2018-12-09 13:21:31', '2018-12-09 13:21:31'),
 (19, 'FRESH PULLOVER WHITE', 'fresh-pullover-white', 12, 10, '45.00', '50.00', 40, '{\"XS\":\"30\",\"XL\":\"10\"}', 'h9-41544361793.jpg', '[\"h9-11544361793.jpg\",\"h-21544361793.jpg\",\"h9-31544361793.jpg\",\"h9-51544361793.jpg\"]', 'A pioneer in casual wear.', '- Straight, relaxed fit\r\n- Funnel neck hood\r\n- Dropped shoulder design\r\n- Discreet embroidered Gymshark logo\r\n- 99% Cotton, 1% Viscose\r\n- Model is 6\'1\" and wears a size M. \r\n\r\nCurrent and contemporary, the Fresh Pullover is a design to talk about. An introverted aesthetic with a style-focused design makes this hoodie a truly unique article.', 0, 0, '2018-12-09 13:23:13', '2018-12-09 13:23:13'),
 (20, 'FLATLOCK TRACK TOP SAPPHIRE BLUE', 'flatlock-track-top-sapphire-blue', 12, 9, '40.00', '45.00', 53, '{\"XS\":\"12\",\"S\":\"20\",\"M\":\"10\",\"XL\":\"11\"}', 'h8-41544361923.jpg', '[\"h8-11544361923.jpg\",\"h8-21544361923.jpg\",\"h8-31544361923.jpg\",\"h8-51544361923.jpg\"]', ' Sleek, lightweight and form-fitting.', 'Sleek, lightweight and form-fitting.\r\n\r\n\r\n• Athletic fit\r\n• Flat lock covered seams\r\n• Self fabric cuffs and hem\r\n• Concealed zip pockets\r\n• 100% Polyester\r\n• Model is 6\'4\" and wears a size L\r\n\r\nMoving with you and your workout, the Flatlock Track Top is a covering layer that completes your look and supports your training. Fitted with flat lock seams and concealed side pockets, its aesthetic is as sleek as its performance.', 0, 0, '2018-12-09 13:25:23', '2018-12-09 13:25:23'),
@@ -551,8 +615,8 @@ INSERT INTO `products` (`id`, `name`, `alias`, `cate_id`, `sup_id`, `price_in`, 
 (31, 'ELEMENT+ BASELAYER LEGGINGS BLACK MARL', 'element+-baselayer-leggings-black-marl', 13, 10, '25.00', '30.00', 60, '{\"L\":\"30\",\"XL\":\"20\",\"M\":\"10\"}', 'b7-41544363176.jpg', '[\"b7-11544363176.jpg\",\"b7-21544363176.jpg\",\"b7-31544363176.jpg\"]', 'Primed for performance.', '• Muscle shaping cover stitch seam\r\n• Raised rubber print waistband\r\n• Mesh panels and DRY technology\r\n• Printed Gymshark logo\r\n• Main: 90% Polyester, 10% Elastane. Mesh: 90% Polyester, 10%    Elastane.\r\n• Model is 6\'1\" and wears a size M. \r\n\r\nEvery step of the Element+ Baselayer Leggings’ creation revolved around performance. These compressive base layer leggings have been sculpted for support, function and focus with sweat-wicking technology, breathable fabrics and a stay-put fit. Element+, assisting your training every rep of the way.', 0, 0, '2018-12-09 13:46:16', '2018-12-09 13:46:16'),
 (32, 'ELEMENT+ BASELAYER SHORTS SMOKEY GREY MARL', 'element+-baselayer-shorts-smokey-grey-marl', 13, 10, '20.00', '25.00', 20, '{\"XS\":\"20\"}', 'b6-41544363274.jpg', '[\"b6-11544363274.jpg\",\"b6-21544363274.jpg\",\"b6-31544363274.jpg\",\"b6-51544363274.jpg\"]', 'Primed for performance.', ' Muscle shaping cover stitch seam\r\n• Raised rubber print waistband\r\n• Mesh panels and DRY technology\r\n• Printed Gymshark logo\r\n• Main: 90% Polyester, 10% Elastane. Mesh: 90% Polyester, 10% Elastane.\r\n• Model is 6\'0\" and wears a size M. \r\n\r\nSupportive, functional and physique-enhancing, the Element+ Baselayer Shorts have been crafted for pristine performance. Maintain freshness and focus with sweat-wicking fabrics and maintain strength and endurance with supportive compression. Element+, assisting your training every rep of the way.', 0, 0, '2018-12-09 13:47:54', '2018-12-09 13:47:54'),
 (33, 'ELEMENT+ BASELAYER LONG SLEEVE TOP SAPPHIRE BLUE MARL', 'element+-baselayer-long-sleeve-top-sapphire-blue-marl', 13, 10, '20.00', '30.00', 25, '{\"XS\":\"12\",\"M\":\"13\"}', 'b5-41544363363.jpg', '[\"b5-11544363363.jpg\",\"b5-21544363363.jpg\",\"b5-31544363363.jpg\"]', 'Primed for performance.', '• Muscle shaping cover stitch seam\r\n• Mesh panels and DRY technology\r\n• Printed Gymshark logo\r\n• Main: 90% Polyester, 10% Elastane. Mesh: 90% Polyester, 10% Elastane.\r\n• Model is 6\'1\" and wears a size M. \r\n\r\nThe Element+ Baselayer Long Sleeve Top is the ultimate in athletic performance. With sweat-wicking fabrics, a compressive fit and a form-enhancing build, you can workout confident of support, function and focus. Element+, assisting your training every rep of the way', 0, 0, '2018-12-09 13:49:23', '2018-12-09 13:49:23'),
-(34, 'FRESH T-SHIRT BLACK', 'fresh-tshirt-black', 5, 10, '25.00', '30.00', 60, '{\"M\":\"20\",\"L\":\"20\",\"XL\":\"20\"}', 't10-41544363528.jpg', '[\"t10-21544363528.jpg\",\"t10-31544363528.jpg\",\"t10-11544363528.jpg\"]', 'A pioneer in casual wear.', '- Straight fit\r\n- Side split hem\r\n- Dropped shoulder design\r\n- Discreet embroidered Gymshark logo\r\n- 100% Cotton\r\n- Model is 6\'1\" and wears a size M.\r\n\r\nThe Fresh Short Sleeve T-Shirt is exactly that: current and contemporary. We’ve kept the visual reserved but the design unique to make one of our most distinctive tops to ', 0, 0, '2018-12-09 13:52:08', '2018-12-09 13:52:08'),
-(35, 'FRESH T-SHIRT WHITE', 'fresh-tshirt-white', 5, 2, '25.00', '30.00', 70, '{\"XS\":\"30\",\"S\":\"20\",\"M\":\"20\"}', 't9-51544363622.jpg', '[\"t9-31544363622.jpg\",\"t9-21544363622.jpg\",\"t9-11544363622.jpg\",\"t9-51544363622.jpg\"]', 'A pioneer in casual wear.', '- Straight fit\r\n- Side split hem\r\n- Dropped shoulder design\r\n- Discreet embroidered Gymshark logo\r\n- 100% Cotton\r\n- Model is 6\'1\" and wears a size M.', 0, 0, '2018-12-09 13:53:42', '2018-12-09 13:53:42'),
+(34, 'FRESH T-SHIRT BLACK', 'fresh-tshirt-black', 5, 10, '25.00', '30.00', 60, '{\"M\":20,\"L\":\"20\",\"XL\":\"20\"}', 't10-41544363528.jpg', '[\"t10-21544363528.jpg\",\"t10-31544363528.jpg\",\"t10-11544363528.jpg\"]', 'A pioneer in casual wear.', '- Straight fit\r\n- Side split hem\r\n- Dropped shoulder design\r\n- Discreet embroidered Gymshark logo\r\n- 100% Cotton\r\n- Model is 6\'1\" and wears a size M.\r\n\r\nThe Fresh Short Sleeve T-Shirt is exactly that: current and contemporary. We’ve kept the visual reserved but the design unique to make one of our most distinctive tops to ', 1, 0, '2018-12-09 13:52:08', '2018-12-09 13:52:08'),
+(35, 'FRESH T-SHIRT WHITE', 'fresh-tshirt-white', 5, 2, '25.00', '30.00', 69, '{\"XS\":29,\"S\":\"20\",\"M\":\"20\"}', 't9-51544363622.jpg', '[\"t9-31544363622.jpg\",\"t9-21544363622.jpg\",\"t9-11544363622.jpg\",\"t9-51544363622.jpg\"]', 'A pioneer in casual wear.', '- Straight fit\r\n- Side split hem\r\n- Dropped shoulder design\r\n- Discreet embroidered Gymshark logo\r\n- 100% Cotton\r\n- Model is 6\'1\" and wears a size M.', 1, 0, '2018-12-09 13:53:42', '2018-12-09 13:53:42'),
 (36, 'FRESH LONG SLEEVE T-SHIRT BLACK', 'fresh-long-sleeve-tshirt-black', 5, 10, '30.00', '35.00', 20, '{\"L\":\"20\"}', 't8-31544363714.jpg', '[\"t8-11544363714.jpg\",\"t8-41544363714.jpg\",\"t8-51544363714.jpg\"]', ' A pioneer in casual wear.', '• Straight fit\r\n• Side split hem\r\n• Dropped shoulder design\r\n• Discreet embroidered Gymshark logo\r\n• 100% Cotton\r\n• Model is 6\'1\" and wears a size M. \r\n\r\nThe Fresh Long Sleeve T-Shirt is a distinctive Gymshark top design. It\'s both current and contemporary with a relaxed, slightly oversized fit and minimalistic design.', 0, 0, '2018-12-09 13:55:14', '2018-12-09 13:55:14'),
 (37, 'APOLLO T-SHIRT FULL RED', 'apollo-tshirt-full-red', 5, 10, '15.00', '18.00', 20, '{\"XS\":\"10\",\"L\":\"10\"}', 't7-41544363801.jpg', '[\"t7-11544363801.jpg\",\"t7-21544363801.jpg\",\"t7-31544363801.jpg\",\"t7-51544363801.jpg\"]', 'The Apollo T-Shirt.', 'The Apollo T-Shirt. We made it for the Gymshark Expo World Tour. It was so good we brought it back.\r\n\r\n• Relaxed fit\r\n• Raglan sleeves\r\n• Classic Gymshark chest logo\r\n• 95% Cotton, 5% Elastane\r\n• Model is 6\'4\" and wears a size L. \r\n\r\nWhoever you are, however you train, the Apollo T-Shirt is the ideal workout top for you. With a statement Gymshark design, it works just as well out the gym as it does in it.', 0, 0, '2018-12-09 13:56:41', '2018-12-09 13:56:41'),
 (38, 'BREATHE LONG SLEEVE T-SHIRT PALE GREEN', 'breathe-long-sleeve-tshirt-pale-green', 5, 10, '30.00', '35.00', 60, '{\"XS\":\"20\",\"M\":\"30\",\"XL\":\"10\"}', 't6-41544363893.jpg', '[\"t6-11544363893.jpg\",\"t6-21544363893.jpg\",\"t6-31544363893.jpg\",\"t6-51544363893.jpg\"]', 'Lifestyle with a contemporary twist.', 'Lifestyle with a contemporary twist. \r\n\r\n• 3/4 perforated back panel\r\n• Layered split hem\r\n• Fused bartack stitch\r\n• Marl-effect fabric\r\n• Main: 74% Polyester, 17% Viscose, 9% Elastane. Mesh: 55% Nylon, 41% Polyester, 4% Elastane\r\n• Model is 6\'0\" and wears a size M. \r\n\r\nBreak away from standard streetwear and boost your lifestyle wardrobe with the Breathe Long Sleeve T-Shirt, a top boasting stylish versatility and comfort that lasts.', 0, 0, '2018-12-09 13:58:13', '2018-12-09 13:58:13'),
@@ -566,21 +630,21 @@ INSERT INTO `products` (`id`, `name`, `alias`, `cate_id`, `sup_id`, `price_in`, 
 (46, 'ISLA KNIT OPEN CARDIGAN BLACK', 'isla-knit-open-cardigan-black', 14, 10, '30.00', '40.00', 30, '{\"XS\":\"10\",\"M\":\"20\"}', 'h3-41544366667.jpg', '[\"h3-11544366667.jpg\",\"h3-21544366667.jpg\",\"h3-31544366667.jpg\",\"h3-51544366667.jpg\"]', 'Commute in comfort.', '\r\n• Soft merino wool fabric\r\n• Large patch pockets\r\n• Long sleeve\r\n• No-fasten, open design\r\n• Cuffed at wrists\r\n• 100% Wool\r\n• Model is 5\'7\" and wears a size S. \r\n\r\nIt\'s every bit as soft as it looks. The Isla Knit Open Cardigan is that final layer and finishing touch to any outfit. Made from luxurious merino wool fabric, it’s a new world of comfort', 0, 0, '2018-12-09 14:44:27', '2018-12-09 14:44:27'),
 (47, 'SLOUNGE CROPPED HOODIE LIGHT GREY MARL', 'slounge-cropped-hoodie-light-grey-marl', 14, 10, '40.00', '42.00', 20, '{\"XS\":\"20\"}', 'h2-41544366752.jpg', '[\"h2-11544366752.jpg\",\"h2-21544366752.jpg\",\"h2-31544366752.jpg\",\"h2-41544366752.jpg\"]', 'The perfect rest day.', ' Our softest fabric blend yet\r\n• Flattering midriff crop\r\n• Ribbed marl design\r\n• Oversized three-piece hood\r\n• 60% Polyester, 38% Viscose, 2% Elastane\r\n• Model is 5\'6\" and wears a size XS. \r\n\r\nThe Slounge Cropped Hoodie’s slim fit enhances your figure and follows your shape closely to ensure freedom of movement. Soft and supple fabrics promise a customisable feel for consistent comfort.', 0, 0, '2018-12-09 14:45:52', '2018-12-09 14:45:52'),
 (48, 'SOLACE SWEATER 2.0 BLACK', 'solace-sweater-20-black', 14, 10, '40.00', '45.00', 30, '{\"XS\":\"10\",\"M\":\"20\"}', 'h1-41544366850.jpg', '[\"h1-11544366850.jpg\",\"h1-21544366850.jpg\",\"h1-31544366850.jpg\",\"h1-51544366850.jpg\"]', 'Solace, softer.', '• Regular, straight fit \r\n• Crew neckline \r\n• Cuffed at wrists \r\n• Main: 46% Viscose, 42% Polyester, 12% Elastane. Rib: 95% Viscose, 5% Elastane. \r\n• Model is 5\'7\" and wears a size S. \r\n\r\nSofter, comfier and better than before, we’ve taken relaxation down a gear with the Solace Sweater 2.0. Boasting luxuriously soft fabrics and a roomy, covering fit, it’s been refined to make your experience exceptional.', 0, 0, '2018-12-09 14:47:30', '2018-12-09 14:47:30'),
-(49, 'HEATHER DUAL BAND SHORTS LIGHT GREY MARL', 'heather-dual-band-shorts-light-grey-marl', 10, 10, '30.00', '35.00', 51, '{\"XS\":11,\"M\":\"20\",\"L\":\"20\"}', 's5-41544367042.jpg', '[\"s5-11544367042.jpg\",\"s5-21544367042.jpg\",\"s5-31544367042.jpg\",\"s5-51544367042.jpg\"]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S. ', 1, 0, '2018-12-09 14:50:42', '2018-12-09 14:50:42'),
+(49, 'HEATHER DUAL BAND SHORTS LIGHT GREY MARL', 'heather-dual-band-shorts-light-grey-marl', 10, 10, '30.00', '35.00', 50, '{\"XS\":10,\"M\":20,\"L\":\"20\"}', 's5-41544367042.jpg', '[\"s5-11544367042.jpg\",\"s5-21544367042.jpg\",\"s5-31544367042.jpg\",\"s5-51544367042.jpg\"]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S. ', 3, 0, '2018-12-09 14:50:42', '2018-12-09 14:50:42'),
 (50, 'FIT SHORTS CHARCOAL/DUSKY PINK', 'fit-shorts-charcoaldusky-pink', 11, 10, '20.00', '26.00', 66, '{\"XS\":\"11\",\"S\":\"55\"}', 's4-41544367142.jpg', '[\"s4-11544367142.jpg\",\"s4-21544367142.jpg\",\"s4-31544367142.jpg\",\"s4-51544367142.jpg\"]', 'Your favourite Fit Leggings made in to your new favourite shorts.', 'Your favourite Fit Leggings made in to your new favourite shorts. Designed with the same soft blend material, to provide that stretchy, supple fit.\r\n\r\n• Elasticated printed waistband\r\n• 4-way stretch fit\r\n \r\n80% Nylon, 20% Elastane\r\n \r\nModel is 5’7” and wears a size S.', 0, 0, '2018-12-09 14:52:22', '2018-12-09 14:52:22'),
 (51, 'PASTEL CYCLING SHORTS ICE BLUE', 'pastel-cycling-shorts-ice-blue', 10, 10, '25.00', '30.00', 42, '{\"XS\":\"10\",\"S\":\"12\",\"M\":\"20\"}', 's3-41544367241.jpg', '[\"s3-11544367241.jpg\",\"s3-21544367241.jpg\",\"s3-31544367241.jpg\",\"s3-51544367241.jpg\"]', 'Sometimes simple’s best.', '• High waisted fit \r\n• One-tone pastel shade \r\n• Logo to front and back of waistband \r\n• 87% Nylon, 13% Elastane \r\n• Model is 5\'6\" and wears a size XS. \r\n\r\nSimplicity doesn’t mean forgoing function or style with the Pastel Cycling Shorts. Workout-ready, these gym shorts promote an elegant look as well as training support.', 0, 0, '2018-12-09 14:54:01', '2018-12-09 14:54:01'),
 (52, 'ELEVATE CYCLING SHORTS BLACK', 'elevate-cycling-shorts-black', 10, 10, '30.00', '36.00', 40, '{\"XS\":\"20\",\"S\":\"10\",\"XL\":\"10\"}', 's2-41544367340.jpg', '[\"s2-11544367340.jpg\",\"s2-21544367340.jpg\",\"s2-31544367340.jpg\",\"s2-51544367340.jpg\"]', 'Elevate your performance.', 'Crafted from soft-stretch, supple fabric blends, the Elevate Cycling Shorts provide a body-hugging fit that offers ease of movement when your workout intensifies. Optimising breathability, mesh panel detailing to the leg prevents distraction and allows for an effortless ride.\r\n\r\nThe back waist panel is finished with double branded, elasticated jacquard detailing which stays in place whilst you cycle. Complete with side pockets.\r\n\r\nMain: 76% Nylon, 24% Elastane. Mesh: 92% Nylon, 8% Elastane.\r\n\r\nModel is 5\'7\" and wears size S', 0, 0, '2018-12-09 14:55:40', '2018-12-09 14:55:40'),
-(53, 'RUNNING SHORTS KHAKI', 'running-shorts-khaki', 10, 10, '30.00', '34.00', 50, '{\"S\":\"50\"}', 's1-41544367426.jpg', '[\"s1-11544367426.jpg\",\"s1-21544367426.jpg\",\"s1-31544367426.jpg\"]', 'Stay cool and collected, no matter how intense the run.', 'Stay cool and collected, no matter how intense the run. Designed with a relaxed, lightweight material, the Running Shorts provide superior comfort and optimum ventilation to ensure a distraction free workout.\r\n\r\nBoasting a detailed elasticated waistband, the Women’s Running Shorts are designed to keep up with you.\r\n\r\nComplete with a concealed pocket to store all of your essentials and reflective Gymshark logo.\r\n\r\nMain: 88% Polyester, 12% Elastane.\r\n\r\nMesh: 89% Polyester, 11% Elastane.\r\n\r\nModel 5\'8\" and wears a S', 0, 0, '2018-12-09 14:57:06', '2018-12-09 14:57:06'),
+(53, 'RUNNING SHORTS KHAKI', 'running-shorts-khaki', 10, 10, '30.00', '34.00', 50, '{\"S\":50}', 's1-41544367426.jpg', '[\"s1-11544367426.jpg\",\"s1-21544367426.jpg\",\"s1-31544367426.jpg\"]', 'Stay cool and collected, no matter how intense the run.', 'Stay cool and collected, no matter how intense the run. Designed with a relaxed, lightweight material, the Running Shorts provide superior comfort and optimum ventilation to ensure a distraction free workout.\r\n\r\nBoasting a detailed elasticated waistband, the Women’s Running Shorts are designed to keep up with you.\r\n\r\nComplete with a concealed pocket to store all of your essentials and reflective Gymshark logo.\r\n\r\nMain: 88% Polyester, 12% Elastane.\r\n\r\nMesh: 89% Polyester, 11% Elastane.\r\n\r\nModel 5\'8\" and wears a S', 2, 0, '2018-12-09 14:57:06', '2018-12-09 14:57:06'),
 (54, 'FLAWLESS KNIT LONG SLEEVE CROP TOP BLACK', 'flawless-knit-long-sleeve-crop-top-black', 15, 10, '40.00', '45.00', 32, '{\"XS\":\"10\",\"M\":\"12\",\"XL\":\"10\"}', 't5-41544367615.jpg', '[\"t5-11544367615.jpg\",\"t5-21544367615.jpg\",\"t5-31544367615.jpg\",\"t5-51544367615.jpg\"]', 'Settle for nothing less than Flawless.', '• Fitted design with midriff crop\r\n• Eyelet and rib patterns\r\n• Crew neckline\r\n• Ventilation detailing\r\n• Thumbholes\r\n• 95% Nylon, 5% Elastane\r\n• Model is 5\'7\" and wears a size S. \r\n\r\nExperience the Flawless performance. The features of the Flawless Knit Long Sleeve Crop Top have been designed to deliver workout support and a stunning aesthetic alike; this gym top boasts flattering contours, enhanced breathability ', 0, 0, '2018-12-09 15:00:15', '2018-12-09 15:00:15'),
 (55, 'FLEUR TEXTURE VEST WASHED KHAKI MARL', 'fleur-texture-vest-washed-khaki-marl', 15, 10, '20.00', '30.00', 35, '{\"XS\":\"35\"}', 't4-41544367695.jpg', '[\"t4-31544367695.jpg\",\"t4-21544367695.jpg\",\"t4-11544367695.jpg\"]', 'Get tough with training.', '• Thick, jacquard fabric\r\n• Double layered back feature\r\n• Keyhole cut out to back\r\n• Front seam\r\n• 46% Polyester, 43% Nylon, 11% Elastane\r\n• Model is 5\'7\" and wears a size S.\r\n\r\nBuilt with jacquard for when training gets hard. The Fleur Texture Vest is constructed from thick yet supple fabrics to move with your through your workout; but with a contemporary cut out design to the back, it’s a gym style ', 0, 0, '2018-12-09 15:01:35', '2018-12-09 15:01:35'),
 (56, 'ASYMMETRIC VEST SMOKEY GREY/BLACK', 'asymmetric-vest-smokey-greyblack', 15, 10, '25.00', '30.00', 30, '{\"XS\":\"10\",\"S\":\"10\",\"L\":\"10\"}', 't3-31544367786.jpg', '[\"t3-41544367786.jpg\",\"t3-21544367786.jpg\",\"t3-11544367786.jpg\"]', 'Abstract art meets performance technology.', '• Relaxed fit\r\n• Asymmetric colour panels\r\n• Cross over panels\r\n• Wrap front details\r\n• 85% Nylon, 15% Elastane\r\n• Model is 5\'7\" and wears a size S.\r\n\r\nDesigned to stand out, assembled to workout, the Asymmetric Vest provides a loose fit to allow you to exercise free of restriction but full of coverage. In unique, bold colourways, get ahead of the rest in style', 0, 0, '2018-12-09 15:03:06', '2018-12-09 15:03:06'),
 (57, 'SOLACE JUMPSUIT CHARCOAL MARL', 'solace-jumpsuit-charcoal-marl', 15, 10, '40.00', '50.00', 30, '{\"XS\":\"10\",\"M\":\"20\"}', 't2-41544367876.jpg', '[\"t2-21544367876.jpg\",\"t2-11544367876.jpg\",\"t2-31544367876.jpg\"]', 'Solace, softer.', '• High neck design with non-functional drawcords \r\n• Functional drawcords to waist \r\n• Keyhole cut out to back with button fastening \r\n• Bulk seams and elastication \r\n• Main: 46% Viscose, 42% Polyester, 12% Elastane. Rib: 95% Viscose, 5% Elastane. \r\n• Model is 5\'7\" and size XS.\r\n\r\nAll-in-one, all for rest day. Experience comfort like no other in the Solace Jumpsuit boasting a luxuriously soft fabric blend and flattering close fit: shaped for you', 0, 0, '2018-12-09 15:04:36', '2018-12-09 15:04:36'),
-(58, 'FLORAL GRAPHIC TANK WHITE', 'floral-graphic-tank-white', 15, 10, '20.00', '25.00', 60, '{\"XS\":30,\"M\":\"10\",\"L\":\"20\"}', 't1-41544367968.jpg', '[\"t1-31544367968.jpg\",\"t1-21544367968.jpg\",\"t1-11544367968.jpg\"]', 'Subtly Gymshark.', 'Subtly Gymshark. The Graphic Floral Tank disguises our famous Gymshark logo within an elegant floral print.\r\n\r\n• Midriff crop and curved side split\r\n\r\n• Crew neck and drop armhole\r\n\r\n• Lightweight, unrestrictive fit\r\n\r\n65% Polyester, 35% Viscose.\r\n\r\nModel is 5\'5\" and wears size XS', 0, 0, '2018-12-09 15:06:08', '2018-12-09 15:06:08'),
+(58, 'FLORAL GRAPHIC TANK WHITE', 'floral-graphic-tank-white', 15, 10, '20.00', '25.00', 44, '{\"XS\":15,\"M\":9,\"L\":\"20\"}', 't1-41544367968.jpg', '[\"t1-31544367968.jpg\",\"t1-21544367968.jpg\",\"t1-11544367968.jpg\"]', 'Subtly Gymshark.', 'Subtly Gymshark. The Graphic Floral Tank disguises our famous Gymshark logo within an elegant floral print.\r\n\r\n• Midriff crop and curved side split\r\n\r\n• Crew neck and drop armhole\r\n\r\n• Lightweight, unrestrictive fit\r\n\r\n65% Polyester, 35% Viscose.\r\n\r\nModel is 5\'5\" and wears size XS', 3, 0, '2018-12-09 15:06:08', '2018-12-09 15:06:08'),
 (60, 'Bio-Arc Series', 'bioarc-series', 9, 10, '250.00', '300.00', 40, 'null', 'e8-315340428931544709249.jpg', '[]', 'TuﬀStuﬀ is proud to introduce the Bio-Arc strength series, the ﬁrst resistance machines to incorporate multiplanar movement of each machine’s seat, along a linear arc trajectory', 'TuﬀStuﬀ is proud to introduce the Bio-Arc strength series, the ﬁrst resistance machines to incorporate multiplanar movement of each machine’s seat, along a linear arc trajectory. The seat movement allows the user to move along the arc path in conjunction with the machine helping to maintain more optimal muscle length and improving the force of contraction and training stimulus. Three years in the making, from concepts and engineering to prototype, testing and reﬁnements. Each of the Bio-Arc line\'s machines were tested, following initial design positioning, by an independent exercise consulting company. Pilot research studies combining joint positioning – using goniometry testing, along with muscle recruitmentand activity measurements – through electromyographic (EMG) testing were performed to determine the optimal dimensions of each unit for ﬁnal production. Every detail and design modiﬁcations were executed to exact speciﬁcations and re-tested. The end results, a patented Bio-Arc Technology that allows full body linear arc trajectory motion during execution of\r\n', 0, 0, '2018-12-13 13:54:09', '2018-12-13 13:54:09'),
-(61, 'Fashion 3-Station Integrated Training Machine', 'fashion-3station-integrated-training-machine', 9, 10, '150.00', '220.00', 26, 'null', 'hort9-615340425291544710149.jpg', '[]', 'Assemble Space:（L*W*H）: 2300*1850*2065（mm）', 'Function: leg press, leg extension, chest extension, high pull, low pull, and abdomen-press etc.\r\n 2300*1850*2065（mm）\r\n\r\nFunction Features\r\nInnovative design, compact structure, can be used by five people simultaneously.\r\nTotal Two towers，40pcs cast iron  Weight stacks ，20 pieces per tower for household trainer, 10pounds/pc', 2, 0, '2018-12-13 14:09:09', '2018-12-13 14:09:09'),
-(62, 'F1-7006 Chest Extension', 'f17006-chest-extension', 9, 10, '180.00', '200.00', 30, '', 'e515340424191544710205.jpg', '[]', 'Assemble Space: 1350*1200*1600 (mm)', 'Function：Exercise chest pectoralis major\r\n\r\n1.The air pressure adjustment system makes the adjustment flexible and convenient.\r\n\r\n2.Interactive handles design, can be automatically adjusted, suitable for different arm length exercisers.\r\n\r\n3.Adjacent and divergent axis movements are consistent with joint motion to ensure that the range of motion is comfortable and natural.', 0, 0, '2018-12-13 14:10:05', '2018-12-13 14:10:05'),
-(63, 'W2004 Pec Fly & Rear Delt', 'w2004-pec-fly--rear-delt', 9, 10, '220.00', '250.00', 10, '', 'e415340422921544710453.jpg', '[]', 'Assemble Space: 1420*1080*2120 mm', 'Training parts: biceps, triceps, chest, back\r\nProduct feature: Arm’s angle can be adjusted, multi-directional movement is available for whole body, longer handgrip, feel more comfortable.   Multi function training, metal pulley, can be paired with the central tower freely customized into 4 stations, 5 stations, 8 station, 12 station, 16 stations training machine.', 0, 0, '2018-12-13 14:14:13', '2018-12-13 14:14:13'),
-(64, 'Commercial Exercise Cycle.', 'commercial-exercise-cycle', 9, 10, '150.00', '200.00', 16, 'null', 'e315340417621544710505.jpg', '[]', 'great', '1. Strong frame,ergonomic design, so that users feel more relaxed\r\n2. The seat cushion can be adjust vertical and horizontal,can meet all users\'requirement.\r\n3. The form arm tube can be adjust vertical,can meet all shape users\' requirement.\r\n4.Adjustable pedal. make the user feel more comfortable.\r\n5.Adopt emergency stop system make sure user can work in a safety condition.\r\n6.The machine can work in bidirectional ways,you can choose your exercise style.\r\n7.Front moving wheel design,can be easily removed.\r\n8.Adopt senior resistance adjustment machine and aluminium alloy brake\r\n9.Special shock-absorption device make you feel more comfortable and full of passion.', 1, 0, '2018-12-13 14:15:05', '2018-12-13 14:15:05'),
+(61, 'Fashion 3-Station Integrated Training Machine', 'fashion-3station-integrated-training-machine', 9, 10, '150.00', '220.00', 21, 'null', 'hort9-615340425291544710149.jpg', '[]', 'Assemble Space:（L*W*H）: 2300*1850*2065（mm）', 'Function: leg press, leg extension, chest extension, high pull, low pull, and abdomen-press etc.\r\n 2300*1850*2065（mm）\r\n\r\nFunction Features\r\nInnovative design, compact structure, can be used by five people simultaneously.\r\nTotal Two towers，40pcs cast iron  Weight stacks ，20 pieces per tower for household trainer, 10pounds/pc', 6, 0, '2018-12-13 14:09:09', '2018-12-13 14:09:09'),
+(62, 'F1-7006 Chest Extension', 'f17006-chest-extension', 9, 10, '180.00', '200.00', 29, 'null', 'e515340424191544710205.jpg', '[]', 'Assemble Space: 1350*1200*1600 (mm)', 'Function：Exercise chest pectoralis major\r\n\r\n1.The air pressure adjustment system makes the adjustment flexible and convenient.\r\n\r\n2.Interactive handles design, can be automatically adjusted, suitable for different arm length exercisers.\r\n\r\n3.Adjacent and divergent axis movements are consistent with joint motion to ensure that the range of motion is comfortable and natural.', 1, 0, '2018-12-13 14:10:05', '2018-12-13 14:10:05'),
+(63, 'W2004 Pec Fly & Rear Delt', 'w2004-pec-fly--rear-delt', 9, 10, '220.00', '250.00', 10, 'null', 'e415340422921544710453.jpg', '[]', 'Assemble Space: 1420*1080*2120 mm', 'Training parts: biceps, triceps, chest, back\r\nProduct feature: Arm’s angle can be adjusted, multi-directional movement is available for whole body, longer handgrip, feel more comfortable.   Multi function training, metal pulley, can be paired with the central tower freely customized into 4 stations, 5 stations, 8 station, 12 station, 16 stations training machine.', 1, 0, '2018-12-13 14:14:13', '2018-12-13 14:14:13'),
+(64, 'Commercial Exercise Cycle.', 'commercial-exercise-cycle', 9, 10, '150.00', '200.00', 11, 'null', 'e315340417621544710505.jpg', '[]', 'great', '1. Strong frame,ergonomic design, so that users feel more relaxed\r\n2. The seat cushion can be adjust vertical and horizontal,can meet all users\'requirement.\r\n3. The form arm tube can be adjust vertical,can meet all shape users\' requirement.\r\n4.Adjustable pedal. make the user feel more comfortable.\r\n5.Adopt emergency stop system make sure user can work in a safety condition.\r\n6.The machine can work in bidirectional ways,you can choose your exercise style.\r\n7.Front moving wheel design,can be easily removed.\r\n8.Adopt senior resistance adjustment machine and aluminium alloy brake\r\n9.Special shock-absorption device make you feel more comfortable and full of passion.', 1, 0, '2018-12-13 14:15:05', '2018-12-13 14:15:05'),
 (65, 'test', 'test', 4, 10, '10.00', '15.00', 20, '', '33315302566911544712599.jpg', '[]', '11', '22', 0, 1, '2018-12-13 14:49:59', '2018-12-13 14:49:59'),
 (66, 'test 1', 'test-1', 9, 10, '10.00', '15.00', 22, '{\"XS\":\"22\"}', 'b4-415326608441544712633.jpg', '[]', '11', '22', 0, 1, '2018-12-13 14:50:33', '2018-12-13 14:50:33'),
 (67, 'test2', 'test2', 13, 10, '10.00', '20.00', 20, '', 'apple215300811641544717394.jpg', '[]', '112', '22', 0, 2, '2018-12-13 16:09:54', '2018-12-13 16:09:54');
@@ -630,7 +694,7 @@ CREATE TABLE IF NOT EXISTS `promotion_detail` (
   PRIMARY KEY (`id`),
   KEY `promotion_id` (`promotion_id`),
   KEY `pro_id` (`pro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `promotion_detail`
@@ -647,7 +711,8 @@ INSERT INTO `promotion_detail` (`id`, `promotion_id`, `pro_id`, `price`, `status
 (10, 3, 6, '11.00', 0, '2018-12-10 07:07:25'),
 (12, 3, 61, '200.00', 0, '2018-12-13 16:05:08'),
 (13, 3, 62, '190.00', 0, '2018-12-13 16:05:08'),
-(14, 3, 63, '225.00', 0, '2018-12-13 16:05:09');
+(14, 3, 63, '225.00', 0, '2018-12-13 16:05:09'),
+(15, 3, 58, '21.25', 0, '2018-12-15 02:17:27');
 
 -- --------------------------------------------------------
 
@@ -666,7 +731,7 @@ CREATE TABLE IF NOT EXISTS `ship` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`order_id`),
   KEY `order_id` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `ship`
@@ -678,7 +743,16 @@ INSERT INTO `ship` (`id`, `user_id`, `order_id`, `status`, `created_at`, `update
 (3, 2, 22, 2, '2018-12-08 13:13:43', '2018-12-12 14:55:50'),
 (4, 2, 24, 1, '2018-12-12 14:53:32', '2018-12-12 14:57:41'),
 (5, 2, 26, 1, '2018-12-13 15:33:08', '2018-12-13 15:33:34'),
-(6, 2, 25, 2, '2018-12-14 00:23:43', '2018-12-14 00:25:07');
+(6, 2, 25, 2, '2018-12-14 00:23:43', '2018-12-14 00:25:07'),
+(7, 2, 28, 2, '2018-12-14 13:53:32', '2018-12-14 14:02:46'),
+(8, 2, 29, 1, '2018-12-14 13:57:21', '2018-12-14 13:59:37'),
+(9, 2, 30, 2, '2018-12-14 13:59:56', '2018-12-14 14:00:01'),
+(10, 6, 31, 1, '2018-12-14 14:01:54', '2018-12-14 14:01:59'),
+(11, 6, 33, 1, '2018-12-14 14:05:50', '2018-12-14 14:05:55'),
+(12, 6, 35, 2, '2018-12-14 14:10:30', '2018-12-14 14:13:57'),
+(13, 2, 36, 1, '2018-12-14 14:10:54', '2018-12-14 14:14:47'),
+(14, 2, 40, 1, '2018-12-15 02:15:17', '2018-12-15 02:16:06'),
+(15, 6, 43, 1, '2018-12-16 07:33:59', '2018-12-16 07:34:09');
 
 -- --------------------------------------------------------
 
@@ -722,7 +796,7 @@ CREATE TABLE IF NOT EXISTS `stock_receipt` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `stock_receipt`
@@ -745,7 +819,8 @@ INSERT INTO `stock_receipt` (`id`, `user_id`, `description`, `status`, `created_
 (14, 1, '<p>new stock</p>\r\n', 1, '2018-12-13 13:11:58', '2018-12-13 13:11:58'),
 (15, 1, '<p>equitment</p>\r\n', 1, '2018-12-13 14:07:34', '2018-12-13 14:07:34'),
 (16, 1, '<p>new equipment</p>\r\n', 1, '2018-12-13 14:13:08', '2018-12-13 14:13:08'),
-(17, 1, '<p>next equipment</p>\r\n', 1, '2018-12-13 14:47:58', '2018-12-13 14:47:58');
+(17, 1, '<p>next equipment</p>\r\n', 1, '2018-12-13 14:47:58', '2018-12-13 14:47:58'),
+(18, 1, '<p>new stock</p>\r\n\r\n<p>&nbsp;</p>\r\n', 1, '2018-12-16 09:02:49', '2018-12-16 09:02:49');
 
 -- --------------------------------------------------------
 
@@ -799,18 +874,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `permission_id` (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `image`, `permission_id`, `phone_number`, `address`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Harrik', 'Uchi', 'ha@gmail.com', '$2y$10$tOwvTp1kXhd30yD17LxEXeWiPixxKj4qzRcleo7VOljDrJPWyR.Ja', '27848131_167563094021853_1262747358_n1543985589.jpg', 1, '0168886853', 'Q2', 0, '2018-12-05 02:57:06', '2018-12-05 02:57:06'),
+(1, 'Harrik', 'Uchi', 'ha@gmail.com', '$2y$10$iXGTKatsgdDEFibAb9K4u.t..qZqUdby2bPmp5tmLLfU1USDO.rU6', 'avatar11544797763.jpg', 1, '0168886853', 'Q2', 0, '2018-12-05 02:57:06', '2018-12-05 02:57:06'),
 (2, 'Ken', 'Delivery', 'ken@gmail.com', '$2y$10$ffJTnfRQ/mHhHaJyQ.f0yufmQkfP2SyrLGFu/oJ/T4ZzGdT5YHkn.', '', 6, '123', '', 0, '2018-12-05 04:50:37', '2018-12-05 04:50:37'),
 (3, 'Haley', 'Data', 'data@gmail.com', '$2y$10$l.JMGqIZFG61DQohXhjQTe.M.TRlEX1AoigUte6U.cXpOPOEp5EKW', 'user1543985540.jpg', 2, '1234567890', 'Q2', 0, '2018-12-05 04:52:20', '2018-12-05 04:52:20'),
-(4, 'Harry', 'Potter', 'harry@gmail.com', '$2y$10$ChX.0yx3PslX2k50N3C4Jepnovja/2d1cpRs0i9dn6drw/G.3Swf.', '', 4, '1234567890', 'Q1', 0, '2018-12-05 05:27:35', '2018-12-05 05:27:35'),
-(5, 'Henry', 'Jack', 'acc01@gmail.com', '$2y$10$5zb3YTTiJEfUURK8F.0n9OLFoD2kIpY/7n52RN0k/JGrH5ow4zALG', 'apple15432369911544241000.jpg', 4, '01688868553', 'Q2', 1, '2018-12-08 03:50:00', '2018-12-08 03:50:00');
+(4, 'Harry', 'Potter', 'harry@gmail.com', '$2y$10$QegbCb.40QtcmqLprj6x1up60KTZd20Oc2A6rkbJsPUVmOuTsKe4.', '', 4, '12345678900', 'Q2', 0, '2018-12-05 05:27:35', '2018-12-05 05:27:35'),
+(5, 'Henry', 'Jack', 'acc01@gmail.com', '$2y$10$5zb3YTTiJEfUURK8F.0n9OLFoD2kIpY/7n52RN0k/JGrH5ow4zALG', 'apple15432369911544241000.jpg', 4, '01688868553', 'Q2', 1, '2018-12-08 03:50:00', '2018-12-08 03:50:00'),
+(6, 'Jack', 'IT', 'ship@gmail.com', '$2y$10$6gZuxiziIBS70DEk0VBXWeYDsFLcgV4CmT4k8hoD7ArbZaPQZwg9e', '', 6, '01688868554', 'Q1', 0, '2018-12-14 13:54:24', '2018-12-14 13:54:24');
 
 --
 -- Constraints for dumped tables

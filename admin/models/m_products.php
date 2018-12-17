@@ -113,6 +113,52 @@ class M_products extends database {
 		// var_dump($sql);
 		return $this->loadAllRows();
 	}
+	public function read_inventory() {
+		$sql ="select p.id as id, p.name as name, p.image as image, p.quantity as inventory, SUM(dstock.quantity)  as input
+				from (select * from products where status = 0) p, (select * from stock_receipt where status = 1) stock, (select * from detail_stock where status != 2) dstock
+				where dstock.stock_id = stock.id and dstock.pro_id = p.id group by p.id";
+		$this->setQuery($sql);
+		// var_dump($sql);
+		return $this->loadAllRows();
+	}
+
+	public function get_output_quantity($pro_id){
+		$sql = "select SUM(detail.quantity) as output
+				from (select * from orders where status != 5) o, order_details detail 
+				where o.id = detail.order_id and detail.pro_id = ? group by detail.pro_id";
+		$this->setQuery($sql);
+		$result =  $this->loadRow(array($pro_id));
+		if(empty($result)) {
+			return 0;
+		}
+		return $result->output;
+	}
+
+	public function get_destroy_quantity($pro_id) {
+		$sql = "select SUM(quantity) as destroy
+				from destroy_product 
+				where pro_id =".$pro_id." group by pro_id";
+		$this->setQuery($sql);
+		$result = $this->loadRow();
+		if(empty($result)) {
+			return 0;
+		}
+		return $result->destroy;
+	}
+
+	public function read_detail_inventory($pro_id) {
+		$sql = "select SUM(d.quantity) as quantity, o.status as status
+				from orders o , (select * from order_details where pro_id = ".$pro_id.") d 
+				where o.id = d.order_id  and o.status != 5 group by o.status";
+		$this->setQuery($sql);
+		return $this->loadAllRows();
+	}
+
+	public function read_status_by_id($id) {
+		$sql = "select * from status where id =".$id;
+		$this->setQuery($sql);
+		return $this->loadRow();
+	}
 
 	public function insert_product($name,$cate_id,$sup_id,$price,$quantity,$size,$image,$sub_image,$intro,$description) {
 		$sql = "insert into products(name,alias,cate_id,sup_id,price,quantity,size,image,sub_image,intro,description) values(?,?,?,?,?,?,?,?,?,?,?)";

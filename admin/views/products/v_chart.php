@@ -201,6 +201,50 @@ include("include/report.php");
 				</table>
 			</div>
 		</div>
+
+		<div class="card">
+			<div class="card-header badge-info"  style="text-align: center;">
+				<form method="POST" action="products_chart_pdf.php">
+				<span style = "font-weight: 500; font-size:1.1rem"><i class="fa fa-search"></i> Inventory Report <span><button  type="submit" style="float:right" class="btn btn-success">Export PDF</button></span></span>
+				</form>
+			</div>
+			<div class="card-body">
+				<table class="table table-striped table_top_product">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Image</th>
+							<th>Name</th>
+							<th>Input</th>
+							<th>Output</th>
+							<th>Destroy</th>
+							<th>Inventory</th>
+							<th>Action</th>
+						</tr>
+
+					</thead>
+					<tbody>
+						<?php foreach($inventory as $key=>$tp): 
+
+						$output = $m_pro->get_output_quantity($tp->id);
+						$destroy = $m_pro->get_destroy_quantity($tp->id);
+
+						?>
+							<tr>
+								<td><?php echo $key + 1 ?></td>
+								<td><img src="public/images/<?php echo $tp->image ?>" width="60px"></td>
+								<td><?php echo $tp->name ?></td>
+								<td><?php echo $tp->input ?></td>
+								<td><?php echo $output ?></td>
+								<td><?php echo $destroy?></td>
+								<td><?php echo $tp->inventory?></td>
+								<td><a href="#view_detail" data-type="inventory" data-toggle="modal" data-proid="<?php echo $tp->id?>" class="btn btn-warning"> <i class="fa fa-eye"> View Detail Output</td>
+							</tr>
+						<?php endforeach ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
 

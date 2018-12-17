@@ -167,5 +167,28 @@ class C_account{
 		unset($_SESSION['customer']);
 		echo "<script>window.location='.'</script>";
 	}
+
+	public function reset_password() {
+		//models
+		$email = $_GET["email"];
+
+		if(isset($_POST["reset_password"])) {
+			$password =  password_hash($_POST["password"],PASSWORD_DEFAULT);
+			$email = $_POST["email"];
+
+			include("models/m_account.php");
+			$m_account = new M_account();
+			if($m_account->reset_password($email,$password)) {
+				$_SESSION["alert-success"] = "Reset password successfully";
+			} else {
+				$_SESSION["alert-danger"] = "Reset password Faily";
+			}
+		}
+
+		//views
+		$title = "Reset password";
+		$view = "views/account/v_reset_password.php";
+		include("include/layout.php");
+	}
 }
 ?>

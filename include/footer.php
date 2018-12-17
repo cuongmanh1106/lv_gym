@@ -103,7 +103,7 @@
                     data = data.trim();
                     // console.log(data);
                     if(data == "overlimit") {
-                        alert("This product's quantity don't enough");
+                        alert("Sorry, This product don't have any left");
                     } else {
                         total_data = data.split('---');
                         total = data.split('-');
@@ -182,6 +182,7 @@
                   }else if(data.cart == 'exists') {
                     alert("This product existed in your cart! please check again");
                     $this1.parent().parent().find('select[name=size_update]').val(data.size);
+                    $this1.parent().parent().find('input[name=qty_checkout]').val(data.qty);
                   } else {
                     $this1.parent().parent().find('.sub-total').html(data.subtotal);
                     $('.total').html(data.total);

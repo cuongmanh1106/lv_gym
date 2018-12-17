@@ -43,8 +43,8 @@
 
                         ?>
                         <tr>
-                         <td><?php echo $c->created_at  ?></td>
-                         <td><?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($c->created_at))->diffForHumans() ?></td>
+                         <td><?php echo $c->updated_at  ?></td>
+                         <td><?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($c->updated_at))->diffForHumans() ?></td>
                          <td><?php echo number_format($delivery_cost,2)  ?></td>
                          <td><?php echo $front?> <?php echo  number_format($subtotal, 2) ?><?php echo $back ?></td>
                          <td><?php echo $front?><?php echo  number_format($subtotal + $delivery_cost, 2)?><?php echo $back?></td>

@@ -34,8 +34,8 @@
     </div>
 
     <div class="modal-footer">
-      <button type="submit" name="change_password" id="change_password" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Update</button>
       <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-reply"></i> Close</button>
+       <button type="submit" name="change_password" id="change_password" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Update</button>
     </div>
   </form>
 </div>
@@ -53,8 +53,8 @@
       html += '<li>Password is required</li>';
       flag = false;
     }
-    if($('input[name=new_password]').val() == '') {
-      html += '<li>New password  is required</li>';
+    if($('input[name=new_password]').val().length < 6) {
+      html += '<li>New password  have length at least 6 character</li>';
       flag = false;
     }
     if($('input[name=conf_new_password]').val() == '') {

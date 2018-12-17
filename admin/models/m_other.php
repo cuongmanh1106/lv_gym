@@ -31,4 +31,6 @@ class M_other extends database {
 		return $result;
 	}
 
+	
+
 }

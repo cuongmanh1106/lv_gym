@@ -65,7 +65,7 @@ public function show_order_detail(){
         if($order->status == 1 && $_POST["status"] != 5 && $_POST["status"] != 3) {
             if($m_order->update_order($_POST["delivery_place"],$_POST["delivery_cost"],$_POST["status"],$id)) {
                 $_SESSION["alert-info"] = "Successfully";
-                echo "<script>window.location = 'orders_list.php'</script>";
+                // echo "<script>window.location = 'orders_list.php'</script>";
                 // header('Location: ' . $_SERVER['HTTP_REFERER']);
             } else {
                 $_SESSION["alert-danger"] = "Fail";
@@ -90,21 +90,21 @@ public function show_order_detail(){
                     }
                     $m_product->update_product_order($total,json_encode($sizes),$product->id);
                 }
-                $_SESSION["alert-success"] = "Successfully";
-                echo "<script>window.location = 'orders_list.php'</script>";
+                $_SESSION["alert-success"] = "Update Order Successfully";
+                // echo "<script>window.location = 'orders_list.php'</script>";
             } else {
                 $_SESSION["alert-danger"] = "Fail";
             }
         } else if($_POST["status"] == 3 && $order->status == 3){ //Khi cập nhật lại người giao hàng
             $shipper = $_POST["shipper"];
             if($m_order->update_shipper($shipper,$id)) {
-                $_SESSION["alert-success"] = "Successfully";
-                echo "<script>window.location = 'orders_list.php'</script>";
+                $_SESSION["alert-success"] = "Update Successfully";
+                // echo "<script>window.location = 'orders_list.php'</script>";
             } else {
                 $_SESSION["alert-danger"] = "Fail";
             }
         } else { // Nếu chọn 3 thì phải chọn shipper
-            if($_POST["delivery_place"] != '' && $_POST["delivery_cost"] != '') {
+            if(isset($_POST["delivery_place"]) && $_POST["delivery_place"] != '' && $_POST["delivery_cost"] != '') {
                 $m_order->update_order($_POST["delivery_place"],$_POST["delivery_cost"],$_POST["status"],$id);
             } else {
                 $m_order->update_status($_POST["status"],$id);
@@ -121,7 +121,9 @@ public function show_order_detail(){
             }
             $_SESSION["alert-success"] = "Successfully";
         }
-        echo "<script>window.location = 'orders_list.php'</script>";
+        // echo "<script>window.location = 'orders_list.php'</script>";
+        $details = $m_order->read_detail_by_id($id);
+        $order = $m_order->read_order_by_id($id);
     }
 
         //views 

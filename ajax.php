@@ -151,28 +151,52 @@ if(isset($_POST['profile_logout'])) {
 	unset($_SESSION["customer"]);
 	echo "success";
 }
-/*#############End Profile process##############*/
 
-/*#############Cart process##############*/
-if(isset($_POST['add-to-cart'])) {
-	$pro_id = $_POST['pro_id'];
-	$size = '';
-	$count = $_POST['count'];
-	$qty = 1;
-	$price = $_POST["price"];
-	include("models/m_products.php");
-	$m_pro = new M_products();
-	$product = $m_pro->read_product_by_id($pro_id);
+if(isset($_POST["reset_password"])){
 
-	if(isset($_POST["qty"])) {
-		$qty = $_POST["qty"];
-		if($_POST["qty"] == "") {
-			$qty = 1;
-		}
+	$email = $_POST["email"];
+	require_once("smtpgmail/class.phpmailer.php");
+	$mail=new PHPMailer();
+	$mail->IsSMTP(); // Chứng thực SMTP
+	$mail->SMTPAuth=TRUE;
+	$mail->Host="smtp.gmail.com";
+	$mail->Port=465;
+	$mail->SMTPSecure="ssl";
+	/* Server google*/
+	$mail->Username="cuongmanh1106@gmail.com"; // Nhập mail 
+	$mail->Password="nguyenmanhcuong"; // Mật khẩu
+	/* Server google*/
+	$mail->CharSet="utf-8";
+	$html = '<a href="http://localhost/lv_gym/reset_password?email='.$email.' ">Reset password link</a>';
+	$mail->SetFrom("cuongmanh1106@gmail.com","Harrik");
+	$mail->Subject="[Reset password]";
+	$mail->MsgHTML($html);
+	$mail->AddAddress($email,$_SESSION["customer"]->first_name ." ".$_SESSION["customer"]->last_name); // Mail người nhận
+	$mail->Send();
+
 	}
-	if(isset($_POST["size"])) {
-		$size  = $_POST["size"];
-		$sizes = json_decode($product->size);
+	/*#############End Profile process##############*/
+
+	/*#############Cart process##############*/
+	if(isset($_POST['add-to-cart'])) {
+		$pro_id = $_POST['pro_id'];
+		$size = '';
+		$count = $_POST['count'];
+		$qty = 1;
+		$price = $_POST["price"];
+		include("models/m_products.php");
+		$m_pro = new M_products();
+		$product = $m_pro->read_product_by_id($pro_id);
+
+		if(isset($_POST["qty"])) {
+			$qty = $_POST["qty"];
+			if($_POST["qty"] == "") {
+				$qty = 1;
+			}
+		}
+		if(isset($_POST["size"])) {
+			$size  = $_POST["size"];
+			$sizes = json_decode($product->size);
 		if($size == "" && count($sizes) > 0) { //chọn khi xem sản phẩm mà k order bên chi tiết
 			foreach($sizes as $key=>$v){
 				if($v != 0) {
@@ -300,7 +324,7 @@ if(isset($_POST["update_cart"])) {
 		$total += $cart["qty"]*$cart["price"]*(isset($_SESSION["vn"])?$_SESSION["vn"]:1);
 
 		if($key != $rowId && $pro_id == $cart["id"] && $size == $cart["size"]) { //if the product just update and it already have in your cart 																			(that mean giống nhau)
-			echo json_encode(['cart'=>"exists",'size'=>$cart_detail["size"] ]); //send back begin size
+			echo json_encode(['cart'=>"exists",'size'=>$cart_detail["size"],'qty'=>$cart_detail["qty"] ]); //send back begin size
 			exit();
 		} 
 		if(count($sizes) > 0) { //có size

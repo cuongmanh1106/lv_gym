@@ -217,6 +217,10 @@ if(isset($_POST["view_detail_date"])) {
         $products = $m_pro->view_list_product_detail_revenue($pro_id,$date);
     } else if($type == "my") {
         $products = $m_pro->view_list_product_detail_revenue_month_year($pro_id,$month,$year);
+    } else if($type == "inventory") {
+        $products = $m_pro->read_detail_inventory($pro_id);
+        include("views/products/v_detail_inventory.php");
+        exit();
     }
     include("views/products/v_view_list_products_detail_revenue.php");
 }

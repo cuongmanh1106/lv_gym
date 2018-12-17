@@ -4,7 +4,7 @@ require_once("admin/models/database.php");
 class M_order extends database {
 
 	public function read_order_by_customer($customer_id) {
-		$sql = "select * from orders where customer_id = ".$customer_id ." order by created_at desc";
+		$sql = "select * from orders where customer_id = ".$customer_id ." order by status desc";
 		$this->setQuery($sql);
 		return $this->loadAllRows();
 	}
@@ -43,7 +43,6 @@ class M_order extends database {
 	public function insert_order_detail($order_id,$pro_id,$price,$size,$quantity) {
 		$sql = "insert into order_details (order_id,pro_id,price,size,quantity) value(?,?,?,?,?)";
 		$this->setQuery($sql);
-		var_dump($sql);
 		return $this->execute(array($order_id,$pro_id,$price,$size,$quantity));
 	}
 

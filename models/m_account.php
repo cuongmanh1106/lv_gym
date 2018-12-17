@@ -37,4 +37,17 @@ class M_account extends database {
 		$this->setQuery($sql);
 		return $this->execute(array($password,$id));
 	}
+
+	public function reset_password($email,$password) {
+		$sql = "select * from users where permission_id = 4 and ans status = 0 and email = '".$email."'";
+		$this->setQuery($sql);
+		$result = $this->loadRow();
+		var_dump($sql);
+		if(empty($result)) {
+			return false;
+		}
+		$sql = "update users set password = ".$password." where email = '".$email."'";
+		$this->setQuery($sql);
+		return $this->execute();
+	}
 }

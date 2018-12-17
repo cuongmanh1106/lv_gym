@@ -63,7 +63,7 @@
                 $date  = date('Y-m-d');
                 $highlight = "";
                 if($date >= $u->date_from && $date <= $u->date_to ) {
-                  $highlight = "background-color: #ffff00";
+                  $highlight = "background-color: #B40431";
                 }
                 ?>
                 <tr style="<?php echo $highlight?>" id="">

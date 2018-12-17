@@ -34,8 +34,8 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" name="change_password" id="change_pass" style="text-align: center;" class="btn btn-info">Update</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-reply"></i> Close</button>
+        <button type="button" name="change_password" id="change_pass" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Save</button>
     </div>
 </form>
 </div>

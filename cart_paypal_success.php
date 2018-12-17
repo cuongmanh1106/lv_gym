@@ -11,7 +11,7 @@ if(!$_GET["success"]) {
 	require("models/m_order.php");
 	$m_order = new M_order();
 	$m_order->update_status(5,$_GET["order_id"]);
-	echo "<script>alert('Order Faily'); window.location='.'</script>";
+	echo "<script>alert('So tien trong tai khoang khong du de thuc hien giao dich nay'); window.location='.'</script>";
 	die();
 }
 

@@ -101,7 +101,7 @@ class C_cart{
 		$mail->SetFrom("cuongmanh1106@gmail.com","Harrik");
 		$mail->Subject="[Confirm your order]";
 		$mail->MsgHTML($html);
-		$mail->AddAddress("cuongmanh2311@gmail.com",$_SESSION["customer"]->first_name ." ".$_SESSION["customer"]->last_name); // Mail người nhận
+		$mail->AddAddress($_SESSION["customer"]->email,$_SESSION["customer"]->first_name ." ".$_SESSION["customer"]->last_name); // Mail người nhận
 		$mail->Send();
 
 		if($_POST["payment"] == "paypal") {
@@ -153,4 +153,6 @@ class C_cart{
 		$title = "Order Successfully";
 		include("include/layout.php");
 	}
+
+	
 }
