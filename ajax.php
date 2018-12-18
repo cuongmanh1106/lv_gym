@@ -214,7 +214,7 @@ if(isset($_POST["reset_password"])){
 		if($size == "" && count($sizes) > 0) { //chọn khi xem sản phẩm mà k order bên chi tiết
 			foreach($sizes as $key=>$v){
 				if($v != 0) {
-					$size = $key;
+					$size = $key; //lấy size gần nhất có số lượng lớn hơn 0
 					break;
 				}
 			}

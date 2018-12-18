@@ -168,4 +168,33 @@ class C_Users
 		$title = "List of Customer";
 		include("include/layout.php");
 	}
+
+
+	public function edit_permission() {
+
+		$m_per = new M_permission();
+		if($m_per->check_permission("edit_user") == 0) {
+			$_SESSION['alert-warning'] = "You don't have permission to do this action";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+		}
+
+
+		$id = $_POST["user_id"];
+		$permission_id = $_POST["permission_id"];
+
+		include("models/m_users.php");
+		$m_user = new M_users();
+		$user = $m_user->read_user_by_id($id);
+		if($user->permission_id == $permission_id) {
+			$_SESSION['alert-warning'] = "Please change permission before update";
+		}
+		else if($m_user->edit_perrmision($id,$permission_id)) {
+			$_SESSION['alert-success'] = "Update permission successfully";
+		} else {
+			$_SESSION['alert-success'] = "Update permission Faily";
+		}
+
+		echo "<script>window.location = 'user_list.php'</script>";
+	}
 }

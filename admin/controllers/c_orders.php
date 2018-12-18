@@ -110,7 +110,7 @@ public function show_order_detail(){
             } else {
                 $_SESSION["alert-danger"] = "Fail";
             }
-        } else { // Nếu chọn 3 thì phải chọn shipper
+        } else { // Nếu chọn 3 thì phải chọn shipper (delivering or completed)
             if(isset($_POST["delivery_place"]) && $_POST["delivery_place"] != '' && $_POST["delivery_cost"] != '') {
                 $m_order->update_order($_POST["delivery_place"],$_POST["delivery_cost"],$_POST["status"],$id);
             } else {

@@ -13,11 +13,11 @@
                 <th><input type="checkbox" name="check_all"></th>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Price</th>
+                <th>Price In</th>
+                <th>Price Sale</th>
                 <th>Category</th>
                 <th>Supplier</th>
                 <th>Quantity</th>
-                <th>Introduce</th>
                 <th>Size</th>
                 <th>Action</th>
               </tr>
@@ -51,11 +51,11 @@
                 <td><input type="checkbox" name="check_products[]" value="<?php echo $p->id?>"></td>
                 <td><img src="public/images/<?php echo $p->image?>" width="150px"></td>
                 <td><?php echo $p->name?></td>
+                <td align="right"><?php echo number_format($p->price_in,2)?></td>
                 <td align="right"><?php echo number_format($p->price,2)?></td>
                 <td><?php echo $cate_name?></td>
                 <td><?php echo $supplier?></td>
                 <td><?php echo $p->quantity?></td>
-                <td><?php echo substr($p->intro,0,30)  ?>.....</td>
                 <td><?php echo $size_name?></td>
                 <td>
                  <div class="dropdown">

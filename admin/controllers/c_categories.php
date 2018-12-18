@@ -102,10 +102,10 @@ class C_categories
 			$msg = "";
 			$children = $m_cate->read_cate_by_parent($id); // tìm con của cate đang đứng
 
-			if($cate->parent_id == 0 && count($children) > 0 ) { //nếu là cấp cao nhất và có con thì không cho thay đổi 
+			if($cate->parent_id == 0 && count($children) > 0 ) { //nếu là cấp cao nhất và có con thì không cho thay đổi (vi dụ sử mens)
 				$parent = $cate->parent_id;
 				$msg = "this category had children, you can change it's parent";
-			} else if($parent != 0 ) { //nếu chọn cha không phải cấp cao nhất
+			} else if($parent != 0 ) { //nếu chọn cha không phải cấp cao nhất (vidu : short->mens )
 				$cate_parent = $m_cate->read_cate_by_id($parent);  //Lấy cha của loại đang đứng
 				if($cate_parent->parent_id != 0 ) { // cha vừa chọn không phải cấp cao nhất thì chọn parent = là thằng có cấp cao nhất (parent = 0) ví dụ parent = Short (parent = 1 :mens) thì t sẽ chuyển parent = 0 :none cấp cao nhất 
 					$parent = $cate_parent->parent_id;

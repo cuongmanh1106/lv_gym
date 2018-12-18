@@ -39,9 +39,9 @@ $('input[name=reset_password').on('click',function(){
 	password = $('input[name=password]').val();
 	confirm_password = $('input[name=confirm_password]').val();
 	flag = true;
-	if(password == "") {
+	if(password.length < 6) {
 		flag = false;
-		html += "<li>Enter password!! please</li>";
+		html += "<li>Password have length at least 6 characters</li>";
 	}
 	if(password != confirm_password) {
 		flag = false;

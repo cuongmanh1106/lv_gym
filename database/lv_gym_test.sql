@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 17, 2018 at 01:08 AM
+-- Generation Time: Dec 18, 2018 at 12:45 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   KEY `pro_id` (`pro_id`),
   KEY `user_id` (`user_id`),
   KEY `parent` (`parent`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `comments`
@@ -90,7 +90,12 @@ INSERT INTO `comments` (`id`, `pro_id`, `user_id`, `comment`, `parent`, `like`, 
 (5, 1, 4, 'nice short', 0, 0, '2018-12-08 03:47:28'),
 (6, 1, 4, 'Love it', 0, 0, '2018-12-08 03:47:44'),
 (7, 1, 5, 'tks so much!!!', 5, 0, '2018-12-08 03:50:26'),
-(8, 1, 4, 'Jack You\'re Welcome', 5, 0, '2018-12-08 03:51:03');
+(8, 1, 4, 'Jack You\'re Welcome', 5, 0, '2018-12-08 03:51:03'),
+(9, 9, 4, 'good promotion', 0, 0, '2018-12-17 13:03:08'),
+(10, 9, 4, '', 0, 0, '2018-12-17 13:03:10'),
+(11, 9, 4, 'hey', 0, 0, '2018-12-17 13:05:49'),
+(12, 9, 4, 'my comment', 11, 0, '2018-12-17 13:06:00'),
+(13, 9, 4, 'Potter ', 11, 0, '2018-12-17 13:06:03');
 
 -- --------------------------------------------------------
 
@@ -106,8 +111,10 @@ CREATE TABLE IF NOT EXISTS `destroy_product` (
   `size` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `quantity` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `pro_id` (`pro_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `destroy_product`
@@ -122,7 +129,9 @@ INSERT INTO `destroy_product` (`id`, `user_id`, `pro_id`, `size`, `quantity`, `c
 (6, 1, 64, 'null', 5, '2018-12-15 02:19:59'),
 (7, 1, 2, '{\"S\":\"2\"}', 2, '2018-12-16 08:40:42'),
 (8, 1, 1, '{\"L\":\"7\"}', 7, '2018-12-16 09:00:02'),
-(9, 1, 3, '{\"XS\":\"5\"}', 5, '2018-12-16 09:00:45');
+(9, 1, 3, '{\"XS\":\"5\"}', 5, '2018-12-16 09:00:45'),
+(10, 1, 1, '{\"XL\":\"10\"}', 10, '2018-12-17 12:55:56'),
+(11, 1, 64, 'null', 1, '2018-12-17 14:15:29');
 
 -- --------------------------------------------------------
 
@@ -144,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `detail_stock` (
   PRIMARY KEY (`id`),
   KEY `stock_id` (`stock_id`),
   KEY `pro_id` (`pro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `detail_stock`
@@ -236,7 +245,8 @@ INSERT INTO `detail_stock` (`id`, `stock_id`, `pro_id`, `quantity`, `price_in`, 
 (92, 17, 58, 2, '20.00', '{\"XS\":\"2\"}', 1, '2018-12-13 14:53:12', '2018-12-13 14:53:12'),
 (93, 6, 67, 20, '10.00', '', 0, '2018-12-13 16:09:54', '2018-12-13 16:09:54'),
 (94, 18, 1, 35, '10.00', '{\"XS\":\"5\",\"XL\":\"30\"}', 1, '2018-12-16 09:03:22', '2018-12-16 09:03:22'),
-(95, 18, 2, 72, '17.00', '{\"XS\":\"50\",\"XL\":22}', 1, '2018-12-16 09:03:46', '2018-12-16 09:03:46');
+(95, 18, 2, 72, '17.00', '{\"XS\":\"50\",\"XL\":22}', 1, '2018-12-16 09:03:46', '2018-12-16 09:03:46'),
+(96, 19, 1, 21, '10.00', '{\"XS\":\"14\",\"S\":\"7\"}', 1, '2018-12-17 12:57:02', '2018-12-17 12:57:02');
 
 -- --------------------------------------------------------
 
@@ -254,14 +264,15 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `feedback`
 --
 
 INSERT INTO `feedback` (`id`, `customer_id`, `content`, `status`, `created_at`, `updated_at`) VALUES
-(1, 4, 'hi', 1, '2018-12-05 05:30:34', '2018-12-05 05:30:34');
+(1, 4, 'hi', 1, '2018-12-05 05:30:34', '2018-12-05 05:30:34'),
+(2, 4, 'nice shop', 0, '2018-12-17 13:07:55', '2018-12-17 13:07:55');
 
 -- --------------------------------------------------------
 
@@ -347,7 +358,7 @@ CREATE TABLE IF NOT EXISTS `like` (
   PRIMARY KEY (`id`),
   KEY `comment_id` (`comment_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `like`
@@ -356,7 +367,9 @@ CREATE TABLE IF NOT EXISTS `like` (
 INSERT INTO `like` (`id`, `comment_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 3, 4, '2018-12-05 05:55:58', '2018-12-05 05:55:58'),
 (3, 5, 4, '2018-12-08 03:47:48', '2018-12-08 03:47:48'),
-(4, 5, 5, '2018-12-08 03:50:29', '2018-12-08 03:50:29');
+(4, 5, 5, '2018-12-08 03:50:29', '2018-12-08 03:50:29'),
+(5, 10, 4, '2018-12-17 13:03:54', '2018-12-17 13:03:54'),
+(6, 9, 4, '2018-12-17 13:03:56', '2018-12-17 13:03:56');
 
 -- --------------------------------------------------------
 
@@ -378,7 +391,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
   KEY `status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `orders`
@@ -411,7 +424,7 @@ INSERT INTO `orders` (`id`, `customer_id`, `area`, `delivery_place`, `delivery_c
 (34, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-14 14:06:06', '2018-12-14 14:09:22'),
 (35, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-14 14:09:56', '2018-12-14 14:13:57'),
 (36, 4, 'hcm', 'Q1', '2.00', 0, 4, '2018-12-14 14:10:14', '2018-12-14 14:14:47'),
-(37, 4, 'hcm', 'Q1', '2.00', 0, 1, '2018-12-14 14:16:03', '2018-12-14 14:16:03'),
+(37, 4, 'hcm', 'Q1', '2.00', 0, 2, '2018-12-14 14:16:03', '2018-12-17 15:59:59'),
 (38, 4, 'hcm', 'Q1', '2.00', 0, 5, '2018-12-14 14:51:14', '2018-12-15 02:22:49'),
 (39, 4, 'hcm', 'Q1', '2.00', 1, 5, '2018-12-14 14:53:35', '2018-12-14 14:57:23'),
 (40, 4, 'hcm', 'Q1', '2.00', 1, 4, '2018-12-15 02:07:47', '2018-12-15 02:16:06'),
@@ -424,7 +437,12 @@ INSERT INTO `orders` (`id`, `customer_id`, `area`, `delivery_place`, `delivery_c
 (47, 4, 'hcm', 'Q1', '2.00', 1, 1, '2018-12-16 10:04:46', '2018-12-16 10:04:46'),
 (48, 4, 'hcm', 'Q1', '2.00', 1, 1, '2018-12-16 10:08:30', '2018-12-16 10:08:30'),
 (49, 4, 'hcm', 'Q1', '2.00', 1, 1, '2018-12-16 10:28:00', '2018-12-16 10:28:00'),
-(50, 4, 'hcm', 'Q1', '2.00', 1, 1, '2018-12-16 10:32:01', '2018-12-16 10:32:01');
+(50, 4, 'hcm', 'Q1', '2.00', 1, 4, '2018-12-16 10:32:01', '2018-12-17 16:02:05'),
+(51, 4, 'hcm', 'Q2', '2.00', 1, 5, '2018-12-17 12:51:31', '2018-12-17 12:54:31'),
+(52, 4, 'hcm', 'Q2', '2.00', 0, 4, '2018-12-17 13:01:03', '2018-12-17 13:02:11'),
+(53, 7, 'hcm', 'Q2', '2.00', 1, 4, '2018-12-17 15:41:05', '2018-12-17 15:44:03'),
+(54, 7, 'hcm', 'Q2', '2.00', 1, 4, '2018-12-17 15:49:11', '2018-12-17 15:52:56'),
+(55, 7, 'hcm', 'Q2', '2.00', 1, 2, '2018-12-17 15:58:26', '2018-12-17 15:59:35');
 
 -- --------------------------------------------------------
 
@@ -444,7 +462,7 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`,`pro_id`),
   KEY `pro_id` (`pro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `order_details`
@@ -517,7 +535,17 @@ INSERT INTO `order_details` (`id`, `order_id`, `pro_id`, `price`, `size`, `quant
 (64, 47, 2, '20.00', 'XS', 1, '2018-12-16 10:04:46'),
 (65, 48, 1, '17.00', 'XS', 1, '2018-12-16 10:08:30'),
 (66, 49, 35, '30.00', 'XS', 1, '2018-12-16 10:28:01'),
-(67, 50, 2, '20.00', 'XS', 5, '2018-12-16 10:32:01');
+(67, 50, 2, '20.00', 'XS', 5, '2018-12-16 10:32:01'),
+(68, 51, 1, '15.30', 'L', 1, '2018-12-17 12:51:31'),
+(69, 51, 1, '15.30', 'XS', 4, '2018-12-17 12:51:31'),
+(70, 52, 1, '15.30', 'XS', 8, '2018-12-17 13:01:03'),
+(71, 52, 3, '16.00', 'XS', 4, '2018-12-17 13:01:03'),
+(72, 52, 1, '15.30', 'S', 2, '2018-12-17 13:01:03'),
+(73, 53, 1, '15.30', 'L', 3, '2018-12-17 15:41:05'),
+(74, 53, 1, '15.30', 'XS', 3, '2018-12-17 15:41:05'),
+(75, 54, 1, '15.30', 'L', 2, '2018-12-17 15:49:11'),
+(76, 54, 1, '15.30', 'XS', 5, '2018-12-17 15:49:12'),
+(77, 55, 1, '15.30', 'XS', 1, '2018-12-17 15:58:26');
 
 -- --------------------------------------------------------
 
@@ -582,9 +610,9 @@ CREATE TABLE IF NOT EXISTS `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `alias`, `cate_id`, `sup_id`, `price_in`, `price`, `quantity`, `size`, `image`, `sub_image`, `intro`, `description`, `view`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'BASIC TRAINING SHORTS', 'basic-training-shorts', 5, 9, '10.00', '17.00', 49, '{\"XS\":14,\"L\":5,\"XL\":\"30\"}', 't5-41544366178.jpg', '[]', 'All the basics and all you need.', '• Relaxed fit \r\n• Overlapping side seam split \r\n• Zip pocket with fusing \r\n• Branded flat drawcord \r\n• 95% Polyester, 5% Elastane \r\n• Model is 6\'0\" and wears size M\r\n\r\nThe Basic Training Shorts work with you in the gym and support you out of it. A loose fit gives complete freedom to squat, sprint and jump for a fully focused workout.', 15, 0, '2018-12-05 04:13:38', '2018-12-05 04:13:38'),
+(1, 'BASIC TRAINING SHORTS', 'basic-training-shorts', 5, 9, '10.00', '17.00', 36, '{\"XS\":11,\"L\":0,\"XL\":20,\"S\":5}', 't5-41544366178.jpg', '[]', 'All the basics and all you need.', '• Relaxed fit \r\n• Overlapping side seam split \r\n• Zip pocket with fusing \r\n• Branded flat drawcord \r\n• 95% Polyester, 5% Elastane \r\n• Model is 6\'0\" and wears size M\r\n\r\nThe Basic Training Shorts work with you in the gym and support you out of it. A loose fit gives complete freedom to squat, sprint and jump for a fully focused workout.', 24, 0, '2018-12-05 04:13:38', '2018-12-05 04:13:38'),
 (2, 'FLAWLESS KNIT TIGHTS', 'flawless-knit-tights', 5, 10, '17.00', '20.00', 74, '{\"XS\":44,\"S\":8,\"XL\":22}', 't1-11544366068.jpg', '[\"t2-11544366068.jpg\"]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S.', 12, 0, '2018-12-05 04:16:20', '2018-12-05 04:16:20'),
-(3, 'FLAWLESS KNIT LONG SLEEVE CROP TOP', 'flawless-knit-long-sleeve-crop-top', 7, 9, '12.00', '16.00', 24, '{\"XS\":24}', 't1-11544366154.jpg', '[]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'nice & Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S. ', 3, 0, '2018-12-05 04:18:51', '2018-12-05 04:18:51'),
+(3, 'FLAWLESS KNIT LONG SLEEVE CROP TOP', 'flawless-knit-long-sleeve-crop-top', 7, 9, '12.00', '16.00', 20, '{\"XS\":20}', 't1-11544366154.jpg', '[]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'nice & Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S. ', 4, 0, '2018-12-05 04:18:51', '2018-12-05 04:18:51'),
 (4, 'FLEUR TEXTURE LONG SLEEVE CROP', 'fleur-texture-long-sleeve-crop', 5, 10, '10.00', '22.00', 0, 'null', 't7-31544366134.jpg', '[]', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort.', 'Designed as part of our lifestyle collection, the Heather Dual Band Shorts boast a classic, relaxed fit with split hem design for ultimate comfort. Concealed pockets offer an easy, safe way to store essentials on the move, whilst a dual waistband provides customisable support to help you find the perfect fit.\r\n\r\nFocusing on detail, the Heather Dual Band Shorts are crafted from ultra-soft French Terry fabric for consistent comfort that lasts all day.\r\n\r\nFinished with woven tag logo.\r\n\r\nMain: 78% Cotton, 22% Polyester\r\n\r\nPocket Bag: 69% Polyester, 31% Cotton\r\n\r\nModel is 5\'7\" and wears a size S.\r\n', 14, 0, '2018-12-05 04:24:12', '2018-12-05 04:24:12'),
 (5, 'Product 55', 'product-55', 8, 9, '16.00', '30.00', 24, '{\"XS\":4,\"S\":\"20\"}', 'b4-515326608441544839228.jpg', '[\"b4-115326608441544839186.jpg\"]', 'nicec', 'nices', 4, 1, '2018-12-05 04:30:06', '2018-12-05 04:30:06'),
 (6, 'Black Shirt', 'black-shirt', 5, 9, '10.00', '12.00', 71, '{\"XS\":14,\"S\":\"15\",\"XL\":\"12\",\"2XL\":\"30\"}', 't3-31544366111.jpg', '[]', 'nice', 'nice', 4, 0, '2018-12-06 13:47:07', '2018-12-06 13:47:07'),
@@ -644,7 +672,7 @@ INSERT INTO `products` (`id`, `name`, `alias`, `cate_id`, `sup_id`, `price_in`, 
 (61, 'Fashion 3-Station Integrated Training Machine', 'fashion-3station-integrated-training-machine', 9, 10, '150.00', '220.00', 21, 'null', 'hort9-615340425291544710149.jpg', '[]', 'Assemble Space:（L*W*H）: 2300*1850*2065（mm）', 'Function: leg press, leg extension, chest extension, high pull, low pull, and abdomen-press etc.\r\n 2300*1850*2065（mm）\r\n\r\nFunction Features\r\nInnovative design, compact structure, can be used by five people simultaneously.\r\nTotal Two towers，40pcs cast iron  Weight stacks ，20 pieces per tower for household trainer, 10pounds/pc', 6, 0, '2018-12-13 14:09:09', '2018-12-13 14:09:09'),
 (62, 'F1-7006 Chest Extension', 'f17006-chest-extension', 9, 10, '180.00', '200.00', 29, 'null', 'e515340424191544710205.jpg', '[]', 'Assemble Space: 1350*1200*1600 (mm)', 'Function：Exercise chest pectoralis major\r\n\r\n1.The air pressure adjustment system makes the adjustment flexible and convenient.\r\n\r\n2.Interactive handles design, can be automatically adjusted, suitable for different arm length exercisers.\r\n\r\n3.Adjacent and divergent axis movements are consistent with joint motion to ensure that the range of motion is comfortable and natural.', 1, 0, '2018-12-13 14:10:05', '2018-12-13 14:10:05'),
 (63, 'W2004 Pec Fly & Rear Delt', 'w2004-pec-fly--rear-delt', 9, 10, '220.00', '250.00', 10, 'null', 'e415340422921544710453.jpg', '[]', 'Assemble Space: 1420*1080*2120 mm', 'Training parts: biceps, triceps, chest, back\r\nProduct feature: Arm’s angle can be adjusted, multi-directional movement is available for whole body, longer handgrip, feel more comfortable.   Multi function training, metal pulley, can be paired with the central tower freely customized into 4 stations, 5 stations, 8 station, 12 station, 16 stations training machine.', 1, 0, '2018-12-13 14:14:13', '2018-12-13 14:14:13'),
-(64, 'Commercial Exercise Cycle.', 'commercial-exercise-cycle', 9, 10, '150.00', '200.00', 11, 'null', 'e315340417621544710505.jpg', '[]', 'great', '1. Strong frame,ergonomic design, so that users feel more relaxed\r\n2. The seat cushion can be adjust vertical and horizontal,can meet all users\'requirement.\r\n3. The form arm tube can be adjust vertical,can meet all shape users\' requirement.\r\n4.Adjustable pedal. make the user feel more comfortable.\r\n5.Adopt emergency stop system make sure user can work in a safety condition.\r\n6.The machine can work in bidirectional ways,you can choose your exercise style.\r\n7.Front moving wheel design,can be easily removed.\r\n8.Adopt senior resistance adjustment machine and aluminium alloy brake\r\n9.Special shock-absorption device make you feel more comfortable and full of passion.', 1, 0, '2018-12-13 14:15:05', '2018-12-13 14:15:05'),
+(64, 'Commercial Exercise Cycle.', 'commercial-exercise-cycle', 9, 10, '150.00', '200.00', 10, 'null', 'e315340417621544710505.jpg', '[]', 'great', '1. Strong frame,ergonomic design, so that users feel more relaxed\r\n2. The seat cushion can be adjust vertical and horizontal,can meet all users\'requirement.\r\n3. The form arm tube can be adjust vertical,can meet all shape users\' requirement.\r\n4.Adjustable pedal. make the user feel more comfortable.\r\n5.Adopt emergency stop system make sure user can work in a safety condition.\r\n6.The machine can work in bidirectional ways,you can choose your exercise style.\r\n7.Front moving wheel design,can be easily removed.\r\n8.Adopt senior resistance adjustment machine and aluminium alloy brake\r\n9.Special shock-absorption device make you feel more comfortable and full of passion.', 1, 0, '2018-12-13 14:15:05', '2018-12-13 14:15:05'),
 (65, 'test', 'test', 4, 10, '10.00', '15.00', 20, '', '33315302566911544712599.jpg', '[]', '11', '22', 0, 1, '2018-12-13 14:49:59', '2018-12-13 14:49:59'),
 (66, 'test 1', 'test-1', 9, 10, '10.00', '15.00', 22, '{\"XS\":\"22\"}', 'b4-415326608441544712633.jpg', '[]', '11', '22', 0, 1, '2018-12-13 14:50:33', '2018-12-13 14:50:33'),
 (67, 'test2', 'test2', 13, 10, '10.00', '20.00', 20, '', 'apple215300811641544717394.jpg', '[]', '112', '22', 0, 2, '2018-12-13 16:09:54', '2018-12-13 16:09:54');
@@ -666,7 +694,7 @@ CREATE TABLE IF NOT EXISTS `promotion` (
   `status` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `promotion`
@@ -675,7 +703,8 @@ CREATE TABLE IF NOT EXISTS `promotion` (
 INSERT INTO `promotion` (`id`, `name`, `description`, `image`, `date_from`, `date_to`, `status`, `created_at`) VALUES
 (1, 'First promotion', '<p>description</p>\r\n', 'apple15390030891543987262.jpg', '2018-12-05', '2018-12-08', 1, '2018-12-05 05:21:02'),
 (2, 'Black friday', '<p>hi</p>\r\n', 'apple15302017531544104524.jpg', '2018-12-06', '2018-12-09', 0, '2018-12-06 13:55:24'),
-(3, 'Promotion for new year', '', '', '2018-12-13', '2018-12-15', 0, '2018-12-08 13:05:11');
+(3, 'Promotion for new year', '', '', '2018-12-13', '2018-12-15', 0, '2018-12-08 13:05:11'),
+(4, 'happy monday', '', '', '2018-12-17', '2018-12-19', 0, '2018-12-17 12:48:01');
 
 -- --------------------------------------------------------
 
@@ -694,7 +723,7 @@ CREATE TABLE IF NOT EXISTS `promotion_detail` (
   PRIMARY KEY (`id`),
   KEY `promotion_id` (`promotion_id`),
   KEY `pro_id` (`pro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `promotion_detail`
@@ -712,7 +741,11 @@ INSERT INTO `promotion_detail` (`id`, `promotion_id`, `pro_id`, `price`, `status
 (12, 3, 61, '200.00', 0, '2018-12-13 16:05:08'),
 (13, 3, 62, '190.00', 0, '2018-12-13 16:05:08'),
 (14, 3, 63, '225.00', 0, '2018-12-13 16:05:09'),
-(15, 3, 58, '21.25', 0, '2018-12-15 02:17:27');
+(15, 3, 58, '21.25', 0, '2018-12-15 02:17:27'),
+(17, 4, 9, '27.00', 0, '2018-12-17 12:48:47'),
+(18, 4, 10, '27.00', 0, '2018-12-17 12:48:48'),
+(19, 4, 64, '180.00', 0, '2018-12-17 12:48:48'),
+(20, 4, 1, '15.30', 0, '2018-12-17 15:39:16');
 
 -- --------------------------------------------------------
 
@@ -729,9 +762,10 @@ CREATE TABLE IF NOT EXISTS `ship` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `order_id_2` (`order_id`),
   KEY `user_id` (`user_id`,`order_id`),
   KEY `order_id` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `ship`
@@ -752,7 +786,12 @@ INSERT INTO `ship` (`id`, `user_id`, `order_id`, `status`, `created_at`, `update
 (12, 6, 35, 2, '2018-12-14 14:10:30', '2018-12-14 14:13:57'),
 (13, 2, 36, 1, '2018-12-14 14:10:54', '2018-12-14 14:14:47'),
 (14, 2, 40, 1, '2018-12-15 02:15:17', '2018-12-15 02:16:06'),
-(15, 6, 43, 1, '2018-12-16 07:33:59', '2018-12-16 07:34:09');
+(15, 6, 43, 1, '2018-12-16 07:33:59', '2018-12-16 07:34:09'),
+(16, 2, 51, 2, '2018-12-17 12:53:30', '2018-12-17 12:54:32'),
+(18, 6, 52, 1, '2018-12-17 13:01:53', '2018-12-17 13:02:11'),
+(19, 6, 53, 1, '2018-12-17 15:43:53', '2018-12-17 15:44:03'),
+(20, 6, 54, 1, '2018-12-17 15:52:45', '2018-12-17 15:52:56'),
+(21, 6, 50, 1, '2018-12-17 16:01:19', '2018-12-17 16:02:05');
 
 -- --------------------------------------------------------
 
@@ -796,7 +835,7 @@ CREATE TABLE IF NOT EXISTS `stock_receipt` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `stock_receipt`
@@ -820,7 +859,8 @@ INSERT INTO `stock_receipt` (`id`, `user_id`, `description`, `status`, `created_
 (15, 1, '<p>equitment</p>\r\n', 1, '2018-12-13 14:07:34', '2018-12-13 14:07:34'),
 (16, 1, '<p>new equipment</p>\r\n', 1, '2018-12-13 14:13:08', '2018-12-13 14:13:08'),
 (17, 1, '<p>next equipment</p>\r\n', 1, '2018-12-13 14:47:58', '2018-12-13 14:47:58'),
-(18, 1, '<p>new stock</p>\r\n\r\n<p>&nbsp;</p>\r\n', 1, '2018-12-16 09:02:49', '2018-12-16 09:02:49');
+(18, 1, '<p>new stock</p>\r\n\r\n<p>&nbsp;</p>\r\n', 1, '2018-12-16 09:02:49', '2018-12-16 09:02:49'),
+(19, 1, '<p>monday stock</p>\r\n', 1, '2018-12-17 12:56:33', '2018-12-17 12:56:33');
 
 -- --------------------------------------------------------
 
@@ -874,7 +914,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `permission_id` (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -884,9 +924,10 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `imag
 (1, 'Harrik', 'Uchi', 'ha@gmail.com', '$2y$10$iXGTKatsgdDEFibAb9K4u.t..qZqUdby2bPmp5tmLLfU1USDO.rU6', 'avatar11544797763.jpg', 1, '0168886853', 'Q2', 0, '2018-12-05 02:57:06', '2018-12-05 02:57:06'),
 (2, 'Ken', 'Delivery', 'ken@gmail.com', '$2y$10$ffJTnfRQ/mHhHaJyQ.f0yufmQkfP2SyrLGFu/oJ/T4ZzGdT5YHkn.', '', 6, '123', '', 0, '2018-12-05 04:50:37', '2018-12-05 04:50:37'),
 (3, 'Haley', 'Data', 'data@gmail.com', '$2y$10$l.JMGqIZFG61DQohXhjQTe.M.TRlEX1AoigUte6U.cXpOPOEp5EKW', 'user1543985540.jpg', 2, '1234567890', 'Q2', 0, '2018-12-05 04:52:20', '2018-12-05 04:52:20'),
-(4, 'Harry', 'Potter', 'harry@gmail.com', '$2y$10$QegbCb.40QtcmqLprj6x1up60KTZd20Oc2A6rkbJsPUVmOuTsKe4.', '', 4, '12345678900', 'Q2', 0, '2018-12-05 05:27:35', '2018-12-05 05:27:35'),
+(4, 'Harry', 'Potter', 'harry@gmail.com', '$2y$10$jaEiidbmbJjr1rqACeayU.Qx17NOqtcJBYAQ2MyJ3PRFieHkHVXri', '', 4, '12345678900', 'Q2', 0, '2018-12-05 05:27:35', '2018-12-05 05:27:35'),
 (5, 'Henry', 'Jack', 'acc01@gmail.com', '$2y$10$5zb3YTTiJEfUURK8F.0n9OLFoD2kIpY/7n52RN0k/JGrH5ow4zALG', 'apple15432369911544241000.jpg', 4, '01688868553', 'Q2', 1, '2018-12-08 03:50:00', '2018-12-08 03:50:00'),
-(6, 'Jack', 'IT', 'ship@gmail.com', '$2y$10$6gZuxiziIBS70DEk0VBXWeYDsFLcgV4CmT4k8hoD7ArbZaPQZwg9e', '', 6, '01688868554', 'Q1', 0, '2018-12-14 13:54:24', '2018-12-14 13:54:24');
+(6, 'Jack', 'IT', 'ship@gmail.com', '$2y$10$6gZuxiziIBS70DEk0VBXWeYDsFLcgV4CmT4k8hoD7ArbZaPQZwg9e', '', 6, '01688868554', 'Q1', 0, '2018-12-14 13:54:24', '2018-12-14 13:54:24'),
+(7, 'Kit', 'Crazy', 'kit@gmail.com', '$2y$10$uxE/kaW7iFyZar7tz7k4d.d16bHPo4I7Hy11Qu.pfPfkIvDXJB3Uy', '', 4, '0168745214', 'Q2', 0, '2018-12-17 13:14:36', '2018-12-17 13:14:36');
 
 --
 -- Constraints for dumped tables
@@ -898,6 +939,13 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `imag
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`pro_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `destroy_product`
+--
+ALTER TABLE `destroy_product`
+  ADD CONSTRAINT `destroy_product_ibfk_1` FOREIGN KEY (`pro_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `destroy_product_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `detail_stock`

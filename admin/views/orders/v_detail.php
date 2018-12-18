@@ -47,7 +47,12 @@
                                                 <b>Delivery to: </b><input type="text" class="form-control" name="delivery_place" value="<?php echo  $order->delivery_place ?>">
                                             </div>
                                             <div class="col-md-4">
+                                                <?php if($order->payment == 0) { ?>
                                                 <b>Delivery cost: </b><input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="delivery_cost" value="<?php echo  $order->delivery_cost ?>">
+                                                <?php } else {?>
+                                                <input type="hidden" class="form-control" onkeypress="return isNumberKey(event)" name="delivery_cost" value="<?php echo  $order->delivery_cost ?>">
+                                                <b>Delivery cost: </b><?php echo $order->delivery_cost ?>
+                                                <?php }?>
                                             </div>
                                             <?php } else {?> 
                                             <div class="col-md-4">

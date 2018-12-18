@@ -56,10 +56,10 @@
 
                <?php
                foreach($users as $key=>$u):
-                 $permission = $m_user->read_permission_by_id($u->permission_id);
+                 $permission_tmp = $m_user->read_permission_by_id($u->permission_id);
                  $permission_name = '';
-                 if($permission) {
-                  $permission_name = $permission->name;
+                 if($permission_tmp) {
+                  $permission_name = $permission_tmp->name;
                 }
                 $image = 'us.png';
                 if($u->image != '') {
@@ -68,7 +68,7 @@
                 ?>
                 <tr id="">
                  <td>
-                  <?php if($permission->id != 1) {?>
+                  <?php if($permission_tmp->id != 1) {?>
                   <input type="checkbox" name="check_user[]" value="<?php echo $u->id ?>">
                   <?php }?>
                 </td>
@@ -79,6 +79,14 @@
                 <td><?php echo $u->email ?></td>
                 <td><?php echo $u->phone_number ?></td>
                 <td>
+                  <!--Edit permission user-->
+                  <?php if($m_per->check_permission('edit_user') == 1 && $u->permission_id != 1 && $u->permission_id != 6){ ?>
+                  <a class="dropdown-item badge badge-success" data-id = "<?php echo $u->id ?>" data-name="<?php echo $u->first_name?> <?php echo $u->last_name?>" data-permission="<?php echo $u->permission_id?>"   href="#edit_permission" data-toggle="modal"><i class="fa fa-edit"></i> Edit permission</a>
+                  <?php } else if($m_per->check_permission('edit_user') == 0 && $u->permission_id != 1) {?>
+                  <button class="badge badge-default" disabled=""><i class="fa fa-edit"></i> Edit permission</button>
+                  <?php }?>
+                  
+                  <!--Delete user-->
                   <?php if($m_per->check_permission('delete_user') == 1 && $u->permission_id != 1){ ?>
                   <a class="dropdown-item badge badge-danger delete_user" data-index = "<?php echo $u->id ?>"  id="delete_user"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> Delete</a>
                   <?php } else if($m_per->check_permission('delete_user') == 0 && $u->permission_id != 1) {?>
@@ -102,6 +110,52 @@
 
 
 </div><!-- /#right-panel -->
+
+<div id="edit_permission" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header badge-info">
+        <h4 class="modal-title custom_align" id="Heading" style="text-align: left">
+          <i class="fa fa-edit MarginRight-10"></i>
+          Edit Permission (<span id="user_name"></span>)</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+
+        <div class="profile_validation"></div>
+        <form method="POST" enctype="multipart/form-data" action="user_edit_permission.php">
+
+          <input type="hidden" name="user_id" value="">
+       
+          <div class="row form-group">
+            <div class="col-md-2"><label for="text-input" class=" form-control-label">Permission:</label></div>
+            <div class="col-md-9">
+              <select  required="required" id="text-input" name="permission_id" class="form-control">
+                <?php foreach($permission as $p): ?>
+                  <?php if($p->id != 1) {?>
+                  <option value="<?php echo $p->id ?>"><?php echo  $p->name ?></option>
+                  <?php }?>
+                <?php endforeach; ?>
+              </select>
+          </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-reply"></i> Close</button>
+            <button type="submit" name="update_prof" id="update_profile" style="text-align: center;" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Save</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
 <script type="text/javascript">
   $(document).ready(function(){
     $('.table_user').DataTable();
@@ -234,5 +288,15 @@
       })
     } 
     
+  })
+
+  $('#edit_permission').on('show.bs.modal',function(e) {
+    id = $(e.relatedTarget).data('id');
+    name = $(e.relatedTarget).data('name');
+    permission_id = $(e.relatedTarget).data('permission');
+
+    $(e.currentTarget).find('input[name=user_id]').val(id);
+    $(e.currentTarget).find('#user_name').html(name);
+    $(e.currentTarget).find('select[name=permission_id]').val(permission_id);
   })
 </script>

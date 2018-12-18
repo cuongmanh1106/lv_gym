@@ -38,46 +38,46 @@ if(isset($_SESSION["vn"])) {
 								<img class="etalage_thumb_image img-responsive" src="admin/public/images/<?php echo $s?>" alt="" >
 								<img class="etalage_source_image img-responsive" src="admin/public/images/<?php echo $s?>" alt="" >
 							</li>
-           <?php } }?>
+             <?php } }?>
 
-         </ul>
+           </ul>
 
-       </div>	
-       <div class="col-md-7 single-top-in">
-        <div class="single-para">
-         <h4><?php echo $product->name?></h4>
-         <p><?php echo $product->description?></p>
-         <div class="star">
-          <ul>
-           <li><i> </i></li>
-           <li><i> </i></li>
-           <li><i> </i></li>
-           <li><i> </i></li>
-           <li><i> </i></li>
-         </ul>
-         <div class="review">
-           <a href="#"> <?php echo $product->view?> reviews </a>/
-           <a href="#">  Write a review</a>
+         </div>	
+         <div class="col-md-7 single-top-in">
+          <div class="single-para">
+           <h4><?php echo $product->name?></h4>
+           <p><?php echo $product->description?></p>
+           <div class="star">
+            <ul>
+             <li><i> </i></li>
+             <li><i> </i></li>
+             <li><i> </i></li>
+             <li><i> </i></li>
+             <li><i> </i></li>
+           </ul>
+           <div class="review">
+             <a href="#"> <?php echo $product->view?> reviews </a>/
+             <a href="#">  Write a review</a>
+           </div>
+           <div class="clearfix"> </div>
          </div>
-         <div class="clearfix"> </div>
-       </div>
 
-       <?php if($promotion_price == 0) {?>
-        <h3  id="price_<?php echo $product->id?>" data-price="<?php echo $product->price?>" style="padding-bottom: 15px; padding-top: 15px"><?php echo $front?><?php echo number_format($price,2) ?><?php echo $back?></h3>
-      <?php } else {?>
-        <div class="row" style="padding-bottom: 15px; padding-top: 15px">
+         <?php if($promotion_price == 0) {?>
+         <h3  id="price_<?php echo $product->id?>" data-price="<?php echo $product->price?>" style="padding-bottom: 15px; padding-top: 15px"><?php echo $front?><?php echo number_format($price,2) ?><?php echo $back?></h3>
+         <?php } else {?>
+         <div class="row" style="padding-bottom: 15px; padding-top: 15px">
           <div class="col-md-12"><strike><?php echo $front?><?php echo number_format($price,2) ?><?php echo $back?></strike></div>
           <div class="col-md-12" style="color:#ff4d4d"><h3 id="price_<?php echo $product->id?>" data-price="<?php echo $promotion->price?>"><?php echo $front?><?php echo number_format($promotion_price,2)?><?php echo $back?></h3></div>
         </div>
 
 
-      <?php }?>
+        <?php }?>
 
-      <div class="available">
-        <h6>Available Options :</h6>
+        <div class="available">
+          <h6>Available Options :</h6>
 
-        <ul>
-          <?php if(count(json_decode($product->size)) > 0) {?>
+          <ul>
+            <?php if(count(json_decode($product->size)) > 0) {?>
             <li>Size: <select name="size" class="form-group">
              <?php 
              $sizes = json_decode($product->size);
@@ -87,39 +87,39 @@ if(isset($_SESSION["vn"])) {
                if($value != 0) {
                 ?>
                 <option value="<?php echo $key?>"><?php echo $key?></option>
-              <?php } } }?>
-            </select></li>
-          <?php }?>
+                <?php } } }?>
+              </select></li>
+              <?php }?>
 
-          <li>Quantity: <input type="text" class="form-group" onkeypress="return isNumberKey(event)" value="1" name="qty"></li>
-        </ul>
+              <li>Quantity: <input type="text" class="form-group" onkeypress="return isNumberKey(event)" value="1" name="qty"></li>
+            </ul>
+          </div>
+
+          <a href="javascript:void(0)" data-index="<?php echo $product->id ?>" class="cart add-single-cart "> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+
+        </div>
       </div>
+      <div class="clearfix"> </div>
 
-      <a href="javascript:void(0)" data-index="<?php echo $product->id ?>" class="cart add-single-cart "> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+      <h5><b id="total_cmt"><?php echo count($all_comment) ?></b> comments</h5>
+      <input type="hidden" name="total_comments" value="<?php echo count($all_comment) ?>">
+      <hr style="border:1px solid #FFFFFF">
 
-    </div>
-  </div>
-  <div class="clearfix"> </div>
-
-  <h5><b id="total_cmt"><?php echo count($all_comment) ?></b> comments</h5>
-  <input type="hidden" name="total_comments" value="<?php echo count($all_comment) ?>">
-  <hr style="border:1px solid #FFFFFF">
-
-  <div class="row">
-   <div class="col-md-1"><img src="admin/public/images/<?php echo (isset($_SESSION["customer"]) && $_SESSION["customer"]->image!='')?$_SESSION["customer"]->image:'us.png' ?>" width="60px"></div>
-   <div class="col-md-11">
-    <textarea name="cmt" class="form-control" placeholder=" Your Comment..."></textarea>
-    <div style="width: 100%; text-align: right; background: #fff; border-radius: 4px">
-     <a style="text-align: right;" id="add_cmt" class="btn btn-success  <?php echo ( !isset($_SESSION["customer"]))?'disabled':''?>">Post</a>
+      <div class="row">
+       <div class="col-md-1"><img src="admin/public/images/<?php echo (isset($_SESSION["customer"]) && $_SESSION["customer"]->image!='')?$_SESSION["customer"]->image:'us.png' ?>" width="60px"></div>
+       <div class="col-md-11">
+        <textarea name="cmt" class="form-control" placeholder=" Your Comment..."></textarea>
+        <div style="width: 100%; text-align: right; background: #fff; border-radius: 4px">
+         <a style="text-align: right;" id="add_cmt" class="btn btn-success  <?php echo ( !isset($_SESSION["customer"]))?'disabled':''?>">Post</a>
+       </div>
+     </div>
    </div>
- </div>
-</div>
-<div class="clearfix"></div>
-<div class="comment">
- <!--Danh sách comment-->
- <?php
- foreach($comments as $cmt) {
-  $cus = $m_account->read_user_by_id($cmt->user_id);
+   <div class="clearfix"></div>
+   <div class="comment">
+     <!--Danh sách comment-->
+     <?php
+     foreach($comments as $cmt) {
+      $cus = $m_account->read_user_by_id($cmt->user_id);
 
               $count_like = count($m_comment->read_like($cmt->id)); //count(DB::table('like')->where('comment_id',$cmt->id)->get()); // số lượng lượt thích 
 
@@ -138,7 +138,7 @@ if(isset($_SESSION["vn"])) {
                  <div>
                   <?php if($like == 0) {?> <!--Chưa like-->
                   <a href="javascript:void(0)" class="like" data-index="<?php echo $cmt->id ?>" style="color:blue"> Like </a>-
-                <?php } else {?>
+                  <?php } else {?>
                   <a href="javascript:void(0)" class="dislike" data-index="<?php echo $cmt->id ?>" style="color:red"> Dislike </a>-
                   <?php } ?> <!--đã like-->
                   <a href="javascript:void(0)" class="rep" style="color:blue"> Reply </a>-
@@ -168,9 +168,9 @@ if(isset($_SESSION["vn"])) {
                         <div>
 
                          <?php if($sub_like == 0) {?>
-                           <a href="javascript:void(0)" class="like" data-index="<?php echo $s->id ?>" style="color:blue"> Like </a>-
+                         <a href="javascript:void(0)" class="like" data-index="<?php echo $s->id ?>" style="color:blue"> Like </a>-
                          <?php } else {?>
-                           <a href="javascript:void(0)" class="dislike" data-index="<?php echo $s->id ?>" style="color:red"> Dislike </a>-
+                         <a href="javascript:void(0)" class="dislike" data-index="<?php echo $s->id ?>" style="color:red"> Dislike </a>-
                          <?php }?>
 
                          <a href="javascript:void(0)" class="sub_rep" style="color:blue"> Reply </a>-
@@ -221,7 +221,7 @@ if(isset($_SESSION["vn"])) {
               <?php
               foreach($sub_comment as $s) {
 
-              $sub_cus = $m_account->read_user_by_id($s->user_id);
+                $sub_cus = $m_account->read_user_by_id($s->user_id);
               $count_sub_like = count($m_comment->read_like($s->id));  //Tổng like của sub_comment
 
               ?>
@@ -256,20 +256,20 @@ if(isset($_SESSION["vn"])) {
      </div>
 
      <div class="clearfix"></div>
-   <?php } ?>
+     <?php } ?>
 
-   <?php } ?> <!--endforeach-->
- </div>
- <?php $count = count($all_comment);
- ?>
- <?php if($count>10) {?>
+     <?php } ?> <!--endforeach-->
+   </div>
+   <?php $count = count($all_comment);
+   ?>
+   <?php if($count>10) {?>
    <button class="row btn btn-info" style="width: 100%;  margin-top: 40px; margin-bottom: 40px" name="show_more" >
      <h5 style="text-align: center; line-height: 50px;color:#fff;font-weight: bold">Show more</h5>
      <input type="hidden" name="more" value="<?php echo count($comments) ?>">
    </button>
- <?php }?>
- <hr class="row" style="border:1px solid #FFFFFF"><br> 
-</div>
+   <?php }?>
+   <hr class="row" style="border:1px solid #FFFFFF"><br> 
+ </div>
 </div>
 <div class="col-md-3">
  <div class="single-bottom">
@@ -280,29 +280,29 @@ if(isset($_SESSION["vn"])) {
     $promotion_price = 0;
     $promotion = $m_promotion->get_promotion_price($p->id);
     if($promotion != 0) {
-        $promotion_price = $promotion->price;
+      $promotion_price = $promotion->price;
     }   
     $price = $rp->price;
     $front = "$";
     $back = "";
     if(isset($_SESSION["vn"])) {
-        $front = "";
-        $back = " VND"; 
-        $price = $rp->price*$_SESSION["vn"];
-        if($promotion != 0) {
-            $promotion_price = $promotion->price*$_SESSION["vn"];
-        }
+      $front = "";
+      $back = " VND"; 
+      $price = $rp->price*$_SESSION["vn"];
+      if($promotion != 0) {
+        $promotion_price = $promotion->price*$_SESSION["vn"];
+      }
     } 
-   ?>
-   <div class="product-go">
-    <a href="single.php?id=<?php echo $rp->id?>"><img class="img-responsive fashion" src="admin/public/images/<?php echo $rp->image?>" alt=""></a>
-    <div class="grid-product">
-      <a href="single.php?id=<?php echo $rp->id?>" class="elit"><?php echo $rp->name?></a>
-      <span class=" price-in"> <?php echo $front?><?php echo number_format($price,2)?><?php echo $back?></span>
+    ?>
+    <div class="product-go">
+      <a href="single.php?id=<?php echo $rp->id?>"><img class="img-responsive fashion" src="admin/public/images/<?php echo $rp->image?>" alt=""></a>
+      <div class="grid-product">
+        <a href="single.php?id=<?php echo $rp->id?>" class="elit"><?php echo $rp->name?></a>
+        <span class=" price-in"> <?php echo $front?><?php echo number_format($price,2)?><?php echo $back?></span>
+      </div>
+      <div class="clearfix"> </div>
     </div>
-    <div class="clearfix"> </div>
-  </div>
-<?php endforeach ?>
+  <?php endforeach ?>
 
 </div>
 </div>
@@ -318,7 +318,10 @@ if(isset($_SESSION["vn"])) {
           pro_id = '<?php echo $product->id ?>';
           user_id = '<?php echo $_SESSION["customer"]->id ?>';
           total = $('input[name=total_comments]').val();
-          console.log(pro_id);
+          if(comment == "") {
+            alert("Please enter your comment");
+            return;
+          }
           $.ajax({
             type: "POST",
             url: "ajax.php",
@@ -378,6 +381,10 @@ if(isset($_SESSION["vn"])) {
         $this3 = $(this).parent().parent().parent().parent();
         user_id = '<?php echo $_SESSION["customer"]->id ?>';
         pro_id = '<?php echo $product->id ?>';
+        if(comment == "") {
+          alert("Please enter your comment");
+          return;
+        }
         $.ajax({
           type:'POST',
           url: 'ajax.php',

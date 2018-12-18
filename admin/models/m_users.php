@@ -109,5 +109,11 @@ class M_users extends database {
 		return $this->loadAllRows();
 	}
 
+	public function edit_perrmision($id,$permission_id) {
+		$sql = "update users set permission_id =? where id = ?";
+		$this->setQuery($sql);
+		return $this->execute(array($permission_id,$id));
+	}
+
 
 }
