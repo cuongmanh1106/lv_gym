@@ -734,6 +734,8 @@ if(isset($_POST["update_stock_receipt"])) { //update status stock
                 $m_pro->delete_product($d->pro_id);
             }
         }
+    $_SESSION["alert-success"] = "Update Status Stock Successfully";
+    echo "success";
     } else if ($status == "1") {
         $m_stock->cancel_stock($status,$id);
         foreach($detail as $d) {

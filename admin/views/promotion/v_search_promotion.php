@@ -20,8 +20,13 @@
                 if($u->image != '') {
                   $image = $u->image;
                 }
+                $date  = date('Y-m-d');
+                $highlight = "";
+                if($date >= $u->date_from && $date <= $u->date_to ) {
+                  $highlight = "background-color: #B40431";
+                }
                 ?>
-                <tr id="">
+                <tr style="<?php echo $highlight?>" id="">
                  <td>
                   <input type="checkbox" name="check_promotion[]" value="<?php echo $u->id ?>">
                 </td>

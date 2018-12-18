@@ -16,7 +16,7 @@ class M_users extends database {
 	}
 
 	public function read_user_by_permission($permission) {
-		$sql = "select * from users where permission_id = ".$permission;
+		$sql = "select * from users where status = 0 and permission_id = ".$permission;
 		$this->setQuery($sql);
 		return $this->loadAllRows();
 	}

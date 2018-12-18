@@ -11,7 +11,7 @@ class M_suppliers extends database {
 	}
 
 	public function read_supply_by_id($id) {
-		$sql = "select * from suppliers where status = 0 and id = ".$id;
+		$sql = "select * from suppliers where id = ".$id;
 		$this->setQuery($sql);
 		return $this->loadRow();
 	} 
