@@ -43,7 +43,7 @@
 
                 <tr>
                  <th><input type="checkbox" name="check_all_user"></th>
-                 <th>STT</th>
+                 <th>#</th>
                  <th>Image</th>
                  <th>Name</th>
                  <th>Permission</th>
@@ -68,7 +68,7 @@
                 ?>
                 <tr id="">
                  <td>
-                  <?php if($permission_tmp->id != 1) {?>
+                  <?php if($permission_tmp->id != 1 && $_SESSION["user"]->id != $u->id) {?>
                   <input type="checkbox" name="check_user[]" value="<?php echo $u->id ?>">
                   <?php }?>
                 </td>
@@ -87,10 +87,10 @@
                   <?php }?>
                   
                   <!--Delete user-->
-                  <?php if($m_per->check_permission('delete_user') == 1 && $u->permission_id != 1){ ?>
+                  <?php if($m_per->check_permission('delete_user') == 1 && $u->permission_id != 1 && $_SESSION["user"]->id != $u->id){ ?>
                   <a class="dropdown-item badge badge-danger delete_user" data-index = "<?php echo $u->id ?>"  id="delete_user"  href="javascript::void(0)"><i class="fa fa-trash-o"></i> Delete</a>
                   <?php } else if($m_per->check_permission('delete_user') == 0 && $u->permission_id != 1) {?>
-                  <button class="badge badge-default" disabled=""><i class="fa fa-trash-o"></i> Delete</button>
+                  <button class="badge badge-default" type="button" disabled=""><i class="fa fa-trash-o"></i> Delete</button>
                   <?php }?>
                 </div>
               </div>

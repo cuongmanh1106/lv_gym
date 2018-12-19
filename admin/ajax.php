@@ -296,7 +296,6 @@ if(isset($_POST["delete_group_user"])) {
 if(isset($_POST["search_user"])) {
     $name = $_POST["name"];
     $permission = $_POST["permission"]; 
-    var_dump($name);
     include("models/m_users.php");
     include("models/m_permission.php");
     $m_per = new M_permission();

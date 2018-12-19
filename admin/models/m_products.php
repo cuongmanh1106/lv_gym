@@ -240,6 +240,7 @@ class M_products extends database {
 				$cates = $this->loadAllRows();
 				if(count($cates) != 0) { //neu co con
 					$arrId = [];
+					$arrId[] = $cate;
 					foreach($cates as $c) {
 						$arrId[] = $c->id;
 					}

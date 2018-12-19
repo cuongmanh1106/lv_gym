@@ -25,6 +25,7 @@ class C_products {
 			$child = $m_cate->read_cate_by_parent($cate->id);
 			if($cate->parent_id == 0 && count($child) > 0) {
 				$arrCate = array();
+				$arrCate[] = $cate_id;
 				$children_cate = $m_cate->read_cate_by_parent($cate->id);
 				foreach($children_cate as $c) {
 					$arrCate[] = $c->id;
@@ -53,14 +54,16 @@ class C_products {
 			$cate_id = $_GET['cate_id'];
 			$cate = $m_cate->read_cate_by_id($cate_id);
 			$child = $m_cate->read_cate_by_parent($cate->id);
-			if($cate->parent_id == 0 && count($child) > 0) {
+			if($cate->parent_id == 0 && count($child) > 0) { //có con 
 				$arrCate = array();
+				$arrCate[] = $cate_id;
 				$children_cate = $m_cate->read_cate_by_parent($cate->id);
 				foreach($children_cate as $c) {
 					$arrCate[] = $c->id;
 				}
 				$products = $m_pro->read_product_by_arrcate($arrCate,$vt,$limit);
 			} else  {
+
 				$products = $m_pro->read_product_by_cate_id($cate_id,$vt,$limit);
 			}
 		} else {
