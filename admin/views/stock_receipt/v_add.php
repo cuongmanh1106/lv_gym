@@ -12,7 +12,18 @@
       <div class="modal-body">
 
         <form id="form" method="POST" action="stock_receipt_add.php">
-         
+
+         <div class="row form-group">
+          <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Supplier</label></div>
+          <div class="col-12 col-md-9">
+            <select name="sup_id" class="form-control">
+              <?php foreach($sups as $s) {?>
+              <option value="<?php echo $s->id?>"><?php echo $s->name?></option>
+              <?php }?>
+            </select>
+          </div>
+        </div>
+
         <div class="row form-group">
           <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
           <div class="col-12 col-md-9"><textarea class="ckeditor description_stock"  name="description_stock" id="des_stock" required="required" rows="9" placeholder="Content..." class="form-control"></textarea>
@@ -21,11 +32,11 @@
 
       </div>
       <div class="modal-footer ">
-       
-          <button type="button" class="btn btn-danger" data-dismiss="modal">
-            <i class="fa fa-reply icon"></i> Back</button>
-             <button type="submit" name="add_stock" class="btn btn-info">
-          <i class="fa fa-thumbs-up icon"></i> Save</button>
+
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          <i class="fa fa-reply icon"></i> Back</button>
+          <button type="submit" name="add_stock" class="btn btn-info">
+            <i class="fa fa-thumbs-up icon"></i> Save</button>
           </div>
         </form>
       </div>

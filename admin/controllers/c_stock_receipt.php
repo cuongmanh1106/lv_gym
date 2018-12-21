@@ -24,10 +24,13 @@ class C_stock_receipt
 		//models
 		include("models/m_stock_receipt.php");
 		include("models/m_users.php");
+        include("models/m_supplier.php");
+        $m_sup = new M_suppliers();
 		$m_stock = new M_stock_receipt();
 		$m_user = new M_users();
 		$stocks = $m_stock->read_all_stock();
         $users = $m_user->read_all_user();
+        $sups = $m_sup->read_all_suppliers();
 
 
 		//views
@@ -47,9 +50,10 @@ class C_stock_receipt
 
 		$description = $_POST["description_stock"];
 		$user_id = $_SESSION["user"]->id;
+        $sup_id = $_POST["sup_id"];
 		include("models/m_stock_receipt.php");
 		$m_stock = new M_stock_receipt();
-		if($m_stock->insert_stock($user_id,$description)) {
+		if($m_stock->insert_stock($user_id,$sup_id,$description)) {
 			$_SESSION['alert-success'] = "Insert stock receipt successfully";
 		} else {
 			$_SESSION['alert-danger'] = "Insert stock receipt failed";
@@ -107,6 +111,7 @@ class C_stock_receipt
             }
 
             //Xu Ly size
+            $stock = $m_stock->read_stock_by_id($stock_id);
             $size  = '';
             $total_quantity = 0;
             if(isset($_POST['size'])) {
@@ -126,7 +131,6 @@ class C_stock_receipt
             $price_out = str_replace(',', '', $_POST["price"]);
             
             $cate_id = $_POST["cate_id"];
-            $sup_id = $_POST["sup_id"];
             $intro = $_POST["intro"];
             $description = $_POST["description"];
             $quanity = $total_quantity;
@@ -153,7 +157,7 @@ class C_stock_receipt
                 }
                 $status = 2;
                 // $name,$cate_id,$sup_id,$price,$quantity,$size,$image,$sub_image,$intro,$description
-                $pro_id = $m_pro->insert_product_get_id($name,$cate_id,$sup_id,$price_out,$price_in,$quanity,$size,$image,json_encode($sub_image_array),$intro,$description,$status);
+                $pro_id = $m_pro->insert_product_get_id($name,$cate_id,$stock->sup_id,$price_out,$price_in,$quanity,$size,$image,json_encode($sub_image_array),$intro,$description,$status);
                 if($pro_id != 0){
                 	$m_stock->insert_stock_detail($stock_id,$pro_id,$quanity,$price_in,$size,0);
                     $_SESSION['alert-success'] = "Insert Product Successfully";
@@ -183,9 +187,12 @@ class C_stock_receipt
         $stock_id = $_GET["id"];
         require("models/m_categories.php");
         require("models/m_products.php");
+        require("models/m_stock_receipt.php");
         $m_pro = new M_products();
         $m_cate = new M_Categories();
-        $products = $m_pro->read_all_pro();
+        $m_stock = new M_stock_receipt();
+        $stock = $m_stock->read_stock_by_id($stock_id);
+        $products = $m_pro->read_pro_by_sup_id($stock->sup_id);
         $cates = $m_cate->read_all_categories();
         
 

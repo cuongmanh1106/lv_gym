@@ -67,7 +67,7 @@ if($product->sub_image != '') {
                                 <div class="col-md-1">(<span style="color:red">*</span>)</div>
                             </div>
 
-                            <div class="row form-group">
+                 <!--            <div class="row form-group">
                                 <div class="col col-md-1"><label for="select" class=" form-control-label">Suplier:</label></div>
                                 <div class="col-12 col-md-10">
                                   <select name="sup_id" required="required" id="" class="form-control selected2">
@@ -77,7 +77,7 @@ if($product->sub_image != '') {
                                 </select>
                             </div>
                             <div class="col-md-1">(<span style="color:red">*</span>)</div>
-                        </div>
+                        </div> -->
 
                         <div class="row form-group">
                             <div class="col-md-1"><label for="text-input" class=" form-control-label">Introduce:</label></div>

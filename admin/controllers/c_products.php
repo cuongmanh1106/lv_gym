@@ -218,7 +218,7 @@ public function update() {
             
             $name = $_POST['name'];
             $cate_id = $_POST["cate_id"];
-            $sup_id = $_POST["sup_id"];
+            // $sup_id = $_POST["sup_id"];
             $description = $_POST["description"];
             $intro = $_POST['intro'];
             /*----thu thập dữ liệu-----*/
@@ -265,7 +265,7 @@ public function update() {
             }
 
             //Tiến hành update
-            if($m_product->update_product($name,$cate_id,$sup_id,$product->price,$product->quantity,$product->size,$new_img,json_encode($new_sub_image),$intro,$description,$id)){
+            if($m_product->update_product($name,$cate_id,$product->sup_id,$product->price,$product->quantity,$product->size,$new_img,json_encode($new_sub_image),$intro,$description,$id)){
                 $_SESSION['alert-success'] = "Edit Product Successfully";
                 if(isset($_GET["stock_id"])) {
                     $stock_id = $_GET["stock_id"];

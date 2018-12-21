@@ -595,6 +595,8 @@ if(isset($_POST["search_stock"])) {
 
     include("models/m_stock_receipt.php");
     include("models/m_users.php");
+    include("models/m_supplier.php");
+    $m_sup = new M_suppliers();
     $m_user = new M_users();
     $m_stock = new M_stock_receipt();
     $stocks = $m_stock->search_stock_receipt($stock_no,$user,$status);

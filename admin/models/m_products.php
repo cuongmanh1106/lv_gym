@@ -17,6 +17,12 @@ class M_products extends database {
 		return $this->loadAllRows();
 	}
 
+	public function read_pro_by_sup_id($sup_id) {
+		$sql = "select * from products where status != 1 and sup_id = ? order by id desc";
+		$this->setQuery($sql);
+		return $this->loadAllRows(array($sup_id));
+	}
+
 	public function read_product_by_id($id) {
 		$sql = "select * from products where id =".$id;
 		$this->setQuery($sql);

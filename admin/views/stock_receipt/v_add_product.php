@@ -45,7 +45,7 @@ include("include/report.php");
                             <div class="col-md-1">(<span style="color:red">*</span>)</div>
                         </div>
 
-                        <div class="row form-group">
+                       <!--  <div class="row form-group">
                             <div class="col col-md-1"><label for="select" class=" form-control-label">Suplier:</label></div>
                             <div class="col-12 col-md-10">
                               <select name="sup_id" required="required" id="" class="form-control selected2">
@@ -56,7 +56,7 @@ include("include/report.php");
                         </div>
                         <div class="col-md-1">(<span style="color:red">*</span>)</div>
                     </div>
-
+ -->
 
 
                     <div class="row form-group">

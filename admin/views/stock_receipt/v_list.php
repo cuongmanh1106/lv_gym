@@ -47,6 +47,7 @@
               <th>Date</th>
               <th>Stock No.</th>
               <th>Staff</th>
+              <th>Supplier</th>
               <th>Description</th>
               <th>Status</th>
               <th>Action</th>
@@ -66,7 +67,11 @@
             } else if ($stock->status == 2) {
               $status = "Canceled";
             }
-
+            $sub_name = "";
+            $sup_tmp = $m_sup->read_supply_by_id($stock->sup_id);
+            if(!empty($sup_tmp)) {
+              $sub_name = $sup_tmp->name;
+            }
             ?>
             <tr id="">
                 <!--  <td>
@@ -76,6 +81,7 @@
                 <td><?php echo $stock->created_at ?></td>
                 <td><?php echo $stock->id ?></td>
                 <td><?php echo $user_name ?></td>
+                <td><?php echo $sub_name?></td>
                 <td><?php echo $stock->description ?></td>
                 <td><?php echo $status?></td>
                 <td>

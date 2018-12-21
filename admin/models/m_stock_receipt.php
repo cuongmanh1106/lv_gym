@@ -139,10 +139,10 @@ class M_stock_receipt extends database {
 	}
 
 
-	public function insert_stock($user_id,$description) {
-		$sql = "insert into stock_receipt(user_id,description) values(?,?)";
+	public function insert_stock($user_id,$sup_id,$description) {
+		$sql = "insert into stock_receipt(user_id,sup_id,description) values(?,?,?)";
 		$this->setQuery($sql);
-		return $this->execute(array($user_id,$description));
+		return $this->execute(array($user_id,$sup_id,$description));
 	}
 
 	public function update_stock($user_id,$description,$id) {
