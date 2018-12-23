@@ -64,7 +64,7 @@
                                             <?php }?>
                                             <div class="col-md-4">
                                                 <b>Status: </b>
-                                                <?php if($order->status <= 4 && $_SESSION["user"]->permission_id!=6 && $now <= $update ) { ?> <!--không cho sửa delivery-->
+                                                <?php if($order->status < 4 && $_SESSION["user"]->permission_id!=6 || ($now <= $update && $order->status==4) ) { ?> <!--không cho sửa delivery-->
                                                 <select class="form-control" name="status">
                                                     <?php
                                                     foreach($status as $stt):
@@ -95,7 +95,7 @@
                                                 <?php if($order->status == 3 && $_SESSION["user"]->permission_id != 6) {?> <!-- nếu cập nhật lại người giao hàng -->
                                                 <Button type="button" class="btn btn-info" name="delivery_first" data-toggle="modal" data-target="#delivery"><i class="fa fa-thumbs-up"></i> Confirm</Button>
                                                 <button type="submit" name="confirm" class="btn btn-info " style="display: none"><i class="fa fa-thumbs-up"></i> Confirm</button>
-                                                <?php } elseif($order->status <= 4 && $_SESSION["user"]->permission_id != 6 && $now <= $update ) { ?> <!-- cập nhật status -->
+                                                <?php } elseif($order->status < 4 && $_SESSION["user"]->permission_id != 6 || ( $now <= $update && $order->status==4 ) ) { ?> <!-- cập nhật status -->
                                                 <Button type="submit" name="confirm" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Confirm</button>
                                                     <?php } else {?>  <!-- khi status là completed hoặc cancel thì không cho cập nhật lại nữa -->
                                                     <button disabled type="button" name="confirm" class="btn btn-info"><i class="fa fa-thumbs-up"></i> Confirm</button>
