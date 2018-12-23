@@ -73,15 +73,9 @@
 				</tr>
 			<?php endforeach ?>
 		</tbody>
-
-		<tfoot>
-			<tr>
-				<th colspan="3">Total</th>
-				<th><?php echo $total_quantity?></th>
-				<th>$<?php echo number_format($total_revenue,2) ?></th>
-				<th></th>
-			</tr>
-		</tfoot>
 	</table>
+	<hr>
+	<h4> <b style="color:red">Total Quantity:</b> <?php echo $total_quantity ?></h4>
+	<h4> <b style="color:red">Total Revenue:</b>$ <?php echo number_format($total_revenue,2) ?></h4>
 </body>
 </html>
